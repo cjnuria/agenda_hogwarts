@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="315.0" prefWidth="539.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19" fx:controller="com.agenda.agenda_v1.PanelPendientesController">
+   <children>
+      <TabPane prefHeight="315.0" prefWidth="539.0" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+            <Tab text="General">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="242.0" prefWidth="462.0">
+                     <children>
+                        <TableView prefHeight="288.0" prefWidth="546.0">
+                           <columns>
+                              <TableColumn prefWidth="149.59998166561127" text="Asignatura" />
+                              <TableColumn prefWidth="104.0" text="Tipo" />
+                              <TableColumn prefWidth="80.79998779296875" text="Fecha" />
+                              <TableColumn prefWidth="77.60003662109375" text="Porcentaje" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Exámenes">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView prefHeight="288.0" prefWidth="546.0">
+                           <columns>
+                              <TableColumn prefWidth="149.59998166561127" text="Asignatura" />
+                              <TableColumn prefWidth="104.0" text="Tipo" />
+                              <TableColumn prefWidth="80.79998779296875" text="Fecha" />
+                              <TableColumn prefWidth="77.60003662109375" text="Porcentaje" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Proyectos">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView prefHeight="288.0" prefWidth="546.0">
+                           <columns>
+                              <TableColumn prefWidth="149.59998166561127" text="Asignatura" />
+                              <TableColumn prefWidth="104.0" text="Tipo" />
+                              <TableColumn prefWidth="80.79998779296875" text="Fecha" />
+                              <TableColumn prefWidth="77.60003662109375" text="Porcentaje" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Tareas">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView prefHeight="288.0" prefWidth="546.0">
+                           <columns>
+                              <TableColumn prefWidth="149.59998166561127" text="Asignatura" />
+                              <TableColumn prefWidth="104.0" text="Tipo" />
+                              <TableColumn prefWidth="80.79998779296875" text="Fecha" />
+                              <TableColumn prefWidth="77.60003662109375" text="Porcentaje" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+         </tabs>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </TabPane>
+   </children>
+</AnchorPane>
