@@ -35,7 +35,7 @@
                <children>
                   <VBox layoutX="-5.0" layoutY="-2.0" prefHeight="325.0" prefWidth="214.0">
                      <children>
-                        <Button fx:id="buttonPanelAlumno" alignment="CENTER" mnemonicParsing="false" prefHeight="49.0" prefWidth="214.0" style="-fx-background-color: #1e90ff;" text="Panel Alumno" textFill="WHITE">
+                        <Button fx:id="buttonPanelAlumno" alignment="CENTER" mnemonicParsing="false" prefHeight="49.0" prefWidth="214.0" style="-fx-background-color: #1e90ff;" text="Área Personal" textFill="WHITE">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
