@@ -13,7 +13,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="361.0" prefWidth="648.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.agenda.agenda_v1.LoginController">
    <children>
-      <Pane prefHeight="410.0" prefWidth="747.0" visible="false" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Pane prefHeight="410.0" prefWidth="747.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ImageView fitHeight="470.0" fitWidth="869.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -39,7 +39,7 @@
                   <Tooltip text="Pulsa para entrar" />
                </tooltip>
             </Label>
-            <ImageView fx:id="jlabelEntrarLogin" fitHeight="43.0" fitWidth="89.0" layoutX="414.0" layoutY="409.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="jlabelEntrarLogin" fitHeight="43.0" fitWidth="89.0" layoutX="406.0" layoutY="406.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@imagenes/snitch.png" />
                </image>
@@ -79,7 +79,7 @@
             </Label>
          </children>
       </Pane>
-      <Pane prefHeight="364.0" prefWidth="648.0" style="-fx-background-color: black;" AnchorPane.bottomAnchor="-3.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Pane prefHeight="364.0" prefWidth="648.0" style="-fx-background-color: black;" visible="false" AnchorPane.bottomAnchor="-3.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label layoutX="80.0" layoutY="180.0" text="Profesor" textFill="#ac972a">
                <font>
