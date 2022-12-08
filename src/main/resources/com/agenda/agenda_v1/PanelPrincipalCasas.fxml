@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Blend?>
+<?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.effect.SepiaTone?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -64,7 +68,7 @@
                   </Button>
                </children>
             </Pane>
-            <Pane fx:id="panelSalaComun" layoutX="225.0" layoutY="-3.0" prefHeight="695.0" prefWidth="816.0" style="-fx-background-color: white;">
+            <Pane fx:id="panelSalaComun" layoutX="225.0" layoutY="-3.0" prefHeight="695.0" prefWidth="816.0" style="-fx-background-color: white;" visible="false">
                <children>
                   <ImageView fitHeight="817.0" fitWidth="823.0" layoutX="-3.0" layoutY="-112.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -299,7 +303,7 @@
                   </Pane>
                </children>
             </Pane>
-            <Pane fx:id="panelTareas" layoutX="221.0" layoutY="-1.0" prefHeight="695.0" prefWidth="823.0" visible="false">
+            <Pane fx:id="panelTareas" layoutX="221.0" layoutY="-1.0" prefHeight="695.0" prefWidth="823.0">
                <children>
                   <ImageView fitHeight="817.0" fitWidth="823.0" layoutY="-112.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -308,9 +312,31 @@
                   </ImageView>
                   <Label layoutX="347.0" layoutY="46.0" prefHeight="62.0" prefWidth="128.0" text="Tareas">
                      <font>
-                        <Font size="42.0" />
+                        <Font name="Harrington" size="42.0" />
                      </font>
+                     <textFill>
+                        <LinearGradient endX="0.5236593180274361" endY="0.731861204002934" startX="0.5268138673403285" startY="0.5015773231674819">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.886274516582489" green="0.658823549747467" blue="0.14509804546833038" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.8549019694328308" green="0.10588235408067703" blue="0.0235294122248888" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
                   </Label>
+                  <TableView layoutX="170.0" layoutY="125.0" prefHeight="200.0" prefWidth="549.0">
+                    <columns>
+                      <TableColumn prefWidth="75.0" text="C1" />
+                      <TableColumn prefWidth="75.0" text="C2" />
+                    </columns>
+                  </TableView>
                </children>
             </Pane>
             <Pane fx:id="panelNotas" layoutX="221.0" layoutY="-3.0" prefHeight="695.0" prefWidth="823.0" visible="false">
@@ -320,11 +346,196 @@
                         <Image url="@imagenes/imagenes%20agenda/pngegg%20(51).png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="347.0" layoutY="46.0" prefHeight="62.0" prefWidth="128.0" text="Notas">
+                  <Label layoutX="348.0" layoutY="14.0" prefHeight="62.0" prefWidth="128.0" text="Notas">
                      <font>
-                        <Font size="42.0" />
+                        <Font name="Harrington" size="47.0" />
+                     </font>
+                     <textFill>
+                        <LinearGradient endX="0.5331230404249125" endY="0.4637224350817947" startX="0.533123063740294" startY="0.47949520797007467">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.8549019694328308" green="0.10588235408067703" blue="0.0235294122248888" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.886274516582489" green="0.658823549747467" blue="0.14509804546833038" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                  </Label>
+                  <TableView layoutX="106.0" layoutY="108.0" prefHeight="276.0" prefWidth="612.0" tableMenuButtonVisible="true">
+                    <columns>
+                      <TableColumn prefWidth="180.0" text="Asignatura" />
+                      <TableColumn prefWidth="143.33328247070312" text="Tipo" />
+                        <TableColumn prefWidth="163.3333740234375" text="Nombre" />
+                        <TableColumn prefWidth="124.66668701171875" text="Nota" />
+                    </columns>
+                     <effect>
+                        <SepiaTone />
+                     </effect>
+                  </TableView>
+                  <Label layoutX="106.0" layoutY="408.0" text="Selecciona Asignatura">
+                     <font>
+                        <Font name="Harrington" size="20.0" />
+                     </font>
+                     <effect>
+                        <ColorAdjust>
+                           <input>
+                              <Bloom />
+                           </input>
+                        </ColorAdjust>
+                     </effect>
+                  </Label>
+                  <ComboBox layoutX="339.0" layoutY="408.0" prefHeight="25.0" prefWidth="254.0">
+                     <effect>
+                        <SepiaTone />
+                     </effect>
+                  </ComboBox>
+                  <ImageView fitHeight="42.0" fitWidth="64.0" layoutX="106.0" layoutY="483.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagenes/pngegg%20(5).png" />
+                     </image></ImageView>
+                  <Label layoutX="189.0" layoutY="492.0" prefHeight="24.0" prefWidth="35.0" text="9,8">
+                     <font>
+                        <Font name="Harrington" size="20.0" />
+                     </font></Label>
+                  <ImageView fitHeight="42.0" fitWidth="64.0" layoutX="106.0" layoutY="566.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagenes/imagenes%20agenda/casas/pngegg%20(2).png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="525.0" layoutY="492.0" prefHeight="24.0" prefWidth="33.0" text="9,8">
+                     <font>
+                        <Font name="Harrington" size="20.0" />
                      </font>
                   </Label>
+                  <ImageView fitHeight="42.0" fitWidth="64.0" layoutX="455.0" layoutY="483.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagenes/imagenes%20agenda/casas/pngegg%20(12).png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="190.0" layoutY="575.0" prefHeight="24.0" prefWidth="33.0" text="9,8">
+                     <font>
+                        <Font name="Harrington" size="20.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="42.0" fitWidth="64.0" layoutX="283.0" layoutY="566.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagenes/escoba.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="361.0" layoutY="575.0" prefHeight="24.0" prefWidth="68.0" text="9,8">
+                     <font>
+                        <Font name="Harrington" size="20.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="42.0" fitWidth="64.0" layoutX="283.0" layoutY="483.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagenes/libros.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="365.0" layoutY="492.0" prefHeight="24.0" prefWidth="68.0" text="9,8">
+                     <font>
+                        <Font name="Harrington" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="525.0" layoutY="575.0" prefHeight="24.0" prefWidth="33.0" text="9,8">
+                     <font>
+                        <Font name="Harrington" size="20.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="42.0" fitWidth="64.0" layoutX="455.0" layoutY="566.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagenes/pngegg%20(7).png" />
+                     </image>
+                  </ImageView>
+                  <Pane layoutX="89.0" layoutY="448.0" prefHeight="201.0" prefWidth="485.0" />
+               </children>
+            </Pane>
+            <Pane fx:id="paneConfiguracion" layoutX="222.0" layoutY="-1.0" prefHeight="695.0" prefWidth="823.0" visible="false">
+               <children>
+                  <ImageView fitHeight="817.0" fitWidth="823.0" layoutY="-112.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagenes/imagenes%20agenda/pngegg%20(51).png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="201.0" layoutY="55.0" prefHeight="62.0" prefWidth="350.0" text="Configuración">
+                     <font>
+                        <Font name="Harrington" size="47.0" />
+                     </font>
+                     <textFill>
+                        <LinearGradient endX="0.5331230404249125" endY="0.4637224350817947" startX="0.533123063740294" startY="0.47949520797007467">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.8549019694328308" green="0.10588235408067703" blue="0.0235294122248888" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.886274516582489" green="0.658823549747467" blue="0.14509804546833038" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                  </Label>
+                  <Label layoutX="114.0" layoutY="163.0" text="Nombre:">
+                     <font>
+                        <Font name="Harrington" size="24.0" />
+                     </font>
+                  </Label>
+                  <TextField layoutX="309.0" layoutY="165.0" prefHeight="25.0" prefWidth="254.0" />
+                  <Label layoutX="114.0" layoutY="504.0" text="DNI:">
+                     <font>
+                        <Font name="Harrington" size="24.0" />
+                     </font>
+                  </Label>
+                  <TextField layoutX="309.0" layoutY="232.0" prefHeight="25.0" prefWidth="254.0" />
+                  <Label layoutX="111.0" layoutY="440.0" text="Curso:">
+                     <font>
+                        <Font name="Harrington" size="24.0" />
+                     </font>
+                  </Label>
+                  <TextField layoutX="309.0" layoutY="442.0" prefHeight="25.0" prefWidth="254.0" />
+                  <Label layoutX="114.0" layoutY="303.0" text="Apellidos">
+                     <font>
+                        <Font name="Harrington" size="24.0" />
+                     </font>
+                  </Label>
+                  <TextField layoutX="309.0" layoutY="305.0" prefHeight="25.0" prefWidth="254.0" />
+                  <Label layoutX="113.0" layoutY="374.0" text="Email:">
+                     <font>
+                        <Font name="Harrington" size="24.0" />
+                     </font>
+                  </Label>
+                  <TextField layoutX="309.0" layoutY="376.0" prefHeight="25.0" prefWidth="254.0" />
+                  <Label layoutX="110.0" layoutY="565.0" text="Teléfono:">
+                     <font>
+                        <Font name="Harrington" size="24.0" />
+                     </font>
+                  </Label>
+                  <TextField layoutX="309.0" layoutY="567.0" prefHeight="25.0" prefWidth="254.0" />
+                  <Label layoutX="112.0" layoutY="230.0" text="F. Nacimiento:">
+                     <font>
+                        <Font name="Harrington" size="24.0" />
+                     </font>
+                  </Label>
+                  <TextField layoutX="309.0" layoutY="506.0" prefHeight="25.0" prefWidth="254.0" />
+                  <ImageView fitHeight="92.0" fitWidth="102.0" layoutX="674.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagenes/WhatsApp%20Image%202022-12-08%20at%2017.45.47.jpeg" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="216.0" fitWidth="222.0" layoutX="614.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagenes/imagenes%20agenda/Untitled.png" />
+                     </image>
+                  </ImageView>
                </children>
             </Pane>
          </children>
