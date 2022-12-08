@@ -53,9 +53,17 @@ public class LoginController implements Initializable {
     private void login(MouseEvent event) throws IOException {
         if (labelUser.getText().equals("admin") && labelPass.getText().equals("admin")) {
 
-            try {
+            String casa = "PanelPrincipalCasas.fxml";
+            abrirCasa(event, casa);
+            
+        }
 
-                Parent root = FXMLLoader.load(getClass().getResource("panellgryfprueba3.fxml"));
+    }
+    
+    public void abrirCasa(MouseEvent event, String casa){
+        try {
+
+                Parent root = FXMLLoader.load(getClass().getResource(casa));
                 Scene scene = new Scene(root, 1040, 690);
                 Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 appStage.setScene(scene);
@@ -64,8 +72,6 @@ public class LoginController implements Initializable {
 
             } catch (Exception e) {
             }
-        }
-
     }
 
     @FXML

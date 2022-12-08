@@ -24,7 +24,7 @@ import javafx.stage.Stage;
  *
  * @author Ismael
  */
-public class Panellgryfprueba3Controller implements Initializable {
+public class PanelPrincipalCasasController implements Initializable {
 
     @FXML
     private Pane panelSalaComun;
@@ -46,8 +46,8 @@ public class Panellgryfprueba3Controller implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        panelAlumno.minHeight(1040);
-        panelAlumno.minWidth(690);
+//        panelAlumno.minHeight(1040);
+//        panelAlumno.minWidth(690);
     }
     
     public void vaciarPanel(){
