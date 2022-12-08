@@ -27,34 +27,34 @@
          <children>
             <Pane fx:id="panelMenuLateral" prefHeight="693.0" prefWidth="228.0">
                <children>
-                  <ImageView fitHeight="390.0" fitWidth="229.0" layoutY="-9.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="imagen_bandera" fitHeight="390.0" fitWidth="229.0" layoutY="-9.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@imagenes/imagenes%20agenda/casas/bandera/BanderaGryffindor.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="180.0" fitWidth="159.0" layoutX="36.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="imagen_escudo" fitHeight="180.0" fitWidth="159.0" layoutX="36.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@imagenes/imagenes%20agenda/casas/escudos/pngegg1.png" />
                      </image>
                   </ImageView>
                   <VBox layoutX="-3.0" layoutY="381.0" prefHeight="312.0" prefWidth="232.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#cambiarPanelSalaComun" prefHeight="74.0" prefWidth="229.0" style="-fx-background-color: #da1b06;" text="Sala Común" textFill="#e2a825">
+                        <Button fx:id="boton_sala_comun" mnemonicParsing="false" onAction="#cambiarPanelSalaComun" prefHeight="74.0" prefWidth="229.0" style="-fx-background-color: #da1b06;" text="Sala Común" textFill="#e2a825">
                            <font>
                               <Font name="Harrington" size="30.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#cambiarPanelAsignaturas" prefHeight="74.0" prefWidth="229.0" style="-fx-background-color: #da1b06;" text="Asignaturas" textFill="#e2a825">
+                        <Button fx:id="boton_asignaturas" mnemonicParsing="false" onAction="#cambiarPanelAsignaturas" prefHeight="74.0" prefWidth="229.0" style="-fx-background-color: #da1b06;" text="Asignaturas" textFill="#e2a825">
                            <font>
                               <Font name="Harrington" size="30.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#cambiarPanelTareas" prefHeight="74.0" prefWidth="229.0" style="-fx-background-color: #da1b06;" text="Tareas" textFill="#e2a825">
+                        <Button fx:id="boton_tareas" mnemonicParsing="false" onAction="#cambiarPanelTareas" prefHeight="74.0" prefWidth="229.0" style="-fx-background-color: #da1b06;" text="Tareas" textFill="#e2a825">
                            <font>
                               <Font name="Harrington" size="30.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#cambiarPanelNotas" prefHeight="92.0" prefWidth="229.0" style="-fx-background-color: #da1b06;" text="Notas" textFill="#e2a825">
+                        <Button fx:id="boton_notas" mnemonicParsing="false" onAction="#cambiarPanelNotas" prefHeight="92.0" prefWidth="229.0" style="-fx-background-color: #da1b06;" text="Notas" textFill="#e2a825">
                            <font>
                               <Font name="Harrington" size="30.0" />
                            </font>
@@ -148,17 +148,33 @@
                   </ImageView>
                </children>
             </Pane>
-            <Pane fx:id="panelAsignaturas" layoutX="221.0" layoutY="-2.0" prefHeight="695.0" prefWidth="823.0" visible="false">
+            <Pane fx:id="panelAsignaturas" layoutX="221.0" layoutY="-2.0" prefHeight="695.0" prefWidth="823.0">
                <children>
                   <ImageView fitHeight="817.0" fitWidth="823.0" layoutY="-112.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@imagenes/imagenes%20agenda/pngegg%20(51).png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="294.0" layoutY="32.0" prefHeight="62.0" prefWidth="222.0" text="Asignaturas">
+                  <Label layoutX="270.0" layoutY="29.0" prefHeight="62.0" prefWidth="304.0" text="Asignaturas">
                      <font>
-                        <Font size="42.0" />
+                        <Font name="Harrington" size="42.0" />
                      </font>
+                     <textFill>
+                        <LinearGradient endX="0.49842267683251806" endY="0.5552050473186121" startX="0.49842272496749923" startY="0.473186155975053">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.886274516582489" green="0.658823549747467" blue="0.14509804546833038" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.8549019694328308" green="0.10588235408067703" blue="0.0235294122248888" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
                   </Label>
                   <Pane layoutX="28.0" layoutY="108.0" prefHeight="105.0" prefWidth="338.0">
                      <children>
@@ -169,7 +185,7 @@
                         </ImageView>
                         <Label layoutX="115.0" layoutY="35.0" prefHeight="42.0" prefWidth="109.0" text="Pociones">
                            <font>
-                              <Font size="25.0" />
+                              <Font name="Harrington" size="25.0" />
                            </font>
                         </Label>
                      </children>
@@ -183,7 +199,7 @@
                         </ImageView>
                         <Label layoutX="115.0" layoutY="35.0" prefHeight="42.0" prefWidth="199.0" text="Transformaciones">
                            <font>
-                              <Font size="25.0" />
+                              <Font name="Harrington" size="25.0" />
                            </font>
                         </Label>
                      </children>
@@ -197,7 +213,7 @@
                         </ImageView>
                         <Label layoutX="115.0" layoutY="35.0" prefHeight="42.0" prefWidth="199.0" text="Encantamientos">
                            <font>
-                              <Font size="25.0" />
+                              <Font name="Harrington" size="25.0" />
                            </font>
                         </Label>
                      </children>
@@ -211,12 +227,12 @@
                         </ImageView>
                         <Label layoutX="115.0" layoutY="22.0" prefHeight="35.0" prefWidth="215.0" text="Defensa contra las">
                            <font>
-                              <Font size="25.0" />
+                              <Font name="Harrington" size="25.0" />
                            </font>
                         </Label>
                         <Label layoutX="115.0" layoutY="53.0" prefHeight="25.0" prefWidth="199.0" text="artes oscuras">
                            <font>
-                              <Font size="25.0" />
+                              <Font name="Harrington" size="25.0" />
                            </font>
                         </Label>
                      </children>
@@ -230,12 +246,12 @@
                         </ImageView>
                         <Label layoutX="111.0" layoutY="21.0" prefHeight="35.0" prefWidth="199.0" text="Cuidado de ">
                            <font>
-                              <Font size="25.0" />
+                              <Font name="Harrington" size="25.0" />
                            </font>
                         </Label>
                         <Label layoutX="111.0" layoutY="49.0" prefHeight="35.0" prefWidth="199.0" text="criaturas mágicas">
                            <font>
-                              <Font size="25.0" />
+                              <Font name="Harrington" size="25.0" />
                            </font>
                         </Label>
                      </children>
@@ -249,12 +265,12 @@
                         </ImageView>
                         <Label layoutX="112.0" layoutY="25.0" prefHeight="42.0" prefWidth="199.0" text="Historia de la">
                            <font>
-                              <Font size="25.0" />
+                              <Font name="Harrington" size="25.0" />
                            </font>
                         </Label>
                         <Label layoutX="112.0" layoutY="53.0" prefHeight="36.0" prefWidth="199.0" text="magia">
                            <font>
-                              <Font size="25.0" />
+                              <Font name="Harrington" size="25.0" />
                            </font>
                         </Label>
                      </children>
@@ -268,7 +284,7 @@
                         </ImageView>
                         <Label layoutX="115.0" layoutY="35.0" prefHeight="42.0" prefWidth="199.0" text="Clases de vuelo">
                            <font>
-                              <Font size="25.0" />
+                              <Font name="Harrington" size="25.0" />
                            </font>
                         </Label>
                      </children>
@@ -282,7 +298,7 @@
                         </ImageView>
                         <Label layoutX="117.0" layoutY="36.0" prefHeight="42.0" prefWidth="207.0" text="Runas antiguas">
                            <font>
-                              <Font size="25.0" />
+                              <Font name="Harrington" size="25.0" />
                            </font>
                         </Label>
                      </children>
@@ -296,21 +312,21 @@
                         </ImageView>
                         <Label layoutX="126.0" layoutY="31.0" prefHeight="42.0" prefWidth="134.0" text="Adivinación">
                            <font>
-                              <Font size="25.0" />
+                              <Font name="Harrington" size="25.0" />
                            </font>
                         </Label>
                      </children>
                   </Pane>
                </children>
             </Pane>
-            <Pane fx:id="panelTareas" layoutX="221.0" layoutY="-1.0" prefHeight="695.0" prefWidth="823.0">
+            <Pane fx:id="panelTareas" layoutX="221.0" layoutY="-1.0" prefHeight="695.0" prefWidth="823.0" visible="false">
                <children>
                   <ImageView fitHeight="817.0" fitWidth="823.0" layoutY="-112.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@imagenes/imagenes%20agenda/pngegg%20(51).png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="347.0" layoutY="46.0" prefHeight="62.0" prefWidth="174.0" text="Tareas">
+                  <Label fx:id="label_titulo" layoutX="347.0" layoutY="46.0" prefHeight="62.0" prefWidth="174.0" text="Tareas">
                      <font>
                         <Font name="Harrington" size="50.0" />
                      </font>

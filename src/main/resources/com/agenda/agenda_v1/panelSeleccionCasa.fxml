@@ -37,7 +37,7 @@
                   <Image url="@imagenes/pngegg%20(11).png" />
                </image>
             </ImageView>
-            <Label layoutX="299.0" layoutY="279.0" prefHeight="30.0" prefWidth="121.0" text="GRYFFINDOR">
+            <Label fx:id="label_casa_seleccion" layoutX="299.0" layoutY="279.0" prefHeight="30.0" prefWidth="121.0" text="GRYFFINDOR">
                <font>
                   <Font size="20.0" />
                </font>

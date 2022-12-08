@@ -15,6 +15,9 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -40,6 +43,22 @@ public class PanelPrincipalCasasController implements Initializable {
     private AnchorPane panelAlumno;
     @FXML
     private Button botonSalirAlumno;
+    @FXML
+    private Pane paneConfiguracion;
+    @FXML
+    private ImageView imagen_bandera;
+    @FXML
+    private ImageView imagen_escudo;
+    @FXML
+    private Button boton_sala_comun;
+    @FXML
+    private Button boton_asignaturas;
+    @FXML
+    private Button boton_tareas;
+    @FXML
+    private Button boton_notas;
+    @FXML
+    private Label label_titulo;
 
     /**
      * Initializes the controller class.
@@ -48,17 +67,26 @@ public class PanelPrincipalCasasController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 //        panelAlumno.minHeight(1040);
 //        panelAlumno.minWidth(690);
+       
+
     }
-    
-    public void vaciarPanel(){
+
+    public void vaciarPanel() {
         panelAsignaturas.setVisible(false);
         panelNotas.setVisible(false);
         panelTareas.setVisible(false);
         panelSalaComun.setVisible(false);
     }
+    //===========================================================================================================
+
+    public void panel_Slytherin() {
+
+        imagen_escudo.setImage(new Image("C:\\Users\\nuria\\Documents\\NetBeansProjects\\Agenda_nuria_ismy\\src\\main\\resources\\com\\agenda\\agenda_v1\\imagenes\\imagenes agenda\\casas\\escudos\\escudo_verde.png"));
+
+    }
 
     @FXML
-    private void cambiarPanelSalaComun(ActionEvent event) {        
+    private void cambiarPanelSalaComun(ActionEvent event) {
         vaciarPanel();
         panelSalaComun.setVisible(true);
     }
@@ -66,19 +94,19 @@ public class PanelPrincipalCasasController implements Initializable {
     @FXML
     private void cambiarPanelAsignaturas(ActionEvent event) {
         vaciarPanel();
-        panelAsignaturas.setVisible(true);    
+        panelAsignaturas.setVisible(true);
     }
-    
+
     @FXML
     private void cambiarPanelNotas(ActionEvent event) {
         vaciarPanel();
-        panelNotas.setVisible(true);        
+        panelNotas.setVisible(true);
     }
-    
+
     @FXML
     private void cambiarPanelTareas(ActionEvent event) {
         vaciarPanel();
-        panelTareas.setVisible(true);        
+        panelTareas.setVisible(true);
     }
 
     @FXML

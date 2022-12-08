@@ -55,25 +55,37 @@ public class LoginController implements Initializable {
 
             String casa = "PanelPrincipalCasas.fxml";
             abrirCasa(event, casa);
-            
+
         }
 
     }
+
+    //=========================================================================================================
+    // Registro
+    @FXML
+    private void registro(MouseEvent event) throws IOException {
+
+        String casa = "panelSeleccionCasa.fxml";
+        abrirCasa(event, casa);
+
+    }
+    //=========================================================================================================
     
-    public void abrirCasa(MouseEvent event, String casa){
+    
+
+    public void abrirCasa(MouseEvent event, String casa) {
         try {
 
-                Parent root = FXMLLoader.load(getClass().getResource(casa));
-                Scene scene = new Scene(root, 1040, 690);
-                Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                appStage.setScene(scene);
-                appStage.toFront();
-                appStage.centerOnScreen();
-                appStage.show();
-                
+            Parent root = FXMLLoader.load(getClass().getResource(casa));
+            Scene scene = new Scene(root, 1040, 690);
+            Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            appStage.setScene(scene);
+            appStage.toFront();
+            appStage.centerOnScreen();
+            appStage.show();
 
-            } catch (Exception e) {
-            }
+        } catch (Exception e) {
+        }
     }
 
     @FXML
