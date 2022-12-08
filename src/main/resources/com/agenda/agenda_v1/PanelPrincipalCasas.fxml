@@ -310,9 +310,9 @@
                         <Image url="@imagenes/imagenes%20agenda/pngegg%20(51).png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="347.0" layoutY="46.0" prefHeight="62.0" prefWidth="128.0" text="Tareas">
+                  <Label layoutX="347.0" layoutY="46.0" prefHeight="62.0" prefWidth="174.0" text="Tareas">
                      <font>
-                        <Font name="Harrington" size="42.0" />
+                        <Font name="Harrington" size="50.0" />
                      </font>
                      <textFill>
                         <LinearGradient endX="0.5236593180274361" endY="0.731861204002934" startX="0.5268138673403285" startY="0.5015773231674819">
@@ -331,12 +331,47 @@
                         </LinearGradient>
                      </textFill>
                   </Label>
-                  <TableView layoutX="170.0" layoutY="125.0" prefHeight="200.0" prefWidth="549.0">
+                  <TableView layoutX="99.0" layoutY="138.0" prefHeight="199.0" prefWidth="625.0">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="C1" />
-                      <TableColumn prefWidth="75.0" text="C2" />
+                      <TableColumn prefWidth="157.99996948242188" text="Asignatura" />
+                      <TableColumn prefWidth="143.3333740234375" text="Tipo" />
+                        <TableColumn prefWidth="158.44442749023438" text="Nombre" />
+                        <TableColumn prefWidth="165.11114501953125" text="Fecha Entrega" />
                     </columns>
+                     <effect>
+                        <SepiaTone />
+                     </effect>
                   </TableView>
+                  <Label layoutX="294.0" layoutY="382.0" text="Subir documento">
+                     <font>
+                        <Font name="Harrington" size="28.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="79.0" fitWidth="96.0" layoutX="157.0" layoutY="361.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagenes/reliquias.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="296.0" layoutY="489.0" text="Añadir comentario">
+                     <font>
+                        <Font name="Harrington" size="28.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="79.0" fitWidth="96.0" layoutX="157.0" layoutY="467.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagenes/imagenes%20agenda/casas/pngegg%20(10).png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="296.0" layoutY="592.0" text="Guardar Cambios">
+                     <font>
+                        <Font name="Harrington" size="28.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="49.0" fitWidth="78.0" layoutX="161.0" layoutY="585.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagenes/llaveAlada.png" />
+                     </image>
+                  </ImageView>
                </children>
             </Pane>
             <Pane fx:id="panelNotas" layoutX="221.0" layoutY="-3.0" prefHeight="695.0" prefWidth="823.0" visible="false">
