@@ -20,12 +20,12 @@
                   <Image url="@imagenes/harry-potter-hogwarts-legacy.gif" />
                </image>
             </ImageView>
-            <TextField layoutX="345.0" layoutY="296.0" promptText="Usuario">
+            <TextField fx:id="labelUser" layoutX="345.0" layoutY="296.0" promptText="Usuario">
                <font>
                   <Font name="Roboto Slab Light" size="16.0" />
                </font>
             </TextField>
-            <PasswordField layoutX="345.0" layoutY="350.0" promptText="Contraseña">
+            <PasswordField fx:id="labelPass" layoutX="345.0" layoutY="350.0" promptText="Contraseña">
                <font>
                   <Font name="Roboto Slab Light" size="16.0" />
                </font>
@@ -39,7 +39,7 @@
                   <Tooltip text="Pulsa para entrar" />
                </tooltip>
             </Label>
-            <ImageView fx:id="jlabelEntrarLogin" fitHeight="43.0" fitWidth="89.0" layoutX="406.0" layoutY="406.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="jlabelEntrarLogin" fitHeight="43.0" fitWidth="89.0" layoutX="406.0" layoutY="406.0" onMouseClicked="#login" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@imagenes/snitch.png" />
                </image>
