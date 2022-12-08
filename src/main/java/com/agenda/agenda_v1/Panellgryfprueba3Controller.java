@@ -6,7 +6,9 @@ package com.agenda.agenda_v1;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.layout.Pane;
 
 /**
  * FXML Controller class
@@ -14,6 +16,9 @@ import javafx.fxml.Initializable;
  * @author Ismael
  */
 public class Panellgryfprueba3Controller implements Initializable {
+
+    @FXML
+    private Pane panelSalaComun;
 
     /**
      * Initializes the controller class.
