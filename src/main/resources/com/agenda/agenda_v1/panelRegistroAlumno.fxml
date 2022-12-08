@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="513.0" prefWidth="638.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19" fx:controller="com.agenda.agenda_v1.PanelRegistroAlumnoController">
+   <children>
+      <Pane prefHeight="522.0" prefWidth="638.0" AnchorPane.bottomAnchor="-9.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fitHeight="873.0" fitWidth="675.0" layoutX="-4.0" layoutY="-6.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagenes/Untitled.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="94.0" layoutY="107.0" prefHeight="36.0" prefWidth="96.0" text="Nombre">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <Label layoutX="94.0" layoutY="151.0" prefHeight="36.0" prefWidth="109.0" text="Apellidos">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <Label layoutX="94.0" layoutY="196.0" prefHeight="36.0" prefWidth="203.0" text="Fecha Nacimiento">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <Label layoutX="94.0" layoutY="245.0" prefHeight="36.0" prefWidth="58.0" text="Sexo">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <Label layoutX="94.0" layoutY="290.0" prefHeight="36.0" prefWidth="162.0" text="Fecha ">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="87.0" fitWidth="88.0" layoutX="537.0" layoutY="421.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagenes/imagenes%20agenda/casas/pngegg%20(11).png" />
+               </image>
+            </ImageView>
+            <TextField cache="true" layoutX="341.0" layoutY="113.0" prefHeight="25.0" prefWidth="203.0" />
+            <TextField layoutX="341.0" layoutY="157.0" prefHeight="25.0" prefWidth="203.0" />
+            <TextField layoutX="341.0" layoutY="202.0" prefHeight="25.0" prefWidth="203.0" />
+            <TextField layoutX="341.0" layoutY="250.0" prefHeight="25.0" prefWidth="203.0" />
+            <TextField layoutX="341.0" layoutY="296.0" prefHeight="25.0" prefWidth="203.0" />
+            <Label layoutX="94.0" layoutY="334.0" prefHeight="36.0" prefWidth="58.0" text="DNI">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <Label layoutX="94.0" layoutY="379.0" prefHeight="36.0" prefWidth="162.0" text="Correo">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <TextField layoutX="341.0" layoutY="339.0" prefHeight="25.0" prefWidth="203.0" />
+            <TextField layoutX="341.0" layoutY="385.0" prefHeight="25.0" prefWidth="203.0" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
