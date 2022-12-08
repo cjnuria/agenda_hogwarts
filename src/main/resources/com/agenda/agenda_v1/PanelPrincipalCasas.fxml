@@ -57,14 +57,7 @@
                         </Button>
                      </children>
                   </VBox>
-                  <Button fx:id="botonSalirAlumno" layoutX="70.0" layoutY="328.0" mnemonicParsing="false" onAction="#cerrarTodo" style="-fx-background-color: #da1b06;" text="SALIR" textFill="#e2a825">
-                     <graphic>
-                        <ImageView fitHeight="25.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../../../../../../../Desktop/100636305_2689004694677990_5629174379419009024_n.jpg" />
-                           </image>
-                        </ImageView>
-                     </graphic>
+                  <Button fx:id="botonSalirAlumno" layoutX="80.0" layoutY="328.0" mnemonicParsing="false" onAction="#cerrarTodo" style="-fx-background-color: #da1b06;" text="SALIR" textFill="#e2a825">
                      <font>
                         <Font size="17.0" />
                      </font>
