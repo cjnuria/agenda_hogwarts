@@ -79,50 +79,5 @@
             </Label>
          </children>
       </Pane>
-      <Pane prefHeight="364.0" prefWidth="648.0" style="-fx-background-color: black;" visible="false" AnchorPane.bottomAnchor="-3.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <Label layoutX="80.0" layoutY="180.0" text="Profesor" textFill="#ac972a">
-               <font>
-                  <Font name="Harrington" size="30.0" />
-               </font>
-            </Label>
-            <ImageView fitHeight="53.0" fitWidth="59.0" layoutX="112.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@imagenes/icons8-minerva-mcgonagall-48.png" />
-               </image>
-            </ImageView>
-            <Label layoutX="437.0" layoutY="187.0" text="Alumno" textFill="#ac972a">
-               <font>
-                  <Font name="Harrington" size="30.0" />
-               </font>
-            </Label>
-            <ImageView fitHeight="59.0" fitWidth="59.0" layoutX="459.0" layoutY="119.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@imagenes/icons8-harry-potter-48.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="96.0" fitWidth="102.0" layoutX="438.0" layoutY="234.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../../../../../../../Desktop/agenda%20Hogwarts/SelfreliantWellgroomedKiwi-size_restricted.gif" />
-               </image>
-            </ImageView>
-            <Label layoutX="518.0" layoutY="308.0" prefHeight="19.0" prefWidth="59.0" style="-fx-background-color: black;" text="              " />
-            <ImageView fitHeight="117.0" fitWidth="92.0" layoutX="92.0" layoutY="230.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../../../../../../../Desktop/agenda%20Hogwarts/b338e3ade304a81ce998040b53686cc0d1df1704_hq.gif" />
-               </image>
-            </ImageView>
-            <Label layoutX="159.0" layoutY="46.0" text="¿Cómo quieres registrarte?" textFill="#ac972a">
-               <font>
-                  <Font name="Harrington" size="28.0" />
-               </font>
-            </Label>
-         </children>
-      </Pane>
-      <ImageView fitHeight="48.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../../../../../../Desktop/agenda%20Hogwarts/pngtree-vector-back-icon-png-image_998156.jpg" />
-         </image>
-      </ImageView>
    </children>
 </AnchorPane>
