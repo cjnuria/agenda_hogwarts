@@ -13,7 +13,7 @@ import javafx.fxml.Initializable;
  *
  * @author Ismael
  */
-public class PanelNuevaAsignaturaController implements Initializable {
+public class PanelAsignaturasController implements Initializable {
 
     /**
      * Initializes the controller class.
