@@ -59,6 +59,8 @@ public class PanelPrincipalCasasController implements Initializable {
     private Button boton_notas;
     @FXML
     private Label label_titulo;
+    @FXML
+    private Pane paneAsignaturasIndividual;
 
     /**
      * Initializes the controller class.
@@ -67,8 +69,17 @@ public class PanelPrincipalCasasController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 //        panelAlumno.minHeight(1040);
 //        panelAlumno.minWidth(690);
-       
+        paneConfiguracion.setVisible(true);
+//        Image image = new Image ("C:/Users/Ismael/Documents/NetBeansProjects/Agenda_v1/src/main/resources/com/agenda/agenda_v1/imagenes/imagenes agenda/casas/escudos/escudo_verde.png");
+//        imagen_escudo.setImage(image);
+        //cambiarImagen();
 
+    }
+    
+    public void cambiarImagen(){
+        Image image1 = new Image(getClass().getResourceAsStream("C:\\Users\\Ismael\\Documents\\NetBeansProjects\\Agenda_v1\\src\\main\\resources\\com\\agenda\\agenda_v1\\imagenes\\imagenes agenda\\casas\\escudos\\escudo_verde.png"));
+        ImageView imageView1 = new ImageView(image1);
+        panelMenuLateral.getChildren().add(imageView1);
     }
 
     public void vaciarPanel() {
@@ -76,14 +87,12 @@ public class PanelPrincipalCasasController implements Initializable {
         panelNotas.setVisible(false);
         panelTareas.setVisible(false);
         panelSalaComun.setVisible(false);
+        paneAsignaturasIndividual.setVisible(false);
+        paneConfiguracion.setVisible(false);
     }
     //===========================================================================================================
 
-    public void panel_Slytherin() {
-
-        imagen_escudo.setImage(new Image("C:\\Users\\nuria\\Documents\\NetBeansProjects\\Agenda_nuria_ismy\\src\\main\\resources\\com\\agenda\\agenda_v1\\imagenes\\imagenes agenda\\casas\\escudos\\escudo_verde.png"));
-
-    }
+  
 
     @FXML
     private void cambiarPanelSalaComun(ActionEvent event) {
