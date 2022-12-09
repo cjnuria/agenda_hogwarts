@@ -6,6 +6,7 @@ package com.agenda.agenda_v1;
 
 import java.io.IOException;
 import java.net.URL;
+import java.security.SecureRandom;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -87,6 +88,30 @@ public class PanelSeleccionCasaController implements Initializable {
         labelPulsaSombrero2.setVisible(false);
         imagenNombreCasa.setVisible(true);
         label_casa_seleccion.setVisible(true);
+        pulsarCasas();
+    }
+    
+    public void pulsarCasas(){
+        SecureRandom generador = new SecureRandom();
+        int i = generador.nextInt(4);
+        switch (i) {
+            case 0:
+                label_casa_seleccion.setText("GRYFFINDOR");
+                break;
+                
+            case 1:
+                label_casa_seleccion.setText("HAFFLEPUFF");
+                break;
+            
+            case 2:
+                label_casa_seleccion.setText("RAVENCLAW");
+                break;
+                
+            case 3:
+                label_casa_seleccion.setText("SLYTHERIN");
+                break;
+            
+        }
     }
 
 }
