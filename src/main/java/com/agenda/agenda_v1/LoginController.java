@@ -39,6 +39,8 @@ public class LoginController implements Initializable {
     private TextField labelUser;
     @FXML
     private PasswordField labelPass;
+    @FXML
+    private ImageView botonRegistro;
 
     /**
      * Initializes the controller class.
@@ -52,9 +54,11 @@ public class LoginController implements Initializable {
     @FXML
     private void login(MouseEvent event) throws IOException {
         if (labelUser.getText().equals("admin") && labelPass.getText().equals("admin")) {
-
+            int tam1, tam2;
+            tam1 = 1040;
+            tam2 = 690;
             String casa = "PanelPrincipalCasas.fxml";
-            abrirCasa(event, casa);
+            abrirCasa(event, casa, tam1, tam2);
 
         }
 
@@ -65,19 +69,20 @@ public class LoginController implements Initializable {
     @FXML
     private void registro(MouseEvent event) throws IOException {
 
+        int tam1, tam2;
+        tam1 = 913;
+        tam2 = 511;
         String casa = "panelSeleccionCasa.fxml";
-        abrirCasa(event, casa);
+        abrirCasa(event, casa, tam1, tam2);
 
     }
     //=========================================================================================================
-    
-    
 
-    public void abrirCasa(MouseEvent event, String casa) {
+    public void abrirCasa(MouseEvent event, String casa, int tam1, int tam2) {
         try {
 
             Parent root = FXMLLoader.load(getClass().getResource(casa));
-            Scene scene = new Scene(root, 1040, 690);
+            Scene scene = new Scene(root, tam1, tam2);
             Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             appStage.setScene(scene);
             appStage.toFront();
@@ -93,8 +98,8 @@ public class LoginController implements Initializable {
         System.exit(0);
     }
 
-    public void mostrarMenuAdministrador(Event event) {
-
+    @FXML
+    private void abrirCasa(MouseEvent event) {
     }
 
 }

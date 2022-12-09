@@ -14,6 +14,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -26,6 +27,18 @@ public class PanelSeleccionCasaController implements Initializable {
 
     @FXML
     private Label label_casa_seleccion;
+    @FXML
+    private ImageView botonIrHogwarts;
+    @FXML
+    private ImageView botonSombrero;
+    @FXML
+    private ImageView imagenPulsaSombrero;
+    @FXML
+    private Label labelPulsaSombrero1;
+    @FXML
+    private Label labelPulsaSombrero2;
+    @FXML
+    private ImageView imagenNombreCasa;
 
     /**
      * Initializes the controller class.
@@ -37,6 +50,7 @@ public class PanelSeleccionCasaController implements Initializable {
  
     //==========================================================================================================
     // configuracion 4 casas
+    @FXML
     private void segun_casa(MouseEvent event) throws IOException {
         if (label_casa_seleccion.getText().equalsIgnoreCase("gryffindor") ) {
 
@@ -65,5 +79,14 @@ public class PanelSeleccionCasaController implements Initializable {
         } catch (Exception e) {
         }
     }
-    
+
+    @FXML
+    private void saberCasa(MouseEvent event) {
+        imagenPulsaSombrero.setVisible(false);
+        labelPulsaSombrero1.setVisible(false);
+        labelPulsaSombrero2.setVisible(false);
+        imagenNombreCasa.setVisible(true);
+        label_casa_seleccion.setVisible(true);
+    }
+
 }

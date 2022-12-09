@@ -47,12 +47,12 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <Label fx:id="jlabelRegistro" layoutX="664.0" layoutY="7.0" prefHeight="21.0" prefWidth="101.0" text="Registro" textFill="#ac972a">
+            <Label fx:id="jlabelRegistro" layoutX="664.0" layoutY="7.0" onMouseClicked="#registro" prefHeight="21.0" prefWidth="101.0" text="Registro" textFill="#ac972a">
                <font>
                   <Font name="Harrington" size="18.0" />
                </font>
                <graphic>
-                  <ImageView fitHeight="28.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="botonRegistro" fitHeight="28.0" fitWidth="31.0" onMouseClicked="#abrirCasa" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@imagenes/hat_98438%20(1).png" />
                      </image>

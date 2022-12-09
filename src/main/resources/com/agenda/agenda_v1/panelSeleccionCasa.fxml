@@ -17,7 +17,7 @@
                   <Image url="@imagenes/Hogwarts%20Gawalpop.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="118.0" fitWidth="112.0" layoutX="398.0" layoutY="367.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="botonSombrero" fitHeight="118.0" fitWidth="112.0" layoutX="398.0" layoutY="367.0" onMouseClicked="#saberCasa" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@imagenes/hat_98438%20(1).png" />
                </image>
@@ -25,14 +25,14 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fitHeight="127.0" fitWidth="183.0" layoutX="454.0" layoutY="269.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imagenPulsaSombrero" fitHeight="127.0" fitWidth="183.0" layoutX="454.0" layoutY="269.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@imagenes/pngegg%20(10).png" />
                </image>
             </ImageView>
-            <Label layoutX="472.0" layoutY="294.0" text="Pulsa sobre mí para saber" />
-            <Label layoutX="472.0" layoutY="311.0" text="en que casa te pondré." />
-            <ImageView fitHeight="184.0" fitWidth="216.0" layoutX="256.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true" visible="false">
+            <Label fx:id="labelPulsaSombrero1" layoutX="472.0" layoutY="294.0" text="Pulsa sobre mí para saber" />
+            <Label fx:id="labelPulsaSombrero2" layoutX="472.0" layoutY="311.0" text="en que casa te pondré." />
+            <ImageView fx:id="imagenNombreCasa" fitHeight="184.0" fitWidth="216.0" layoutX="256.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
                   <Image url="@imagenes/pngegg%20(11).png" />
                </image>
@@ -42,7 +42,7 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <ImageView fitHeight="112.0" fitWidth="80.0" layoutX="813.0" layoutY="423.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="botonIrHogwarts" fitHeight="112.0" fitWidth="80.0" layoutX="813.0" layoutY="423.0" onMouseClicked="#segun_casa" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@imagenes/pngegg%20(13).png" />
                </image>
