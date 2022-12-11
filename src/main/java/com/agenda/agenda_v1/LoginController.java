@@ -7,6 +7,11 @@ package com.agenda.agenda_v1;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,6 +25,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 /**
@@ -41,6 +47,10 @@ public class LoginController implements Initializable {
     private PasswordField labelPass;
     @FXML
     private ImageView botonRegistro;
+    @FXML
+    private Pane panelGifCasa;
+    @FXML
+    private Pane panelLogin;
 
     /**
      * Initializes the controller class.
@@ -49,11 +59,25 @@ public class LoginController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         Tooltip.install(jlabelEntrarLogin, new Tooltip("Pulsa para entrar"));
+        panelLogin.setVisible(true);
     }
 
     @FXML
-    private void login(MouseEvent event) throws IOException {
+    private void login(MouseEvent event) throws IOException, InterruptedException {
         if (labelUser.getText().equals("admin") && labelPass.getText().equals("admin")) {
+            
+            
+//            int tam3, tam4;
+//            tam3 = 920;
+//            tam4 = 688;
+//            String gif = "panelGifCasa.fxml";
+//            abrirCasa(event, gif, tam3, tam4);
+//            
+//            //event.wait(7);
+//            //event.notifyAll();
+//            TimeUnit.SECONDS.sleep(7);
+            //esperar(7);
+
             int tam1, tam2;
             tam1 = 1040;
             tam2 = 690;
@@ -100,6 +124,14 @@ public class LoginController implements Initializable {
 
     @FXML
     private void abrirCasa(MouseEvent event) {
+    }
+
+    public static void esperar(int segundos) {
+        try {
+            Thread.sleep(segundos * 1000);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
 }
