@@ -77,6 +77,10 @@ public class LoginController implements Initializable {
 //            //event.notifyAll();
 //            TimeUnit.SECONDS.sleep(7);
             //esperar(7);
+            
+            //Thread hilogif = new Thread();
+            
+            
 
             int tam1, tam2;
             tam1 = 1040;
