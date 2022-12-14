@@ -11,9 +11,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="468.0" prefWidth="617.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.agenda.agenda_v1.LoginController">
+<AnchorPane id="AnchorPane" prefHeight="473.0" prefWidth="875.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.agenda.agenda_v1.LoginController">
    <children>
-      <Pane fx:id="panelLogin" prefHeight="467.0" prefWidth="865.0" AnchorPane.bottomAnchor="-6.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Pane fx:id="panelLogin" prefHeight="473.0" prefWidth="875.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ImageView fitHeight="473.0" fitWidth="877.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -39,7 +39,7 @@
                   <Tooltip text="Pulsa para entrar" />
                </tooltip>
             </Label>
-            <ImageView fx:id="jlabelEntrarLogin" fitHeight="43.0" fitWidth="89.0" layoutX="406.0" layoutY="406.0" onMouseClicked="#login" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="jlabelEntrarLogin" fitHeight="43.0" fitWidth="89.0" layoutX="406.0" layoutY="400.0" onMouseClicked="#abrirCasa" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@imagenes/snitch.png" />
                </image>
@@ -52,7 +52,7 @@
                   <Font name="Harrington" size="18.0" />
                </font>
                <graphic>
-                  <ImageView fx:id="botonRegistro" fitHeight="28.0" fitWidth="31.0" onMouseClicked="#abrirCasa" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="botonRegistro" fitHeight="28.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@imagenes/hat_98438%20(1).png" />
                      </image>

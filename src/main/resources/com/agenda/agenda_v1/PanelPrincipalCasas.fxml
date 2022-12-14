@@ -32,7 +32,7 @@
                         <Image url="@imagenes/imagenes%20agenda/casas/bandera/BanderaGryffindor.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="imagen_escudo" fitHeight="180.0" fitWidth="159.0" layoutX="36.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="_imgEScudo" fitHeight="180.0" fitWidth="159.0" layoutX="36.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@imagenes/imagenes%20agenda/casas/escudos/pngegg1.png" />
                      </image>

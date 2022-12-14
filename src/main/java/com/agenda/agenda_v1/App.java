@@ -15,6 +15,12 @@ import javafx.stage.StageStyle;
 public class App extends Application {
 
     private static Scene scene;
+    
+    
+
+    public static Scene getScene() {
+        return scene;
+    }
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -26,6 +32,7 @@ public class App extends Application {
 
     static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
+        
     }
 
     private static Parent loadFXML(String fxml) throws IOException {

@@ -48,8 +48,6 @@ public class LoginController implements Initializable {
     @FXML
     private ImageView botonRegistro;
     @FXML
-    private Pane panelGifCasa;
-    @FXML
     private Pane panelLogin;
 
     /**
@@ -59,34 +57,16 @@ public class LoginController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         Tooltip.install(jlabelEntrarLogin, new Tooltip("Pulsa para entrar"));
-        panelLogin.setVisible(true);
+//        panelLogin.setVisible(true);
+
     }
 
-    @FXML
     private void login(MouseEvent event) throws IOException, InterruptedException {
         if (labelUser.getText().equals("admin") && labelPass.getText().equals("admin")) {
-            
-            
-//            int tam3, tam4;
-//            tam3 = 920;
-//            tam4 = 688;
-//            String gif = "panelGifCasa.fxml";
-//            abrirCasa(event, gif, tam3, tam4);
-//            
-//            //event.wait(7);
-//            //event.notifyAll();
-//            TimeUnit.SECONDS.sleep(7);
-            //esperar(7);
-            
-            //Thread hilogif = new Thread();
-            
-            
-
-            int tam1, tam2;
-            tam1 = 1040;
-            tam2 = 690;
-            String casa = "PanelPrincipalCasas.fxml";
-            abrirCasa(event, casa, tam1, tam2);
+            String casa = "panelGifCasa";
+            Thread a = new Thread(new lanzarGifHilo());
+            a.start();
+            abrirCasa(event);
 
         }
 
@@ -97,16 +77,12 @@ public class LoginController implements Initializable {
     @FXML
     private void registro(MouseEvent event) throws IOException {
 
-        int tam1, tam2;
-        tam1 = 913;
-        tam2 = 511;
-        String casa = "panelSeleccionCasa.fxml";
-        abrirCasa(event, casa, tam1, tam2);
+        abrirSeleccionCasa(event);
 
     }
     //=========================================================================================================
 
-    public void abrirCasa(MouseEvent event, String casa, int tam1, int tam2) {
+    public void abrirGif(MouseEvent event, String casa, int tam1, int tam2) {
         try {
 
             Parent root = FXMLLoader.load(getClass().getResource(casa));
@@ -116,6 +92,7 @@ public class LoginController implements Initializable {
             appStage.toFront();
             appStage.centerOnScreen();
             appStage.show();
+            Thread.currentThread().wait(7000);
 
         } catch (Exception e) {
         }
@@ -128,13 +105,35 @@ public class LoginController implements Initializable {
 
     @FXML
     private void abrirCasa(MouseEvent event) {
+        try {
+
+            Parent root = FXMLLoader.load(getClass().getResource("PanelPrincipalCasas.fxml"));
+            Scene scene = new Scene(root, 1040, 690);
+            Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            appStage.setScene(scene);
+            appStage.toFront();
+            appStage.centerOnScreen();
+            appStage.show();
+            Thread.currentThread().wait(7000);
+
+        } catch (Exception e) {
+        }
     }
 
-    public static void esperar(int segundos) {
+    @FXML
+    private void abrirSeleccionCasa(MouseEvent event) {
         try {
-            Thread.sleep(segundos * 1000);
+
+            Parent root = FXMLLoader.load(getClass().getResource("PanelSeleccionCasa.fxml"));
+            Scene scene = new Scene(root, 913, 511);
+            Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            appStage.setScene(scene);
+            appStage.toFront();
+            appStage.centerOnScreen();
+            appStage.show();
+            Thread.currentThread().wait(7000);
+
         } catch (Exception e) {
-            System.out.println(e);
         }
     }
 

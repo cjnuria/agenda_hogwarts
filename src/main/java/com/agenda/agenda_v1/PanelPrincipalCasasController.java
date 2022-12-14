@@ -48,8 +48,6 @@ public class PanelPrincipalCasasController implements Initializable {
     @FXML
     private ImageView imagen_bandera;
     @FXML
-    private ImageView imagen_escudo;
-    @FXML
     private Button boton_sala_comun;
     @FXML
     private Button boton_asignaturas;
@@ -61,6 +59,8 @@ public class PanelPrincipalCasasController implements Initializable {
     private Label label_titulo;
     @FXML
     private Pane paneAsignaturasIndividual;
+    @FXML
+    private ImageView _imgEScudo;
 
     /**
      * Initializes the controller class.
@@ -70,16 +70,19 @@ public class PanelPrincipalCasasController implements Initializable {
 //        panelAlumno.minHeight(1040);
 //        panelAlumno.minWidth(690);
         paneConfiguracion.setVisible(true);
-//        Image image = new Image ("C:/Users/Ismael/Documents/NetBeansProjects/Agenda_v1/src/main/resources/com/agenda/agenda_v1/imagenes/imagenes agenda/casas/escudos/escudo_verde.png");
-//        imagen_escudo.setImage(image);
-        //cambiarImagen();
+        
+        
+        cambiarImagen();
+        
+        
 
     }
     
     public void cambiarImagen(){
-        Image image1 = new Image(getClass().getResourceAsStream("C:\\Users\\Ismael\\Documents\\NetBeansProjects\\Agenda_v1\\src\\main\\resources\\com\\agenda\\agenda_v1\\imagenes\\imagenes agenda\\casas\\escudos\\escudo_verde.png"));
+        Image image1 = new Image(getClass().getResourceAsStream("/img/escudos/escudo_verde.png"));
         ImageView imageView1 = new ImageView(image1);
-        panelMenuLateral.getChildren().add(imageView1);
+        //panelMenuLateral.getChildren().add(imageView1);//para coger nodo hijo y añadir nueva imagen
+        _imgEScudo.setImage(image1);
     }
 
     public void vaciarPanel() {
