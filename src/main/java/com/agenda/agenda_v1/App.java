@@ -15,16 +15,21 @@ import javafx.stage.StageStyle;
 public class App extends Application {
 
     private static Scene scene;
+    private static Stage stage;
     
     
 
     public static Scene getScene() {
         return scene;
     }
+    
+    public static Stage getStage() {
+        return stage;
+    }
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("login"), 865, 467);
+        scene = new Scene(loadFXML("PanelPrincipalCasas"), 858, 458);
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(scene);
         stage.show();
