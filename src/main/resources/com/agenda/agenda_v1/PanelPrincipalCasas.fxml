@@ -27,41 +27,41 @@
          <children>
             <Pane fx:id="panelMenuLateral" prefHeight="693.0" prefWidth="228.0">
                <children>
-                  <ImageView fx:id="imagen_bandera" fitHeight="390.0" fitWidth="229.0" layoutX="-1.0" layoutY="-9.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="_imagen_bandera" fitHeight="390.0" fitWidth="229.0" layoutX="-1.0" layoutY="-9.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@imagenes/imagenes%20agenda/casas/bandera/BanderaGryffindor.png" />
+                        <Image url="@../../../img/casas/BanderaRoja.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="_imgEScudo" fitHeight="180.0" fitWidth="159.0" layoutX="36.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@imagenes/imagenes%20agenda/casas/escudos/pngegg1.png" />
+                        <Image url="@../../../img/escudos/rojo.png" />
                      </image>
                   </ImageView>
                   <VBox layoutX="-3.0" layoutY="381.0" prefHeight="312.0" prefWidth="232.0">
                      <children>
-                        <Button fx:id="boton_sala_comun" mnemonicParsing="false" onAction="#cambiarPanelSalaComun" prefHeight="74.0" prefWidth="229.0" style="-fx-background-color: #da1b06;" styleClass="boton" text="Sala Común" textFill="#e2a825">
+                        <Button fx:id="_boton_sala_comun" mnemonicParsing="false" onAction="#cambiarPanelSalaComun" prefHeight="74.0" prefWidth="229.0" styleClass="boton" text="Sala Común" textFill="#e2a825">
                            <font>
                               <Font name="Harrington" size="30.0" />
                            </font>
                         </Button>
-                        <Button fx:id="boton_asignaturas" mnemonicParsing="false" onAction="#cambiarPanelAsignaturas" prefHeight="74.0" prefWidth="229.0" style="-fx-background-color: #da1b06;" text="Asignaturas" textFill="#e2a825">
+                        <Button fx:id="_boton_asignaturas" mnemonicParsing="false" onAction="#cambiarPanelAsignaturas" prefHeight="74.0" prefWidth="229.0" text="Asignaturas" textFill="#e2a825">
                            <font>
                               <Font name="Harrington" size="30.0" />
                            </font>
                         </Button>
-                        <Button fx:id="boton_tareas" mnemonicParsing="false" onAction="#cambiarPanelTareas" prefHeight="74.0" prefWidth="229.0" style="-fx-background-color: #da1b06;" text="Tareas" textFill="#e2a825">
+                        <Button fx:id="_boton_tareas" mnemonicParsing="false" onAction="#cambiarPanelTareas" prefHeight="74.0" prefWidth="229.0" text="Tareas" textFill="#e2a825">
                            <font>
                               <Font name="Harrington" size="30.0" />
                            </font>
                         </Button>
-                        <Button fx:id="boton_notas" mnemonicParsing="false" onAction="#cambiarPanelNotas" prefHeight="92.0" prefWidth="229.0" style="-fx-background-color: #da1b06;" text="Notas" textFill="#e2a825">
+                        <Button fx:id="_boton_notas" mnemonicParsing="false" onAction="#cambiarPanelNotas" prefHeight="92.0" prefWidth="229.0" text="Notas" textFill="#e2a825">
                            <font>
                               <Font name="Harrington" size="30.0" />
                            </font>
                         </Button>
                      </children>
                   </VBox>
-                  <Button fx:id="botonSalirAlumno" layoutX="80.0" layoutY="328.0" mnemonicParsing="false" onAction="#cerrarTodo" style="-fx-background-color: #da1b06;" text="SALIR" textFill="#e2a825">
+                  <Button fx:id="botonSalirAlumno" layoutX="80.0" layoutY="328.0" mnemonicParsing="false" onAction="#cerrarTodo" text="SALIR" textFill="#e2a825">
                      <font>
                         <Font size="17.0" />
                      </font>

@@ -60,12 +60,13 @@ public class LoginController implements Initializable {
 //        panelLogin.setVisible(true);
 
     }
-
+    @FXML
     private void login(MouseEvent event) throws IOException, InterruptedException {
         if (labelUser.getText().equals("admin") && labelPass.getText().equals("admin")) {
-            String casa = "panelGifCasa";
+            //String casa = "panelGifCasa";
             Thread a = new Thread(new lanzarGifHilo());
             a.start();
+            
             abrirCasa(event);
 
         }
@@ -82,21 +83,21 @@ public class LoginController implements Initializable {
     }
     //=========================================================================================================
 
-    public void abrirGif(MouseEvent event, String casa, int tam1, int tam2) {
-        try {
-
-            Parent root = FXMLLoader.load(getClass().getResource(casa));
-            Scene scene = new Scene(root, tam1, tam2);
-            Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            appStage.setScene(scene);
-            appStage.toFront();
-            appStage.centerOnScreen();
-            appStage.show();
-            Thread.currentThread().wait(7000);
-
-        } catch (Exception e) {
-        }
-    }
+//    public void abrirGif(MouseEvent event, String casa, int tam1, int tam2) {
+//        try {
+//
+//            Parent root = FXMLLoader.load(getClass().getResource(casa));
+//            Scene scene = new Scene(root, tam1, tam2);
+//            Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+//            appStage.setScene(scene);
+//            appStage.toFront();
+//            appStage.centerOnScreen();
+//            appStage.show();
+//            Thread.currentThread().wait(7000);
+//
+//        } catch (Exception e) {
+//        }
+//    }
 
     @FXML
     private void cerrarTodo(MouseEvent event) {

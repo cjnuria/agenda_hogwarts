@@ -19,9 +19,8 @@ import javafx.stage.Window;
  *
  * @author Ismael
  */
-public class lanzarGifHilo implements Runnable{
+public class lanzarGifHilo implements Runnable {
 
-    
     public void abrirGif(String casa, int tam1, int tam2) {
         try {
 
@@ -33,9 +32,10 @@ public class lanzarGifHilo implements Runnable{
         } catch (Exception e) {
         }
     }
+
     @Override
-    public  void run() {
-        
+    public void run() {
+
         try {
             int tam1, tam2;
             tam1 = 913;
@@ -47,6 +47,7 @@ public class lanzarGifHilo implements Runnable{
         } catch (InterruptedException ex) {
             Logger.getLogger(lanzarGifHilo.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
-    
+
 }

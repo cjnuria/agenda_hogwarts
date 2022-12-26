@@ -20,6 +20,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import static javafx.scene.paint.Color.rgb;
 import javafx.stage.Stage;
 
 /**
@@ -46,21 +49,22 @@ public class PanelPrincipalCasasController implements Initializable {
     @FXML
     private Pane paneConfiguracion;
     @FXML
-    private ImageView imagen_bandera;
-    @FXML
-    private Button boton_sala_comun;
-    @FXML
-    private Button boton_asignaturas;
-    @FXML
-    private Button boton_tareas;
-    @FXML
-    private Button boton_notas;
-    @FXML
     private Label label_titulo;
     @FXML
     private Pane paneAsignaturasIndividual;
     @FXML
     private ImageView _imgEScudo;
+    @FXML
+    private ImageView _imagen_bandera;
+    private VBox _boxmenu;
+    @FXML
+    private Button _boton_sala_comun;
+    @FXML
+    private Button _boton_asignaturas;
+    @FXML
+    private Button _boton_tareas;
+    @FXML
+    private Button _boton_notas;
 
     /**
      * Initializes the controller class.
@@ -72,17 +76,63 @@ public class PanelPrincipalCasasController implements Initializable {
         paneConfiguracion.setVisible(true);
         
         
-        cambiarImagen();
+        cambiarImagenSl();
         
         
 
     }
     
-    public void cambiarImagen(){
-        Image image1 = new Image(getClass().getResourceAsStream("/img/escudos/escudo_verde.png"));
+    public void cambiarImagenSl(){
+        Image image1 = new Image(getClass().getResourceAsStream("/img/escudos/verde.png"));
         ImageView imageView1 = new ImageView(image1);
+        Image image2 = new Image(getClass().getResourceAsStream("/img/casas/banderaVerde.png"));
+        ImageView imageView2 = new ImageView(image2);
         //panelMenuLateral.getChildren().add(imageView1);//para coger nodo hijo y añadir nueva imagen
         _imgEScudo.setImage(image1);
+        _imagen_bandera.setImage(image2);
+//        _boton_sala_comun.setStyle("-fx-background-color: MediumSeaGreen");
+//        _boton_asignaturas.setStyle("-fx-background-color: MediumSeaGreen");
+//        _boton_notas.setStyle("-fx-background-color: MediumSeaGreen");
+//        _boton_tareas.setStyle("-fx-background-color: MediumSeaGreen");
+//        botonSalirAlumno.setStyle("-fx-text-fill: Silver");
+//        botonSalirAlumno.setStyle("-fx-background-color: MediumSeaGreen");
+
+        panelMenuLateral.getStylesheets().clear();
+        panelMenuLateral.getStylesheets().add("/css/CssVerde.css");
+        
+        
+        
+        
+    }
+    
+    public void cambiarImagenGr(){
+        Image image1 = new Image(getClass().getResourceAsStream("/img/escudos/rojo.png"));
+        ImageView imageView1 = new ImageView(image1);
+        Image image2 = new Image(getClass().getResourceAsStream("/img/casas/banderaRoja.png"));
+        ImageView imageView2 = new ImageView(image2);
+        //panelMenuLateral.getChildren().add(imageView1);//para coger nodo hijo y añadir nueva imagen
+        _imgEScudo.setImage(image1);
+        _imagen_bandera.setImage(image2);
+    }
+    
+    public void cambiarImagenRa(){
+        Image image1 = new Image(getClass().getResourceAsStream("/img/escudos/azul.png"));
+        ImageView imageView1 = new ImageView(image1);
+        Image image2 = new Image(getClass().getResourceAsStream("/img/casas/banderaAzul.png"));
+        ImageView imageView2 = new ImageView(image2);
+        //panelMenuLateral.getChildren().add(imageView1);//para coger nodo hijo y añadir nueva imagen
+        _imgEScudo.setImage(image1);
+        _imagen_bandera.setImage(image2);
+    }
+    
+    public void cambiarImagenHu(){
+        Image image1 = new Image(getClass().getResourceAsStream("/img/escudos/amarillo.png"));
+        ImageView imageView1 = new ImageView(image1);
+        Image image2 = new Image(getClass().getResourceAsStream("/img/casas/banderaAmarilla.png"));
+        ImageView imageView2 = new ImageView(image2);
+        //panelMenuLateral.getChildren().add(imageView1);//para coger nodo hijo y añadir nueva imagen
+        _imgEScudo.setImage(image1);
+        _imagen_bandera.setImage(image2);
     }
 
     public void vaciarPanel() {
