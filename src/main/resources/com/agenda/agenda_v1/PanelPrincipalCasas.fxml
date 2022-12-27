@@ -3,11 +3,13 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.effect.Blend?>
@@ -26,7 +28,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="690.0" prefWidth="1040.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.agenda.agenda_v1.PanelPrincipalCasasController">
    <children>
-      <Pane fx:id="panelAlumnos" layoutX="-2.0" layoutY="-1.0" prefHeight="691.0" prefWidth="1044.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="-1.0">
+      <Pane fx:id="panelAlumnos" layoutX="-2.0" layoutY="-1.0" prefHeight="691.0" prefWidth="1044.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="-1.0">
          <children>
             <Pane fx:id="panelMenuLateral" prefHeight="693.0" prefWidth="228.0">
                <children>
@@ -152,7 +154,7 @@
                   </ImageView>
                </children>
             </Pane>
-            <Pane fx:id="panelAsignaturas" layoutX="221.0" layoutY="-2.0" prefHeight="695.0" prefWidth="823.0" visible="false">
+            <Pane fx:id="panelAsignaturas" layoutX="221.0" layoutY="-2.0" prefHeight="695.0" prefWidth="823.0">
                <children>
                   <ImageView fitHeight="817.0" fitWidth="823.0" layoutY="-112.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -180,14 +182,14 @@
                         </LinearGradient>
                      </textFill>
                   </Label>
-                  <Pane layoutX="28.0" layoutY="108.0" prefHeight="105.0" prefWidth="338.0">
+                  <Pane layoutX="28.0" layoutY="108.0" onMouseClicked="#cambiarAsignaturaIndividual" prefHeight="105.0" prefWidth="338.0">
                      <children>
-                        <ImageView fitHeight="79.0" fitWidth="78.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="79.0" fitWidth="78.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#cambiarAsignaturaIndividual" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@imagenes/pngegg%20(5).png" />
                            </image>
                         </ImageView>
-                        <Label layoutX="115.0" layoutY="35.0" prefHeight="42.0" prefWidth="109.0" text="Pociones">
+                        <Label fx:id="_labelPociones" layoutX="115.0" layoutY="35.0" onMouseClicked="#cambiarAsignaturaIndividual" prefHeight="42.0" prefWidth="109.0" text="Pociones">
                            <font>
                               <Font name="Harrington" size="25.0" />
                            </font>
@@ -201,7 +203,7 @@
                               <Image url="@imagenes/pngegg%20(4).png" />
                            </image>
                         </ImageView>
-                        <Label layoutX="115.0" layoutY="35.0" prefHeight="42.0" prefWidth="199.0" text="Transformaciones">
+                        <Label fx:id="_labelTransformaciones" layoutX="115.0" layoutY="35.0" prefHeight="42.0" prefWidth="199.0" text="Transformaciones">
                            <font>
                               <Font name="Harrington" size="25.0" />
                            </font>
@@ -215,7 +217,7 @@
                               <Image url="@imagenes/imagenes%20agenda/casas/pngegg%20(10).png" />
                            </image>
                         </ImageView>
-                        <Label layoutX="115.0" layoutY="35.0" prefHeight="42.0" prefWidth="199.0" text="Encantamientos">
+                        <Label fx:id="_labelEncantamientos" layoutX="115.0" layoutY="35.0" prefHeight="42.0" prefWidth="199.0" text="Encantamientos">
                            <font>
                               <Font name="Harrington" size="25.0" />
                            </font>
@@ -229,7 +231,7 @@
                               <Image url="@imagenes/imagenes%20agenda/casas/pngegg%20(2).png" />
                            </image>
                         </ImageView>
-                        <Label layoutX="115.0" layoutY="22.0" prefHeight="35.0" prefWidth="215.0" text="Defensa contra las">
+                        <Label fx:id="_labelDefensa" layoutX="115.0" layoutY="22.0" prefHeight="35.0" prefWidth="215.0" text="Defensa contra las">
                            <font>
                               <Font name="Harrington" size="25.0" />
                            </font>
@@ -248,7 +250,7 @@
                               <Image url="@imagenes/imagenes%20agenda/casas/pngegg%20(12).png" />
                            </image>
                         </ImageView>
-                        <Label layoutX="111.0" layoutY="21.0" prefHeight="35.0" prefWidth="199.0" text="Cuidado de ">
+                        <Label fx:id="_labelCriaturas" layoutX="111.0" layoutY="21.0" prefHeight="35.0" prefWidth="199.0" text="Cuidado de ">
                            <font>
                               <Font name="Harrington" size="25.0" />
                            </font>
@@ -272,7 +274,7 @@
                               <Font name="Harrington" size="25.0" />
                            </font>
                         </Label>
-                        <Label layoutX="112.0" layoutY="53.0" prefHeight="36.0" prefWidth="199.0" text="magia">
+                        <Label fx:id="_labelHistoria" layoutX="112.0" layoutY="53.0" prefHeight="36.0" prefWidth="199.0" text="magia">
                            <font>
                               <Font name="Harrington" size="25.0" />
                            </font>
@@ -286,7 +288,7 @@
                               <Image url="@imagenes/escoba.png" />
                            </image>
                         </ImageView>
-                        <Label layoutX="115.0" layoutY="35.0" prefHeight="42.0" prefWidth="199.0" text="Clases de vuelo">
+                        <Label fx:id="_labelVuelo" layoutX="115.0" layoutY="35.0" prefHeight="42.0" prefWidth="199.0" text="Clases de vuelo">
                            <font>
                               <Font name="Harrington" size="25.0" />
                            </font>
@@ -300,7 +302,7 @@
                               <Image url="@imagenes/pngegg%20(6).png" />
                            </image>
                         </ImageView>
-                        <Label layoutX="117.0" layoutY="36.0" prefHeight="42.0" prefWidth="207.0" text="Runas antiguas">
+                        <Label fx:id="_labelRunas" layoutX="117.0" layoutY="36.0" prefHeight="42.0" prefWidth="207.0" text="Runas antiguas">
                            <font>
                               <Font name="Harrington" size="25.0" />
                            </font>
@@ -314,7 +316,7 @@
                               <Image url="@imagenes/pngegg%20(7).png" />
                            </image>
                         </ImageView>
-                        <Label layoutX="126.0" layoutY="31.0" prefHeight="42.0" prefWidth="134.0" text="Adivinación">
+                        <Label fx:id="_labelAdivinacion" layoutX="126.0" layoutY="31.0" prefHeight="42.0" prefWidth="134.0" text="Adivinación">
                            <font>
                               <Font name="Harrington" size="25.0" />
                            </font>
@@ -615,12 +617,6 @@
                         <Image url="@imagenes/pngegg%20(5).png" />
                      </image>
                   </ImageView>
-                  <TableView layoutX="124.0" layoutY="191.0" prefHeight="200.0" prefWidth="575.0">
-                    <columns>
-                      <TableColumn prefWidth="75.0" text="C1" />
-                      <TableColumn prefWidth="75.0" text="C2" />
-                    </columns>
-                  </TableView>
                   <Label layoutX="118.0" layoutY="480.0" text="Profesor:">
                      <font>
                         <Font size="22.0" />
@@ -636,7 +632,7 @@
                         <Font size="22.0" />
                      </font>
                   </Label>
-                  <Label layoutX="313.0" layoutY="480.0" prefHeight="32.0" prefWidth="207.0" text="Albus Dumbledore">
+                  <Label layoutX="308.0" layoutY="480.0" prefHeight="32.0" prefWidth="207.0" text="Albus Dumbledore">
                      <font>
                         <Font size="22.0" />
                      </font>
@@ -651,6 +647,21 @@
                         <Font size="22.0" />
                      </font>
                   </Label>
+                  <TableView layoutX="93.0" layoutY="162.0" prefHeight="276.0" prefWidth="612.0" tableMenuButtonVisible="true">
+                     <columns>
+                        <TableColumn prefWidth="145.5555419921875" text="Asignaturas" />
+                        <TableColumn prefWidth="161.77780151367188" text="Profesor" />
+                        <TableColumn prefWidth="127.111083984375" text="Tareas" />
+                        <TableColumn editable="false" minWidth="0.0" prefWidth="130.22222900390625" text="Fecha" />
+                     </columns>
+                     <effect>
+                        <Blend>
+                           <topInput>
+                              <SepiaTone />
+                           </topInput>
+                        </Blend>
+                     </effect>
+                  </TableView>
                </children>
             </Pane>
          </children>
@@ -764,7 +775,7 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane fx:id="panelProfesores" layoutY="-1.0" prefHeight="695.0" prefWidth="1052.0">
+      <Pane fx:id="panelProfesores" layoutY="-1.0" prefHeight="695.0" prefWidth="1052.0" visible="false">
          <children>
             <Pane fx:id="_panelMenuLateralProfe" prefHeight="693.0" prefWidth="228.0">
                <children>
@@ -795,7 +806,7 @@
                               <Font name="Harrington" size="30.0" />
                            </font>
                         </Button>
-                        <Button fx:id="_boton_Alumnos_Profes" mnemonicParsing="false" onAction="#cambiarAlumnosProfes" prefHeight="92.0" prefWidth="229.0" text="Alumnos" textFill="#e2a825">
+                        <Button fx:id="_boton_Alumnos_Profes" mnemonicParsing="false" onAction="#cambiarCorreccionesProfes" prefHeight="92.0" prefWidth="229.0" text="Correcciones" textFill="#e2a825">
                            <font>
                               <Font name="Harrington" size="30.0" />
                            </font>
@@ -810,7 +821,7 @@
                   <Label fx:id="LabelSesionProfe" layoutX="22.0" layoutY="6.0" prefHeight="17.0" prefWidth="72.0" text="LabelSesion1" />
                </children>
             </Pane>
-            <Pane fx:id="_panelSalaComunProfes" layoutX="223.0" prefHeight="695.0" prefWidth="831.0" style="-fx-background-color: white;">
+            <Pane fx:id="_panelSalaComunProfes" layoutX="223.0" prefHeight="695.0" prefWidth="831.0" style="-fx-background-color: white;" visible="false">
                <children>
                   <ImageView fitHeight="822.0" fitWidth="837.0" layoutX="-3.0" layoutY="-125.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -893,30 +904,176 @@
                   </ImageView>
                </children>
             </Pane>
-            <Pane fx:id="_panelTareasProfes" layoutX="223.0" prefHeight="695.0" prefWidth="831.0" visible="false">
+            <Pane fx:id="_panelCursosProfes" layoutX="223.0" prefHeight="695.0" prefWidth="831.0">
                <children>
                   <ImageView fitHeight="822.0" fitWidth="837.0" layoutX="-3.0" layoutY="-125.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@imagenes/imagenes%20agenda/pngegg%20(51).png" />
                      </image>
                   </ImageView>
+                  <TableView layoutX="110.0" layoutY="161.0" prefHeight="276.0" prefWidth="612.0" tableMenuButtonVisible="true">
+                     <columns>
+                        <TableColumn prefWidth="145.5555419921875" text="Asignaturas" />
+                        <TableColumn prefWidth="161.77780151367188" text="Cursos" />
+                        <TableColumn prefWidth="127.111083984375" text="Tareas" />
+                        <TableColumn editable="false" minWidth="0.0" prefWidth="130.22222900390625" text="Fecha" />
+                     </columns>
+                     <effect>
+                        <Blend>
+                           <topInput>
+                              <SepiaTone />
+                           </topInput>
+                        </Blend>
+                     </effect>
+                  </TableView>
+                  <Label layoutX="197.0" layoutY="42.0" text="Tareas Pendientes">
+                     <font>
+                        <Font name="Harrington" size="55.0" />
+                     </font>
+                     <textFill>
+                        <LinearGradient endX="0.49211358873626043" endY="0.5173501577287066" startX="0.4921135526350244" startY="0.5993690746439744">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.8549019694328308" green="0.10588235408067703" blue="0.0235294122248888" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.8799999952316284" green="0.6487066745758057" blue="0.14959999918937683" opacity="0.9923858046531677" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                  </Label>
                </children></Pane>
-            <Pane fx:id="_panelAlumnosProfes" layoutX="228.0" prefHeight="695.0" prefWidth="831.0" visible="false">
+            <Pane fx:id="_panelAsignaerTareasProfes" layoutX="228.0" prefHeight="695.0" prefWidth="831.0" visible="false">
                <children>
-                  <ImageView fitHeight="820.0" fitWidth="831.0" layoutX="-4.0" layoutY="-125.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="838.0" fitWidth="831.0" layoutX="-5.0" layoutY="-119.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@imagenes/imagenes%20agenda/pngegg%20(51).png" />
                      </image>
                   </ImageView>
+                  <Label layoutX="123.0" layoutY="145.0" text="Nombre Tarea">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Label>
+                  <Label layoutX="123.0" layoutY="196.0" text="Cursos">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="123.0" layoutY="245.0" text="Alumnos">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="122.0" layoutY="374.0" text="Descripción">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="123.0" layoutY="334.0" text="Fecha">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <ComboBox layoutX="303.0" layoutY="197.0" prefHeight="25.0" prefWidth="248.0" />
+                  <ComboBox layoutX="303.0" layoutY="245.0" prefHeight="25.0" prefWidth="248.0" />
+                  <TextArea layoutX="123.0" layoutY="410.0" prefHeight="73.0" prefWidth="431.0" />
+                  <DatePicker layoutX="303.0" layoutY="335.0" prefHeight="25.0" prefWidth="248.0" />
+                  <Label layoutX="135.0" layoutY="44.0" text="Asignar Tareas">
+                     <font>
+                        <Font name="Harrington" size="55.0" />
+                     </font>
+                     <textFill>
+                        <LinearGradient endX="0.49211358873626043" endY="0.5173501577287066" startX="0.4921135526350244" startY="0.5993690746439744">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.8549019694328308" green="0.10588235408067703" blue="0.0235294122248888" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.8799999952316284" green="0.6487066745758057" blue="0.14959999918937683" opacity="0.9923858046531677" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                  </Label>
+                  <TextField layoutX="303.0" layoutY="146.0" prefHeight="25.0" prefWidth="248.0" />
+                  <Label layoutX="128.0" layoutY="494.0" text="Destinatarios">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextArea layoutX="124.0" layoutY="529.0" prefHeight="58.0" prefWidth="431.0" />
+                  <Button layoutX="298.0" layoutY="609.0" mnemonicParsing="false" text="Enviar">
+                     <font>
+                        <Font size="20.0" />
+                     </font></Button>
+                  <Button layoutX="571.0" layoutY="197.0" mnemonicParsing="false" text="+">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Button>
+                  <Button layoutX="571.0" layoutY="245.0" mnemonicParsing="false" text="+">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Button>
+                  <Label layoutX="122.0" layoutY="288.0" text="Tipo Tarea">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <ComboBox layoutX="302.0" layoutY="288.0" prefHeight="25.0" prefWidth="248.0" />
                </children>
             </Pane>
-            <Pane fx:id="_panelCursosProfes" layoutX="219.0" prefHeight="695.0" prefWidth="816.0" visible="false">
+            <Pane fx:id="_panelCorreccionesProfes" layoutX="219.0" prefHeight="695.0" prefWidth="837.0" visible="false">
                <children>
                   <ImageView fitHeight="820.0" fitWidth="837.0" layoutX="6.0" layoutY="-125.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@imagenes/imagenes%20agenda/pngegg%20(51).png" />
                      </image>
                   </ImageView>
+                  <TableView layoutX="120.0" layoutY="171.0" prefHeight="276.0" prefWidth="612.0" tableMenuButtonVisible="true">
+                     <columns>
+                        <TableColumn prefWidth="145.5555419921875" text="Asignaturas" />
+                        <TableColumn prefWidth="161.77780151367188" text="Cursos" />
+                        <TableColumn prefWidth="127.111083984375" text="Tareas" />
+                        <TableColumn editable="false" minWidth="0.0" prefWidth="130.22222900390625" text="Fecha" />
+                     </columns>
+                     <effect>
+                        <Blend>
+                           <topInput>
+                              <SepiaTone />
+                           </topInput>
+                        </Blend>
+                     </effect>
+                  </TableView>
+                  <Label layoutX="135.0" layoutY="44.0" text="Correcciones Pendientes">
+                     <font>
+                        <Font name="Harrington" size="55.0" />
+                     </font>
+                     <textFill>
+                        <LinearGradient endX="0.49211358873626043" endY="0.5173501577287066" startX="0.4921135526350244" startY="0.5993690746439744">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.8549019694328308" green="0.10588235408067703" blue="0.0235294122248888" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.8799999952316284" green="0.6487066745758057" blue="0.14959999918937683" opacity="0.9923858046531677" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                  </Label>
                </children>
             </Pane>
          </children>

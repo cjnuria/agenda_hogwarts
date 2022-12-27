@@ -22,6 +22,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.PickResult;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -125,12 +126,29 @@ public class PanelPrincipalCasasController implements Initializable {
     @FXML
     private Pane _panelSalaComunProfes;
     @FXML
-    private Pane _panelTareasProfes;
-    @FXML
-    private Pane _panelAlumnosProfes;
-    @FXML
     private Pane _panelCursosProfes;
-
+    @FXML
+    private Pane _panelAsignaerTareasProfes;
+    @FXML
+    private Pane _panelCorreccionesProfes;
+    @FXML
+    private Label _labelPociones;
+    @FXML
+    private Label _labelTransformaciones;
+    @FXML
+    private Label _labelEncantamientos;
+    @FXML
+    private Label _labelDefensa;
+    @FXML
+    private Label _labelCriaturas;
+    @FXML
+    private Label _labelHistoria;
+    @FXML
+    private Label _labelVuelo;
+    @FXML
+    private Label _labelRunas;
+    @FXML
+    private Label _labelAdivinacion;
 
     /**
      * Initializes the controller class.
@@ -258,18 +276,18 @@ public class PanelPrincipalCasasController implements Initializable {
         panelLog.setVisible(false);
         panelProfesores.setVisible(false);
         panelRegistro.setVisible(false);;
-        _panelAlumnosProfes.setVisible(false);
+        _panelCorreccionesProfes.setVisible(false);
         _panelCursosProfes.setVisible(false);
         _panelSalaComunProfes.setVisible(false);
-        _panelTareasProfes.setVisible(false);
+        _panelAsignaerTareasProfes.setVisible(false);
     }
 
-    public void vaciarPanelProfes(){
-        _panelAlumnosProfes.setVisible(false);
+    public void vaciarPanelProfes() {
+        _panelCorreccionesProfes.setVisible(false);
         _panelCursosProfes.setVisible(false);
         _panelSalaComunProfes.setVisible(false);
-        _panelTareasProfes.setVisible(false);
-                
+        _panelAsignaerTareasProfes.setVisible(false);
+
     }
 
     //===========================================================================================================
@@ -299,6 +317,84 @@ public class PanelPrincipalCasasController implements Initializable {
         vaciarPanelTodo();
         panelAlumnos.setVisible(true);
         panelTareas.setVisible(true);
+    }
+
+    @FXML
+    private void cambiarAsignaturaIndividual(MouseEvent event) {
+
+        //intentando sacar el texto que hay en el label que haces click
+        String a = event.getPickResult().getIntersectedNode().getParent().getId();
+        //chapuza que funciona, no me gusta pero es lo que hay, no se que más hacer, 18-24
+        String asignatura = a.substring(6).toLowerCase();
+
+        switch (asignatura) {
+            case "pociones":
+                vaciarPanelTodo();
+                panelAlumnos.setVisible(true);
+                paneAsignaturasIndividual.setVisible(true);
+
+//                Image image1 = new Image(getClass().getResourceAsStream("/img/escudos/rojo.png"));
+//                ImageView imageView1 = new ImageView(image1);
+//                Image image2 = new Image(getClass().getResourceAsStream("/img/casas/banderaRoja.png"));
+//                ImageView imageView2 = new ImageView(image2);
+//                //panelMenuLateral.getChildren().add(imageView1);//para coger nodo hijo y añadir nueva imagen
+//                _imgEScudo.setImage(image1);
+//                _imagen_bandera.setImage(image2);
+//                panelMenuLateral.getStylesheets().clear();
+//                panelMenuLateral.getStylesheets().add("/css/CssRojo.css");
+
+                break;
+            case "criaturas":
+                vaciarPanelTodo();
+                panelAlumnos.setVisible(true);
+                paneAsignaturasIndividual.setVisible(true);
+
+                break;
+            case "vuelo":
+                vaciarPanelTodo();
+                panelAlumnos.setVisible(true);
+                paneAsignaturasIndividual.setVisible(true);
+
+                break;
+            case "defensa":
+                vaciarPanelTodo();
+                panelAlumnos.setVisible(true);
+                paneAsignaturasIndividual.setVisible(true);
+
+                break;
+            case "historia":
+                vaciarPanelTodo();
+                panelAlumnos.setVisible(true);
+                paneAsignaturasIndividual.setVisible(true);
+
+                break;
+            case "transformaciones":
+                vaciarPanelTodo();
+                panelAlumnos.setVisible(true);
+                paneAsignaturasIndividual.setVisible(true);
+
+                break;
+            case "encantamientos":
+                vaciarPanelTodo();
+                panelAlumnos.setVisible(true);
+                paneAsignaturasIndividual.setVisible(true);
+
+                break;
+            case "runas":
+                vaciarPanelTodo();
+                panelAlumnos.setVisible(true);
+                paneAsignaturasIndividual.setVisible(true);
+
+                break;
+            case "adivinacion":
+                vaciarPanelTodo();
+                panelAlumnos.setVisible(true);
+                paneAsignaturasIndividual.setVisible(true);
+
+                break;
+
+        }
+
     }
 
     @FXML
@@ -390,29 +486,36 @@ public class PanelPrincipalCasasController implements Initializable {
         panelSalaComun.setVisible(true);
 
     }
-    
+
     @FXML
-    private void cambiarSalaProfes(){
+    private void cambiarSalaProfes() {
         vaciarPanelProfes();
         _panelSalaComunProfes.setVisible(true);
     }
-    
+
     @FXML
-    private void cambiarTareasProfes(){
+    private void cambiarTareasProfes() {
         vaciarPanelProfes();
-        _panelTareasProfes.setVisible(true);
+        _panelAsignaerTareasProfes.setVisible(true);
     }
-    
+
     @FXML
-    private void cambiarAlumnosProfes(){
+    private void cambiarCorreccionesProfes() {
         vaciarPanelProfes();
-        _panelAlumnosProfes.setVisible(true);
+        _panelCorreccionesProfes.setVisible(true);
     }
-    
+
     @FXML
-    private void cambiarCursosProfes(){
+    private void cambiarCursosProfes() {
         vaciarPanelProfes();
-        _panelAlumnosProfes.setVisible(true);
+        _panelCursosProfes.setVisible(true);
+    }
+
+    private void elegirAsignaturaPanel(MouseEvent event) {
+
+        String asignatura = event.getPickResult().toString();
+        System.out.println(asignatura);
+
     }
 
 }
