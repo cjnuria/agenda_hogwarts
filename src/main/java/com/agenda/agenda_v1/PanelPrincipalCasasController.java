@@ -104,8 +104,6 @@ public class PanelPrincipalCasasController implements Initializable {
     @FXML
     private Pane panelProfesores;
     @FXML
-    private Pane panelMenuLateralProfe;
-    @FXML
     private ImageView _imagen_banderaProfes;
     @FXML
     private ImageView _imgEScudoProfes;
@@ -121,8 +119,17 @@ public class PanelPrincipalCasasController implements Initializable {
     private Button _botonSalirProfes;
     @FXML
     private Label LabelSesionProfe;
-    @FXML
     private Pane panelSalaComunProfes;
+    @FXML
+    private Pane _panelMenuLateralProfe;
+    @FXML
+    private Pane _panelSalaComunProfes;
+    @FXML
+    private Pane _panelTareasProfes;
+    @FXML
+    private Pane _panelAlumnosProfes;
+    @FXML
+    private Pane _panelCursosProfes;
 
 
     /**
@@ -232,19 +239,11 @@ public class PanelPrincipalCasasController implements Initializable {
         Window win = App.getScene().getWindow();
         win.setWidth(1040);
         win.setHeight(690);
-        Image image1 = new Image(getClass().getResourceAsStream("/img/escudos/cole.png"));
-        ImageView imageView1 = new ImageView(image1);
-        Image image2 = new Image(getClass().getResourceAsStream("/img/casas/banderaAzul.png"));
-        ImageView imageView2 = new ImageView(image2);
-        panelMenuLateral.getChildren().add(imageView1);//para coger nodo hijo y añadir nueva imagen
-        _imgEScudo.setImage(image1);
-        panelMenuLateral.getStylesheets().clear();
-        panelMenuLateral.getStylesheets().add("/css/CssProfesor.css");
-        _imagen_bandera.setImage(image2);
+        _panelMenuLateralProfe.getStylesheets().clear();
+        _panelMenuLateralProfe.getStylesheets().add("/css/CssProfesor.css");
         vaciarPanelTodo();
-
         panelProfesores.setVisible(true);
-        panelSalaComunProfes.setVisible(true);
+        _panelSalaComunProfes.setVisible(true);
     }
 
     public void vaciarPanelTodo() {
@@ -259,9 +258,19 @@ public class PanelPrincipalCasasController implements Initializable {
         panelLog.setVisible(false);
         panelProfesores.setVisible(false);
         panelRegistro.setVisible(false);;
+        _panelAlumnosProfes.setVisible(false);
+        _panelCursosProfes.setVisible(false);
+        _panelSalaComunProfes.setVisible(false);
+        _panelTareasProfes.setVisible(false);
     }
 
-    
+    public void vaciarPanelProfes(){
+        _panelAlumnosProfes.setVisible(false);
+        _panelCursosProfes.setVisible(false);
+        _panelSalaComunProfes.setVisible(false);
+        _panelTareasProfes.setVisible(false);
+                
+    }
 
     //===========================================================================================================
     @FXML
@@ -380,6 +389,30 @@ public class PanelPrincipalCasasController implements Initializable {
         panelAlumnos.setVisible(true);
         panelSalaComun.setVisible(true);
 
+    }
+    
+    @FXML
+    private void cambiarSalaProfes(){
+        vaciarPanelProfes();
+        _panelSalaComunProfes.setVisible(true);
+    }
+    
+    @FXML
+    private void cambiarTareasProfes(){
+        vaciarPanelProfes();
+        _panelTareasProfes.setVisible(true);
+    }
+    
+    @FXML
+    private void cambiarAlumnosProfes(){
+        vaciarPanelProfes();
+        _panelAlumnosProfes.setVisible(true);
+    }
+    
+    @FXML
+    private void cambiarCursosProfes(){
+        vaciarPanelProfes();
+        _panelAlumnosProfes.setVisible(true);
     }
 
 }
