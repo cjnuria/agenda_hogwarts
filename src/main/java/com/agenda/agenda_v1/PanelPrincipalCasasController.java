@@ -4,9 +4,16 @@
  */
 package com.agenda.agenda_v1;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.SecureRandom;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -18,6 +25,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -28,6 +36,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import static javafx.scene.paint.Color.rgb;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
@@ -132,23 +141,39 @@ public class PanelPrincipalCasasController implements Initializable {
     @FXML
     private Pane _panelCorreccionesProfes;
     @FXML
-    private Label _labelPociones;
+    private Label _tituloAsignatura;
     @FXML
-    private Label _labelTransformaciones;
+    private Label _nombreProfesorAsignatura;
     @FXML
-    private Label _labelEncantamientos;
+    private Label _notaMediaAsignatura;
     @FXML
-    private Label _labelDefensa;
+    private Label _tipoAsignatura;
     @FXML
-    private Label _labelCriaturas;
+    private TableView<?> _tablaAsignaturaIndividual;
     @FXML
-    private Label _labelHistoria;
+    private ImageView _imagenAsignatura;
     @FXML
-    private Label _labelVuelo;
+    private ImageView _asignaturaPociones;
     @FXML
-    private Label _labelRunas;
+    private ImageView _asignaturaTransformaciones;
     @FXML
-    private Label _labelAdivinacion;
+    private ImageView _asignaturaEncantamientos;
+    @FXML
+    private ImageView _asignaturaDefensa;
+    @FXML
+    private ImageView _asignaturaCriaturas;
+    @FXML
+    private ImageView _asignaturaHistoria;
+    @FXML
+    private ImageView _asignaturaVuelo;
+    @FXML
+    private ImageView _asignaturaRunas;
+    @FXML
+    private ImageView _asignaturaAdivinacion;
+    @FXML
+    private Pane panelTareas1;
+    @FXML
+    private Label label_titulo1;
 
     /**
      * Initializes the controller class.
@@ -319,77 +344,71 @@ public class PanelPrincipalCasasController implements Initializable {
         panelTareas.setVisible(true);
     }
 
+    public void cambiarPanelAsignaturasIndividual(String asignatura, String profesor, float notaMedia, String tipoAsignatura) {
+
+        vaciarPanelTodo();
+        panelAlumnos.setVisible(true);
+        paneAsignaturasIndividual.setVisible(true);
+
+        //CAMBIAR FOTOS, LABEL Y TABLAS, SOLO ESTÁ EL CODE SIN CAMBIAR
+        //HACERLO CON TODOS LOS CASES O CREAR UN MÉTODO(SE PODRIA HACER SOLO UNO....)
+        //panelMenuLateral.getChildren().add(imageView1);//para coger nodo hijo y añadir nueva imagen
+        Image image1 = new Image(getClass().getResourceAsStream("/img/asignaturas/" + asignatura + ".png"));
+        ImageView imageView1 = new ImageView(image1);
+        _imagenAsignatura.setImage(image1);
+
+        _tituloAsignatura.setText(asignatura.toUpperCase());
+        _nombreProfesorAsignatura.setText(profesor);
+        _notaMediaAsignatura.setText(String.valueOf(notaMedia));
+        _tipoAsignatura.setText(tipoAsignatura);
+    }
+
     @FXML
     private void cambiarAsignaturaIndividual(MouseEvent event) {
 
         //intentando sacar el texto que hay en el label que haces click
-        String a = event.getPickResult().getIntersectedNode().getParent().getId();
+        //RECORDAR ARREGLAR ESTO, SOLO COJO EL LABEL Y NO EL PANEL COMPLETO....ARREGLAR O FUNCIONA A TROZOS
+        String a = event.getPickResult().getIntersectedNode().getId().toString();
         //chapuza que funciona, no me gusta pero es lo que hay, no se que más hacer, 18-24
-        String asignatura = a.substring(6).toLowerCase();
+        String asignatura = a.substring(11).toLowerCase();
+        System.out.println(a); //para comprobar los nodos y saber donde estoy entrando
 
+        //SE PODRIA HACER UN RETURN Y NO EL SW, SE LE PASA EL SZTRING Y SE PONE DE NOMBRE A TODO....RARO...DAR VUELTA
         switch (asignatura) {
             case "pociones":
-                vaciarPanelTodo();
-                panelAlumnos.setVisible(true);
-                paneAsignaturasIndividual.setVisible(true);
-
-//                Image image1 = new Image(getClass().getResourceAsStream("/img/escudos/rojo.png"));
-//                ImageView imageView1 = new ImageView(image1);
-//                Image image2 = new Image(getClass().getResourceAsStream("/img/casas/banderaRoja.png"));
-//                ImageView imageView2 = new ImageView(image2);
-//                //panelMenuLateral.getChildren().add(imageView1);//para coger nodo hijo y añadir nueva imagen
-//                _imgEScudo.setImage(image1);
-//                _imagen_bandera.setImage(image2);
-//                panelMenuLateral.getStylesheets().clear();
-//                panelMenuLateral.getStylesheets().add("/css/CssRojo.css");
+                cambiarPanelAsignaturasIndividual(asignatura, "Snape", 9.8f, "OPCIONAL");
 
                 break;
             case "criaturas":
-                vaciarPanelTodo();
-                panelAlumnos.setVisible(true);
-                paneAsignaturasIndividual.setVisible(true);
+                cambiarPanelAsignaturasIndividual(asignatura, "Hagrid", 9.7f, "OBLIGATORIA");
 
                 break;
             case "vuelo":
-                vaciarPanelTodo();
-                panelAlumnos.setVisible(true);
-                paneAsignaturasIndividual.setVisible(true);
+                cambiarPanelAsignaturasIndividual(asignatura, "Hook", 9.6f, "OPCIONAL");
 
                 break;
             case "defensa":
-                vaciarPanelTodo();
-                panelAlumnos.setVisible(true);
-                paneAsignaturasIndividual.setVisible(true);
+                cambiarPanelAsignaturasIndividual(asignatura, "Lupin", 9.58f, "OBLIGATORIA");
 
                 break;
             case "historia":
-                vaciarPanelTodo();
-                panelAlumnos.setVisible(true);
-                paneAsignaturasIndividual.setVisible(true);
+                cambiarPanelAsignaturasIndividual(asignatura, "Beans", 9.4f, "OPCIONAL");
 
                 break;
             case "transformaciones":
-                vaciarPanelTodo();
-                panelAlumnos.setVisible(true);
-                paneAsignaturasIndividual.setVisible(true);
+                cambiarPanelAsignaturasIndividual(asignatura, "Mcgonagall", 9.3f, "OBLIGATORIA");
 
                 break;
             case "encantamientos":
-                vaciarPanelTodo();
-                panelAlumnos.setVisible(true);
-                paneAsignaturasIndividual.setVisible(true);
+                cambiarPanelAsignaturasIndividual(asignatura, "Flitwich", 9.2f, "OPCIONAL");
 
                 break;
             case "runas":
-                vaciarPanelTodo();
-                panelAlumnos.setVisible(true);
-                paneAsignaturasIndividual.setVisible(true);
+                cambiarPanelAsignaturasIndividual(asignatura, "Babbling", 9.1f, "OPCIONAL");
 
                 break;
             case "adivinacion":
-                vaciarPanelTodo();
-                panelAlumnos.setVisible(true);
-                paneAsignaturasIndividual.setVisible(true);
+                cambiarPanelAsignaturasIndividual(asignatura, "Trelawney", 8.2f, "OPCIONAL");
 
                 break;
 
@@ -515,6 +534,47 @@ public class PanelPrincipalCasasController implements Initializable {
 
         String asignatura = event.getPickResult().toString();
         System.out.println(asignatura);
+
+    }
+
+    @FXML
+    private void atrasAsignatura(MouseEvent event) {
+
+        paneAsignaturasIndividual.setVisible(false);
+        panelAsignaturas.setVisible(true);
+    }
+
+    //método para copiar un archivo elegido del sistema a una ruta específica (en este caso la carpeta archivos)
+    @FXML
+    private void fileChooser(MouseEvent event) {
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Buscar Archivo");
+
+        // Agregar filtros para facilitar la busqueda
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("All Images", "*.*"),
+                new FileChooser.ExtensionFilter("JPG", "*.jpg"),
+                new FileChooser.ExtensionFilter("PNG", "*.png")
+        );
+
+        // Obtener la imagen seleccionada
+        File archivo = fileChooser.showOpenDialog(null);
+        String archivoElegido = archivo.getAbsoluteFile().toString();
+
+        Path path = Paths.get("");
+        String directoryName = path.toAbsolutePath().toString();
+        System.out.println(directoryName);
+
+        String destinationPath = directoryName+"\\src\\main\\resources\\Archivos\\";  // destination file path
+        File sourceFile = new File(archivoElegido);        // Creating A Source File
+        File destinationFile = new File(destinationPath + sourceFile.getName());   //Creating A Destination File. Name stays the same this way, referring to getName()
+        try {
+            Files.copy(sourceFile.toPath(), destinationFile.toPath());
+            // Static Methods To Copy Copy source path to destination path
+        } catch (Exception e) {
+            System.out.println(e);  // printing in case of error.
+        }
 
     }
 
