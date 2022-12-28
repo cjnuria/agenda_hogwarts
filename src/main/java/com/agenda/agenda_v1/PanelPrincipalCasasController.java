@@ -11,6 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.SecureRandom;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,7 +23,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableView;
@@ -38,6 +42,7 @@ import javafx.scene.paint.Color;
 import static javafx.scene.paint.Color.rgb;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.Window;
 
 /**
@@ -174,6 +179,10 @@ public class PanelPrincipalCasasController implements Initializable {
     private Pane panelTareas1;
     @FXML
     private Label label_titulo1;
+    @FXML
+    private TextField _tfDocumentoSubir;
+    @FXML
+    private TextField _tfComentario;
 
     /**
      * Initializes the controller class.
@@ -552,25 +561,39 @@ public class PanelPrincipalCasasController implements Initializable {
         fileChooser.setTitle("Buscar Archivo");
 
         // Agregar filtros para facilitar la busqueda
-        fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("All Images", "*.*"),
-                new FileChooser.ExtensionFilter("JPG", "*.jpg"),
-                new FileChooser.ExtensionFilter("PNG", "*.png")
-        );
+        fileChooser.getExtensionFilters().addAll();
 
         // Obtener la imagen seleccionada
         File archivo = fileChooser.showOpenDialog(null);
         String archivoElegido = archivo.getAbsoluteFile().toString();
 
+        _tfDocumentoSubir.setText(archivoElegido);
+
+    }
+
+    @FXML
+    private void GuardarDocumentoComentario() {
+        String archivoElegido = _tfDocumentoSubir.getText();
+        
         Path path = Paths.get("");
         String directoryName = path.toAbsolutePath().toString();
-        System.out.println(directoryName);
-
-        String destinationPath = directoryName+"\\src\\main\\resources\\Archivos\\";  // destination file path
+        
+        String destinationPath = directoryName + "\\src\\main\\resources\\Archivos\\";  // destination file path
         File sourceFile = new File(archivoElegido);        // Creating A Source File
         File destinationFile = new File(destinationPath + sourceFile.getName());   //Creating A Destination File. Name stays the same this way, referring to getName()
+
         try {
-            Files.copy(sourceFile.toPath(), destinationFile.toPath());
+            Alert dialogoAlerta = new Alert(AlertType.CONFIRMATION);
+            dialogoAlerta.setTitle("Ventana de Confirmación");
+            dialogoAlerta.setHeaderText(null);
+            dialogoAlerta.initStyle(StageStyle.UTILITY);
+            dialogoAlerta.setContentText("¿Seguro que quieres subir el archivo?");
+
+            Optional<ButtonType> result = dialogoAlerta.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                Files.copy(sourceFile.toPath(), destinationFile.toPath());
+            }
+
             // Static Methods To Copy Copy source path to destination path
         } catch (Exception e) {
             System.out.println(e);  // printing in case of error.
