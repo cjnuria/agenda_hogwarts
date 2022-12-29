@@ -11,6 +11,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.SecureRandom;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -191,6 +194,7 @@ public class PanelPrincipalCasasController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         vaciarPanelTodo();
         panelLog.setVisible(true);
+        connect();
 
     }
 
@@ -570,7 +574,11 @@ public class PanelPrincipalCasasController implements Initializable {
         _tfDocumentoSubir.setText(archivoElegido);
 
     }
-
+    
+    
+    
+    
+    
     @FXML
     private void GuardarDocumentoComentario() {
         String archivoElegido = _tfDocumentoSubir.getText();
@@ -600,5 +608,37 @@ public class PanelPrincipalCasasController implements Initializable {
         }
 
     }
+    
+    
+    ////////////////CONEXION///////////////////
+    
+    // Conexión a la base de datos
+    private static Connection conn = null;
 
+    // Configuración de la conexión a la base de datos
+    private static final String DB_HOST = "servidor.choto.es";
+    private static final String DB_PORT = "3306";
+    private static final String DB_NAME = "alu_nurismy_agenda";
+    private static final String DB_URL = "jdbc:mysql://" + DB_HOST + ":" + DB_PORT + "/" + DB_NAME + ""
+            + "?serverTimezone=UTC";
+    private static final String DB_USER = "unalumno";
+    private static final String DB_PASS = "soyunalumno2022";
+    
+        /**
+     * Intenta conectar con la base de datos.
+     *
+     * @return true si pudo conectarse, false en caso contrario
+     */
+    public static boolean connect() {
+        try {
+            //System.out.print("Conectando a la base de datos...");
+            conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+            //System.out.println("OK!");
+            return true;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+    
 }
