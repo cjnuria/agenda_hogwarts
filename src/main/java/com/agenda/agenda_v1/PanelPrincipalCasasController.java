@@ -252,6 +252,7 @@ public class PanelPrincipalCasasController implements Initializable {
         //panelMenuLateral.getChildren().add(imageView1);//para coger nodo hijo y añadir nueva imagen
         _imgEScudo.setImage(image1);
         _imagen_bandera.setImage(image2);
+        //solo csss para menu lateral si se pone asi
         panelMenuLateral.getStylesheets().clear();
         panelMenuLateral.getStylesheets().add("/css/CssRojo.css");
         vaciarPanelTodo();
@@ -709,21 +710,9 @@ public class PanelPrincipalCasasController implements Initializable {
             return false;
         }
     }
-
-    public void loginAlumno() {
-
-        //COMPROBAMOS QUE ES CORRECTO
-        String dni = labelUser.getText();
-        String paswd = labelPass.getText();
+    
+    public void altaEstudiante(){
         
-        if (comprobarLogin(dni, paswd)) {
-        }
-
-        //para md5
-//        char[] arrayC = labelPass.getPassword();
-//        String pass = new String(arrayC);
-//        String passMd5 = Utilidades.Utilidades_Control.getMD5(pass);
-//        System.out.println(passMd5);
     }
 
 }
