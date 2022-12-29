@@ -13,7 +13,9 @@ import java.nio.file.Paths;
 import java.security.SecureRandom;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -195,6 +197,7 @@ public class PanelPrincipalCasasController implements Initializable {
         vaciarPanelTodo();
         panelLog.setVisible(true);
         connect();
+        comprobarConexion();
 
     }
 
@@ -574,18 +577,14 @@ public class PanelPrincipalCasasController implements Initializable {
         _tfDocumentoSubir.setText(archivoElegido);
 
     }
-    
-    
-    
-    
-    
+
     @FXML
     private void GuardarDocumentoComentario() {
         String archivoElegido = _tfDocumentoSubir.getText();
-        
+
         Path path = Paths.get("");
         String directoryName = path.toAbsolutePath().toString();
-        
+
         String destinationPath = directoryName + "\\src\\main\\resources\\Archivos\\";  // destination file path
         File sourceFile = new File(archivoElegido);        // Creating A Source File
         File destinationFile = new File(destinationPath + sourceFile.getName());   //Creating A Destination File. Name stays the same this way, referring to getName()
@@ -608,10 +607,8 @@ public class PanelPrincipalCasasController implements Initializable {
         }
 
     }
-    
-    
+
     ////////////////CONEXION///////////////////
-    
     // Conexión a la base de datos
     private static Connection conn = null;
 
@@ -623,8 +620,8 @@ public class PanelPrincipalCasasController implements Initializable {
             + "?serverTimezone=UTC";
     private static final String DB_USER = "unalumno";
     private static final String DB_PASS = "soyunalumno2022";
-    
-        /**
+
+    /**
      * Intenta conectar con la base de datos.
      *
      * @return true si pudo conectarse, false en caso contrario
@@ -640,5 +637,93 @@ public class PanelPrincipalCasasController implements Initializable {
             return false;
         }
     }
-    
+
+    public void comprobarConexion() {
+        try {
+            Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            String sql = "SELECT * FROM estudiantes WHERE dni = '76652552S'";
+            //System.out.println(sql);
+            ResultSet rs = stmt.executeQuery(sql);
+            //hay que hacer el bucle si no, no funciona.... pa variar
+            if (!rs.first()) {
+                System.out.println("no hay nada");;
+            } else {
+                System.out.println(rs.getString("nombre"));
+            }
+            //stmt.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public static void transaccion(String sql) {
+        try {
+
+            conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+
+            conn.setAutoCommit(false); ////// ----->> Desactivamos auto commit
+
+            Statement st = conn.createStatement();
+
+            // Crear un registro de envíos si se cumple una determinada condición
+            if (st.executeUpdate(sql) != 0) {
+                //JOptionPane.showMessageDialog(null, "Transacción Correcta");
+                conn.commit();  ///// ---->> reflejar las operaciones en la base de datos
+
+            } else {
+                //JOptionPane.showMessageDialog(null, "Error, desacemos los cambios");
+                conn.rollback(); ///// -----> Deshacer operaciones
+            }
+        } catch (SQLException e) {  //Si se produce una Excepción deshacemos las operaciones
+
+            //System.out.println(e.toString());
+            if (conn != null) {
+                try {
+                    //JOptionPane.showMessageDialog(null, "Error, desacemos los cambios");
+                    conn.rollback();///// -----> Deshacer operaciones
+                } catch (SQLException ex) {
+                    System.out.println(ex.toString());
+                    //JOptionPane.showMessageDialog(null, "Error, desacemos los cambios");
+                }
+            }
+
+        }
+    }
+
+    public boolean comprobarLogin(String user, String pass) {
+        try {
+            Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            String sql = "SELECT * FROM estudiantes WHERE dni = '76652552S' AND pass = '1234'";
+            //System.out.println(sql);
+            ResultSet rs = stmt.executeQuery(sql);
+            //hay que hacer el bucle si no, no funciona.... pa variar
+            if (!rs.first()) {
+                System.out.println("no hay nada");;
+                return false;
+            } else {
+                return true;
+            }
+            //stmt.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
+
+    public void loginAlumno() {
+
+        //COMPROBAMOS QUE ES CORRECTO
+        String dni = labelUser.getText();
+        String paswd = labelPass.getText();
+        
+        if (comprobarLogin(dni, paswd)) {
+        }
+
+        //para md5
+//        char[] arrayC = labelPass.getPassword();
+//        String pass = new String(arrayC);
+//        String passMd5 = Utilidades.Utilidades_Control.getMD5(pass);
+//        System.out.println(passMd5);
+    }
+
 }
