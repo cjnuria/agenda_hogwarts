@@ -28,7 +28,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="690.0" prefWidth="1040.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.agenda.agenda_v1.PanelPrincipalCasasController">
    <children>
-      <Pane fx:id="panelAlumnos" layoutX="-2.0" layoutY="-1.0" prefHeight="691.0" prefWidth="1044.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="-1.0">
+      <Pane fx:id="panelAlumnos" layoutX="-2.0" layoutY="-1.0" prefHeight="691.0" prefWidth="1044.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="-1.0">
          <children>
             <Pane fx:id="panelTareas1" layoutX="222.0" layoutY="-1.0" prefHeight="695.0" prefWidth="823.0" visible="false">
                <children>
@@ -130,12 +130,17 @@
                         </Button>
                      </children>
                   </VBox>
-                  <Button fx:id="botonSalirAlumno" layoutX="80.0" layoutY="328.0" mnemonicParsing="false" onAction="#cerrarTodo" onMouseClicked="#salirProg" text="SALIR" textFill="#e2a825">
+                  <Button fx:id="botonSalirAlumno" layoutX="80.0" layoutY="309.0" mnemonicParsing="false" onAction="#cerrarTodo" onMouseClicked="#salirProg" text="SALIR" textFill="#e2a825">
                      <font>
-                        <Font size="17.0" />
+                        <Font size="14.0" />
                      </font>
                   </Button>
                   <Label layoutX="22.0" layoutY="6.0" prefHeight="17.0" prefWidth="72.0" text="LabelSesion1" />
+                  <Button fx:id="botonSalirAlumno1" layoutX="57.0" layoutY="347.0" mnemonicParsing="false" onMouseClicked="#cerrarSesion" text="Cerrar Sesión" textFill="#e2a825">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
                </children>
             </Pane>
             <Pane fx:id="panelSalaComun" layoutX="225.0" layoutY="-3.0" prefHeight="695.0" prefWidth="816.0" style="-fx-background-color: white;" visible="false">
@@ -892,7 +897,7 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane fx:id="panelProfesores" layoutY="-1.0" prefHeight="695.0" prefWidth="1052.0" visible="false">
+      <Pane fx:id="panelProfesores" layoutY="-1.0" prefHeight="695.0" prefWidth="1052.0">
          <children>
             <Pane fx:id="_panelMenuLateralProfe" prefHeight="693.0" prefWidth="228.0">
                <children>
@@ -930,12 +935,17 @@
                         </Button>
                      </children>
                   </VBox>
-                  <Button fx:id="_botonSalirProfes" layoutX="80.0" layoutY="328.0" mnemonicParsing="false" onAction="#cerrarTodo" onMouseClicked="#salirProg" text="SALIR" textFill="#e2a825">
+                  <Button fx:id="_botonSalirProfes" layoutX="79.0" layoutY="302.0" mnemonicParsing="false" onAction="#cerrarTodo" onMouseClicked="#salirProg" text="SALIR" textFill="#e2a825">
                      <font>
-                        <Font size="17.0" />
+                        <Font size="14.0" />
                      </font>
                   </Button>
                   <Label fx:id="LabelSesionProfe" layoutX="22.0" layoutY="6.0" prefHeight="17.0" prefWidth="72.0" text="LabelSesion1" />
+                  <Button fx:id="botonSalirAlumno11" layoutX="56.0" layoutY="338.0" mnemonicParsing="false" onMouseClicked="#cerrarSesion" text="Cerrar Sesión" textFill="#e2a825">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
                </children>
             </Pane>
             <Pane fx:id="_panelSalaComunProfes" layoutX="223.0" prefHeight="695.0" prefWidth="831.0" style="-fx-background-color: white;" visible="false">

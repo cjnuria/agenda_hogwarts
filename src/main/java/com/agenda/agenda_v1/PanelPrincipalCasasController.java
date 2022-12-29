@@ -139,7 +139,6 @@ public class PanelPrincipalCasasController implements Initializable {
     private Button _botonSalirProfes;
     @FXML
     private Label LabelSesionProfe;
-    private Pane panelSalaComunProfes;
     @FXML
     private Pane _panelMenuLateralProfe;
     @FXML
@@ -188,6 +187,8 @@ public class PanelPrincipalCasasController implements Initializable {
     private TextField _tfDocumentoSubir;
     @FXML
     private TextField _tfComentario;
+    @FXML
+    private Button botonSalirAlumno1;
 
     /**
      * Initializes the controller class.
@@ -713,6 +714,15 @@ public class PanelPrincipalCasasController implements Initializable {
     
     public void altaEstudiante(){
         
+    }
+
+    @FXML
+    private void cerrarSesion(MouseEvent event) {
+        Window win = App.getScene().getWindow();
+        win.setWidth(858);
+        win.setHeight(458);
+        vaciarPanelTodo();
+        panelLog.setVisible(true);
     }
 
 }
