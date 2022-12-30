@@ -136,7 +136,7 @@
                         <Font size="14.0" />
                      </font>
                   </Button>
-                  <Label layoutX="22.0" layoutY="6.0" prefHeight="17.0" prefWidth="72.0" text="LabelSesion1" />
+                  <Label fx:id="_labelSesionEstudiante" layoutX="22.0" layoutY="6.0" prefHeight="17.0" prefWidth="72.0" text="LabelSesion1" />
                   <Button fx:id="botonSalirAlumno1" layoutX="57.0" layoutY="347.0" mnemonicParsing="false" onMouseClicked="#cerrarSesion" text="Cerrar Sesión" textFill="#e2a825">
                      <font>
                         <Font size="14.0" />
@@ -694,7 +694,6 @@
                         <Font name="Harrington" size="24.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="_tfCursoEstudiante" layoutX="309.0" layoutY="450.0" prefHeight="25.0" prefWidth="254.0" />
                   <Label layoutX="107.0" layoutY="397.0" text="F. Nacimiento:">
                      <font>
                         <Font name="Harrington" size="24.0" />
@@ -722,6 +721,7 @@
                      </font>
                   </Label>
                   <TextField fx:id="_tfPassEstudiante" layoutX="309.0" layoutY="492.0" prefHeight="25.0" prefWidth="254.0" />
+                  <ComboBox fx:id="_cbCursos" layoutX="308.0" layoutY="449.0" prefHeight="25.0" prefWidth="254.0" />
                </children>
             </Pane>
             <Pane fx:id="paneAsignaturasIndividual" layoutX="218.0" layoutY="-1.0" prefHeight="695.0" prefWidth="823.0" visible="false">
@@ -793,7 +793,7 @@
                   </ImageView>
                </children>
             </Pane>
-            <Pane fx:id="panelAsignaturas11" layoutX="222.0" layoutY="10.0" prefHeight="695.0" prefWidth="854.0" visible="false">
+            <Pane fx:id="panelSelecionAsignatura" layoutX="222.0" layoutY="10.0" prefHeight="695.0" prefWidth="854.0">
                <children>
                   <ImageView fitHeight="869.0" fitWidth="850.0" layoutX="-4.0" layoutY="-145.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -839,7 +839,7 @@
                               <Cursor fx:constant="DEFAULT" />
                            </cursor>
                         </Label>
-                        <CheckBox layoutX="-13.0" layoutY="40.0" mnemonicParsing="false">
+                        <CheckBox fx:id="_checkPociones" layoutX="-13.0" layoutY="40.0" mnemonicParsing="false">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -867,7 +867,7 @@
                               <Cursor fx:constant="DEFAULT" />
                            </cursor>
                         </Label>
-                        <CheckBox layoutX="-10.0" layoutY="40.0" mnemonicParsing="false">
+                        <CheckBox fx:id="_checkTransformaciones" layoutX="-10.0" layoutY="40.0" mnemonicParsing="false">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -1011,37 +1011,37 @@
                         </Label>
                      </children>
                   </Pane>
-                  <CheckBox layoutX="14.0" layoutY="457.0" mnemonicParsing="false">
+                  <CheckBox fx:id="_checkDefensa" layoutX="14.0" layoutY="457.0" mnemonicParsing="false">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </CheckBox>
-                  <CheckBox layoutX="383.0" layoutY="147.0" mnemonicParsing="false">
+                  <CheckBox fx:id="_checkCriaturas" layoutX="383.0" layoutY="147.0" mnemonicParsing="false">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </CheckBox>
-                  <CheckBox layoutX="14.0" layoutY="345.0" mnemonicParsing="false">
+                  <CheckBox fx:id="_checkEncantamientos" layoutX="14.0" layoutY="345.0" mnemonicParsing="false">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </CheckBox>
-                  <CheckBox layoutX="15.0" layoutY="587.0" mnemonicParsing="false">
+                  <CheckBox fx:id="_checkRunas" layoutX="15.0" layoutY="587.0" mnemonicParsing="false">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </CheckBox>
-                  <CheckBox layoutX="391.0" layoutY="459.0" mnemonicParsing="false">
+                  <CheckBox fx:id="_checkAdivinacion" layoutX="391.0" layoutY="459.0" mnemonicParsing="false">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </CheckBox>
-                  <CheckBox layoutX="386.0" layoutY="351.0" mnemonicParsing="false">
+                  <CheckBox fx:id="_checkVuelo" layoutX="386.0" layoutY="351.0" mnemonicParsing="false">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </CheckBox>
-                  <CheckBox layoutX="383.0" layoutY="256.0" mnemonicParsing="false">
+                  <CheckBox fx:id="_checkVuelo" layoutX="383.0" layoutY="256.0" mnemonicParsing="false">
                      <font>
                         <Font size="18.0" />
                      </font>

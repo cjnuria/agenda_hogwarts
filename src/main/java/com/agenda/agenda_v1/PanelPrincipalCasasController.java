@@ -23,6 +23,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -35,6 +36,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableView;
@@ -203,13 +206,51 @@ public class PanelPrincipalCasasController implements Initializable {
     @FXML
     private TextField _tfTelefonoEstudiante;
     @FXML
-    private TextField _tfCursoEstudiante;
-    @FXML
     private TextField _tfFechaNacEstudiante;
     @FXML
     private TextField _tfPassEstudiante;
     @FXML
     private Button botonSalirAlumno11;
+    @FXML
+    private Pane panelSelecionAsignatura;
+    @FXML
+    private ImageView _asignaturaPociones11;
+    @FXML
+    private ImageView _asignaturaTransformaciones11;
+    @FXML
+    private ImageView _asignaturaEncantamientos11;
+    @FXML
+    private ImageView _asignaturaDefensa11;
+    @FXML
+    private ImageView _asignaturaCriaturas11;
+    @FXML
+    private ImageView _asignaturaHistoria11;
+    @FXML
+    private ImageView _asignaturaVuelo11;
+    @FXML
+    private ImageView _asignaturaRunas11;
+    @FXML
+    private ImageView _asignaturaAdivinacion11;
+    @FXML
+    private ComboBox<String> _cbCursos;
+    @FXML
+    private Label _labelSesionEstudiante;
+    @FXML
+    private CheckBox _checkPociones;
+    @FXML
+    private CheckBox _checkTransformaciones;
+    @FXML
+    private CheckBox _checkDefensa;
+    @FXML
+    private CheckBox _checkCriaturas;
+    @FXML
+    private CheckBox _checkEncantamientos;
+    @FXML
+    private CheckBox _checkRunas;
+    @FXML
+    private CheckBox _checkAdivinacion;
+    @FXML
+    private CheckBox _checkVuelo;
 
     /**
      * Initializes the controller class.
@@ -220,6 +261,8 @@ public class PanelPrincipalCasasController implements Initializable {
         panelLog.setVisible(true);
         connect();
         comprobarConexion();
+        _cbCursos.getItems().addAll("Primero", "Segundo", "Tercero", "Cuarto", "Quinto", "Sexto", "Séptimo");
+        _cbCursos.setValue("Primero");
 
     }
 
@@ -536,7 +579,6 @@ public class PanelPrincipalCasasController implements Initializable {
 
     }
 
-    @FXML
     private void guardarPerfil(MouseEvent event) {
 
         vaciarPanelTodo();
@@ -737,10 +779,10 @@ public class PanelPrincipalCasasController implements Initializable {
     public void altaEstudiante() {
 
         //String sql = "";
-        try {     
-            
+        try {
+
             PreparedStatement pst = conn.prepareStatement("INSERT INTO estudiantes (nombre, apellidos, dni, telefono, fecha_nac, correo, pass, casa) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-            
+
             String nombre = _tfNombreEstudiante.getText();
             String apellidos = _tfApellidosEstudiante.getText();
             String dni = _tfDniEstudiante.getText();
@@ -751,8 +793,6 @@ public class PanelPrincipalCasasController implements Initializable {
             String casa = label_casa_seleccion.getText();
 
             //sql = "INSERT INTO estudiantes (nombre, apellidos, telefono, dni, fecha_nac, correo, pass, casa) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-
-            
             pst.setString(1, nombre);
             pst.setString(2, apellidos);
             pst.setString(3, dni);
@@ -761,14 +801,16 @@ public class PanelPrincipalCasasController implements Initializable {
             pst.setString(6, correo);
             pst.setString(7, pass);
             pst.setString(8, casa);
-            
+
             boolean a = pst.execute();
-            
-            if (a) {
-                System.out.println("correcto");
+            System.out.println(a);
+
+            if (!a) {
+                Jopane("Añadido correctamente", "Añadir estudiantes");
+                vaciarPanelTodo();
                 paneConfiguracion.setVisible(false);
-                panelSalaComun.setVisible(true);
-            }else{
+                panelSelecionAsignatura.setVisible(true);
+            } else {
                 System.out.println("error al insertar");
             }
 
@@ -785,6 +827,98 @@ public class PanelPrincipalCasasController implements Initializable {
         win.setHeight(458);
         vaciarPanelTodo();
         panelLog.setVisible(true);
+    }
+
+    //========Metodo para las alertas=============================
+    public void Jopane(String mensaje, String titulo) {
+        Alert alerta = new Alert(AlertType.INFORMATION);
+        alerta.setTitle(titulo);
+        alerta.setHeaderText(null);
+        alerta.setContentText(mensaje);
+
+    }
+
+    //============Metodo seleccion asignaturas==================
+    public void Asignaturas_elegidas(String asignatura) {
+
+    }
+
+    public void insertar_asignatura() {
+        String dni= _labelSesionEstudiante.getText();
+        try {
+            PreparedStatement pst = conn.prepareStatement("INSERT INTO asigEstu (id_estudiante,id_asigProf) VALUES (?, ?)");
+            pst.setInt(1,obtner_id_estudiante(dni));
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public int obtner_id_estudiante(String dni) {
+        try {
+            PreparedStatement pst = conn.prepareStatement("SELECT * FROM estudiantes WHERE dni= ? ");
+            pst.setString(1, dni);
+            ResultSet resultado = pst.executeQuery();
+            int id = resultado.getInt("id_estudiante");
+            if (!resultado.first()) {
+
+                Jopane("No se han encontrado datos", "Error");
+                return -1;
+            } else {
+                return id;
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            return -1;
+        }
+
+    }
+    
+    public int obtener_id_asigProf(int id_asignatura){
+         try {
+            PreparedStatement pst = conn.prepareStatement("SELECT * FROM asigProf WHERE id_asignatura = ? ");
+            pst.setInt(1, id_asignatura);
+            ResultSet resultado = pst.executeQuery();
+            int id = resultado.getInt("id_asigProf");
+            if (!resultado.first()) {
+
+                Jopane("No se han encontrado datos", "Error");
+                return -1;
+            } else {
+                return id;
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            return -1;
+        }
+
+        
+    }
+    public int obtener_id_asignatura(String asignatura){
+         try {
+            PreparedStatement pst = conn.prepareStatement("SELECT * FROM asignatura WHERE nombre= ? ");
+            pst.setString(1, asignatura);
+            ResultSet resultado = pst.executeQuery();
+            int id = resultado.getInt("id_asignatura");
+            if (!resultado.first()) {
+
+                Jopane("No se han encontrado datos", "Error");
+                return -1;
+            } else {
+                return id;
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            return -1;
+        }
+
+        
     }
 
 }
