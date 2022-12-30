@@ -13,9 +13,12 @@ import java.nio.file.Paths;
 import java.security.SecureRandom;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -189,6 +192,24 @@ public class PanelPrincipalCasasController implements Initializable {
     private TextField _tfComentario;
     @FXML
     private Button botonSalirAlumno1;
+    @FXML
+    private TextField _tfNombreEstudiante;
+    @FXML
+    private TextField _tfApellidosEstudiante;
+    @FXML
+    private TextField _tfEmailEstudiante;
+    @FXML
+    private TextField _tfDniEstudiante;
+    @FXML
+    private TextField _tfTelefonoEstudiante;
+    @FXML
+    private TextField _tfCursoEstudiante;
+    @FXML
+    private TextField _tfFechaNacEstudiante;
+    @FXML
+    private TextField _tfPassEstudiante;
+    @FXML
+    private Button botonSalirAlumno11;
 
     /**
      * Initializes the controller class.
@@ -711,9 +732,50 @@ public class PanelPrincipalCasasController implements Initializable {
             return false;
         }
     }
-    
-    public void altaEstudiante(){
-        
+
+    @FXML
+    public void altaEstudiante() {
+
+        //String sql = "";
+        try {     
+            
+            PreparedStatement pst = conn.prepareStatement("INSERT INTO estudiantes (nombre, apellidos, dni, telefono, fecha_nac, correo, pass, casa) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+            
+            String nombre = _tfNombreEstudiante.getText();
+            String apellidos = _tfApellidosEstudiante.getText();
+            String dni = _tfDniEstudiante.getText();
+            int telefono = Integer.parseInt(_tfTelefonoEstudiante.getText());
+            String fecha_nac = _tfFechaNacEstudiante.getText();
+            String correo = _tfEmailEstudiante.getText();
+            String pass = _tfPassEstudiante.getText();
+            String casa = label_casa_seleccion.getText();
+
+            //sql = "INSERT INTO estudiantes (nombre, apellidos, telefono, dni, fecha_nac, correo, pass, casa) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+            
+            pst.setString(1, nombre);
+            pst.setString(2, apellidos);
+            pst.setString(3, dni);
+            pst.setInt(4, telefono);
+            pst.setString(5, fecha_nac);
+            pst.setString(6, correo);
+            pst.setString(7, pass);
+            pst.setString(8, casa);
+            
+            boolean a = pst.execute();
+            
+            if (a) {
+                System.out.println("correcto");
+                paneConfiguracion.setVisible(false);
+                panelSalaComun.setVisible(true);
+            }else{
+                System.out.println("error al insertar");
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     @FXML
