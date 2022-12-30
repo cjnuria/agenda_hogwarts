@@ -2,6 +2,7 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
@@ -790,6 +791,265 @@
                         <Image url="@../../../img/otros/atras.png" />
                      </image>
                   </ImageView>
+               </children>
+            </Pane>
+            <Pane fx:id="panelAsignaturas11" layoutX="222.0" layoutY="10.0" prefHeight="695.0" prefWidth="854.0">
+               <children>
+                  <ImageView fitHeight="869.0" fitWidth="850.0" layoutX="-4.0" layoutY="-145.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagenes/pngegg%20(51).png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="145.0" layoutY="31.0" prefHeight="62.0" prefWidth="525.0" text="Selección de Asignaturas">
+                     <font>
+                        <Font name="Harrington" size="42.0" />
+                     </font>
+                     <textFill>
+                        <LinearGradient endX="0.49842267683251806" endY="0.5552050473186121" startX="0.49842272496749923" startY="0.473186155975053">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.886274516582489" green="0.658823549747467" blue="0.14509804546833038" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.8549019694328308" green="0.10588235408067703" blue="0.0235294122248888" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                  </Label>
+                  <Pane layoutX="28.0" layoutY="108.0" prefHeight="105.0" prefWidth="338.0">
+                     <children>
+                        <ImageView fx:id="_asignaturaPociones11" fitHeight="79.0" fitWidth="78.0" layoutX="15.0" layoutY="16.0" onMouseClicked="#cambiarAsignaturaIndividual" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@imagenes/pngegg%20(5).png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                        <Label layoutX="114.0" layoutY="34.0" prefHeight="42.0" prefWidth="109.0" text="Pociones">
+                           <font>
+                              <Font name="Harrington" size="25.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="DEFAULT" />
+                           </cursor>
+                        </Label>
+                        <CheckBox layoutX="-13.0" layoutY="40.0" mnemonicParsing="false">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </CheckBox>
+                     </children>
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                  </Pane>
+                  <Pane layoutX="28.0" layoutY="213.0" prefHeight="105.0" prefWidth="338.0">
+                     <children>
+                        <ImageView fx:id="_asignaturaTransformaciones11" fitHeight="73.0" fitWidth="143.0" layoutY="28.0" onMouseClicked="#cambiarAsignaturaIndividual" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@imagenes/pngegg%20(4).png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                        <Label layoutX="115.0" layoutY="35.0" prefHeight="42.0" prefWidth="199.0" text="Transformaciones">
+                           <font>
+                              <Font name="Harrington" size="25.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="DEFAULT" />
+                           </cursor>
+                        </Label>
+                        <CheckBox layoutX="-10.0" layoutY="40.0" mnemonicParsing="false">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </CheckBox>
+                     </children>
+                  </Pane>
+                  <Pane layoutX="28.0" layoutY="313.0" prefHeight="105.0" prefWidth="338.0">
+                     <children>
+                        <ImageView fx:id="_asignaturaEncantamientos11" fitHeight="89.0" fitWidth="100.0" layoutX="8.0" layoutY="12.0" onMouseClicked="#cambiarAsignaturaIndividual" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@imagenes/pn5gegg%20(10).png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                        <Label layoutX="115.0" layoutY="35.0" prefHeight="42.0" prefWidth="199.0" text="Encantamientos">
+                           <font>
+                              <Font name="Harrington" size="25.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="DEFAULT" />
+                           </cursor>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane layoutX="28.0" layoutY="418.0" prefHeight="105.0" prefWidth="338.0">
+                     <children>
+                        <ImageView fx:id="_asignaturaDefensa11" fitHeight="79.0" fitWidth="78.0" layoutX="14.0" layoutY="21.0" onMouseClicked="#cambiarAsignaturaIndividual" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@imagenes/pngerrgg%20(2).png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                        <Label layoutX="115.0" layoutY="22.0" prefHeight="35.0" prefWidth="215.0" text="Defensa contra las">
+                           <font>
+                              <Font name="Harrington" size="25.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="115.0" layoutY="53.0" prefHeight="25.0" prefWidth="199.0" text="artes oscuras">
+                           <font>
+                              <Font name="Harrington" size="25.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane layoutX="415.0" layoutY="108.0" prefHeight="105.0" prefWidth="338.0">
+                     <children>
+                        <ImageView fx:id="_asignaturaCriaturas11" fitHeight="78.0" fitWidth="96.0" layoutX="8.0" layoutY="19.0" onMouseClicked="#cambiarAsignaturaIndividual" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@imagenes/png7egg%20(12).png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                        <Label layoutX="111.0" layoutY="21.0" prefHeight="35.0" prefWidth="199.0" text="Cuidado de ">
+                           <font>
+                              <Font name="Harrington" size="25.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="111.0" layoutY="49.0" prefHeight="35.0" prefWidth="199.0" text="criaturas mágicas">
+                           <font>
+                              <Font name="Harrington" size="25.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane layoutX="415.0" layoutY="213.0" prefHeight="105.0" prefWidth="338.0">
+                     <children>
+                        <ImageView fx:id="_asignaturaHistoria11" fitHeight="67.0" fitWidth="96.0" layoutX="14.0" layoutY="25.0" onMouseClicked="#cambiarAsignaturaIndividual" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@imagenes/libros.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                        <Label layoutX="112.0" layoutY="25.0" prefHeight="42.0" prefWidth="199.0" text="Historia de la">
+                           <font>
+                              <Font name="Harrington" size="25.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="112.0" layoutY="53.0" prefHeight="36.0" prefWidth="199.0" text="magia">
+                           <font>
+                              <Font name="Harrington" size="25.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane layoutX="415.0" layoutY="313.0" prefHeight="105.0" prefWidth="338.0">
+                     <children>
+                        <ImageView fx:id="_asignaturaVuelo11" fitHeight="62.0" fitWidth="89.0" layoutX="14.0" layoutY="22.0" onMouseClicked="#cambiarAsignaturaIndividual" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@imagenes/escoba.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                        <Label layoutX="115.0" layoutY="35.0" prefHeight="42.0" prefWidth="199.0" text="Clases de vuelo">
+                           <font>
+                              <Font name="Harrington" size="25.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane layoutX="28.0" layoutY="547.0" prefHeight="105.0" prefWidth="338.0">
+                     <children>
+                        <ImageView fx:id="_asignaturaRunas11" fitHeight="74.0" fitWidth="72.0" layoutX="26.0" layoutY="21.0" onMouseClicked="#cambiarAsignaturaIndividual" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@imagenes/pngegg%20(6).png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                        <Label layoutX="117.0" layoutY="36.0" prefHeight="42.0" prefWidth="207.0" text="Runas antiguas">
+                           <font>
+                              <Font name="Harrington" size="25.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane layoutX="405.0" layoutY="418.0" prefHeight="105.0" prefWidth="338.0">
+                     <children>
+                        <ImageView fx:id="_asignaturaAdivinacion11" fitHeight="62.0" fitWidth="89.0" layoutX="35.0" layoutY="21.0" onMouseClicked="#cambiarAsignaturaIndividual" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@imagenes/pngegg%20(7).png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                        <Label layoutX="126.0" layoutY="31.0" prefHeight="42.0" prefWidth="134.0" text="Adivinación">
+                           <font>
+                              <Font name="Harrington" size="25.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <CheckBox layoutX="14.0" layoutY="457.0" mnemonicParsing="false">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </CheckBox>
+                  <CheckBox layoutX="383.0" layoutY="147.0" mnemonicParsing="false">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </CheckBox>
+                  <CheckBox layoutX="14.0" layoutY="345.0" mnemonicParsing="false">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </CheckBox>
+                  <CheckBox layoutX="15.0" layoutY="587.0" mnemonicParsing="false">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </CheckBox>
+                  <CheckBox layoutX="391.0" layoutY="459.0" mnemonicParsing="false">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </CheckBox>
+                  <CheckBox layoutX="386.0" layoutY="351.0" mnemonicParsing="false">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </CheckBox>
+                  <CheckBox layoutX="383.0" layoutY="256.0" mnemonicParsing="false">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </CheckBox>
+                  <Button layoutX="411.0" layoutY="579.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="174.0" text="Guardar Cambios" textFill="#b38a39">
+                     <font>
+                        <Font name="Harrington" size="18.0" />
+                     </font></Button>
                </children>
             </Pane>
          </children>
