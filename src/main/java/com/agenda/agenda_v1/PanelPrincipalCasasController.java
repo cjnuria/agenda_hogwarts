@@ -342,7 +342,7 @@ public class PanelPrincipalCasasController implements Initializable {
         paneConfiguracion.setVisible(true);
     }
 
-    public void cambiarImagenHu() {
+    public void cambiarImagenHu() {                
         Window win = App.getScene().getWindow();
         win.setWidth(1040);
         win.setHeight(690);
@@ -781,7 +781,7 @@ public class PanelPrincipalCasasController implements Initializable {
         //String sql = "";
         try {
 
-            PreparedStatement pst = conn.prepareStatement("INSERT INTO estudiantes (nombre, apellidos, dni, telefono, fecha_nac, correo, pass, casa) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+            PreparedStatement pst = conn.prepareStatement("INSERT INTO estudiantes (nombre, apellidos, dni, telefono, fecha_nac, correo, pass, casa, curso) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
             String nombre = _tfNombreEstudiante.getText();
             String apellidos = _tfApellidosEstudiante.getText();
@@ -791,6 +791,7 @@ public class PanelPrincipalCasasController implements Initializable {
             String correo = _tfEmailEstudiante.getText();
             String pass = _tfPassEstudiante.getText();
             String casa = label_casa_seleccion.getText();
+            String curso = _cbCursos.getValue();
 
             //sql = "INSERT INTO estudiantes (nombre, apellidos, telefono, dni, fecha_nac, correo, pass, casa) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             pst.setString(1, nombre);
@@ -801,15 +802,18 @@ public class PanelPrincipalCasasController implements Initializable {
             pst.setString(6, correo);
             pst.setString(7, pass);
             pst.setString(8, casa);
+            pst.setString(9, curso);
 
             boolean a = pst.execute();
             System.out.println(a);
 
             if (!a) {
-                Jopane("Añadido correctamente", "Añadir estudiantes");
+
                 vaciarPanelTodo();
                 paneConfiguracion.setVisible(false);
+                panelAlumnos.setVisible(true);
                 panelSelecionAsignatura.setVisible(true);
+                Jopane("Añadido correctamente, seleccione ahora 6 asignaturas", "Añadir estudiantes");
             } else {
                 System.out.println("error al insertar");
             }
@@ -835,19 +839,119 @@ public class PanelPrincipalCasasController implements Initializable {
         alerta.setTitle(titulo);
         alerta.setHeaderText(null);
         alerta.setContentText(mensaje);
+        alerta.show();
 
     }
 
     //============Metodo seleccion asignaturas==================
-    public void Asignaturas_elegidas(String asignatura) {
+    @FXML
+    public void Asignaturas_elegidas() {
+        String dni = "76652552S";
+        int id_estudiante = obtner_id_estudiante(dni);
+        int cont = 0;
+        if (_checkAdivinacion.isSelected()) {
+            if (cont >= 6) {
+                desactivarCheckAsignatura();
+                Jopane("Ya ha seleccionado 6 asignaturas", "Error");
+            } else {
 
+                insertar_asigEstu("Adivinacion");
+                cont++;
+            }
+
+            if (_checkCriaturas.isSelected()) {
+                if (cont >= 6) {
+                    desactivarCheckAsignatura();
+                    Jopane("Ya ha seleccionado 6 asignaturas", "Error");
+                } else {
+
+                    insertar_asigEstu("Criaturas");
+                    cont++;
+                }
+            }
+            if (_checkDefensa.isSelected()) {
+                if (cont >= 6) {
+                    desactivarCheckAsignatura();
+                    Jopane("Ya ha seleccionado 6 asignaturas", "Error");
+                } else {
+                    insertar_asigEstu("Defensa");
+                    cont++;
+                }
+            }
+            if (_checkEncantamientos.isSelected()) {
+                if (cont >= 6) {
+                    desactivarCheckAsignatura();
+                    Jopane("Ya ha seleccionado 6 asignaturas", "Error");
+                } else {
+                    insertar_asigEstu("Encantamientos");
+                    cont++;
+                }
+            }
+            if (_checkPociones.isSelected()) {
+                if (cont >= 6) {
+                    desactivarCheckAsignatura();
+                    Jopane("Ya ha seleccionado 6 asignaturas", "Error");
+                } else {
+                    insertar_asigEstu("Pociones");
+                    cont++;
+                }
+            }
+            if (_checkRunas.isSelected()) {
+                if (cont >= 6) {
+                    desactivarCheckAsignatura();
+                    Jopane("Ya ha seleccionado 6 asignaturas", "Error");
+                } else {
+                    insertar_asigEstu("Runas");
+                    cont++;
+                }
+            }
+            if (_checkTransformaciones.isSelected()) {
+                if (cont >= 6) {
+                    desactivarCheckAsignatura();
+                    Jopane("Ya ha seleccionado 6 asignaturas", "Error");
+                } else {
+                    insertar_asigEstu("Transformaciones");
+                    cont++;
+                }
+            }
+            if (_checkVuelo.isSelected()) {
+                if (cont >= 6) {
+                    desactivarCheckAsignatura();
+                    Jopane("Ya ha seleccionado 6 asignaturas", "Error");
+                } else {
+                    insertar_asigEstu("Vuelo");
+                    cont++;
+                }
+            }
+
+            if (cont != 6) {
+                Jopane("Hay que seleccionar 6 asignaturas", "Error");
+                cont = 0;
+            } else {
+                Jopane("Asignaturas elegidas correctamente", "Elegir asignaturas");
+                vaciarPanelTodo();
+                panelAlumnos.setVisible(true);
+                panelSalaComun.setVisible(true);
+            }
+
+        }
     }
 
-    public void insertar_asignatura() {
-        String dni= _labelSesionEstudiante.getText();
+    public void insertar_asigEstu(String asignatura) {
+        String dni = "76652552S";
+
+        int id_asignatura = obtener_id_asignatura(asignatura);
+        int id_asigprof = obtener_id_asigProf(id_asignatura);
+        int id_estudiante = obtner_id_estudiante(dni);
+        System.out.println(id_estudiante);
+        System.out.println(id_asigprof);
+        System.out.println(id_asignatura);
         try {
-            PreparedStatement pst = conn.prepareStatement("INSERT INTO asigEstu (id_estudiante,id_asigProf) VALUES (?, ?)");
-            pst.setInt(1,obtner_id_estudiante(dni));
+            PreparedStatement pst = conn.prepareStatement("INSERT INTO asigEstu (id_estudiante, id_asigProf) VALUES (?, ?)", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            pst.setInt(1, id_estudiante);
+            pst.setInt(2, id_asigprof);
+            pst.executeUpdate();
+
         } catch (SQLException ex) {
             Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -855,16 +959,18 @@ public class PanelPrincipalCasasController implements Initializable {
     }
 
     public int obtner_id_estudiante(String dni) {
+        ResultSet resultado;
         try {
-            PreparedStatement pst = conn.prepareStatement("SELECT * FROM estudiantes WHERE dni= ? ");
+            PreparedStatement pst = conn.prepareStatement("SELECT * FROM estudiantes WHERE dni = ? ", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             pst.setString(1, dni);
-            ResultSet resultado = pst.executeQuery();
-            int id = resultado.getInt("id_estudiante");
+            resultado = pst.executeQuery();
+
             if (!resultado.first()) {
 
                 Jopane("No se han encontrado datos", "Error");
                 return -1;
             } else {
+                int id = resultado.getInt("id_estudiante");
                 return id;
 
             }
@@ -875,18 +981,20 @@ public class PanelPrincipalCasasController implements Initializable {
         }
 
     }
-    
-    public int obtener_id_asigProf(int id_asignatura){
-         try {
-            PreparedStatement pst = conn.prepareStatement("SELECT * FROM asigProf WHERE id_asignatura = ? ");
+
+    public int obtener_id_asigProf(int id_asignatura) {
+        ResultSet resultado;
+        try {
+            PreparedStatement pst = conn.prepareStatement("SELECT * FROM asigProf WHERE id_asignatura = ? ", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             pst.setInt(1, id_asignatura);
-            ResultSet resultado = pst.executeQuery();
-            int id = resultado.getInt("id_asigProf");
+            resultado = pst.executeQuery();
+
             if (!resultado.first()) {
 
                 Jopane("No se han encontrado datos", "Error");
                 return -1;
             } else {
+                int id = resultado.getInt("id_asigProf");
                 return id;
 
             }
@@ -896,19 +1004,21 @@ public class PanelPrincipalCasasController implements Initializable {
             return -1;
         }
 
-        
     }
-    public int obtener_id_asignatura(String asignatura){
-         try {
-            PreparedStatement pst = conn.prepareStatement("SELECT * FROM asignatura WHERE nombre= ? ");
+
+    public int obtener_id_asignatura(String asignatura) {
+        ResultSet resultado;
+        try {
+            PreparedStatement pst = conn.prepareStatement("SELECT * FROM asignaturas WHERE nombre = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             pst.setString(1, asignatura);
-            ResultSet resultado = pst.executeQuery();
-            int id = resultado.getInt("id_asignatura");
+            resultado = pst.executeQuery();
+
             if (!resultado.first()) {
 
                 Jopane("No se han encontrado datos", "Error");
                 return -1;
             } else {
+                int id = resultado.getInt("id_asignatura");
                 return id;
 
             }
@@ -918,7 +1028,83 @@ public class PanelPrincipalCasasController implements Initializable {
             return -1;
         }
 
-        
+    }
+
+    public int totalAsignaturas(int id_estudiante) {
+        try {
+            PreparedStatement pst = conn.prepareStatement("SELECT COUNT(id_estudiante) AS total FROM asigEstu WHERE id_estudiante = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            pst.setInt(1, id_estudiante);
+            ResultSet resultado = pst.executeQuery();
+
+            if (!resultado.first()) {
+
+                Jopane("No se han encontrado datos", "Error");
+                return -1;
+            } else {
+                int num = resultado.getInt("total");
+                return num;
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            return -1;
+        }
+    }
+
+    public int contarCheck() {
+
+        int cont = 0;
+
+        if (_checkAdivinacion.isSelected()) {
+            cont++;
+            System.out.println(cont);
+        }
+        if (_checkCriaturas.isSelected()) {
+            cont++;
+            System.out.println(cont);
+        }
+
+        if (_checkDefensa.isSelected()) {
+            cont++;
+            System.out.println(cont);
+        }
+
+        if (_checkEncantamientos.isSelected()) {
+            cont++;
+            System.out.println(cont);
+        }
+
+        if (_checkPociones.isSelected()) {
+            cont++;
+            System.out.println(cont);
+        }
+
+        if (_checkRunas.isSelected()) {
+            cont++;
+            System.out.println(cont);
+        }
+        if (_checkTransformaciones.isSelected()) {
+            cont++;
+            System.out.println(cont);
+        }
+
+        if (_checkVuelo.isSelected()) {
+            cont++;
+            System.out.println(cont);
+        }
+
+        return cont;
+    }
+
+    public void desactivarCheckAsignatura() {
+        _checkVuelo.setDisable(true);
+        _checkAdivinacion.setDisable(true);
+        _checkCriaturas.setDisable(true);
+        _checkDefensa.setDisable(true);
+        _checkEncantamientos.setDisable(true);
+        _checkPociones.setDisable(true);
+        _checkRunas.setDisable(true);
+        _checkTransformaciones.setDisable(true);
     }
 
 }

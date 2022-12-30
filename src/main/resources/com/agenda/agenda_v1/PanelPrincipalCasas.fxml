@@ -793,7 +793,7 @@
                   </ImageView>
                </children>
             </Pane>
-            <Pane fx:id="panelSelecionAsignatura" layoutX="222.0" layoutY="10.0" prefHeight="695.0" prefWidth="854.0">
+            <Pane fx:id="panelSelecionAsignatura" layoutX="222.0" layoutY="10.0" prefHeight="695.0" prefWidth="854.0" visible="false">
                <children>
                   <ImageView fitHeight="869.0" fitWidth="850.0" layoutX="-4.0" layoutY="-145.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -1046,7 +1046,7 @@
                         <Font size="18.0" />
                      </font>
                   </CheckBox>
-                  <Button layoutX="411.0" layoutY="579.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="174.0" text="Guardar Cambios" textFill="#b38a39">
+                  <Button layoutX="411.0" layoutY="579.0" mnemonicParsing="false" onMouseClicked="#Asignaturas_elegidas" prefHeight="43.0" prefWidth="174.0" text="Guardar Cambios" textFill="#b38a39">
                      <font>
                         <Font name="Harrington" size="18.0" />
                      </font></Button>
