@@ -1041,7 +1041,7 @@
                         <Font size="18.0" />
                      </font>
                   </CheckBox>
-                  <CheckBox fx:id="_checkVuelo" layoutX="383.0" layoutY="256.0" mnemonicParsing="false">
+                  <CheckBox fx:id="_checkHistoria" layoutX="383.0" layoutY="256.0" mnemonicParsing="false">
                      <font>
                         <Font size="18.0" />
                      </font>

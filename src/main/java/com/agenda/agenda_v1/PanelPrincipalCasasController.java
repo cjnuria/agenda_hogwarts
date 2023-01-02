@@ -18,6 +18,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -252,6 +253,9 @@ public class PanelPrincipalCasasController implements Initializable {
     @FXML
     private CheckBox _checkVuelo;
 
+    @FXML
+    private CheckBox _checkHistoria;
+
     /**
      * Initializes the controller class.
      */
@@ -263,6 +267,44 @@ public class PanelPrincipalCasasController implements Initializable {
         comprobarConexion();
         _cbCursos.getItems().addAll("Primero", "Segundo", "Tercero", "Cuarto", "Quinto", "Sexto", "Séptimo");
         _cbCursos.setValue("Primero");
+
+        controlcheck();
+        //y si hacemos un boton comprobar? que luego cambie por guardar o algo asi....
+        //como un añadir que solo comprueba y delspues guardar cambios
+        //con un boton añadir sacamos un alert que diga las asignaturas elegida y ahi contamos, si todo va bien y pusa si hacemos commit
+        //controlar clicks del raton
+    }
+
+    public void controlcheck() {
+
+        _checkAdivinacion.setOnMouseClicked((MouseEvent mouseEvent) -> {
+            // Insertar aquí el código a ejecutar cuando se haga clic en el ratón
+            contarCheck();
+        });
+        _checkCriaturas.setOnMouseClicked((MouseEvent mouseEvent) -> {
+            contarCheck();
+        });
+        _checkDefensa.setOnMouseClicked((MouseEvent mouseEvent) -> {
+            contarCheck();
+        });
+        _checkEncantamientos.setOnMouseClicked((MouseEvent mouseEvent) -> {
+            contarCheck();
+        });
+        _checkPociones.setOnMouseClicked((MouseEvent mouseEvent) -> {
+            contarCheck();
+        });
+        _checkRunas.setOnMouseClicked((MouseEvent mouseEvent) -> {
+            contarCheck();
+        });
+        _checkTransformaciones.setOnMouseClicked((MouseEvent mouseEvent) -> {
+            contarCheck();
+        });
+        _checkVuelo.setOnMouseClicked((MouseEvent mouseEvent) -> {
+            contarCheck();
+        });
+        _checkHistoria.setOnMouseClicked((MouseEvent mouseEvent) -> {
+            contarCheck();
+        });
 
     }
 
@@ -342,7 +384,7 @@ public class PanelPrincipalCasasController implements Initializable {
         paneConfiguracion.setVisible(true);
     }
 
-    public void cambiarImagenHu() {                
+    public void cambiarImagenHu() {
         Window win = App.getScene().getWindow();
         win.setWidth(1040);
         win.setHeight(690);
@@ -378,11 +420,13 @@ public class PanelPrincipalCasasController implements Initializable {
         panelTareas.setVisible(false);
         panelSalaComun.setVisible(false);
         paneAsignaturasIndividual.setVisible(false);
-        paneConfiguracion.setVisible(false);
         panelAlumnos.setVisible(false);
         panelLog.setVisible(false);
         panelProfesores.setVisible(false);
-        panelRegistro.setVisible(false);;
+        panelRegistro.setVisible(false);
+        paneConfiguracion.setVisible(false);
+        panelSelecionAsignatura.setVisible(false);
+        paneConfiguracion.setVisible(false);
         _panelCorreccionesProfes.setVisible(false);
         _panelCursosProfes.setVisible(false);
         _panelSalaComunProfes.setVisible(false);
@@ -453,6 +497,7 @@ public class PanelPrincipalCasasController implements Initializable {
         String a = event.getPickResult().getIntersectedNode().getId().toString();
         //chapuza que funciona, no me gusta pero es lo que hay, no se que más hacer, 18-24
         String asignatura = a.substring(11).toLowerCase();
+
         System.out.println(a); //para comprobar los nodos y saber donde estoy entrando
 
         //SE PODRIA HACER UN RETURN Y NO EL SW, SE LE PASA EL SZTRING Y SE PONE DE NOMBRE A TODO....RARO...DAR VUELTA
@@ -810,7 +855,6 @@ public class PanelPrincipalCasasController implements Initializable {
             if (!a) {
 
                 vaciarPanelTodo();
-                paneConfiguracion.setVisible(false);
                 panelAlumnos.setVisible(true);
                 panelSelecionAsignatura.setVisible(true);
                 Jopane("Añadido correctamente, seleccione ahora 6 asignaturas", "Añadir estudiantes");
@@ -848,91 +892,44 @@ public class PanelPrincipalCasasController implements Initializable {
     public void Asignaturas_elegidas() {
         String dni = "76652552S";
         int id_estudiante = obtner_id_estudiante(dni);
-        int cont = 0;
-        if (_checkAdivinacion.isSelected()) {
-            if (cont >= 6) {
-                desactivarCheckAsignatura();
-                Jopane("Ya ha seleccionado 6 asignaturas", "Error");
-            } else {
 
+        if (contarCheck() < 6) {
+            Jopane("Hay que añadir 6 asignaturas obligatoriamente", "error");
+        } else {
+
+            if (_checkAdivinacion.isSelected()) {
                 insertar_asigEstu("Adivinacion");
-                cont++;
             }
-
             if (_checkCriaturas.isSelected()) {
-                if (cont >= 6) {
-                    desactivarCheckAsignatura();
-                    Jopane("Ya ha seleccionado 6 asignaturas", "Error");
-                } else {
-
-                    insertar_asigEstu("Criaturas");
-                    cont++;
-                }
+                insertar_asigEstu("Criaturas");
             }
             if (_checkDefensa.isSelected()) {
-                if (cont >= 6) {
-                    desactivarCheckAsignatura();
-                    Jopane("Ya ha seleccionado 6 asignaturas", "Error");
-                } else {
-                    insertar_asigEstu("Defensa");
-                    cont++;
-                }
+                insertar_asigEstu("Defensa");
             }
             if (_checkEncantamientos.isSelected()) {
-                if (cont >= 6) {
-                    desactivarCheckAsignatura();
-                    Jopane("Ya ha seleccionado 6 asignaturas", "Error");
-                } else {
-                    insertar_asigEstu("Encantamientos");
-                    cont++;
-                }
+                insertar_asigEstu("Encantamientos");
             }
             if (_checkPociones.isSelected()) {
-                if (cont >= 6) {
-                    desactivarCheckAsignatura();
-                    Jopane("Ya ha seleccionado 6 asignaturas", "Error");
-                } else {
-                    insertar_asigEstu("Pociones");
-                    cont++;
-                }
+                insertar_asigEstu("Pociones");
             }
             if (_checkRunas.isSelected()) {
-                if (cont >= 6) {
-                    desactivarCheckAsignatura();
-                    Jopane("Ya ha seleccionado 6 asignaturas", "Error");
-                } else {
-                    insertar_asigEstu("Runas");
-                    cont++;
-                }
+                insertar_asigEstu("Runas");
             }
             if (_checkTransformaciones.isSelected()) {
-                if (cont >= 6) {
-                    desactivarCheckAsignatura();
-                    Jopane("Ya ha seleccionado 6 asignaturas", "Error");
-                } else {
-                    insertar_asigEstu("Transformaciones");
-                    cont++;
-                }
+                insertar_asigEstu("Transformaciones");
             }
             if (_checkVuelo.isSelected()) {
-                if (cont >= 6) {
-                    desactivarCheckAsignatura();
-                    Jopane("Ya ha seleccionado 6 asignaturas", "Error");
-                } else {
-                    insertar_asigEstu("Vuelo");
-                    cont++;
-                }
+                insertar_asigEstu("Vuelo");
+            }
+            if (_checkHistoria.isSelected()) {
+                insertar_asigEstu("Historia");
             }
 
-            if (cont != 6) {
-                Jopane("Hay que seleccionar 6 asignaturas", "Error");
-                cont = 0;
-            } else {
-                Jopane("Asignaturas elegidas correctamente", "Elegir asignaturas");
-                vaciarPanelTodo();
-                panelAlumnos.setVisible(true);
-                panelSalaComun.setVisible(true);
-            }
+            vaciarPanelTodo();
+
+            panelAlumnos.setVisible(true);
+            panelSalaComun.setVisible(true);
+            Jopane("Asignaturas elegidas correctamente", "Elegir asignaturas");
 
         }
     }
@@ -1091,13 +1088,26 @@ public class PanelPrincipalCasasController implements Initializable {
         if (_checkVuelo.isSelected()) {
             cont++;
             System.out.println(cont);
+
+        }
+
+        if (_checkHistoria.isSelected()) {
+            cont++;
+            System.out.println(cont);
+
+        }
+
+        if (cont > 5) {
+            desactivarCheckAsignatura();
+        } else {
+            activarAsignaturas();
         }
 
         return cont;
     }
 
     public void desactivarCheckAsignatura() {
-        _checkVuelo.setDisable(true);
+
         _checkAdivinacion.setDisable(true);
         _checkCriaturas.setDisable(true);
         _checkDefensa.setDisable(true);
@@ -1105,6 +1115,38 @@ public class PanelPrincipalCasasController implements Initializable {
         _checkPociones.setDisable(true);
         _checkRunas.setDisable(true);
         _checkTransformaciones.setDisable(true);
+        _checkVuelo.setDisable(true);
+        _checkHistoria.setDisable(true);
+
+        ArrayList<CheckBox> a = new ArrayList(9);
+        a.add(_checkTransformaciones);
+        a.add(_checkRunas);
+        a.add(_checkAdivinacion);
+        a.add(_checkCriaturas);
+        a.add(_checkDefensa);
+        a.add(_checkEncantamientos);
+        a.add(_checkHistoria);
+        a.add(_checkPociones);
+        a.add(_checkVuelo);
+
+        for (int i = 0; i < 9; i++) {
+            if (a.get(i).isSelected()) {
+                a.get(i).setDisable(false);
+            }
+        }
+
+    }
+
+    public void activarAsignaturas() {
+        _checkAdivinacion.setDisable(false);
+        _checkCriaturas.setDisable(false);
+        _checkDefensa.setDisable(false);
+        _checkEncantamientos.setDisable(false);
+        _checkPociones.setDisable(false);
+        _checkRunas.setDisable(false);
+        _checkTransformaciones.setDisable(false);
+        _checkVuelo.setDisable(false);
+        _checkHistoria.setDisable(false);
     }
 
 }
