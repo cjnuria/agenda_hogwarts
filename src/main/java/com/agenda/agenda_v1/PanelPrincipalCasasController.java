@@ -40,10 +40,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -147,7 +149,6 @@ public class PanelPrincipalCasasController implements Initializable {
     private Button _boton_Alumnos_Profes;
     @FXML
     private Button _botonSalirProfes;
-    @FXML
     private Label LabelSesionProfe;
     @FXML
     private Pane _panelMenuLateralProfe;
@@ -268,7 +269,25 @@ public class PanelPrincipalCasasController implements Initializable {
     @FXML
     private TableColumn<Alumnos_objeto, String> _columCursos;
     @FXML
-    private TableColumn<?, ?> _columApellidos;
+    private TableColumn<Alumnos_objeto, String> _columApellidos;
+    @FXML
+    private Label _labelSesionProfesor;
+    @FXML
+    private ComboBox<String> _cbTareas_cursos;
+    @FXML
+    private ComboBox<String> _cbTareas_alumnos;
+    @FXML
+    private TextArea _taTareas_descripcion;
+    @FXML
+    private DatePicker _dpTareas_fecha;
+    @FXML
+    private TextField _tfNombreTarea;
+    @FXML
+    private TextArea _taTarea_destinatario;
+    @FXML
+    private ComboBox<String> _cbTareas_tipo;
+    @FXML
+    private ComboBox<String> _cbTarea_casa;
 
     /**
      * Initializes the controller class.
@@ -278,11 +297,8 @@ public class PanelPrincipalCasasController implements Initializable {
         vaciarPanelTodo();
         panelLog.setVisible(true);
         connect();
-        comprobarConexion();
-        _cbCursos.getItems().addAll("Primero", "Segundo", "Tercero", "Cuarto", "Quinto", "Sexto", "Séptimo");
-        _cbCursos.setValue("Primero");
+
         controlcheck();
-        rellenar_tabla(3);
 
         //y si hacemos un boton comprobar? que luego cambie por guardar o algo asi....
         //como un añadir que solo comprueba y delspues guardar cambios
@@ -325,8 +341,11 @@ public class PanelPrincipalCasasController implements Initializable {
 
     @FXML
     public void abrirCasaLogin() {
-        String casa = labelUser.getText();
-        switch (casa) {
+        String dni = labelUser.getText();
+//        String casa= casa_por_dni(dni);
+//        System.out.println(casa);
+        switch (dni) {
+
             case "a":
                 cambiarImagenGr();
                 break;
@@ -341,6 +360,14 @@ public class PanelPrincipalCasasController implements Initializable {
                 break;
             case "p":
                 cambiarImagenProfe();
+                break;
+//            case "minerva":
+//                _labelSesionProfesor.setText("minerva");
+//                cambiarImagenProfe();
+//            case "SLYTHERIN":
+//                cambiarImagenSl();
+//                
+
         }
     }
 
@@ -657,6 +684,13 @@ public class PanelPrincipalCasasController implements Initializable {
     private void cambiarTareasProfes() {
         vaciarPanelProfes();
         _panelAsignaerTareasProfes.setVisible(true);
+        _cbTareas_cursos.getItems().addAll("Primero", "Segundo", "Tercero", "Cuarto", "Quinto", "Sexto", "Séptimo");
+        _cbTareas_cursos.setValue("Primero");
+        _cbTarea_casa.getItems().addAll("Gryffindor", "Slytherin", "Hafflepuff", "Ravenclaw");
+        _cbTarea_casa.setValue("Gryffindor");
+        _cbTareas_tipo.getItems().addAll("Examen", "Proyecto", "Recuperación", "Ejercicios");
+        _cbTareas_tipo.setValue("Ejercicios");
+
     }
 
     @FXML
@@ -667,8 +701,16 @@ public class PanelPrincipalCasasController implements Initializable {
 
     @FXML
     private void cambiarCursosProfes() {
+        _cbCursos.getItems().addAll("Primero", "Segundo", "Tercero", "Cuarto", "Quinto", "Sexto", "Séptimo");
+        _cbCursos.setValue("Primero");
         vaciarPanelProfes();
         _panelCursosProfes.setVisible(true);
+        int id_profesor = id_profesor_Con_dni(_labelSesionProfesor.getText());
+        int id_asigProf = id_profesor_obtener_asifprof(id_profesor);
+        rellenar_tabla(id_asigProf);
+        System.out.println(id_asigProf);
+        System.out.println(id_profesor);
+        System.out.println(_labelSesionProfesor.getText());
     }
 
     private void elegirAsignaturaPanel(MouseEvent event) {
@@ -760,24 +802,6 @@ public class PanelPrincipalCasasController implements Initializable {
         } catch (SQLException ex) {
             ex.printStackTrace();
             return false;
-        }
-    }
-
-    public void comprobarConexion() {
-        try {
-            Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            String sql = "SELECT * FROM estudiantes WHERE dni = '76652552S'";
-            //System.out.println(sql);
-            ResultSet rs = stmt.executeQuery(sql);
-            //hay que hacer el bucle si no, no funciona.... pa variar
-            if (!rs.first()) {
-                System.out.println("no hay nada");;
-            } else {
-                System.out.println(rs.getString("nombre"));
-            }
-            //stmt.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -874,6 +898,7 @@ public class PanelPrincipalCasasController implements Initializable {
                 panelSelecionAsignatura.setVisible(true);
                 Jopane("Añadido correctamente, seleccione ahora 6 asignaturas", "Añadir estudiantes");
                 borrar_datos_registro();
+                _labelSesionEstudiante.setText(dni);
             } else {
                 System.out.println("error al insertar");
             }
@@ -906,7 +931,7 @@ public class PanelPrincipalCasasController implements Initializable {
     //============Metodo seleccion asignaturas==================
     @FXML
     public void Asignaturas_elegidas() {
-        String dni = "76652552S";
+        String dni = _labelSesionEstudiante.getText();
         int id_estudiante = obtner_id_estudiante(dni);
 
         if (contarCheck() < 6) {
@@ -951,7 +976,7 @@ public class PanelPrincipalCasasController implements Initializable {
     }
 
     public void insertar_asigEstu(String asignatura) {
-        String dni = "76652552S";
+        String dni = _labelSesionEstudiante.getText();
 
         int id_asignatura = obtener_id_asignatura(asignatura);
         int id_asigprof = obtener_id_asigProf(id_asignatura);
@@ -1284,4 +1309,50 @@ public class PanelPrincipalCasasController implements Initializable {
         _tfPassEstudiante.setText("");
 
     }
+
+    public int obtener_id_profesor(String dni) {
+        ResultSet resultado;
+        try {
+            PreparedStatement pst = conn.prepareStatement("SELECT * FROM profesores WHERE dni = ? ", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            pst.setString(1, dni);
+            resultado = pst.executeQuery();
+
+            if (!resultado.first()) {
+
+                Jopane("No se han encontrado datos", "Error");
+                return -1;
+            } else {
+                int id = resultado.getInt("id_asigProf");
+                return id;
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            return -1;
+        }
+
+    }
+
+    public String casa_por_dni(String dni) {
+        try {
+            PreparedStatement pst = conn.prepareStatement("SELECT * FROM estudiantes where dni= ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            pst.setString(1, dni);
+            ResultSet resultado = pst.executeQuery();
+            if (!resultado.first()) {
+
+                Jopane("No se han encontrado datos", "Error");
+                return null;
+            } else {
+                String casa = resultado.getString("casa");
+                return casa;
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+
+    }
+
 }
