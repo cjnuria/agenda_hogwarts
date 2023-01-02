@@ -29,7 +29,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="690.0" prefWidth="1040.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.agenda.agenda_v1.PanelPrincipalCasasController">
    <children>
-      <Pane fx:id="panelAlumnos" layoutX="-2.0" layoutY="-1.0" prefHeight="691.0" prefWidth="1044.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="-1.0">
+      <Pane fx:id="panelAlumnos" layoutX="-2.0" layoutY="-1.0" prefHeight="691.0" prefWidth="1044.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="-1.0">
          <children>
             <Pane fx:id="panelTareas1" layoutX="222.0" layoutY="-1.0" prefHeight="695.0" prefWidth="823.0" visible="false">
                <children>
@@ -631,7 +631,7 @@
                   <Pane layoutX="89.0" layoutY="448.0" prefHeight="201.0" prefWidth="485.0" />
                </children>
             </Pane>
-            <Pane fx:id="paneConfiguracion" layoutX="222.0" layoutY="-1.0" prefHeight="695.0" prefWidth="823.0">
+            <Pane fx:id="paneConfiguracion" layoutX="222.0" layoutY="-1.0" prefHeight="695.0" prefWidth="823.0" visible="false">
                <children>
                   <ImageView fitHeight="817.0" fitWidth="823.0" layoutY="-112.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -1163,7 +1163,7 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane fx:id="panelProfesores" layoutY="-1.0" prefHeight="695.0" prefWidth="1052.0" visible="false">
+      <Pane fx:id="panelProfesores" layoutY="-1.0" prefHeight="695.0" prefWidth="1052.0">
          <children>
             <Pane fx:id="_panelMenuLateralProfe" prefHeight="693.0" prefWidth="228.0">
                <children>
@@ -1297,18 +1297,19 @@
                   </ImageView>
                </children>
             </Pane>
-            <Pane fx:id="_panelCursosProfes" layoutX="223.0" prefHeight="695.0" prefWidth="831.0" visible="false">
+            <Pane fx:id="_panelCursosProfes" layoutX="223.0" prefHeight="695.0" prefWidth="831.0">
                <children>
                   <ImageView fitHeight="822.0" fitWidth="837.0" layoutX="-3.0" layoutY="-125.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@imagenes/pngegg%20(51).png" />
                      </image>
                   </ImageView>
-                  <TableView layoutX="110.0" layoutY="161.0" prefHeight="276.0" prefWidth="612.0" tableMenuButtonVisible="true">
+                  <TableView fx:id="_tablaProfesor_cursos" layoutX="110.0" layoutY="161.0" prefHeight="276.0" prefWidth="612.0" tableMenuButtonVisible="true">
                      <columns>
-                        <TableColumn prefWidth="245.60003662109375" text="Alumno" />
-                        <TableColumn prefWidth="161.5999755859375" text="Cursos" />
-                        <TableColumn prefWidth="186.39996337890625" text="Asignatura" />
+                        <TableColumn fx:id="_columAlumno" prefWidth="175.33331298828125" resizable="false" text="Alumno" />
+                        <TableColumn fx:id="_columApellidos" prefWidth="182.00003051757812" text="Apellidos" />
+                        <TableColumn fx:id="_columCursos" prefWidth="113.3333740234375" text="Cursos" />
+                        <TableColumn fx:id="_columCasa" prefWidth="124.6666259765625" text="Casa" />
                      </columns>
                      <effect>
                         <Blend>

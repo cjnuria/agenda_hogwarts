@@ -11,17 +11,33 @@ import java.util.Date;
  * @author Ismael
  */
 public class Alumnos_objeto {
-    
+
     private int id_estudiante;
     private String nombre;
     private String apellidos;
     private String telefono;
-    private String dni;    
+    private String dni;
     private Date fecha_nac;
     private String correo;
+    private String pass;
+    private String casa;
+    private boolean promociona;
+    private String curso;
     private String imagen;
 
-    public Alumnos_objeto(int id_estudiante, String nombre, String apellidos, String telefono, String dni, Date fecha_nac, String correo, String imagen) {
+    public Alumnos_objeto(String nombre, String apellidos, String casa, String curso) {
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.casa = casa;
+        this.curso = curso;
+    }
+   
+
+   
+
+    
+
+    public Alumnos_objeto(int id_estudiante, String nombre, String apellidos, String telefono, String dni, Date fecha_nac, String correo, String pass, String casa, boolean promociona, String curso, String imagen) {
         this.id_estudiante = id_estudiante;
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -29,6 +45,10 @@ public class Alumnos_objeto {
         this.dni = dni;
         this.fecha_nac = fecha_nac;
         this.correo = correo;
+        this.pass = pass;
+        this.casa = casa;
+        this.promociona = promociona;
+        this.curso = curso;
         this.imagen = imagen;
     }
 
@@ -88,6 +108,38 @@ public class Alumnos_objeto {
         this.correo = correo;
     }
 
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
+
+    public String getCasa() {
+        return casa;
+    }
+
+    public void setCasa(String casa) {
+        this.casa = casa;
+    }
+
+    public boolean isPromociona() {
+        return promociona;
+    }
+
+    public void setPromociona(boolean promociona) {
+        this.promociona = promociona;
+    }
+
+    public String getCurso() {
+        return curso;
+    }
+
+    public void setCurso(String curso) {
+        this.curso = curso;
+    }
+
     public String getImagen() {
         return imagen;
     }
@@ -95,6 +147,5 @@ public class Alumnos_objeto {
     public void setImagen(String imagen) {
         this.imagen = imagen;
     }
-    
-    
+
 }
