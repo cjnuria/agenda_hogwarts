@@ -17,11 +17,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Time;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.Timer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
@@ -149,7 +151,6 @@ public class PanelPrincipalCasasController implements Initializable {
     private Button _boton_Alumnos_Profes;
     @FXML
     private Button _botonSalirProfes;
-    private Label LabelSesionProfe;
     @FXML
     private Pane _panelMenuLateralProfe;
     @FXML
@@ -300,16 +301,19 @@ public class PanelPrincipalCasasController implements Initializable {
 
         controlcheck();
         controTareas();
+        solo_combo_casa();
+        solo_combo_curos();
         _cbCursos.getItems().addAll("Primero", "Segundo", "Tercero", "Cuarto", "Quinto", "Sexto", "Séptimo");
         _cbCursos.setValue("Primero");
+//        _labelSesionProfesor.setText("3");
 
+//        
         //y si hacemos un boton comprobar? que luego cambie por guardar o algo asi....
         //como un añadir que solo comprueba y delspues guardar cambios
         //con un boton añadir sacamos un alert que diga las asignaturas elegida y ahi contamos, si todo va bien y pusa si hacemos commit
         //controlar clicks del raton
     }
 
-    
     //Método para controlar los click que se hacen al elegir asignaturas para poder bloquearlas al elegir 6
     public void controlcheck() {
 
@@ -343,20 +347,12 @@ public class PanelPrincipalCasasController implements Initializable {
         });
 
     }
-    
+
     //Método para controlar click en los combobox de tareas
-    public void controTareas(){
-        _cbTareas_cursos.setOnMouseClicked((MouseEvent mouseEvent) -> {
-            String curso = _cbTareas_cursos.getValue();
-            totalAlumnos_por_curso(curso);
-        });
-        _cbTarea_casa.setOnMouseClicked((MouseEvent mouseEvent) -> {
-            String casa = _cbTarea_casa.getValue();
-            totalAlumnos_por_casa(casa);
-        });
+    public void controTareas() {
+
     }
 
-    
     //Método para abrir la casa según dni(no terminado)
     @FXML
     public void abrirCasaLogin() {
@@ -391,7 +387,6 @@ public class PanelPrincipalCasasController implements Initializable {
 
     ////////////MÉTODOS PARA CAMBIAR APARIENCIA SEGÚN CASA///////////////
     /////////////////////////////////////////////////////////////////////
-    
     public void cambiarImagenSl() {
         Window win = App.getScene().getWindow();
         win.setWidth(1040);
@@ -476,10 +471,8 @@ public class PanelPrincipalCasasController implements Initializable {
         _panelSalaComunProfes.setVisible(true);
     }
 
-    
     ////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////
-    
     //MÉTODO PARA VACIAR PANELES//
     public void vaciarPanelTodo() {
 
@@ -512,7 +505,6 @@ public class PanelPrincipalCasasController implements Initializable {
     //===========================================================================================================
     //////////////MÉTODOS PARA CABIAR PANELES SEGÚN DONDE HAGAS CLICK/////////
     //////////////////////////////////////////////////////////////////////////
-    
     @FXML
     private void cambiarPanelSalaComun(ActionEvent event) {
         vaciarPanelTodo();
@@ -539,8 +531,9 @@ public class PanelPrincipalCasasController implements Initializable {
         vaciarPanelTodo();
         panelAlumnos.setVisible(true);
         panelTareas.setVisible(true);
+        totalAlumnos();
     }
-    
+
     @FXML
     private void cambiarSalaProfes() {
         vaciarPanelProfes();
@@ -549,18 +542,20 @@ public class PanelPrincipalCasasController implements Initializable {
 
     @FXML
     private void cambiarTareasProfes() {
+
         vaciarPanelProfes();
         _panelAsignaerTareasProfes.setVisible(true);
         _cbTareas_cursos.getItems().addAll("Primero", "Segundo", "Tercero", "Cuarto", "Quinto", "Sexto", "Séptimo");
-        _cbTareas_cursos.setValue("Primero");
+        //_cbTareas_cursos.setValue("Primero");
         _cbTarea_casa.getItems().addAll("Gryffindor", "Slytherin", "Hafflepuff", "Ravenclaw");
-        _cbTarea_casa.setValue("Gryffindor");
+        //_cbTarea_casa.setValue("Gryffindor");
         _cbTareas_tipo.getItems().addAll("Examen", "Proyecto", "Recuperación", "Ejercicios");
         _cbTareas_tipo.setValue("Ejercicios");
-        totalAlumnos();
+        solo_combo_casa();
+        solo_combo_curos();
 
     }
-    
+
     @FXML
     private void cambiarCorreccionesProfes() {
         vaciarPanelProfes();
@@ -584,7 +579,6 @@ public class PanelPrincipalCasasController implements Initializable {
     /////////////////////////////////////////////////////////////////////////////////
     /////////MÉTODOS PARA ABRIR ASIGNATURAS AL HACER CLICK EN SU ICONO///////////////
     /////////////////////////////////////////////////////////////////////////////////
-    
     public void cambiarPanelAsignaturasIndividual(String asignatura, String profesor, float notaMedia, String tipoAsignatura) {
 
         vaciarPanelTodo();
@@ -655,10 +649,9 @@ public class PanelPrincipalCasasController implements Initializable {
                 break;
         }
     }
-    
-    /////////////////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////////////////
 
+    /////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////
     @FXML
     public void salirProg() {
         System.exit(0);
@@ -668,10 +661,9 @@ public class PanelPrincipalCasasController implements Initializable {
     private void cerrarTodo(ActionEvent event) {
         System.exit(0);
     }
-    
-    /////////////////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////////////////
 
+    /////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////
     @FXML
     private void registro() {
         Window win = App.getScene().getWindow();
@@ -721,22 +713,16 @@ public class PanelPrincipalCasasController implements Initializable {
         switch (casa) {
             case "GRYFFINDOR":
                 cambiarImagenGr();
-                LabelSesionProfe.setText("");
                 break;
             case "SLYTHERIN":
                 cambiarImagenSl();
-                LabelSesionProfe.setText("");
                 break;
             case "HAFFLEPUFF":
                 cambiarImagenHu();
-                LabelSesionProfe.setText("");
                 break;
             case "RAVENCLAW":
                 cambiarImagenRa();
-                LabelSesionProfe.setText("");
                 break;
-            default:
-                throw new AssertionError();
         }
 
     }
@@ -766,7 +752,6 @@ public class PanelPrincipalCasasController implements Initializable {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //método para copiar un archivo elegido del sistema a una ruta específica (en este caso la carpeta archivos)
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
     @FXML
     private void fileChooser(MouseEvent event) {
 
@@ -813,10 +798,9 @@ public class PanelPrincipalCasasController implements Initializable {
         }
 
     }
-    
-    /////////////////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////////////////
 
+    /////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////
     ////////////////CONEXION///////////////////
     // Conexión a la base de datos
     private static Connection conn = null;
@@ -880,11 +864,10 @@ public class PanelPrincipalCasasController implements Initializable {
 
         }
     }
-    
+
     /////////////////////////////////////////////////////////////////////////////////
     ////////////////MÉTODO PARA DAR DE ALTA UN ESTUDIANTE////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////
-
     @FXML
     public void altaEstudiante() {
 
@@ -933,10 +916,9 @@ public class PanelPrincipalCasasController implements Initializable {
         }
 
     }
-    
+
     /////////////////////////////////////////////////////////////////////////////////
     //ARREGLAR PARA CERRAR SESIÓN DE VERDAD, REINICIAR TODOS LOS VALORES O ALGO ASI
-
     @FXML
     private void cerrarSesion(MouseEvent event) {
         Window win = App.getScene().getWindow();
@@ -944,6 +926,43 @@ public class PanelPrincipalCasasController implements Initializable {
         win.setHeight(458);
         vaciarPanelTodo();
         panelLog.setVisible(true);
+        borrarTodo();
+
+        
+        
+    }
+    
+    public void borrarTodo(){
+        _cbCursos.getItems().clear();
+        _cbTarea_casa.getItems().clear();
+        _cbTareas_alumnos.getItems().clear();
+        _cbTareas_tipo.getItems().clear();
+        _cbTareas_cursos.getItems().clear();
+        _tfApellidosEstudiante.setText("");
+        _tfComentario.setText("");
+        _tfDniEstudiante.setText("");
+        _tfDocumentoSubir.setText("");
+        _tfEmailEstudiante.setText("");
+        _tfFechaNacEstudiante.setText("");
+        _tfNombreEstudiante.setText("");
+        _tfNombreTarea.setText("");
+        _tfPassEstudiante.setText("");
+        _tfTelefonoEstudiante.setText("");
+        _checkAdivinacion.setSelected(false);
+        _checkCriaturas.setSelected(false);
+        _checkDefensa.setSelected(false);
+        _checkEncantamientos.setSelected(false);
+        _checkHistoria.setSelected(false);
+        _checkPociones.setSelected(false);
+        _checkRunas.setSelected(false);
+        _checkTransformaciones.setSelected(false);
+        _checkVuelo.setSelected(false);
+        _taTarea_destinatario.setText("");
+        _taTareas_descripcion.setText("");
+        _labelSesionEstudiante.setText("");
+        _labelSesionProfesor.setText("");
+        
+        
     }
 
     //========Metodo para las alertas=============================
@@ -1027,7 +1046,6 @@ public class PanelPrincipalCasasController implements Initializable {
     /////////////////////////////////////////////////////////////////////////////////
     ///////////////////MÉTDOS PARA OBTENER DATOS/////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////
-    
     public int obtner_id_estudiante(String dni) {
         ResultSet resultado;
         try {
@@ -1386,19 +1404,20 @@ public class PanelPrincipalCasasController implements Initializable {
         }
 
     }
-    
-    
-        public void totalAlumnos() {
+
+    public void totalAlumnos() {
         ResultSet rs;
         ArrayList a = new ArrayList();
         try {
             PreparedStatement pst = conn.prepareStatement("SELECT * FROM estudiantes", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             rs = pst.executeQuery();
+            _cbTareas_alumnos.getItems().clear();
             while (rs.next()) {
                 String nombre = rs.getString("nombre");
                 String apellidos = rs.getString("apellidos");
                 String c = nombre + " " + apellidos;
                 a.add(c);
+                _cbTareas_alumnos.getItems().clear();// limpia los combo box para no duplicar datos
                 _cbTareas_alumnos.getItems().addAll(a);
             }
         } catch (SQLException ex) {
@@ -1413,6 +1432,7 @@ public class PanelPrincipalCasasController implements Initializable {
             PreparedStatement pst = conn.prepareStatement("SELECT * FROM estudiantes WHERE curso = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             pst.setString(1, curso);
             rs = pst.executeQuery();
+            _cbTareas_alumnos.getItems().clear();
 
             while (rs.next()) {
 
@@ -1438,6 +1458,7 @@ public class PanelPrincipalCasasController implements Initializable {
             PreparedStatement pst = conn.prepareStatement("SELECT * FROM estudiantes WHERE casa = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             pst.setString(1, casa);
             rs = pst.executeQuery();
+            _cbTareas_alumnos.getItems().clear();
 
             while (rs.next()) {
 
@@ -1464,6 +1485,7 @@ public class PanelPrincipalCasasController implements Initializable {
             pst.setString(1, curso);
             pst.setString(2, casa);
             rs = pst.executeQuery();
+            _cbTareas_alumnos.getItems().clear();
 
             while (rs.next()) {
 
@@ -1480,6 +1502,191 @@ public class PanelPrincipalCasasController implements Initializable {
             Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
 
         }
+    }
+
+    //== metodo para filtar los alumnos por casa=================
+    public void filtar_alumnos_por_casa(int id_asigProf) {
+        ResultSet rs;
+        ArrayList a = new ArrayList();
+        try {
+            PreparedStatement pst = conn.prepareStatement("SELECT estudiantes.casa \n"
+                    + "FROM alu_nurismy_agenda.estudiantes\n"
+                    + "WHERE id_estudiante IN (SELECT id_estudiante\n"
+                    + "FROM alu_nurismy_agenda.asigEstu\n"
+                    + "WHERE (id_asigProf) IN (?));", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            pst.setInt(1, id_asigProf);
+            rs = pst.executeQuery();
+            _cbTareas_alumnos.getItems().clear();
+
+            while (rs.next()) {
+
+                String nombre = rs.getString("nombre");
+                String apellidos = rs.getString("apellidos");
+
+                String c = nombre + " " + apellidos;
+                a.add(c);
+                _cbTareas_alumnos.getItems().addAll(a);
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+//== metodo para filtar los alumnos por curso=================
+
+    public void filtar_alumnos_por_curso(int id_asigProf) {
+        ResultSet rs;
+        ArrayList a = new ArrayList();
+        try {
+            PreparedStatement pst = conn.prepareStatement("SELECT estudiantes.curso \n"
+                    + "FROM alu_nurismy_agenda.estudiantes\n"
+                    + "WHERE id_estudiante IN (SELECT id_estudiante\n"
+                    + "FROM alu_nurismy_agenda.asigEstu\n"
+                    + "WHERE (id_asigProf) IN (?));", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            pst.setInt(1, id_asigProf);
+            rs = pst.executeQuery();
+            _cbTareas_alumnos.getItems().clear();
+            while (rs.next()) {
+
+                String nombre = rs.getString("nombre");
+                String apellidos = rs.getString("apellidos");
+
+                String c = nombre + " " + apellidos;
+                a.add(c);
+                _cbTareas_alumnos.getItems().addAll(a);
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+    //== metodo para filtar los alumnos dependiendo de la casa y el curso=================
+
+    public void alumnos_segun_casaYcurso(int id_asigProf) {
+        ResultSet rs;
+        ArrayList a = new ArrayList();
+        try {
+            PreparedStatement pst = conn.prepareStatement("SELECT estudiantes.* \n"
+                    + "FROM alu_nurismy_agenda.estudiantes\n"
+                    + "WHERE id_estudiante IN (SELECT id_estudiante\n"
+                    + "FROM alu_nurismy_agenda.asigEstu\n"
+                    + "WHERE (id_asigProf) IN (?))AND estudiantes.casa=? AND estudiantes.curso=?;", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            pst.setInt(1, id_asigProf);
+            pst.setString(2, _cbTarea_casa.getValue());
+            pst.setString(3, _cbTareas_cursos.getValue());
+            rs = pst.executeQuery();
+            _cbTareas_alumnos.getItems().clear();
+            while (rs.next()) {
+
+                String nombre = rs.getString("nombre");
+                String apellidos = rs.getString("apellidos");
+
+                String c = nombre + " " + apellidos;
+                a.add(c);
+                _cbTareas_alumnos.getItems().addAll(a);
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+    //== metodo para filtar los alumnos dependiendo de la casa sin selecionar otro combobox=================
+
+    public void alumnos_segun_casa(int id_asigProf, String p2) {
+        ResultSet rs;
+        ArrayList a = new ArrayList();
+        try {
+            PreparedStatement pst = conn.prepareStatement("SELECT estudiantes.* \n"
+                    + "FROM alu_nurismy_agenda.estudiantes\n"
+                    + "WHERE id_estudiante IN (SELECT id_estudiante\n"
+                    + "FROM alu_nurismy_agenda.asigEstu\n"
+                    + "WHERE (id_asigProf) IN (?))AND estudiantes.casa=?;", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            pst.setInt(1, id_asigProf);
+            pst.setString(2, p2);
+            rs = pst.executeQuery();
+            _cbTareas_alumnos.getItems().clear();
+
+            while (rs.next()) {
+
+                String nombre = rs.getString("nombre");
+                String apellidos = rs.getString("apellidos");
+
+                String c = nombre + " " + apellidos;
+                a.add(c);
+                _cbTareas_alumnos.getItems().addAll(a);
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+    //== metodo para filtar los alumnos dependiendo del curso sin seleccionar otro combox=================
+
+    public void alumnos_segun_curso(int id_asigProf, String p2) {
+        ResultSet rs;
+        ArrayList a = new ArrayList();
+        try {
+            PreparedStatement pst = conn.prepareStatement("SELECT estudiantes.* \n"
+                    + "FROM alu_nurismy_agenda.estudiantes\n"
+                    + "WHERE id_estudiante IN (SELECT id_estudiante\n"
+                    + "FROM alu_nurismy_agenda.asigEstu\n"
+                    + "WHERE (id_asigProf) IN (?))AND  estudiantes.curso=?;", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            pst.setInt(1, id_asigProf);
+            pst.setString(2, p2);
+            rs = pst.executeQuery();
+            _cbTareas_alumnos.getItems().clear();
+            while (rs.next()) {
+
+                String nombre = rs.getString("nombre");
+                String apellidos = rs.getString("apellidos");
+
+                String c = nombre + " " + apellidos;
+                a.add(c);
+                _cbTareas_alumnos.getItems().addAll(a);
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void solo_combo_curos() {
+        // Insertar aquí el código a ejecutar cuando se haga clic en el ratón
+        int id_asigProf = id_profesor_obtener_asifprof(id_profesor_Con_dni("sybill"));
+
+        _cbTareas_cursos.valueProperty().addListener((ov, p1, p2) -> {
+            System.out.println("Nueva Selección: " + p2);
+            System.out.println("Vieja Selección: " + p1);
+            if (_cbTarea_casa.getValue() == null) {
+                alumnos_segun_curso(id_asigProf, p2);
+            } else {
+                alumnos_segun_casaYcurso(id_asigProf);
+            }
+        });
+    }
+
+    public void solo_combo_casa() {
+
+        int id_asigProf = id_profesor_obtener_asifprof(id_profesor_Con_dni("minerva"));
+
+        _cbTarea_casa.valueProperty().addListener((ov, p1, p2) -> {
+            System.out.println("Nueva Selección: " + p2);
+            System.out.println("Vieja Selección: " + p1);
+            if (_cbTareas_cursos.getValue() == null) {
+                alumnos_segun_casa(id_asigProf, p2);
+            } else {
+                alumnos_segun_casaYcurso(id_asigProf);
+            }
+        });
     }
 
 }
