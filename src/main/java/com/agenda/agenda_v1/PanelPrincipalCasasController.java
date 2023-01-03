@@ -300,6 +300,8 @@ public class PanelPrincipalCasasController implements Initializable {
 
         controlcheck();
         controTareas();
+        _cbCursos.getItems().addAll("Primero", "Segundo", "Tercero", "Cuarto", "Quinto", "Sexto", "Séptimo");
+        _cbCursos.setValue("Primero");
 
         //y si hacemos un boton comprobar? que luego cambie por guardar o algo asi....
         //como un añadir que solo comprueba y delspues guardar cambios
