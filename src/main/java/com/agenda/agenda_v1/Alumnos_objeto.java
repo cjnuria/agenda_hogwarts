@@ -31,11 +31,11 @@ public class Alumnos_objeto {
         this.casa = casa;
         this.curso = curso;
     }
-   
 
-   
-
-    
+    public Alumnos_objeto(String nombre, String apellidos) {
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+    }
 
     public Alumnos_objeto(int id_estudiante, String nombre, String apellidos, String telefono, String dni, Date fecha_nac, String correo, String pass, String casa, boolean promociona, String curso, String imagen) {
         this.id_estudiante = id_estudiante;
