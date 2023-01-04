@@ -29,7 +29,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="690.0" prefWidth="1040.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.agenda.agenda_v1.PanelPrincipalCasasController">
    <children>
-      <Pane fx:id="panelAlumnos" layoutX="-2.0" layoutY="-1.0" prefHeight="691.0" prefWidth="1044.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="-1.0">
+      <Pane fx:id="panelAlumnos" layoutX="-2.0" layoutY="-1.0" prefHeight="691.0" prefWidth="1044.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="-1.0">
          <children>
             <Pane fx:id="panelTareas1" layoutX="222.0" layoutY="-1.0" prefHeight="695.0" prefWidth="823.0" visible="false">
                <children>
@@ -434,7 +434,7 @@
                   </Pane>
                </children>
             </Pane>
-            <Pane fx:id="panelTareas" layoutX="221.0" layoutY="-1.0" prefHeight="695.0" prefWidth="823.0" visible="false">
+            <Pane fx:id="panelTareas" layoutX="221.0" layoutY="-1.0" prefHeight="695.0" prefWidth="823.0">
                <children>
                   <ImageView fitHeight="820.0" fitWidth="843.0" layoutY="-126.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -462,14 +462,13 @@
                         </LinearGradient>
                      </textFill>
                   </Label>
-                  <TableView layoutX="58.0" layoutY="138.0" prefHeight="199.0" prefWidth="715.0">
+                  <TableView fx:id="_tbA_tareas" layoutX="58.0" layoutY="138.0" prefHeight="199.0" prefWidth="715.0">
                     <columns>
-                      <TableColumn prefWidth="157.99996948242188" text="Asignatura" />
-                      <TableColumn prefWidth="97.60000610351562" text="Tipo" />
-                        <TableColumn prefWidth="126.4000244140625" text="Nombre" />
-                        <TableColumn prefWidth="129.5999755859375" text="Fecha Entrega" />
-                        <TableColumn prefWidth="110.5999755859375" text="Comentario" />
-                        <TableColumn prefWidth="89.4000244140625" text="Archivo" />
+                      <TableColumn fx:id="_columA_tareaAsignatura" prefWidth="157.99996948242188" text="Asignatura" />
+                      <TableColumn fx:id="_columA_tareaTipo" prefWidth="97.60000610351562" text="Tipo" />
+                        <TableColumn fx:id="_columA_tareaNombre" prefWidth="126.4000244140625" text="Nombre" />
+                        <TableColumn fx:id="_columA_tareafecha_fin" prefWidth="129.5999755859375" text="Fecha Entrega" />
+                        <TableColumn fx:id="_columA_tareaArchivo" prefWidth="201.0" text="Archivo" />
                     </columns>
                      <effect>
                         <SepiaTone />
@@ -1163,7 +1162,7 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane fx:id="panelProfesores" layoutY="-1.0" prefHeight="695.0" prefWidth="1052.0">
+      <Pane fx:id="panelProfesores" layoutY="-1.0" prefHeight="695.0" prefWidth="1052.0" visible="false">
          <children>
             <Pane fx:id="_panelMenuLateralProfe" prefHeight="693.0" prefWidth="228.0">
                <children>
@@ -1341,7 +1340,7 @@
                      </textFill>
                   </Label>
                </children></Pane>
-            <Pane fx:id="_panelAsignaerTareasProfes" layoutX="228.0" prefHeight="695.0" prefWidth="831.0">
+            <Pane fx:id="_panelAsignaerTareasProfes" layoutX="228.0" prefHeight="695.0" prefWidth="831.0" visible="false">
                <children>
                   <ImageView fitHeight="838.0" fitWidth="831.0" layoutX="-5.0" layoutY="-119.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -1362,20 +1361,20 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label layoutX="122.0" layoutY="374.0" text="Descripción">
+                  <Label layoutX="126.0" layoutY="402.0" text="Descripción">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label layoutX="123.0" layoutY="334.0" text="Fecha">
+                  <Label layoutX="123.0" layoutY="334.0" text="Fecha inicio">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
                   <ComboBox fx:id="_cbTareas_cursos" layoutX="302.0" layoutY="160.0" prefHeight="25.0" prefWidth="248.0" />
                   <ComboBox fx:id="_cbTareas_alumnos" layoutX="303.0" layoutY="245.0" prefHeight="25.0" prefWidth="248.0" />
-                  <TextArea fx:id="_taTareas_descripcion" layoutX="123.0" layoutY="410.0" prefHeight="73.0" prefWidth="431.0" />
-                  <DatePicker fx:id="_dpTareas_fecha" layoutX="303.0" layoutY="335.0" prefHeight="25.0" prefWidth="248.0" />
+                  <TextArea fx:id="_taTareas_descripcion" layoutX="127.0" layoutY="438.0" prefHeight="73.0" prefWidth="431.0" />
+                  <DatePicker fx:id="_dpTareas_fechaIni" layoutX="303.0" layoutY="335.0" prefHeight="25.0" prefWidth="248.0" />
                   <Label layoutX="135.0" layoutY="44.0" text="Asignar Tareas">
                      <font>
                         <Font name="Harrington" size="55.0" />
@@ -1398,13 +1397,13 @@
                      </textFill>
                   </Label>
                   <TextField fx:id="_tfNombreTarea" layoutX="302.0" layoutY="125.0" prefHeight="25.0" prefWidth="248.0" />
-                  <Label layoutX="128.0" layoutY="494.0" text="Destinatarios">
+                  <Label layoutX="132.0" layoutY="522.0" text="Destinatarios">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextArea fx:id="_taTarea_destinatario" layoutX="124.0" layoutY="529.0" prefHeight="58.0" prefWidth="431.0" />
-                  <Button layoutX="298.0" layoutY="609.0" mnemonicParsing="false" text="Enviar">
+                  <TextArea fx:id="_taTarea_destinatario" layoutX="128.0" layoutY="557.0" prefHeight="58.0" prefWidth="431.0" />
+                  <Button layoutX="302.0" layoutY="637.0" mnemonicParsing="false" onMouseClicked="#alta_tareas" text="Enviar">
                      <font>
                         <Font size="20.0" />
                      </font></Button>
@@ -1433,6 +1432,12 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
+                  <Label layoutX="122.0" layoutY="375.0" text="Fecha Entrega">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <DatePicker fx:id="_dpTareas_fechaFin" layoutX="302.0" layoutY="376.0" prefHeight="25.0" prefWidth="248.0" />
                </children>
             </Pane>
             <Pane fx:id="_panelCorreccionesProfes" layoutX="219.0" prefHeight="695.0" prefWidth="837.0" visible="false">
@@ -1442,12 +1447,14 @@
                         <Image url="@imagenes/pngegg%20(51).png" />
                      </image>
                   </ImageView>
-                  <TableView layoutX="120.0" layoutY="171.0" prefHeight="276.0" prefWidth="612.0" tableMenuButtonVisible="true">
+                  <TableView fx:id="_tbTarea_correciones" layoutX="120.0" layoutY="171.0" prefHeight="276.0" prefWidth="612.0" tableMenuButtonVisible="true">
                      <columns>
-                        <TableColumn prefWidth="145.5555419921875" text="Asignaturas" />
-                        <TableColumn prefWidth="161.77780151367188" text="Cursos" />
-                        <TableColumn prefWidth="127.111083984375" text="Tareas" />
-                        <TableColumn editable="false" minWidth="0.0" prefWidth="130.22222900390625" text="Fecha" />
+                        <TableColumn fx:id="_columTareaNombre" prefWidth="75.0" text="Nombre" />
+                        <TableColumn fx:id="_columTareasApellidos" prefWidth="133.38299560546875" text="Apellidos" />
+                        <TableColumn fx:id="_columTareasCursos" prefWidth="108.61700439453125" text="Cursos" />
+                        <TableColumn fx:id="_columTareasTareas" prefWidth="125.8128662109375" text="Tareas" />
+                        <TableColumn fx:id="_columTareaTipo" prefWidth="69.14630126953125" text="Tipo" />
+                        <TableColumn fx:id="_columTareasFechaFin" editable="false" minWidth="0.0" prefWidth="97.33331298828125" text="Fecha" />
                      </columns>
                      <effect>
                         <Blend>
@@ -1483,19 +1490,19 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="260.0" layoutY="479.0" prefHeight="25.0" prefWidth="274.0" />
+                  <TextField fx:id="_tfTareas_alumno" layoutX="260.0" layoutY="479.0" prefHeight="25.0" prefWidth="274.0" />
                   <Label layoutX="120.0" layoutY="520.0" text="Comentario">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="260.0" layoutY="521.0" prefHeight="25.0" prefWidth="274.0" />
+                  <TextField fx:id="_tfTareasComentario" layoutX="260.0" layoutY="521.0" prefHeight="25.0" prefWidth="274.0" />
                   <Label layoutX="120.0" layoutY="564.0" text="Nota">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="260.0" layoutY="565.0" prefHeight="25.0" prefWidth="274.0" />
+                  <TextField fx:id="_tfTareasNota" layoutX="260.0" layoutY="565.0" prefHeight="25.0" prefWidth="274.0" />
                   <Button layoutX="377.0" layoutY="615.0" mnemonicParsing="false" text="Guardar">
                      <font>
                         <Font size="20.0" />

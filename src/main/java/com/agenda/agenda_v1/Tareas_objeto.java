@@ -14,7 +14,7 @@ public class Tareas_objeto {
     
     private int id_tarea;
     private String id_profesor;
-    private String id_asignatura;
+    private String id_estudiante;
     private String id_curso;
     private String nombre_tarea;    
     private Date descripcion_tarea;
@@ -25,11 +25,13 @@ public class Tareas_objeto {
     private String entregado;
     private String archivo;
     private String corregido;
+    
 
-    public Tareas_objeto(int id_tarea, String id_profesor, String id_asignatura, String id_curso, String nombre_tarea, Date descripcion_tarea, String tipo_tarea, String rubrica, String fecha_inicio, String fecha_fin, String entregado, String archivo, String corregido) {
+
+    public Tareas_objeto(int id_tarea, String id_profesor, String id_estudiante, String id_curso, String nombre_tarea, Date descripcion_tarea, String tipo_tarea, String rubrica, String fecha_inicio, String fecha_fin, String entregado, String archivo, String corregido) {
         this.id_tarea = id_tarea;
         this.id_profesor = id_profesor;
-        this.id_asignatura = id_asignatura;
+        this.id_estudiante = id_estudiante;
         this.id_curso = id_curso;
         this.nombre_tarea = nombre_tarea;
         this.descripcion_tarea = descripcion_tarea;
@@ -40,6 +42,7 @@ public class Tareas_objeto {
         this.entregado = entregado;
         this.archivo = archivo;
         this.corregido = corregido;
+
     }
 
     public int getId_tarea() {
@@ -58,12 +61,12 @@ public class Tareas_objeto {
         this.id_profesor = id_profesor;
     }
 
-    public String getId_asignatura() {
-        return id_asignatura;
+    public String getId_estudiante() {
+        return id_estudiante;
     }
 
-    public void setId_asignatura(String id_asignatura) {
-        this.id_asignatura = id_asignatura;
+    public void setId_estudiante(String id_estudiante) {
+        this.id_estudiante = id_estudiante;
     }
 
     public String getId_curso() {
@@ -146,5 +149,5 @@ public class Tareas_objeto {
         this.corregido = corregido;
     }
     
-    
+
 }

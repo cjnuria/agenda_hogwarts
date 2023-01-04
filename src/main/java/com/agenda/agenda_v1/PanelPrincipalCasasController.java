@@ -280,8 +280,6 @@ public class PanelPrincipalCasasController implements Initializable {
     @FXML
     private TextArea _taTareas_descripcion;
     @FXML
-    private DatePicker _dpTareas_fecha;
-    @FXML
     private TextField _tfNombreTarea;
     @FXML
     private TextArea _taTarea_destinatario;
@@ -289,6 +287,30 @@ public class PanelPrincipalCasasController implements Initializable {
     private ComboBox<String> _cbTareas_tipo;
     @FXML
     private ComboBox<String> _cbTarea_casa;
+    @FXML
+    private DatePicker _dpTareas_fechaIni;
+    @FXML
+    private DatePicker _dpTareas_fechaFin;
+    @FXML
+    private TableView<tareas_profesores_objeto> _tbTarea_correciones;
+    @FXML
+    private TableColumn<tareas_profesores_objeto, String> _columTareasCursos;
+    @FXML
+    private TableColumn<tareas_profesores_objeto, String> _columTareasTareas;
+    @FXML
+    private TableColumn<tareas_profesores_objeto, String> _columTareasFechaFin;
+    @FXML
+    private TextField _tfTareas_alumno;
+    @FXML
+    private TextField _tfTareasComentario;
+    @FXML
+    private TextField _tfTareasNota;
+    @FXML
+    private TableColumn<tareas_profesores_objeto, String> _columTareaNombre;
+    @FXML
+    private TableColumn<tareas_profesores_objeto, String> _columTareasApellidos;
+    @FXML
+    private TableColumn<tareas_profesores_objeto, String> _columTareaTipo;
 
     /**
      * Initializes the controller class.
@@ -538,6 +560,7 @@ public class PanelPrincipalCasasController implements Initializable {
     private void cambiarSalaProfes() {
         vaciarPanelProfes();
         _panelSalaComunProfes.setVisible(true);
+
     }
 
     @FXML
@@ -551,6 +574,7 @@ public class PanelPrincipalCasasController implements Initializable {
         //_cbTarea_casa.setValue("Gryffindor");
         _cbTareas_tipo.getItems().addAll("Examen", "Proyecto", "Recuperación", "Ejercicios");
         _cbTareas_tipo.setValue("Ejercicios");
+        totalAlumnos();
         solo_combo_casa();
         solo_combo_curos();
 
@@ -560,6 +584,7 @@ public class PanelPrincipalCasasController implements Initializable {
     private void cambiarCorreccionesProfes() {
         vaciarPanelProfes();
         _panelCorreccionesProfes.setVisible(true);
+        rellenar_tabla_correcciones(14);
     }
 
     @FXML
@@ -928,11 +953,9 @@ public class PanelPrincipalCasasController implements Initializable {
         panelLog.setVisible(true);
         borrarTodo();
 
-        
-        
     }
-    
-    public void borrarTodo(){
+
+    public void borrarTodo() {
         _cbCursos.getItems().clear();
         _cbTarea_casa.getItems().clear();
         _cbTareas_alumnos.getItems().clear();
@@ -961,8 +984,7 @@ public class PanelPrincipalCasasController implements Initializable {
         _taTareas_descripcion.setText("");
         _labelSesionEstudiante.setText("");
         _labelSesionProfesor.setText("");
-        
-        
+
     }
 
     //========Metodo para las alertas=============================
@@ -1026,15 +1048,15 @@ public class PanelPrincipalCasasController implements Initializable {
         String dni = _labelSesionEstudiante.getText();
 
         int id_asignatura = obtener_id_asignatura(asignatura);
-        int id_asigprof = obtener_id_asigProf(id_asignatura);
+        int id_asigProf = obtener_id_asigProf(id_asignatura);
         int id_estudiante = obtner_id_estudiante(dni);
         System.out.println(id_estudiante);
-        System.out.println(id_asigprof);
+        System.out.println(id_asigProf);
         System.out.println(id_asignatura);
         try {
             PreparedStatement pst = conn.prepareStatement("INSERT INTO asigEstu (id_estudiante, id_asigProf) VALUES (?, ?)", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             pst.setInt(1, id_estudiante);
-            pst.setInt(2, id_asigprof);
+            pst.setInt(2, id_asigProf);
             pst.executeUpdate();
 
         } catch (SQLException ex) {
@@ -1284,6 +1306,27 @@ public class PanelPrincipalCasasController implements Initializable {
 
     }
 
+    public int id_asignatura_Con_id_profesor(int id_profesor) {
+        try {
+            PreparedStatement pst = conn.prepareStatement("SELECT * FROM asigProf where id_profesor = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            pst.setInt(1, id_profesor);
+            ResultSet resultado = pst.executeQuery();
+            if (!resultado.first()) {
+
+                Jopane("No se han encontrado datos", "Error");
+                return -1;
+            } else {
+                int id_asignatura = resultado.getInt("id_asignatura");
+                return id_asignatura;
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            return -1;
+        }
+
+    }
+
     public int id_profesor_obtener_asifprof(int id_profesor) {
         try {
             PreparedStatement pst = conn.prepareStatement("SELECT * FROM asigProf where id_profesor= ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
@@ -1372,7 +1415,7 @@ public class PanelPrincipalCasasController implements Initializable {
                 Jopane("No se han encontrado datos", "Error");
                 return -1;
             } else {
-                int id = resultado.getInt("id_asigProf");
+                int id = resultado.getInt("id_profesor");
                 return id;
 
             }
@@ -1413,9 +1456,11 @@ public class PanelPrincipalCasasController implements Initializable {
             rs = pst.executeQuery();
             _cbTareas_alumnos.getItems().clear();
             while (rs.next()) {
+                String dni = rs.getString("dni");
                 String nombre = rs.getString("nombre");
                 String apellidos = rs.getString("apellidos");
-                String c = nombre + " " + apellidos;
+
+                String c = dni + " - " + nombre + " " + apellidos;
                 a.add(c);
                 _cbTareas_alumnos.getItems().clear();// limpia los combo box para no duplicar datos
                 _cbTareas_alumnos.getItems().addAll(a);
@@ -1436,10 +1481,11 @@ public class PanelPrincipalCasasController implements Initializable {
 
             while (rs.next()) {
 
+                String dni = rs.getString("dni");
                 String nombre = rs.getString("nombre");
                 String apellidos = rs.getString("apellidos");
 
-                String c = nombre + " " + apellidos;
+                String c = dni + " - " + nombre + " " + apellidos;
                 a.add(c);
                 _cbTareas_alumnos.getItems().addAll(a);
 
@@ -1462,10 +1508,11 @@ public class PanelPrincipalCasasController implements Initializable {
 
             while (rs.next()) {
 
+                String dni = rs.getString("dni");
                 String nombre = rs.getString("nombre");
                 String apellidos = rs.getString("apellidos");
 
-                String c = nombre + " " + apellidos;
+                String c = dni + " - " + nombre + " " + apellidos;
                 a.add(c);
                 _cbTareas_alumnos.getItems().addAll(a);
 
@@ -1489,10 +1536,11 @@ public class PanelPrincipalCasasController implements Initializable {
 
             while (rs.next()) {
 
+                String dni = rs.getString("dni");
                 String nombre = rs.getString("nombre");
                 String apellidos = rs.getString("apellidos");
 
-                String c = nombre + " " + apellidos;
+                String c = dni + " - " + nombre + " " + apellidos;
                 a.add(c);
                 _cbTareas_alumnos.getItems().addAll(a);
 
@@ -1520,10 +1568,11 @@ public class PanelPrincipalCasasController implements Initializable {
 
             while (rs.next()) {
 
+                String dni = rs.getString("dni");
                 String nombre = rs.getString("nombre");
                 String apellidos = rs.getString("apellidos");
 
-                String c = nombre + " " + apellidos;
+                String c = dni + " - " + nombre + " " + apellidos;
                 a.add(c);
                 _cbTareas_alumnos.getItems().addAll(a);
 
@@ -1550,10 +1599,11 @@ public class PanelPrincipalCasasController implements Initializable {
             _cbTareas_alumnos.getItems().clear();
             while (rs.next()) {
 
+                String dni = rs.getString("dni");
                 String nombre = rs.getString("nombre");
                 String apellidos = rs.getString("apellidos");
 
-                String c = nombre + " " + apellidos;
+                String c = dni + " - " + nombre + " " + apellidos;
                 a.add(c);
                 _cbTareas_alumnos.getItems().addAll(a);
 
@@ -1582,10 +1632,11 @@ public class PanelPrincipalCasasController implements Initializable {
             _cbTareas_alumnos.getItems().clear();
             while (rs.next()) {
 
+                String dni = rs.getString("dni");
                 String nombre = rs.getString("nombre");
                 String apellidos = rs.getString("apellidos");
 
-                String c = nombre + " " + apellidos;
+                String c = dni + " - " + nombre + " " + apellidos;
                 a.add(c);
                 _cbTareas_alumnos.getItems().addAll(a);
 
@@ -1614,10 +1665,11 @@ public class PanelPrincipalCasasController implements Initializable {
 
             while (rs.next()) {
 
+                String dni = rs.getString("dni");
                 String nombre = rs.getString("nombre");
                 String apellidos = rs.getString("apellidos");
 
-                String c = nombre + " " + apellidos;
+                String c = dni + " - " + nombre + " " + apellidos;
                 a.add(c);
                 _cbTareas_alumnos.getItems().addAll(a);
 
@@ -1645,10 +1697,11 @@ public class PanelPrincipalCasasController implements Initializable {
             _cbTareas_alumnos.getItems().clear();
             while (rs.next()) {
 
+                String dni = rs.getString("dni");
                 String nombre = rs.getString("nombre");
                 String apellidos = rs.getString("apellidos");
 
-                String c = nombre + " " + apellidos;
+                String c = dni + " - " + nombre + " " + apellidos;
                 a.add(c);
                 _cbTareas_alumnos.getItems().addAll(a);
 
@@ -1689,4 +1742,159 @@ public class PanelPrincipalCasasController implements Initializable {
         });
     }
 
+    @FXML
+    public void alta_tareas() {
+
+        int id_profesor = obtener_id_profesor("minerva");
+
+        int id_alumno;
+        int id_asignatura = id_asignatura_Con_id_profesor(id_profesor);
+        System.out.println(id_asignatura);
+
+        try {
+
+            PreparedStatement pst = conn.prepareStatement("INSERT INTO tareas (id_profesor,id_asignatura,id_estudiante,nombre_tarea,tipo_tarea,fecha_inicio,fecha_fin,descripcion_tarea) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+
+            String nombre_tarea = _tfNombreTarea.getText();
+            String tareas_cursos = _cbTareas_cursos.getValue();
+            String casa = _cbTarea_casa.getValue();
+            String alumno = _cbTareas_alumnos.getValue();
+            String dni = alumno.substring(0, 9);
+            id_alumno = obtner_id_estudiante(dni);
+            String Tipo = _cbTareas_tipo.getValue();
+            String fec_ini = _dpTareas_fechaIni.getValue().toString();
+            String fec_fin = _dpTareas_fechaFin.getValue().toString();
+            String descripcion = _taTareas_descripcion.getText();
+            String destinatarios = _taTarea_destinatario.getText();
+
+            //sql = "INSERT INTO estudiantes (nombre, apellidos, telefono, dni, fecha_nac, correo, pass, casa) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            pst.setInt(1, id_profesor);
+            pst.setInt(2, id_asignatura);
+            pst.setInt(3, id_alumno);
+            pst.setString(4, nombre_tarea);
+            pst.setString(5, Tipo);
+            pst.setString(6, fec_ini);
+            pst.setString(7, fec_fin);
+            pst.setString(8, descripcion);
+
+            boolean a = pst.execute();
+
+            if (!a) {
+
+                vaciarPanelTodo();
+                panelProfesores.setVisible(true);
+                _panelSalaComunProfes.setVisible(true);
+                Jopane("Añadido correctamente", "Añadir Tareas");
+                borrar_datos_registro();
+
+            } else {
+                System.out.println("Error al insertar");
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public ObservableList<tareas_profesores_objeto> rellenar_tabla_correcciones(int id_profesor) {
+
+        ObservableList<tareas_profesores_objeto> obs = FXCollections.observableArrayList();
+        _columTareaNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+        _columTareasApellidos.setCellValueFactory(new PropertyValueFactory<>("apellidos"));
+        _columTareasCursos.setCellValueFactory(new PropertyValueFactory<>("curso"));
+        _columTareasTareas.setCellValueFactory(new PropertyValueFactory<>("nombre_tarea"));
+        _columTareaTipo.setCellValueFactory(new PropertyValueFactory<>("tipo_tarea"));
+        _columTareasFechaFin.setCellValueFactory(new PropertyValueFactory<>("fecha_fin"));
+        try {
+            ResultSet rs = datos_para_correcciones(id_profesor);
+
+            while (rs.next()) {
+
+                String nombre = rs.getString("nombre");
+                String apellidos = rs.getString("apellidos");
+                String cursos = rs.getString("curso");
+                String nombre_tarea = rs.getString("nombre_tarea");
+                String tipo_tarea = rs.getString("tipo_tarea");
+                String fecha_fin = rs.getString("fecha_fin");
+                System.out.println(nombre);
+
+                tareas_profesores_objeto c = new tareas_profesores_objeto(nombre, apellidos, cursos, nombre_tarea, tipo_tarea, fecha_fin);
+                obs.add(c);
+                _tbTarea_correciones.getItems().addAll(c);
+
+                System.out.println("hola");
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return obs;
+    }
+
+    public ResultSet datos_tabla_correccion(int id_profesor) {
+        try {
+            PreparedStatement pst = conn.prepareStatement("SELECT * FROM tareas WHERE id_profesor = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            pst.setInt(1, id_profesor);
+            ResultSet resultado = pst.executeQuery();
+            return resultado;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+
+    }
+
+    public ResultSet datos_para_correcciones(int id_profesor) {
+        try {
+            PreparedStatement pst = conn.prepareStatement("SELECT estudiantes.nombre, estudiantes.apellidos, estudiantes.curso, tareas.nombre_tarea, tareas.tipo_tarea, tareas.fecha_fin\n"
+                    + "FROM alu_nurismy_agenda.estudiantes estudiantes, alu_nurismy_agenda.tareas tareas\n"
+                    + "WHERE \n"
+                    + "	tareas.id_estudiante = estudiantes.id_estudiante AND tareas.id_profesor = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            pst.setInt(1, id_profesor);
+            ResultSet resultado = pst.executeQuery();
+            return resultado;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+
+    }
+
+    public ObservableList<tareas_profesores_objeto> rellenar_tareas_alumnos(int id_profesor) {
+
+        ObservableList<tareas_profesores_objeto> obs = FXCollections.observableArrayList();
+//        _colum.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+        _columTareasApellidos.setCellValueFactory(new PropertyValueFactory<>("apellidos"));
+        _columTareasCursos.setCellValueFactory(new PropertyValueFactory<>("curso"));
+        _columTareasTareas.setCellValueFactory(new PropertyValueFactory<>("nombre_tarea"));
+        _columTareaTipo.setCellValueFactory(new PropertyValueFactory<>("tipo_tarea"));
+        _columTareasFechaFin.setCellValueFactory(new PropertyValueFactory<>("fecha_fin"));
+        try {
+            ResultSet rs = datos_para_correcciones(id_profesor);
+
+            while (rs.next()) {
+
+                String nombre = rs.getString("nombre");
+                String apellidos = rs.getString("apellidos");
+                String cursos = rs.getString("curso");
+                String nombre_tarea = rs.getString("nombre_tarea");
+                String tipo_tarea = rs.getString("tipo_tarea");
+                String fecha_fin = rs.getString("fecha_fin");
+                System.out.println(nombre);
+
+                tareas_profesores_objeto c = new tareas_profesores_objeto(nombre, apellidos, cursos, nombre_tarea, tipo_tarea, fecha_fin);
+                obs.add(c);
+                _tbTarea_correciones.getItems().addAll(c);
+
+                System.out.println("hola");
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return obs;
+    }
 }

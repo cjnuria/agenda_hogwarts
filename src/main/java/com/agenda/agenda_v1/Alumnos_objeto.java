@@ -11,53 +11,16 @@ import java.util.Date;
  * @author Ismael
  */
 public class Alumnos_objeto {
+    public String nombre;
+    public String apellidos;
+    public String curso;
+    public String casa;
 
-    private int id_estudiante;
-    private String nombre;
-    private String apellidos;
-    private String telefono;
-    private String dni;
-    private Date fecha_nac;
-    private String correo;
-    private String pass;
-    private String casa;
-    private boolean promociona;
-    private String curso;
-    private String imagen;
-
-    public Alumnos_objeto(String nombre, String apellidos, String casa, String curso) {
+    public Alumnos_objeto(String nombre, String apellidos, String curso, String casa) {
         this.nombre = nombre;
         this.apellidos = apellidos;
-        this.casa = casa;
         this.curso = curso;
-    }
-
-    public Alumnos_objeto(String nombre, String apellidos) {
-        this.nombre = nombre;
-        this.apellidos = apellidos;
-    }
-
-    public Alumnos_objeto(int id_estudiante, String nombre, String apellidos, String telefono, String dni, Date fecha_nac, String correo, String pass, String casa, boolean promociona, String curso, String imagen) {
-        this.id_estudiante = id_estudiante;
-        this.nombre = nombre;
-        this.apellidos = apellidos;
-        this.telefono = telefono;
-        this.dni = dni;
-        this.fecha_nac = fecha_nac;
-        this.correo = correo;
-        this.pass = pass;
         this.casa = casa;
-        this.promociona = promociona;
-        this.curso = curso;
-        this.imagen = imagen;
-    }
-
-    public int getId_estudiante() {
-        return id_estudiante;
-    }
-
-    public void setId_estudiante(int id_estudiante) {
-        this.id_estudiante = id_estudiante;
     }
 
     public String getNombre() {
@@ -76,44 +39,12 @@ public class Alumnos_objeto {
         this.apellidos = apellidos;
     }
 
-    public String getTelefono() {
-        return telefono;
+    public String getCurso() {
+        return curso;
     }
 
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-
-    public String getDni() {
-        return dni;
-    }
-
-    public void setDni(String dni) {
-        this.dni = dni;
-    }
-
-    public Date getFecha_nac() {
-        return fecha_nac;
-    }
-
-    public void setFecha_nac(Date fecha_nac) {
-        this.fecha_nac = fecha_nac;
-    }
-
-    public String getCorreo() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
-
-    public String getPass() {
-        return pass;
-    }
-
-    public void setPass(String pass) {
-        this.pass = pass;
+    public void setCurso(String curso) {
+        this.curso = curso;
     }
 
     public String getCasa() {
@@ -124,28 +55,5 @@ public class Alumnos_objeto {
         this.casa = casa;
     }
 
-    public boolean isPromociona() {
-        return promociona;
-    }
-
-    public void setPromociona(boolean promociona) {
-        this.promociona = promociona;
-    }
-
-    public String getCurso() {
-        return curso;
-    }
-
-    public void setCurso(String curso) {
-        this.curso = curso;
-    }
-
-    public String getImagen() {
-        return imagen;
-    }
-
-    public void setImagen(String imagen) {
-        this.imagen = imagen;
-    }
-
+    
 }
