@@ -52,6 +52,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.PickResult;
 import javafx.scene.layout.AnchorPane;
@@ -358,8 +359,19 @@ public class PanelPrincipalCasasController implements Initializable {
             // Insertar aquí el código a ejecutar cuando se haga clic en el ratón
             comprobar();
         });
-        
+
         rellenar_tablaProfesor_semanal(14);
+
+        labelUser.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                abrirCasaLogin();
+            }
+        });
+        labelPass.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                abrirCasaLogin();
+            }
+        });
 
     }
 
@@ -581,6 +593,7 @@ public class PanelPrincipalCasasController implements Initializable {
         panelAlumnos.setVisible(true);
         panelTareas.setVisible(true);
         //totalAlumnos();
+        _tbA_tareas.getItems().clear();
         rellenar_tareas_alumnos(52);
     }
 
@@ -588,6 +601,7 @@ public class PanelPrincipalCasasController implements Initializable {
     private void cambiarSalaProfes() {
         vaciarPanelProfes();
         _panelSalaComunProfes.setVisible(true);
+        _tbprofesores_semanal.getItems().clear();
         rellenar_tablaProfesor_semanal(14);
 
     }
