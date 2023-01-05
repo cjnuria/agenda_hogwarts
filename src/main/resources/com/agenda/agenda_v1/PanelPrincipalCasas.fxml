@@ -29,7 +29,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="690.0" prefWidth="1040.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.agenda.agenda_v1.PanelPrincipalCasasController">
    <children>
-      <Pane fx:id="panelAlumnos" layoutX="-2.0" layoutY="-1.0" prefHeight="691.0" prefWidth="1044.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="-1.0">
+      <Pane fx:id="panelAlumnos" layoutX="-2.0" layoutY="-1.0" prefHeight="691.0" prefWidth="1044.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="-1.0">
          <children>
             <Pane fx:id="panelTareas1" layoutX="222.0" layoutY="-1.0" prefHeight="695.0" prefWidth="823.0" visible="false">
                <children>
@@ -434,7 +434,7 @@
                   </Pane>
                </children>
             </Pane>
-            <Pane fx:id="panelTareas" layoutX="221.0" layoutY="-1.0" prefHeight="695.0" prefWidth="823.0">
+            <Pane fx:id="panelTareas" layoutX="221.0" layoutY="-1.0" prefHeight="695.0" prefWidth="823.0" visible="false">
                <children>
                   <ImageView fitHeight="820.0" fitWidth="843.0" layoutY="-126.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -1162,7 +1162,7 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane fx:id="panelProfesores" layoutY="-1.0" prefHeight="695.0" prefWidth="1052.0" visible="false">
+      <Pane fx:id="panelProfesores" layoutY="-1.0" prefHeight="695.0" prefWidth="1052.0">
          <children>
             <Pane fx:id="_panelMenuLateralProfe" prefHeight="693.0" prefWidth="228.0">
                <children>
@@ -1213,7 +1213,7 @@
                   </Button>
                </children>
             </Pane>
-            <Pane fx:id="_panelSalaComunProfes" layoutX="223.0" prefHeight="695.0" prefWidth="831.0" style="-fx-background-color: white;" visible="false">
+            <Pane fx:id="_panelSalaComunProfes" layoutX="223.0" prefHeight="695.0" prefWidth="831.0" style="-fx-background-color: white;">
                <children>
                   <ImageView fitHeight="822.0" fitWidth="837.0" layoutX="-3.0" layoutY="-125.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -1241,12 +1241,14 @@
                         </LinearGradient>
                      </textFill>
                   </Label>
-                  <TableView layoutX="105.0" layoutY="192.0" prefHeight="276.0" prefWidth="612.0" tableMenuButtonVisible="true">
+                  <TableView fx:id="_tbprofesores_semanal" layoutX="105.0" layoutY="192.0" prefHeight="276.0" prefWidth="612.0" tableMenuButtonVisible="true">
                      <columns>
-                        <TableColumn prefWidth="145.5555419921875" text="Asignaturas" />
-                        <TableColumn prefWidth="161.77780151367188" text="Cursos" />
-                        <TableColumn prefWidth="127.111083984375" text="Tareas" />
-                        <TableColumn editable="false" minWidth="0.0" prefWidth="130.22222900390625" text="Fecha" />
+                        <TableColumn fx:id="_columP_tarea_nombre" prefWidth="79.33331298828125" text="Nombre" />
+                        <TableColumn fx:id="_columP_tarea_apellidos" prefWidth="122.66665649414062" text="Apellidos" />
+                        <TableColumn fx:id="_columP_tarea_cursos" prefWidth="112.0" text="Curso" />
+                        <TableColumn fx:id="_columP_tarea_tareas" editable="false" minWidth="0.0" prefWidth="121.99993896484375" text="Tareas" />
+                        <TableColumn fx:id="_columP_tarea_tipo" prefWidth="82.66668701171875" text="Tipo" />
+                        <TableColumn fx:id="_columP_tarea_fecha" prefWidth="88.0" text="Fecha" />
                      </columns>
                      <effect>
                         <Blend>

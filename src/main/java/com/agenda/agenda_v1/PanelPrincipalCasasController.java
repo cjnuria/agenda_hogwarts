@@ -311,6 +311,32 @@ public class PanelPrincipalCasasController implements Initializable {
     private TableColumn<tareas_profesores_objeto, String> _columTareasApellidos;
     @FXML
     private TableColumn<tareas_profesores_objeto, String> _columTareaTipo;
+    @FXML
+    private TableView<tareas_alumnos_objeto> _tbA_tareas;
+    @FXML
+    private TableColumn<tareas_alumnos_objeto, String> _columA_tareaAsignatura;
+    @FXML
+    private TableColumn<tareas_alumnos_objeto, String> _columA_tareaTipo;
+    @FXML
+    private TableColumn<tareas_alumnos_objeto, String> _columA_tareaNombre;
+    @FXML
+    private TableColumn<tareas_alumnos_objeto, String> _columA_tareafecha_fin;
+    @FXML
+    private TableColumn<tareas_alumnos_objeto, String> _columA_tareaArchivo;
+    @FXML
+    private TableColumn<tareas_profesores_objeto, String> _columP_tarea_nombre;
+    @FXML
+    private TableColumn<tareas_profesores_objeto, String> _columP_tarea_apellidos;
+    @FXML
+    private TableColumn<tareas_profesores_objeto, String> _columP_tarea_cursos;
+    @FXML
+    private TableColumn<tareas_profesores_objeto, String> _columP_tarea_tareas;
+    @FXML
+    private TableColumn<tareas_profesores_objeto, String> _columP_tarea_tipo;
+    @FXML
+    private TableColumn<tareas_profesores_objeto, String> _columP_tarea_fecha;
+    @FXML
+    private TableView<tareas_profesores_objeto> _tbprofesores_semanal;
 
     /**
      * Initializes the controller class.
@@ -327,13 +353,14 @@ public class PanelPrincipalCasasController implements Initializable {
         solo_combo_curos();
         _cbCursos.getItems().addAll("Primero", "Segundo", "Tercero", "Cuarto", "Quinto", "Sexto", "Séptimo");
         _cbCursos.setValue("Primero");
-//        _labelSesionProfesor.setText("3");
 
-//        
-        //y si hacemos un boton comprobar? que luego cambie por guardar o algo asi....
-        //como un añadir que solo comprueba y delspues guardar cambios
-        //con un boton añadir sacamos un alert que diga las asignaturas elegida y ahi contamos, si todo va bien y pusa si hacemos commit
-        //controlar clicks del raton
+        _tbTarea_correciones.setOnMouseClicked((MouseEvent mouseEvent) -> {
+            // Insertar aquí el código a ejecutar cuando se haga clic en el ratón
+            comprobar();
+        });
+        
+        rellenar_tablaProfesor_semanal(14);
+
     }
 
     //Método para controlar los click que se hacen al elegir asignaturas para poder bloquearlas al elegir 6
@@ -553,13 +580,15 @@ public class PanelPrincipalCasasController implements Initializable {
         vaciarPanelTodo();
         panelAlumnos.setVisible(true);
         panelTareas.setVisible(true);
-        totalAlumnos();
+        //totalAlumnos();
+        rellenar_tareas_alumnos(52);
     }
 
     @FXML
     private void cambiarSalaProfes() {
         vaciarPanelProfes();
         _panelSalaComunProfes.setVisible(true);
+        rellenar_tablaProfesor_semanal(14);
 
     }
 
@@ -583,8 +612,10 @@ public class PanelPrincipalCasasController implements Initializable {
     @FXML
     private void cambiarCorreccionesProfes() {
         vaciarPanelProfes();
+        _tbTarea_correciones.getItems().clear();
         _panelCorreccionesProfes.setVisible(true);
         rellenar_tabla_correcciones(14);
+
     }
 
     @FXML
@@ -1832,20 +1863,6 @@ public class PanelPrincipalCasasController implements Initializable {
         return obs;
     }
 
-    public ResultSet datos_tabla_correccion(int id_profesor) {
-        try {
-            PreparedStatement pst = conn.prepareStatement("SELECT * FROM tareas WHERE id_profesor = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            pst.setInt(1, id_profesor);
-            ResultSet resultado = pst.executeQuery();
-            return resultado;
-
-        } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        }
-
-    }
-
     public ResultSet datos_para_correcciones(int id_profesor) {
         try {
             PreparedStatement pst = conn.prepareStatement("SELECT estudiantes.nombre, estudiantes.apellidos, estudiantes.curso, tareas.nombre_tarea, tareas.tipo_tarea, tareas.fecha_fin\n"
@@ -1863,17 +1880,97 @@ public class PanelPrincipalCasasController implements Initializable {
 
     }
 
-    public ObservableList<tareas_profesores_objeto> rellenar_tareas_alumnos(int id_profesor) {
+    public ObservableList<tareas_alumnos_objeto> rellenar_tareas_alumnos(int id_estudiante) {
+
+        ObservableList<tareas_alumnos_objeto> obs = FXCollections.observableArrayList();
+        _columA_tareaAsignatura.setCellValueFactory(new PropertyValueFactory<>("asignatura"));
+        _columA_tareaTipo.setCellValueFactory(new PropertyValueFactory<>("tipo_tarea"));
+        _columA_tareaNombre.setCellValueFactory(new PropertyValueFactory<>("nombre_tarea"));
+        _columA_tareafecha_fin.setCellValueFactory(new PropertyValueFactory<>("fecha_fin"));
+        _columA_tareaArchivo.setCellValueFactory(new PropertyValueFactory<>("archivo"));
+
+        try {
+            ResultSet rs = datos_para_tareas_alumnos(id_estudiante);
+
+            while (rs.next()) {
+
+                String asignatura = rs.getString("nombre_asignatura");
+                String tipo_tarea = rs.getString("tipo_tarea");
+                String nombre_tarea = rs.getString("nombre_tarea");
+                String fecha_fin = rs.getString("fecha_fin");
+                String archivo = rs.getString("archivo");
+
+                tareas_alumnos_objeto e = new tareas_alumnos_objeto(asignatura, tipo_tarea, nombre_tarea, fecha_fin, archivo);
+                obs.add(e);
+                _tbA_tareas.getItems().addAll(e);
+
+                System.out.println("hola");
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return obs;
+    }
+
+    public void comprobar() {
+        if (_tbTarea_correciones.getSelectionModel().getSelectedItem() != null) {
+            tareas_profesores_objeto p = _tbTarea_correciones.getSelectionModel().getSelectedItem();
+            String nombre_alumno = p.getNombre();
+            String apellidos_alumno = p.getApellidos();
+            String nombreCompleto = nombre_alumno + " " + apellidos_alumno;
+            _tfTareas_alumno.setText(nombreCompleto);
+
+        } else {
+            System.out.println("no ha selecionado nada");
+        }
+    }
+
+    public ResultSet datos_para_tareas_alumnos(int id_estudiante) {
+        try {
+            PreparedStatement pst = conn.prepareStatement("SELECT asignaturas.nombre AS nombre_asignatura, tareas.nombre_tarea, tareas.tipo_tarea, tareas.fecha_fin, tareas.archivo\n"
+                    + "FROM alu_nurismy_agenda.asignaturas asignaturas, alu_nurismy_agenda.tareas tareas\n"
+                    + "WHERE \n"
+                    + "	tareas.id_asignatura = asignaturas.id_asignatura AND tareas.id_estudiante=?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            pst.setInt(1, id_estudiante);
+            ResultSet resultado = pst.executeQuery();
+            return resultado;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+
+    }
+
+    public ResultSet datos_tablaProfesores_semanal(int id_profesor) {
+        try {
+            PreparedStatement pst = conn.prepareStatement("SELECT estudiantes.nombre, estudiantes.apellidos, estudiantes.curso, tareas.nombre_tarea, tareas.tipo_tarea, tareas.fecha_fin\n"
+                    + "FROM alu_nurismy_agenda.estudiantes estudiantes, alu_nurismy_agenda.tareas tareas\n"
+                    + "WHERE \n"
+                    + "	tareas.id_estudiante = estudiantes.id_estudiante AND tareas.id_profesor = ? AND tareas.fecha_fin<CURRENT_DATE() +7;", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            pst.setInt(1, id_profesor);
+            ResultSet resultado = pst.executeQuery();
+            return resultado;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+
+    }
+
+    public ObservableList<tareas_profesores_objeto> rellenar_tablaProfesor_semanal(int id_profesor) {
 
         ObservableList<tareas_profesores_objeto> obs = FXCollections.observableArrayList();
-//        _colum.setCellValueFactory(new PropertyValueFactory<>("nombre"));
-        _columTareasApellidos.setCellValueFactory(new PropertyValueFactory<>("apellidos"));
-        _columTareasCursos.setCellValueFactory(new PropertyValueFactory<>("curso"));
-        _columTareasTareas.setCellValueFactory(new PropertyValueFactory<>("nombre_tarea"));
-        _columTareaTipo.setCellValueFactory(new PropertyValueFactory<>("tipo_tarea"));
-        _columTareasFechaFin.setCellValueFactory(new PropertyValueFactory<>("fecha_fin"));
+        _columP_tarea_nombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+        _columP_tarea_apellidos.setCellValueFactory(new PropertyValueFactory<>("apellidos"));
+        _columP_tarea_cursos.setCellValueFactory(new PropertyValueFactory<>("curso"));
+        _columP_tarea_tareas.setCellValueFactory(new PropertyValueFactory<>("nombre_tarea"));
+        _columP_tarea_tipo.setCellValueFactory(new PropertyValueFactory<>("tipo_tarea"));
+        _columP_tarea_fecha.setCellValueFactory(new PropertyValueFactory<>("fecha_fin"));
         try {
-            ResultSet rs = datos_para_correcciones(id_profesor);
+            ResultSet rs = datos_tablaProfesores_semanal(id_profesor);
 
             while (rs.next()) {
 
@@ -1885,11 +1982,10 @@ public class PanelPrincipalCasasController implements Initializable {
                 String fecha_fin = rs.getString("fecha_fin");
                 System.out.println(nombre);
 
-                tareas_profesores_objeto c = new tareas_profesores_objeto(nombre, apellidos, cursos, nombre_tarea, tipo_tarea, fecha_fin);
-                obs.add(c);
-                _tbTarea_correciones.getItems().addAll(c);
+                tareas_profesores_objeto f = new tareas_profesores_objeto(nombre, apellidos, cursos, nombre_tarea, tipo_tarea, fecha_fin);
+                obs.add(f);
+                _tbprofesores_semanal.getItems().addAll(f);
 
-                System.out.println("hola");
             }
 
         } catch (SQLException ex) {
