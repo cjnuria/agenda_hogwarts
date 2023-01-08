@@ -842,6 +842,7 @@ public class PanelPrincipalCasasController implements Initializable {
     @FXML
     private void GuardarDocumentoComentario() {
         String archivoElegido = _tfDocumentoSubir.getText();
+        String comentario_alumno = _tfComentario.getText();
 
         Path path = Paths.get("");
         String directoryName = path.toAbsolutePath().toString();
