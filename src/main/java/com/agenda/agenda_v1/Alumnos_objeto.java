@@ -16,12 +16,28 @@ public class Alumnos_objeto {
     public String curso;
     public String casa;
 
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+    public String dni;
+
     public Alumnos_objeto(String nombre, String apellidos, String curso, String casa) {
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.curso = curso;
         this.casa = casa;
     }
+
+    public Alumnos_objeto(String nombre, String apellidos, String dni) {
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.dni = dni;
+    }
+    
 
     public String getNombre() {
         return nombre;

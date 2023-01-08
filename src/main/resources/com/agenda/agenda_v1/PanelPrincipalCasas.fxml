@@ -8,6 +8,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
@@ -1213,7 +1215,7 @@
                   </Button>
                </children>
             </Pane>
-            <Pane fx:id="_panelSalaComunProfes" layoutX="223.0" prefHeight="695.0" prefWidth="831.0" style="-fx-background-color: white;">
+            <Pane fx:id="_panelSalaComunProfes" layoutX="223.0" prefHeight="695.0" prefWidth="831.0" style="-fx-background-color: white;" visible="false">
                <children>
                   <ImageView fitHeight="822.0" fitWidth="837.0" layoutX="-3.0" layoutY="-125.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -1263,37 +1265,34 @@
                         <Font name="Harrington" size="24.0" />
                      </font>
                   </Label>
-                  <ProgressBar layoutX="102.0" layoutY="569.0" prefHeight="18.0" prefWidth="128.0" progress="0.0" />
-                  <Label layoutX="128.0" layoutY="600.0" text="Trimestre 1">
+                  <Label layoutX="124.0" layoutY="584.0" text="Asistencia">
                      <font>
                         <Font name="Harrington" size="16.0" />
                      </font>
                   </Label>
-                  <Label layoutX="300.0" layoutY="600.0" text="Nota media">
+                  <Label layoutX="308.0" layoutY="584.0" text="Temario">
                      <font>
                         <Font name="Harrington" size="16.0" />
                      </font>
                   </Label>
-                  <Label layoutX="453.0" layoutY="600.0" text="Configuración">
+                  <Label layoutX="469.0" layoutY="584.0" text="Recursos">
                      <font>
                         <Font name="Harrington" size="16.0" />
                      </font>
                   </Label>
-                  <ProgressBar layoutX="439.0" layoutY="569.0" prefHeight="18.0" prefWidth="128.0" progress="0.0" />
-                  <ProgressBar layoutX="275.0" layoutY="569.0" prefHeight="18.0" prefWidth="128.0" progress="0.0" />
-                  <ImageView fitHeight="73.0" fitWidth="118.0" layoutX="111.0" layoutY="488.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="_iconPergamino" fitHeight="73.0" fitWidth="118.0" layoutX="108.0" layoutY="498.0" onMouseClicked="#cambiar_asistencia" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@imagenes/pngegg%20(1).png" />
+                        <Image url="@../../../img/otros/pergamino.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="92.0" fitWidth="128.0" layoutX="281.0" layoutY="479.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="_iconTemario" fitHeight="92.0" fitWidth="128.0" layoutX="302.0" layoutY="485.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@imagenes/libros.png" />
+                        <Image url="@../../../img/otros/temario.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="73.0" fitWidth="96.0" layoutX="466.0" layoutY="488.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="84.0" fitWidth="111.0" layoutX="451.0" layoutY="510.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@imagenes/recordadora_roja.png" />
+                        <Image url="@imagenes/5.png" />
                      </image>
                   </ImageView>
                </children>
@@ -1413,7 +1412,7 @@
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font></Button>
-                  <Button layoutX="571.0" layoutY="245.0" mnemonicParsing="false" text="+">
+                  <Button layoutX="571.0" layoutY="245.0" mnemonicParsing="false" onMouseClicked="#insertar_destinatarios" text="+">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font></Button>
@@ -1442,31 +1441,70 @@
                   <DatePicker fx:id="_dpTareas_fechaFin" layoutX="302.0" layoutY="376.0" prefHeight="25.0" prefWidth="248.0" />
                </children>
             </Pane>
-            <Pane fx:id="_panelCorreccionesProfes" layoutX="219.0" prefHeight="695.0" prefWidth="837.0" visible="false">
+            <Pane fx:id="_panelCorreccionesProfes" layoutX="219.0" prefHeight="695.0" prefWidth="837.0">
                <children>
                   <ImageView fitHeight="820.0" fitWidth="837.0" layoutX="6.0" layoutY="-125.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@imagenes/pngegg%20(51).png" />
                      </image>
                   </ImageView>
-                  <TableView fx:id="_tbTarea_correciones" layoutX="120.0" layoutY="171.0" prefHeight="276.0" prefWidth="612.0" tableMenuButtonVisible="true">
-                     <columns>
-                        <TableColumn fx:id="_columTareaNombre" prefWidth="75.0" text="Nombre" />
-                        <TableColumn fx:id="_columTareasApellidos" prefWidth="133.38299560546875" text="Apellidos" />
-                        <TableColumn fx:id="_columTareasCursos" prefWidth="108.61700439453125" text="Cursos" />
-                        <TableColumn fx:id="_columTareasTareas" prefWidth="125.8128662109375" text="Tareas" />
-                        <TableColumn fx:id="_columTareaTipo" prefWidth="69.14630126953125" text="Tipo" />
-                        <TableColumn fx:id="_columTareasFechaFin" editable="false" minWidth="0.0" prefWidth="97.33331298828125" text="Fecha" />
-                     </columns>
+                  <TabPane layoutX="94.0" layoutY="126.0" prefHeight="325.0" prefWidth="670.0" tabClosingPolicy="UNAVAILABLE">
+                    <tabs>
+                      <Tab text="Todas">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="239.0" prefWidth="699.0">
+                                 <children>
+                                    <TableView fx:id="_tbTarea_correciones" layoutX="29.0" layoutY="10.0" prefHeight="276.0" prefWidth="612.0" tableMenuButtonVisible="true">
+                                       <columns>
+                                          <TableColumn fx:id="_columTareaNombre" prefWidth="75.0" text="Nombre" />
+                                          <TableColumn fx:id="_columTareasApellidos" prefWidth="133.38299560546875" text="Apellidos" />
+                                          <TableColumn fx:id="_columTareasCursos" prefWidth="108.61700439453125" text="Cursos" />
+                                          <TableColumn fx:id="_columTareasTareas" prefWidth="125.8128662109375" text="Tareas" />
+                                          <TableColumn fx:id="_columTareaTipo" prefWidth="69.14630126953125" text="Tipo" />
+                                          <TableColumn fx:id="_columTareasFechaFin" editable="false" minWidth="0.0" prefWidth="97.33331298828125" text="Fecha" />
+                                       </columns>
+                                       <effect>
+                                          <Blend>
+                                             <topInput>
+                                                <SepiaTone />
+                                             </topInput>
+                                          </Blend>
+                                       </effect>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
+                        </content>
+                      </Tab>
+                      <Tab text="Pendientes">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <TableView fx:id="_tbTarea_correciones_pendientes" layoutX="29.0" layoutY="10.0" prefHeight="276.0" prefWidth="612.0" tableMenuButtonVisible="true">
+                                       <columns>
+                                          <TableColumn fx:id="_columTareaNombrePendientes" prefWidth="75.0" text="Nombre" />
+                                          <TableColumn fx:id="_columTareasApellidosPendientes" prefWidth="133.38299560546875" text="Apellidos" />
+                                          <TableColumn fx:id="_columTareasCursosPendientes" prefWidth="108.61700439453125" text="Cursos" />
+                                          <TableColumn fx:id="_columTareasTareasPendientes" prefWidth="125.8128662109375" text="Tareas" />
+                                          <TableColumn fx:id="_columTareaTipoPendientes" prefWidth="69.14630126953125" text="Tipo" />
+                                          <TableColumn fx:id="_columTareasFechaFinPendientes" editable="false" minWidth="0.0" prefWidth="97.33331298828125" text="Fecha" />
+                                       </columns>
+                                       <effect>
+                                          <Blend>
+                                             <topInput>
+                                                <SepiaTone />
+                                             </topInput>
+                                          </Blend>
+                                       </effect>
+                                    </TableView>
+                                 </children></AnchorPane>
+                        </content>
+                      </Tab>
+                    </tabs>
                      <effect>
-                        <Blend>
-                           <topInput>
-                              <SepiaTone />
-                           </topInput>
-                        </Blend>
+                        <SepiaTone />
                      </effect>
-                  </TableView>
-                  <Label layoutX="135.0" layoutY="44.0" text="Correcciones Pendientes">
+                  </TabPane>
+                  <Label layoutX="257.0" layoutY="47.0" text="Correcciones ">
                      <font>
                         <Font name="Harrington" size="55.0" />
                      </font>
@@ -1510,6 +1548,482 @@
                         <Font size="20.0" />
                      </font>
                   </Button>
+               </children>
+            </Pane>
+            <Pane fx:id="_panelAsistencia" layoutX="219.0" layoutY="-1.0" prefHeight="695.0" prefWidth="831.0" style="-fx-background-color: white;" visible="false">
+               <children>
+                  <ImageView fitHeight="830.0" fitWidth="891.0" layoutX="-8.0" layoutY="-135.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagenes/pngegg%20(51).png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="125.0" layoutY="34.0" text="Asistencia Alumnos">
+                     <font>
+                        <Font name="Harrington" size="55.0" />
+                     </font>
+                     <textFill>
+                        <LinearGradient endX="0.49211358873626043" endY="0.5173501577287066" startX="0.4921135526350244" startY="0.5993690746439744">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.8549019694328308" green="0.10588235408067703" blue="0.0235294122248888" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.8799999952316284" green="0.6487066745758057" blue="0.14959999918937683" opacity="0.9923858046531677" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                  </Label>
+                  <TableView fx:id="_tablaP_asistencia" layoutX="105.0" layoutY="240.0" prefHeight="228.0" prefWidth="612.0" tableMenuButtonVisible="true">
+                     <columns>
+                        <TableColumn fx:id="_columP_nombre" prefWidth="174.66665649414062" text="Nombre" />
+                        <TableColumn fx:id="_columP_apellidos" prefWidth="123.33331298828125" text="Apellidos" />
+                        <TableColumn fx:id="_columP_dni" prefWidth="157.77783203125" text="Dni" />
+                        <TableColumn fx:id="_columP_asistencia" minWidth="0.0" prefWidth="155.5555419921875" text="Asistencia" />
+                     </columns>
+                     <effect>
+                        <Blend>
+                           <topInput>
+                              <SepiaTone />
+                           </topInput>
+                        </Blend>
+                     </effect>
+                  </TableView>
+                  <Label layoutX="102.0" layoutY="124.0" underline="true">
+                     <font>
+                        <Font name="Harrington" size="24.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="269.0" layoutY="536.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="159.0" text="Guardar">
+                     <font>
+                        <Font name="Harrington" size="24.0" />
+                     </font>
+                  </Button>
+                  <Label layoutX="197.0" layoutY="147.0" text="Curso:">
+                     <font>
+                        <Font name="Harrington" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="200.0" layoutY="189.0" text="Casa:">
+                     <font>
+                        <Font name="Harrington" size="18.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="_comboP_AsistenciaCursos" layoutX="300.0" layoutY="143.0" prefHeight="25.0" prefWidth="228.0" />
+                  <ComboBox fx:id="_comboP_AsistenciaCasa" layoutX="300.0" layoutY="187.0" prefHeight="25.0" prefWidth="228.0" />
+               </children>
+            </Pane>
+            <Pane fx:id="_paneTemario" layoutX="223.0" prefHeight="695.0" prefWidth="831.0" style="-fx-background-color: white;" visible="false">
+               <children>
+                  <ImageView fitHeight="817.0" fitWidth="833.0" layoutX="1.0" layoutY="-118.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagenes/pngegg%20(51).png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="262.0" layoutY="49.0" text="Temario">
+                     <font>
+                        <Font name="Harrington" size="55.0" />
+                     </font>
+                     <textFill>
+                        <LinearGradient endX="0.49211358873626043" endY="0.5173501577287066" startX="0.4921135526350244" startY="0.5993690746439744">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.8549019694328308" green="0.10588235408067703" blue="0.0235294122248888" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.8799999952316284" green="0.6487066745758057" blue="0.14959999918937683" opacity="0.9923858046531677" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                  </Label>
+                  <Label layoutX="102.0" layoutY="124.0" underline="true">
+                     <font>
+                        <Font name="Harrington" size="24.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="269.0" layoutY="536.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="159.0" text="Guardar">
+                     <font>
+                        <Font name="Harrington" size="24.0" />
+                     </font>
+                  </Button>
+                  <Label layoutX="116.0" layoutY="170.0" prefHeight="27.0" prefWidth="96.0" text="Tema:">
+                     <font>
+                        <Font name="Harrington" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="118.0" layoutY="223.0" prefHeight="27.0" prefWidth="96.0" text="Unidad:">
+                     <font>
+                        <Font name="Harrington" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="116.0" layoutY="271.0" prefHeight="27.0" prefWidth="96.0" text="Subunidad:">
+                     <font>
+                        <Font name="Harrington" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="115.0" layoutY="325.0" prefHeight="27.0" prefWidth="124.0" text="Descripción:">
+                     <font>
+                        <Font name="Harrington" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="104.0" layoutY="479.0" prefHeight="27.0" prefWidth="124.0" text="Recursos:">
+                     <font>
+                        <Font name="Harrington" size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField layoutX="241.0" layoutY="224.0" prefHeight="25.0" prefWidth="274.0" />
+                  <TextField layoutX="241.0" layoutY="171.0" prefHeight="25.0" prefWidth="274.0" />
+                  <TextField layoutX="241.0" layoutY="272.0" prefHeight="25.0" prefWidth="274.0" />
+                  <TextArea layoutX="239.0" layoutY="325.0" prefHeight="127.0" prefWidth="274.0" />
+                  <TextField layoutX="239.0" layoutY="480.0" prefHeight="25.0" prefWidth="274.0" />
+                  <Button layoutX="538.0" layoutY="480.0" mnemonicParsing="false" text="+" />
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+      <Pane fx:id="panelAdministrador" layoutX="-2.0" layoutY="-1.0" prefHeight="695.0" prefWidth="1056.0" visible="false">
+         <children>
+            <Pane fx:id="panelTareas11" layoutX="222.0" layoutY="-1.0" prefHeight="695.0" prefWidth="823.0" visible="false">
+               <children>
+                  <ImageView fitHeight="820.0" fitWidth="837.0" layoutY="-124.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagenes/pngegg%20(51).png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="label_titulo11" layoutX="347.0" layoutY="46.0" prefHeight="62.0" prefWidth="174.0" text="Tareas">
+                     <font>
+                        <Font name="Harrington" size="50.0" />
+                     </font>
+                     <textFill>
+                        <LinearGradient endX="0.5236593180274361" endY="0.731861204002934" startX="0.5268138673403285" startY="0.5015773231674819">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.886274516582489" green="0.658823549747467" blue="0.14509804546833038" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.8549019694328308" green="0.10588235408067703" blue="0.0235294122248888" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                  </Label>
+                  <TableView layoutX="99.0" layoutY="138.0" prefHeight="199.0" prefWidth="625.0">
+                     <columns>
+                        <TableColumn prefWidth="157.99996948242188" text="Asignatura" />
+                        <TableColumn prefWidth="143.3333740234375" text="Tipo" />
+                        <TableColumn prefWidth="158.44442749023438" text="Nombre" />
+                        <TableColumn prefWidth="165.11114501953125" text="Fecha Entrega" />
+                     </columns>
+                     <effect>
+                        <SepiaTone />
+                     </effect>
+                  </TableView>
+                  <ImageView fitHeight="79.0" fitWidth="96.0" layoutX="157.0" layoutY="361.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagenes/reliquias.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="79.0" fitWidth="96.0" layoutX="157.0" layoutY="467.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagenes/pn5gegg%20(10).png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="296.0" layoutY="592.0" text="Guardar Cambios">
+                     <font>
+                        <Font name="Harrington" size="28.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="49.0" fitWidth="78.0" layoutX="161.0" layoutY="585.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagenes/llaveAlada.png" />
+                     </image>
+                  </ImageView>
+                  <TextArea layoutX="294.0" layoutY="457.0" prefHeight="92.0" prefWidth="214.0" />
+                  <TextField layoutX="294.0" layoutY="388.0" prefHeight="25.0" prefWidth="214.0" />
+                  <Button layoutX="521.0" layoutY="388.0" mnemonicParsing="false" onMouseClicked="#fileChooser" text="+" />
+               </children>
+            </Pane>
+            <ImageView fitHeight="719.0" fitWidth="1066.0" layoutX="43.0" layoutY="-20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../img/otros/despacho.jpg" />
+               </image>
+            </ImageView>
+            <Pane fx:id="panelMenuLateral1" layoutX="-4.0" layoutY="-9.0" prefHeight="693.0" prefWidth="221.0" style="-fx-background-color: white;">
+               <children>
+                  <ImageView fx:id="_imagen_bandera1" fitHeight="334.0" fitWidth="241.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../img/casas/bandera.png" />
+                     </image>
+                  </ImageView>
+                  <VBox layoutX="-3.0" layoutY="332.0" prefHeight="370.0" prefWidth="227.0">
+                     <children>
+                        <Button fx:id="_boton_alumnos_administrador" mnemonicParsing="false" onAction="#cambiarPanelSalaComun" prefHeight="143.0" prefWidth="227.0" styleClass="boton" text="Alumnos" textFill="#e2a825">
+                           <font>
+                              <Font name="Harrington" size="30.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="_boton_profesores_administrador" mnemonicParsing="false" onAction="#cambiarPanelAsignaturas" prefHeight="144.0" prefWidth="227.0" text="Profesores" textFill="#e2a825">
+                           <font>
+                              <Font name="Harrington" size="30.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="_boton_cerrar_sesion" mnemonicParsing="false" onAction="#cambiarPanelTareas" prefHeight="147.0" prefWidth="227.0" text="Cerrar Sesión" textFill="#e2a825">
+                           <font>
+                              <Font name="Harrington" size="30.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="_boton_salir" mnemonicParsing="false" onAction="#cambiarPanelNotas" prefHeight="141.0" prefWidth="227.0" text="Salir" textFill="#e2a825">
+                           <font>
+                              <Font name="Harrington" size="30.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </VBox>
+                  <Label fx:id="_labelSesionEstudiante1" layoutX="22.0" layoutY="6.0" prefHeight="17.0" prefWidth="72.0" text="LabelSesion1" />
+               </children>
+            </Pane>
+            <Pane fx:id="_panelAdministadorAlumnos" layoutX="225.0" layoutY="-7.0" prefHeight="699.0" prefWidth="835.0" style="-fx-background-color: white;" visible="false">
+               <children>
+                  <ImageView fitHeight="821.0" fitWidth="845.0" layoutX="-4.0" layoutY="-121.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagenes/pngegg%20(51).png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="125.0" layoutY="34.0" text="Administrar Alumnos">
+                     <font>
+                        <Font name="Harrington" size="55.0" />
+                     </font>
+                     <textFill>
+                        <LinearGradient endX="0.49211358873626043" endY="0.5173501577287066" startX="0.4921135526350244" startY="0.5993690746439744">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.8549019694328308" green="0.10588235408067703" blue="0.0235294122248888" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.8799999952316284" green="0.6487066745758057" blue="0.14959999918937683" opacity="0.9923858046531677" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                  </Label>
+                  <TableView layoutX="105.0" layoutY="192.0" prefHeight="276.0" prefWidth="612.0" tableMenuButtonVisible="true">
+                     <columns>
+                        <TableColumn prefWidth="145.5555419921875" text="Nombre" />
+                        <TableColumn prefWidth="161.77780151367188" text="Apellidos" />
+                        <TableColumn prefWidth="127.111083984375" text="Casa" />
+                        <TableColumn editable="false" minWidth="0.0" prefWidth="130.22222900390625" text="Curso" />
+                     </columns>
+                     <effect>
+                        <Blend>
+                           <topInput>
+                              <SepiaTone />
+                           </topInput>
+                        </Blend>
+                     </effect>
+                  </TableView>
+                  <Button layoutX="198.0" layoutY="551.0" mnemonicParsing="false" text="Modificar">
+                     <font>
+                        <Font name="Harrington" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="394.0" layoutY="550.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="107.0" text="Button">
+                     <font>
+                        <Font name="Harrington" size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+            </Pane>
+            <Pane fx:id="_panelAdministrador_profesor" layoutX="223.0" layoutY="1.0" prefHeight="705.0" prefWidth="850.0" visible="false">
+               <children>
+                  <ImageView fitHeight="814.0" fitWidth="838.0" layoutY="-119.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagenes/pngegg%20(51).png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="122.0" layoutY="56.0" prefHeight="62.0" prefWidth="601.0" text="Administrar Configuración Profesor">
+                     <font>
+                        <Font name="Harrington" size="36.0" />
+                     </font>
+                     <textFill>
+                        <LinearGradient endX="0.5331230404249125" endY="0.4637224350817947" startX="0.533123063740294" startY="0.47949520797007467">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.8549019694328308" green="0.10588235408067703" blue="0.0235294122248888" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.886274516582489" green="0.658823549747467" blue="0.14509804546833038" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                  </Label>
+                  <Label layoutX="109.0" layoutY="160.0" text="Nombre:">
+                     <font>
+                        <Font name="Harrington" size="24.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="_tfNombreEstudiante11" layoutX="309.0" layoutY="165.0" prefHeight="25.0" prefWidth="254.0" />
+                  <Label layoutX="107.0" layoutY="253.0" text="DNI:">
+                     <font>
+                        <Font name="Harrington" size="24.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="_tfApellidosEstudiante11" layoutX="309.0" layoutY="213.0" prefHeight="25.0" prefWidth="254.0" />
+                  <Label layoutX="109.0" layoutY="445.0" text="Asignatura:">
+                     <font>
+                        <Font name="Harrington" size="24.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="_tfEmailEstudiante11" layoutX="309.0" layoutY="352.0" prefHeight="25.0" prefWidth="254.0" />
+                  <Label layoutX="107.0" layoutY="208.0" text="Apellidos">
+                     <font>
+                        <Font name="Harrington" size="24.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="_tfDniEstudiante11" layoutX="309.0" layoutY="258.0" prefHeight="25.0" prefWidth="254.0" />
+                  <Label layoutX="111.0" layoutY="347.0" text="Email:">
+                     <font>
+                        <Font name="Harrington" size="24.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="_tfTelefonoEstudiante11" layoutX="309.0" layoutY="305.0" prefHeight="25.0" prefWidth="254.0" />
+                  <Label layoutX="107.0" layoutY="300.0" text="Teléfono:">
+                     <font>
+                        <Font name="Harrington" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="107.0" layoutY="397.0" text="F. Nacimiento:">
+                     <font>
+                        <Font name="Harrington" size="24.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="_tfFechaNacEstudiante11" layoutX="309.0" layoutY="402.0" prefHeight="25.0" prefWidth="254.0" />
+                  <Button fx:id="_boton_sala_comun111" layoutX="262.0" layoutY="597.0" mnemonicParsing="false" onMouseClicked="#altaEstudiante" prefHeight="57.0" prefWidth="286.0" styleClass="boton" text="Actualizar Datos" textFill="#e2a825">
+                     <font>
+                        <Font name="Harrington" size="30.0" />
+                     </font>
+                  </Button>
+                  <Label layoutX="107.0" layoutY="487.0" text="Contraseña:">
+                     <font>
+                        <Font name="Harrington" size="24.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="_tfPassEstudiante11" layoutX="309.0" layoutY="492.0" prefHeight="25.0" prefWidth="254.0" />
+                  <ComboBox fx:id="_cbCursos11" layoutX="308.0" layoutY="449.0" prefHeight="25.0" prefWidth="254.0" />
+               </children>
+            </Pane>
+            <Pane fx:id="_panelAdministradorConfiguracion" layoutX="220.0" layoutY="-1.0" prefHeight="705.0" prefWidth="850.0" visible="false">
+               <children>
+                  <ImageView fitHeight="814.0" fitWidth="838.0" layoutY="-119.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@imagenes/pngegg%20(51).png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="122.0" layoutY="56.0" prefHeight="62.0" prefWidth="444.0" text="Administrar Configuración">
+                     <font>
+                        <Font name="Harrington" size="36.0" />
+                     </font>
+                     <textFill>
+                        <LinearGradient endX="0.5331230404249125" endY="0.4637224350817947" startX="0.533123063740294" startY="0.47949520797007467">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.8549019694328308" green="0.10588235408067703" blue="0.0235294122248888" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.886274516582489" green="0.658823549747467" blue="0.14509804546833038" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                  </Label>
+                  <Label layoutX="109.0" layoutY="160.0" text="Nombre:">
+                     <font>
+                        <Font name="Harrington" size="24.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="_tfNombreEstudiante1" layoutX="309.0" layoutY="165.0" prefHeight="25.0" prefWidth="254.0" />
+                  <Label layoutX="107.0" layoutY="253.0" text="DNI:">
+                     <font>
+                        <Font name="Harrington" size="24.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="_tfApellidosEstudiante1" layoutX="309.0" layoutY="213.0" prefHeight="25.0" prefWidth="254.0" />
+                  <Label layoutX="109.0" layoutY="445.0" text="Curso:">
+                     <font>
+                        <Font name="Harrington" size="24.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="_tfEmailEstudiante1" layoutX="309.0" layoutY="352.0" prefHeight="25.0" prefWidth="254.0" />
+                  <Label layoutX="107.0" layoutY="208.0" text="Apellidos">
+                     <font>
+                        <Font name="Harrington" size="24.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="_tfDniEstudiante1" layoutX="309.0" layoutY="258.0" prefHeight="25.0" prefWidth="254.0" />
+                  <Label layoutX="111.0" layoutY="347.0" text="Email:">
+                     <font>
+                        <Font name="Harrington" size="24.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="_tfTelefonoEstudiante1" layoutX="309.0" layoutY="305.0" prefHeight="25.0" prefWidth="254.0" />
+                  <Label layoutX="107.0" layoutY="300.0" text="Teléfono:">
+                     <font>
+                        <Font name="Harrington" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="107.0" layoutY="397.0" text="F. Nacimiento:">
+                     <font>
+                        <Font name="Harrington" size="24.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="_tfFechaNacEstudiante1" layoutX="309.0" layoutY="402.0" prefHeight="25.0" prefWidth="254.0" />
+                  <ImageView fitHeight="92.0" fitWidth="102.0" layoutX="674.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagenes/WhatsApp%20Image%202022-12-08%20at%2017.45.47.jpeg" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="216.0" fitWidth="222.0" layoutX="620.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagenes/Untitl3ed.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="_boton_sala_comun11" layoutX="262.0" layoutY="597.0" mnemonicParsing="false" onMouseClicked="#altaEstudiante" prefHeight="57.0" prefWidth="286.0" styleClass="boton" text="Actualizar Datos" textFill="#e2a825">
+                     <font>
+                        <Font name="Harrington" size="30.0" />
+                     </font>
+                  </Button>
+                  <Label layoutX="107.0" layoutY="487.0" text="Contraseña:">
+                     <font>
+                        <Font name="Harrington" size="24.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="_tfPassEstudiante1" layoutX="309.0" layoutY="492.0" prefHeight="25.0" prefWidth="254.0" />
+                  <ComboBox fx:id="_cbCursos1" layoutX="308.0" layoutY="449.0" prefHeight="25.0" prefWidth="254.0" />
                </children>
             </Pane>
          </children>
