@@ -1023,6 +1023,7 @@ public class PanelPrincipalCasasController implements Initializable {
 
     @FXML
     private void GuardarDocumentoComentario() {
+        System.out.println(_tbA_tareas.getSelectionModel().getSelectedItem().getNombre_tarea());
         String archivoElegido = _tfDocumentoSubir.getText();
         String comentario_alumno = _tfComentario.getText();
 
