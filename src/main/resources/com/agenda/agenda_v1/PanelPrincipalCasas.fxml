@@ -573,60 +573,60 @@
                         <SepiaTone />
                      </effect>
                   </ComboBox>
-                  <ImageView fitHeight="42.0" fitWidth="64.0" layoutX="106.0" layoutY="483.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="_imagNotas1" fitHeight="42.0" fitWidth="64.0" layoutX="106.0" layoutY="483.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@imagenes/pngegg%20(5).png" />
                      </image></ImageView>
-                  <Label layoutX="189.0" layoutY="492.0" prefHeight="24.0" prefWidth="35.0" text="9,8">
+                  <Label fx:id="_labelNotas1" layoutX="189.0" layoutY="492.0" prefHeight="24.0" prefWidth="35.0" text="9,8">
                      <font>
                         <Font name="Harrington" size="20.0" />
                      </font></Label>
-                  <ImageView fitHeight="42.0" fitWidth="64.0" layoutX="106.0" layoutY="566.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="_imagNotas2" fitHeight="42.0" fitWidth="64.0" layoutX="106.0" layoutY="566.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@imagenes/pngegg%20(2).png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="525.0" layoutY="492.0" prefHeight="24.0" prefWidth="33.0" text="9,8">
+                  <Label fx:id="_labelNotas5" layoutX="525.0" layoutY="492.0" prefHeight="24.0" prefWidth="33.0" text="9,8">
                      <font>
                         <Font name="Harrington" size="20.0" />
                      </font>
                   </Label>
-                  <ImageView fitHeight="42.0" fitWidth="64.0" layoutX="455.0" layoutY="483.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="_imagNotas3" fitHeight="42.0" fitWidth="64.0" layoutX="455.0" layoutY="483.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@imagenes/png7egg%20(12).png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="190.0" layoutY="575.0" prefHeight="24.0" prefWidth="33.0" text="9,8">
+                  <Label fx:id="_labelNotas2" layoutX="190.0" layoutY="575.0" prefHeight="24.0" prefWidth="33.0" text="9,8">
                      <font>
                         <Font name="Harrington" size="20.0" />
                      </font>
                   </Label>
-                  <ImageView fitHeight="42.0" fitWidth="64.0" layoutX="283.0" layoutY="566.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="_imagNotas4" fitHeight="42.0" fitWidth="64.0" layoutX="283.0" layoutY="566.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@imagenes/escoba.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="361.0" layoutY="575.0" prefHeight="24.0" prefWidth="68.0" text="9,8">
+                  <Label fx:id="_labelNotas4" layoutX="361.0" layoutY="575.0" prefHeight="24.0" prefWidth="68.0" text="9,8">
                      <font>
                         <Font name="Harrington" size="20.0" />
                      </font>
                   </Label>
-                  <ImageView fitHeight="42.0" fitWidth="64.0" layoutX="283.0" layoutY="483.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="_imagNotas5" fitHeight="42.0" fitWidth="64.0" layoutX="283.0" layoutY="483.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@imagenes/libros.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="365.0" layoutY="492.0" prefHeight="24.0" prefWidth="68.0" text="9,8">
+                  <Label fx:id="_labelNotas3" layoutX="365.0" layoutY="492.0" prefHeight="24.0" prefWidth="68.0" text="9,8">
                      <font>
                         <Font name="Harrington" size="20.0" />
                      </font>
                   </Label>
-                  <Label layoutX="525.0" layoutY="575.0" prefHeight="24.0" prefWidth="33.0" text="9,8">
+                  <Label fx:id="_labelNotas6" layoutX="525.0" layoutY="575.0" prefHeight="24.0" prefWidth="33.0" text="9,8">
                      <font>
                         <Font name="Harrington" size="20.0" />
                      </font>
                   </Label>
-                  <ImageView fitHeight="42.0" fitWidth="64.0" layoutX="455.0" layoutY="566.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="_imagNotas6" fitHeight="42.0" fitWidth="64.0" layoutX="455.0" layoutY="566.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@imagenes/pngegg%20(7).png" />
                      </image>
