@@ -31,7 +31,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="690.0" prefWidth="1040.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.agenda.agenda_v1.PanelPrincipalCasasController">
    <children>
-      <Pane fx:id="panelAlumnos" layoutX="-2.0" layoutY="-1.0" prefHeight="691.0" prefWidth="1044.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="-1.0">
+      <Pane fx:id="panelAlumnos" layoutX="-2.0" layoutY="-1.0" prefHeight="691.0" prefWidth="1044.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="-1.0">
          <children>
             <Pane fx:id="panelTareas1" layoutX="222.0" layoutY="-1.0" prefHeight="695.0" prefWidth="823.0" visible="false">
                <children>
@@ -146,7 +146,7 @@
                   </Button>
                </children>
             </Pane>
-            <Pane fx:id="panelSalaComun" layoutX="225.0" layoutY="-3.0" prefHeight="695.0" prefWidth="816.0" style="-fx-background-color: white;" visible="false">
+            <Pane fx:id="panelSalaComun" layoutX="225.0" layoutY="-3.0" prefHeight="695.0" prefWidth="816.0" style="-fx-background-color: white;">
                <children>
                   <ImageView fitHeight="817.0" fitWidth="823.0" layoutX="-3.0" layoutY="-112.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -174,12 +174,13 @@
                         </LinearGradient>
                      </textFill>
                   </Label>
-                  <TableView layoutX="105.0" layoutY="192.0" prefHeight="276.0" prefWidth="612.0" tableMenuButtonVisible="true">
+                  <TableView fx:id="_tablaAlum_salaComun" layoutX="105.0" layoutY="192.0" prefHeight="276.0" prefWidth="612.0" tableMenuButtonVisible="true">
                     <columns>
-                      <TableColumn prefWidth="145.5555419921875" text="Asignaturas" />
-                      <TableColumn prefWidth="161.77780151367188" text="Profesor" />
-                        <TableColumn prefWidth="127.111083984375" text="Tareas" />
-                        <TableColumn editable="false" minWidth="0.0" prefWidth="130.22222900390625" text="Fecha" />
+                      <TableColumn fx:id="_columAluSema_asignatura" prefWidth="145.5555419921875" text="Asignaturas" />
+                      <TableColumn fx:id="_columAluSema_profesor" prefWidth="161.77780151367188" text="Profesor" />
+                        <TableColumn fx:id="_columAluSema_tareas" prefWidth="110.0" text="Tareas" />
+                        <TableColumn fx:id="_columAluSema_tipo" prefWidth="92.6666259765625" text="Tipo" />
+                        <TableColumn fx:id="_columAluSema_fecha" editable="false" minWidth="0.0" prefWidth="130.22222900390625" text="Fecha" />
                     </columns>
                      <effect>
                         <Blend>
@@ -515,9 +516,9 @@
                   <Button layoutX="533.0" layoutY="494.0" mnemonicParsing="false" text="+" />
                </children>
             </Pane>
-            <Pane fx:id="panelNotas" layoutX="221.0" layoutY="-3.0" prefHeight="695.0" prefWidth="823.0" visible="false">
+            <Pane fx:id="panelNotas" layoutX="221.0" layoutY="-3.0" prefHeight="695.0" prefWidth="823.0">
                <children>
-                  <ImageView fitHeight="817.0" fitWidth="823.0" layoutY="-112.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="806.0" fitWidth="838.0" layoutY="-112.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@imagenes/pngegg%20(51).png" />
                      </image>
@@ -543,12 +544,13 @@
                         </LinearGradient>
                      </textFill>
                   </Label>
-                  <TableView layoutX="106.0" layoutY="108.0" prefHeight="276.0" prefWidth="612.0" tableMenuButtonVisible="true">
+                  <TableView fx:id="_tablaAlu_notas" layoutX="106.0" layoutY="108.0" prefHeight="276.0" prefWidth="612.0" tableMenuButtonVisible="true">
                     <columns>
-                      <TableColumn prefWidth="180.0" text="Asignatura" />
-                      <TableColumn prefWidth="143.33328247070312" text="Tipo" />
-                        <TableColumn prefWidth="163.3333740234375" text="Nombre" />
-                        <TableColumn prefWidth="124.66668701171875" text="Nota" />
+                      <TableColumn fx:id="_columAlu_notas_asignatura" prefWidth="117.99996948242188" text="Asignatura" />
+                      <TableColumn fx:id="_columAlu_notas_tipo" prefWidth="108.0" text="Tipo" />
+                        <TableColumn fx:id="_columAlu_notas_nombre" prefWidth="138.6666259765625" text="Nombre" />
+                        <TableColumn fx:id="_columAlu_notas_nota" prefWidth="78.6666259765625" text="Nota" />
+                        <TableColumn fx:id="_columAlu_notas" prefWidth="153.3333740234375" text="Comentario" />
                     </columns>
                      <effect>
                         <SepiaTone />
@@ -566,7 +568,7 @@
                         </ColorAdjust>
                      </effect>
                   </Label>
-                  <ComboBox layoutX="339.0" layoutY="408.0" prefHeight="25.0" prefWidth="254.0">
+                  <ComboBox fx:id="_jcFilto_notas_alumno" layoutX="339.0" layoutY="408.0" prefHeight="25.0" prefWidth="254.0">
                      <effect>
                         <SepiaTone />
                      </effect>
@@ -1164,7 +1166,7 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane fx:id="panelProfesores" layoutY="-1.0" prefHeight="695.0" prefWidth="1052.0">
+      <Pane fx:id="panelProfesores" layoutY="-1.0" prefHeight="695.0" prefWidth="1052.0" visible="false">
          <children>
             <Pane fx:id="_panelMenuLateralProfe" prefHeight="693.0" prefWidth="228.0">
                <children>
