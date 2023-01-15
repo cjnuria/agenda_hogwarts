@@ -67,6 +67,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.Window;
+import com.agenda.agenda_v1.Delta;
 
 /**
  * FXML Controller class
@@ -465,6 +466,32 @@ public class PanelPrincipalCasasController implements Initializable {
     private TableColumn<notas_objeto, String> _columAlu_notas_nota;
     @FXML
     private TableColumn<notas_objeto, String> _columAlu_notas;
+    @FXML
+    private ComboBox<?> _jcFilto_notas_alumno;
+    @FXML
+    private ImageView _imagNotas1;
+    @FXML
+    private Label _labelNotas1;
+    @FXML
+    private ImageView _imagNotas2;
+    @FXML
+    private Label _labelNotas5;
+    @FXML
+    private ImageView _imagNotas3;
+    @FXML
+    private Label _labelNotas2;
+    @FXML
+    private ImageView _imagNotas4;
+    @FXML
+    private Label _labelNotas4;
+    @FXML
+    private ImageView _imagNotas5;
+    @FXML
+    private Label _labelNotas3;
+    @FXML
+    private Label _labelNotas6;
+    @FXML
+    private ImageView _imagNotas6;
 
     /**
      * Initializes the controller class.
@@ -475,6 +502,7 @@ public class PanelPrincipalCasasController implements Initializable {
         panelLog.setVisible(true);
         connect();
 
+        filtras_notas_asignatura(53);
         controlcheck();
         controTareas();
         solo_combo_casa();
@@ -499,6 +527,20 @@ public class PanelPrincipalCasasController implements Initializable {
                 abrirCasaLogin();
             }
         });
+
+    }
+
+    public void panepressed(MouseEvent me) {
+        Stage a = (Stage) ((Node) me.getSource()).getScene().getWindow();
+        Delta.x = a.getX() - me.getScreenX();
+        Delta.y = a.getY() - me.getScreenY();
+
+    }
+
+    public void panedraged(MouseEvent me) {
+        Stage b = (Stage) ((Node) me.getSource()).getScene().getWindow();
+        b.setX(Delta.x + me.getScreenX());
+        b.setY(Delta.y + me.getScreenY());
 
     }
 
@@ -722,8 +764,13 @@ public class PanelPrincipalCasasController implements Initializable {
         vaciarPanelTodo();
         panelAlumnos.setVisible(true);
         panelNotas.setVisible(true);
+
+        _jcFilto_notas_alumno.getItems().clear();
+        notas_por_asignatura(53);
+
         _tablaAlu_notas.getItems().clear();
         rellenar_notas_alumnos(53);//?????????????????????????
+
     }
 
     @FXML
@@ -733,7 +780,7 @@ public class PanelPrincipalCasasController implements Initializable {
         panelTareas.setVisible(true);
         //totalAlumnos();
         _tbA_tareas.getItems().clear();
-        rellenar_tareas_alumnos(52);
+        rellenar_tareas_alumnos(53);
     }
 
     @FXML
@@ -2544,6 +2591,138 @@ public class PanelPrincipalCasasController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
             return null;
+        }
+
+    }
+
+    public void notas_por_asignatura(int id_estudiante) {
+        ResultSet rs;
+        ArrayList a = new ArrayList();
+        _jcFilto_notas_alumno.getItems().clear();
+        try {
+            PreparedStatement pst = conn.prepareStatement("SELECT DISTINCT asignaturas.nombre \n"
+                    + "FROM alu_nurismy_agenda.asigEstu asigEstu, alu_nurismy_agenda.asigProf asigProf, alu_nurismy_agenda.asignaturas asignaturas\n"
+                    + "WHERE \n"
+                    + "	asigEstu.id_asigProf = asigProf.id_asigProf\n"
+                    + "	AND asigProf.id_asignatura = asignaturas.id_asignatura AND id_estudiante = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            pst.setInt(1, id_estudiante);
+            rs = pst.executeQuery();
+
+            while (rs.next()) {
+                String asignatura = rs.getString("nombre");
+                String c = asignatura;
+                a.add(c);
+            }
+
+            _jcFilto_notas_alumno.getItems().addAll(a);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public void filtras_notas_asignatura(int id_estudiante) {
+
+        _jcFilto_notas_alumno.valueProperty().addListener((ov, p1, p2) -> {
+            _tablaAlu_notas.getItems().clear();
+            String asignatura = p2.toString();
+            System.out.println(asignatura);
+            rellenar_notas_alumnos_por_asignaturas(id_estudiante, asignatura);
+
+        });
+    }
+
+    public ResultSet rellenar_tabla_notas_alumno_por_asignatura(int id_estudiante, String p2) {
+
+        int id_asignatura = obtener_id_asignatura(p2);
+        if (_jcFilto_notas_alumno.getItems().toString().equals(null)) {
+            rellenar_notas_alumnos(id_estudiante);
+        }
+
+        try {
+            PreparedStatement pst = conn.prepareStatement("SELECT DISTINCT tareas.id_asignatura, tareas.tipo_tarea, "
+                    + "tareas.nombre_tarea, notas.nota,  notas.comentario_profesor FROM alu_nurismy_agenda.asignaturas asignaturas, "
+                    + "alu_nurismy_agenda.notas notas, alu_nurismy_agenda.tareas tareas WHERE notas.id_tarea = tareas.id_tarea "
+                    + "AND tareas.id_estudiante =? AND tareas.id_asignatura = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            pst.setInt(1, id_estudiante);
+            pst.setInt(2, id_asignatura);
+            ResultSet rs = pst.executeQuery();
+            return rs;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+
+    }
+
+    public ObservableList<notas_objeto> rellenar_notas_alumnos_por_asignaturas(int id_estudiante, String p2) {
+
+        ObservableList<notas_objeto> obs = FXCollections.observableArrayList();
+        _columAlu_notas_asignatura.setCellValueFactory(new PropertyValueFactory<>("asignatura"));
+        _columAlu_notas_tipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
+        _columAlu_notas_nombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+        _columAlu_notas_nota.setCellValueFactory(new PropertyValueFactory<>("nota"));
+        _columAlu_notas.setCellValueFactory(new PropertyValueFactory<>("comentario"));
+
+        try {
+            ResultSet rs = rellenar_tabla_notas_alumno_por_asignatura(id_estudiante, p2);
+            System.out.println(p2);
+
+            while (rs.next()) {
+
+                int id_asignatura = rs.getInt("id_asignatura");
+                String asignatura = obtener_nombre_asignatura(id_asignatura);
+                System.out.println(asignatura);
+                String nombre_tarea = rs.getString("nombre_tarea");
+                String tipo_tarea = rs.getString("tipo_tarea");
+                String nota = rs.getString("nota");
+                String comentario = rs.getString("comentario_profesor");
+                notas_objeto t = new notas_objeto(asignatura, tipo_tarea, nombre_tarea, nota, comentario);
+                obs.add(t);
+                _tablaAlu_notas.getItems().addAll(t);
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return obs;
+    }
+
+    public void cambiarImagenAsignaturas_Notas() {
+
+        Image image1 = new Image(getClass().getResourceAsStream("/img/escudos/verde.png"));
+        ImageView imageView1 = new ImageView(image1);
+        Image image2 = new Image(getClass().getResourceAsStream("/img/casas/banderaVerde.png"));
+        ImageView imageView2 = new ImageView(image2);
+        //panelMenuLateral.getChildren().add(imageView1);//para coger nodo hijo y añadir nueva imagen
+        _imgEScudo.setImage(image1);
+        _imagen_bandera.setImage(image2);
+
+    }
+
+    @FXML
+    public void subirTarea_Alumno() {
+
+        try {
+            String comentarioAlumno = _tfComentario.getText();
+            String rutaTarea = _tfDocumentoSubir.getText();
+            
+            System.out.println(_tbA_tareas.getSelectionModel().getSelectedItem().getNombre_tarea());
+            
+            
+            PreparedStatement pst = conn.prepareStatement("UPDATE alu_nurismy_agenda.tareas\n"
+                    + "SET entregado=1, archivo=?, comentario_alumno=?\n"
+                    + "WHERE id_tarea=?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            pst.setString(1, rutaTarea);
+            pst.setString(2, comentarioAlumno);
+            pst.setInt(3, 0);
+            ResultSet rs = pst.executeQuery();
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
