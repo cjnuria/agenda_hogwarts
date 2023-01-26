@@ -2693,7 +2693,7 @@ public class PanelPrincipalCasasController implements Initializable {
         return obs;
     }
 
-    public void cambiarImagenAsignaturas_Notas() {
+    public void cambiarImagenAsignaturas_Notas() {//¿¿¿¿¿¿¿esto para que era??????????
 
         Image image1 = new Image(getClass().getResourceAsStream("/img/escudos/verde.png"));
         ImageView imageView1 = new ImageView(image1);
@@ -2720,7 +2720,7 @@ public class PanelPrincipalCasasController implements Initializable {
                     + "WHERE id_tarea=?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             pst.setString(1, rutaTarea);
             pst.setString(2, comentarioAlumno);
-            pst.setInt(3, 0);
+            pst.setInt(3, 0);//modificar el id tarea para que lo coja automático al seleccionar la tarea
             ResultSet rs = pst.executeQuery();
         } catch (SQLException ex) {
             Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
@@ -2729,3 +2729,36 @@ public class PanelPrincipalCasasController implements Initializable {
     }
 
 }
+
+/*
+
+----------------------ERRORES PARA ARREGLAR-------------------------------------
+
+----PROFESORES----
+*correcciones duplica en pendientes al pinchar en correcciones del menu
+*error en filtrar al entrar ya que 'p2' es null
+*cursos sigue dando dos errores y tmbn carga datos duplicados al pinchar en cursos
+*la sala comun no carga nada
+*cargar todos los datos con el id de inicio
+
+----ALUMNOS----
+*al entrar como alumno sigue cargando la ventana de configuracion vacía, hay que poner los datos del alumno actual que entra
+*sala comun no carga nada
+*en tareas hay que hacer que se suba la ruta del archivo y que le cargue al profe en su tabla con algo para descargar el archivo
+*coger comentario del alumno y ponerlo en la tabla del profe de correcciones
+*en notas da error en java al entrar ya que p2 está vacío... no es error pero hacer un catch
+*añadir botón para añadir una foto y que cargue en su sitio (donde aparezco yo...)
+
+
+----GENERAL----
+*hacer el chat entre profe y alumno (recargar cada 15 segundo)
+*hacer documentacion (los param y esas cosas)
+*control de datos (de todos)
+*en registro aunque no pulses el sombrero te lleva a Gryffindor, no dar opción.
+*si cierras sesión realmente no cierra, solo vuelve a la pantalla de inicio
+*modificar el botón atrás, la daga de dobby
+*¿?¿?¿?¿?¿buscar un gif con más resolución para el inicio?¿?¿?¿?¿?
+*quitar todos los souts
+
+*/
+
