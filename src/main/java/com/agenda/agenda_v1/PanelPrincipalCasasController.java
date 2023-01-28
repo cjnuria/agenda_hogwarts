@@ -2725,7 +2725,7 @@ public class PanelPrincipalCasasController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+// hola ismael
     }
 
 }
