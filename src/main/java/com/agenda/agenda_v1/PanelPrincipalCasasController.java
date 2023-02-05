@@ -762,6 +762,7 @@ public class PanelPrincipalCasasController implements Initializable {
     @FXML
     private void cambiarPanelNotas(ActionEvent event) {
         vaciarPanelTodo();
+
         panelAlumnos.setVisible(true);
         panelNotas.setVisible(true);
 
@@ -770,7 +771,7 @@ public class PanelPrincipalCasasController implements Initializable {
 
         _tablaAlu_notas.getItems().clear();
         rellenar_notas_alumnos(53);//?????????????????????????
-
+        cambiarImagenAsignaturas_Notas(53);//??????????????????????????
     }
 
     @FXML
@@ -2612,8 +2613,10 @@ public class PanelPrincipalCasasController implements Initializable {
             while (rs.next()) {
                 String asignatura = rs.getString("nombre");
                 String c = asignatura;
+
                 a.add(c);
             }
+            a.add(0, "Todas");
 
             _jcFilto_notas_alumno.getItems().addAll(a);
 
@@ -2629,7 +2632,12 @@ public class PanelPrincipalCasasController implements Initializable {
             _tablaAlu_notas.getItems().clear();
             String asignatura = p2.toString();
             System.out.println(asignatura);
-            rellenar_notas_alumnos_por_asignaturas(id_estudiante, asignatura);
+            if (asignatura.equals("Todas")) {
+                rellenar_notas_alumnos(id_estudiante);
+            } else {
+                rellenar_notas_alumnos_por_asignaturas(id_estudiante, asignatura);
+
+            }
 
         });
     }
@@ -2693,15 +2701,134 @@ public class PanelPrincipalCasasController implements Initializable {
         return obs;
     }
 
-    public void cambiarImagenAsignaturas_Notas() {//¿¿¿¿¿¿¿esto para que era??????????
+    public void cambiarImagenAsignaturas_Notas(int id_estudiante) {
 
-        Image image1 = new Image(getClass().getResourceAsStream("/img/escudos/verde.png"));
+        ArrayList asignaturas = new ArrayList();
+
+        asignaturas = array_asignaturas_del_alumno(id_estudiante);
+        System.out.println(asignaturas.get(0).toString().toLowerCase());
+        System.out.println("estamos en notas");
+        Image image1 = new Image(getClass().getResourceAsStream("/img/asignaturas/" + asignaturas.get(0).toString().toLowerCase() + ".png"));
         ImageView imageView1 = new ImageView(image1);
-        Image image2 = new Image(getClass().getResourceAsStream("/img/casas/banderaVerde.png"));
+        Image image2 = new Image(getClass().getResourceAsStream("/img/asignaturas/" + asignaturas.get(1).toString().toLowerCase() + ".png"));
         ImageView imageView2 = new ImageView(image2);
-        //panelMenuLateral.getChildren().add(imageView1);//para coger nodo hijo y añadir nueva imagen
-        _imgEScudo.setImage(image1);
-        _imagen_bandera.setImage(image2);
+
+        Image image3 = new Image(getClass().getResourceAsStream("/img/asignaturas/" + asignaturas.get(2).toString().toLowerCase() + ".png"));
+        ImageView imageView3 = new ImageView(image3);
+
+        Image image4 = new Image(getClass().getResourceAsStream("/img/asignaturas/" + asignaturas.get(3).toString().toLowerCase() + ".png"));
+        ImageView imageView4 = new ImageView(image4);
+
+        Image image5 = new Image(getClass().getResourceAsStream("/img/asignaturas/" + asignaturas.get(4).toString().toLowerCase() + ".png"));
+        ImageView imageView5 = new ImageView(image5);
+
+        Image image6 = new Image(getClass().getResourceAsStream("/img/asignaturas/" + asignaturas.get(5).toString().toLowerCase() + ".png"));
+        ImageView imageView6 = new ImageView(image6);
+
+        _imagNotas1.setImage(image1);
+        int id_asignatura1 = obtener_id_asignatura(asignaturas.get(0).toString());
+        float nota = devolver_media_notas(id_asignatura1, id_estudiante);
+        _labelNotas1.setText(String.valueOf(nota));
+        _imagNotas2.setImage(image2);
+        int id_asignatura2 = obtener_id_asignatura(asignaturas.get(1).toString());
+        _labelNotas2.setText(String.valueOf(devolver_media_notas(id_asignatura2, id_estudiante)));
+        _imagNotas3.setImage(image3);
+        int id_asignatura3 = obtener_id_asignatura(asignaturas.get(2).toString());
+        _labelNotas3.setText(String.valueOf(devolver_media_notas(id_asignatura3, id_estudiante)));
+        _imagNotas4.setImage(image4);
+        int id_asignatura4 = obtener_id_asignatura(asignaturas.get(3).toString());
+        _labelNotas4.setText(String.valueOf(devolver_media_notas(id_asignatura4, id_estudiante)));
+        _imagNotas5.setImage(image5);
+        int id_asignatura5 = obtener_id_asignatura(asignaturas.get(4).toString());
+        _labelNotas5.setText(String.valueOf(devolver_media_notas(id_asignatura5, id_estudiante)));
+        _imagNotas6.setImage(image6);
+        int id_asignatura6 = obtener_id_asignatura(asignaturas.get(5).toString());
+        _labelNotas6.setText(String.valueOf(devolver_media_notas(id_asignatura6, id_estudiante)));
+
+    }
+
+    public float devolver_media_notas(int id_asignatura, int id_estudiante) {
+        float notas_total;
+
+        ResultSet rs;
+        try {
+            PreparedStatement pst = conn.prepareStatement("SELECT notas.*, tareas.*,SUM(nota) as suma_notas\n"
+                    + "FROM alu_nurismy_agenda.notas notas, alu_nurismy_agenda.tareas tareas\n"
+                    + "WHERE notas.id_tarea = tareas.id_tarea AND tareas.id_estudiante =? AND tareas.id_asignatura =?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            pst.setInt(1, id_estudiante);
+            pst.setInt(2, id_asignatura);
+            rs = pst.executeQuery();
+            if (!rs.first()) {
+                return 0;
+            } else {
+                notas_total = rs.getFloat("suma_notas");
+                float numero_notas = devolver_numero_notas(id_asignatura, id_estudiante);
+                if (numero_notas == 0) {
+                    return 0;
+                } else {
+                    float media = notas_total / numero_notas;
+                    return media;
+                }
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
+        }
+
+    }
+
+    public float devolver_numero_notas(int id_asignatura, int id_estudiante) {
+        float notas_total;
+
+        ResultSet rs;
+        try {
+            PreparedStatement pst = conn.prepareStatement("SELECT notas.*, tareas.*,COUNT(nota) as numero_notas \n"
+                    + "FROM alu_nurismy_agenda.notas notas, alu_nurismy_agenda.tareas tareas\n"
+                    + "WHERE notas.id_tarea = tareas.id_tarea AND tareas.id_estudiante =? AND tareas.id_asignatura =?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            pst.setInt(1, id_estudiante);
+            pst.setInt(2, id_asignatura);
+            rs = pst.executeQuery();
+            if (!rs.first()) {
+                return 0;
+            } else {
+                notas_total = rs.getFloat("numero_notas");
+                return notas_total;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
+        }
+
+    }
+
+    public ArrayList array_asignaturas_del_alumno(int id_estudiante) {
+        ResultSet rs;
+        ArrayList a = new ArrayList();
+
+        try {
+            PreparedStatement pst = conn.prepareStatement("SELECT DISTINCT asignaturas.nombre \n"
+                    + "FROM alu_nurismy_agenda.asigEstu asigEstu, alu_nurismy_agenda.asigProf asigProf, alu_nurismy_agenda.asignaturas asignaturas\n"
+                    + "WHERE \n"
+                    + "	asigEstu.id_asigProf = asigProf.id_asigProf\n"
+                    + "	AND asigProf.id_asignatura = asignaturas.id_asignatura AND id_estudiante = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            pst.setInt(1, id_estudiante);
+            rs = pst.executeQuery();
+
+            while (rs.next()) {
+                String asignatura = rs.getString("nombre");
+                String c = asignatura;
+
+                a.add(c);
+            }
+            return a;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
 
     }
 
@@ -2711,10 +2838,9 @@ public class PanelPrincipalCasasController implements Initializable {
         try {
             String comentarioAlumno = _tfComentario.getText();
             String rutaTarea = _tfDocumentoSubir.getText();
-            
+
             System.out.println(_tbA_tareas.getSelectionModel().getSelectedItem().getNombre_tarea());
-            
-            
+
             PreparedStatement pst = conn.prepareStatement("UPDATE alu_nurismy_agenda.tareas\n"
                     + "SET entregado=1, archivo=?, comentario_alumno=?\n"
                     + "WHERE id_tarea=?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
@@ -2725,7 +2851,7 @@ public class PanelPrincipalCasasController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
         }
-// hola ismael
+
     }
 
 }
@@ -2760,5 +2886,4 @@ public class PanelPrincipalCasasController implements Initializable {
 *¿?¿?¿?¿?¿buscar un gif con más resolución para el inicio?¿?¿?¿?¿?
 *quitar todos los souts
 *asd
-*/
-
+ */
