@@ -516,7 +516,7 @@
                   <Button layoutX="533.0" layoutY="494.0" mnemonicParsing="false" text="+" />
                </children>
             </Pane>
-            <Pane fx:id="panelNotas" layoutX="221.0" layoutY="-3.0" prefHeight="695.0" prefWidth="823.0">
+            <Pane fx:id="panelNotas" layoutX="221.0" layoutY="-3.0" prefHeight="695.0" prefWidth="823.0" visible="false">
                <children>
                   <ImageView fitHeight="806.0" fitWidth="838.0" layoutY="-112.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -727,7 +727,7 @@
                   <ComboBox fx:id="_cbCursos" layoutX="308.0" layoutY="449.0" prefHeight="25.0" prefWidth="254.0" />
                </children>
             </Pane>
-            <Pane fx:id="paneAsignaturasIndividual" layoutX="218.0" layoutY="-1.0" prefHeight="695.0" prefWidth="823.0" visible="false">
+            <Pane fx:id="paneAsignaturasIndividual" layoutX="218.0" layoutY="-1.0" prefHeight="695.0" prefWidth="823.0">
                <children>
                   <ImageView fitHeight="817.0" fitWidth="823.0" layoutY="-112.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -774,26 +774,16 @@
                         <Font size="22.0" />
                      </font>
                   </Label>
-                  <TableView fx:id="_tablaAsignaturaIndividual" layoutX="93.0" layoutY="162.0" prefHeight="276.0" prefWidth="612.0" tableMenuButtonVisible="true">
-                     <columns>
-                        <TableColumn prefWidth="145.5555419921875" text="Asignaturas" />
-                        <TableColumn prefWidth="161.77780151367188" text="Profesor" />
-                        <TableColumn prefWidth="127.111083984375" text="Tareas" />
-                        <TableColumn editable="false" minWidth="0.0" prefWidth="130.22222900390625" text="Fecha" />
-                     </columns>
-                     <effect>
-                        <Blend>
-                           <topInput>
-                              <SepiaTone />
-                           </topInput>
-                        </Blend>
-                     </effect>
-                  </TableView>
                   <ImageView fitHeight="78.0" fitWidth="81.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#atrasAsignatura" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../img/otros/atras.png" />
                      </image>
                   </ImageView>
+                  <TextArea fx:id="_taTemario" layoutX="118.0" layoutY="148.0" prefHeight="304.0" prefWidth="601.0">
+                     <effect>
+                        <SepiaTone />
+                     </effect>
+                  </TextArea>
                </children>
             </Pane>
             <Pane fx:id="panelSelecionAsignatura" layoutX="222.0" layoutY="10.0" prefHeight="695.0" prefWidth="854.0" visible="false">

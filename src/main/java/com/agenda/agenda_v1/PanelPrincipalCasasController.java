@@ -68,6 +68,8 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.Window;
 import com.agenda.agenda_v1.Delta;
+import javafx.scene.effect.BoxBlur;
+import javafx.scene.effect.GaussianBlur;
 
 /**
  * FXML Controller class
@@ -174,8 +176,6 @@ public class PanelPrincipalCasasController implements Initializable {
     private Label _notaMediaAsignatura;
     @FXML
     private Label _tipoAsignatura;
-    @FXML
-    private TableView<?> _tablaAsignaturaIndividual;
     @FXML
     private ImageView _imagenAsignatura;
     @FXML
@@ -492,6 +492,8 @@ public class PanelPrincipalCasasController implements Initializable {
     private Label _labelNotas6;
     @FXML
     private ImageView _imagNotas6;
+    @FXML
+    private TextArea _taTemario;
 
     /**
      * Initializes the controller class.
@@ -680,8 +682,11 @@ public class PanelPrincipalCasasController implements Initializable {
         ImageView imageView1 = new ImageView(image1);
         Image image2 = new Image(getClass().getResourceAsStream("/img/casas/banderaAmarilla.png"));
         ImageView imageView2 = new ImageView(image2);
+
         //panelMenuLateral.getChildren().add(imageView1);//para coger nodo hijo y añadir nueva imagen
         _imgEScudo.setImage(image1);
+        imageView1.setDisable(true);
+
         panelMenuLateral.getStylesheets().clear();
         panelMenuLateral.getStylesheets().add("/css/CssAmarillo.css");
         _imagen_bandera.setImage(image2);
@@ -757,6 +762,7 @@ public class PanelPrincipalCasasController implements Initializable {
         vaciarPanelTodo();
         panelAlumnos.setVisible(true);
         panelAsignaturas.setVisible(true);
+        iconosPanelAsignaturas(53);
     }
 
     @FXML
@@ -1462,7 +1468,8 @@ public class PanelPrincipalCasasController implements Initializable {
         a.add(_checkHistoria);
         a.add(_checkPociones);
         a.add(_checkVuelo);
-
+        //esto hace quer al desactivar todos porque has llegado al maximo de 6 seleccionadas
+        //te deje seguir editando las que si has seleccionado, para poder desmarcarlas y elegir otra
         for (int i = 0; i < 9; i++) {
             if (a.get(i).isSelected()) {
                 a.get(i).setDisable(false);
@@ -2832,7 +2839,6 @@ public class PanelPrincipalCasasController implements Initializable {
 
     }
 
-    @FXML
     public void subirTarea_Alumno() {
 
         try {
@@ -2850,6 +2856,44 @@ public class PanelPrincipalCasasController implements Initializable {
             ResultSet rs = pst.executeQuery();
         } catch (SQLException ex) {
             Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public void iconosPanelAsignaturas(int id_estudiante) {
+
+        ArrayList asignaturas = new ArrayList();
+        asignaturas = array_asignaturas_del_alumno(id_estudiante);
+
+        ArrayList asignaturas2 = new ArrayList();
+        for (int i = 0; i > asignaturas.size(); i++) {
+            String primeraLetra = asignaturas.get(i).toString().substring(0, 1);
+            String primeraLetraMayuscula = primeraLetra.toUpperCase();
+            String strModificado = primeraLetraMayuscula + asignaturas.get(i).toString().substring(1);
+            asignaturas2.add("_asignatura" + strModificado);
+        }
+
+        ArrayList<ImageView> a = new ArrayList();
+
+        a.add(_asignaturaAdivinacion);
+        a.add(_asignaturaPociones);
+        a.add(_asignaturaRunas);
+        a.add(_asignaturaVuelo);
+        a.add(_asignaturaTransformaciones);
+        a.add(_asignaturaHistoria);
+        a.add(_asignaturaDefensa);
+        a.add(_asignaturaCriaturas);
+        a.add(_asignaturaEncantamientos);
+
+        for (int z = 0; z < asignaturas2.size(); z++) {
+            String aaaa = a.get(z).getId().toString();
+            String bbb = asignaturas2.get(z).toString();
+            if (aaaa.equals(bbb)) {
+                System.out.println(a.get(z).getId().toString());
+                a.get(z).setVisible(true);
+            }else{
+                a.get(z).setVisible(false);
+            }
         }
 
     }
