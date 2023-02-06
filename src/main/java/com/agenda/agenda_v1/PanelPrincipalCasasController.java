@@ -68,6 +68,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.Window;
 import com.agenda.agenda_v1.Delta;
+import javafx.event.EventHandler;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.effect.GaussianBlur;
 
@@ -511,6 +512,7 @@ public class PanelPrincipalCasasController implements Initializable {
         solo_combo_curos();
         _cbCursos.getItems().addAll("Primero", "Segundo", "Tercero", "Cuarto", "Quinto", "Sexto", "Séptimo");
         _cbCursos.setValue("Primero");
+        label_casa_seleccion.setText("");
 
         _tbTarea_correciones.setOnMouseClicked((MouseEvent mouseEvent) -> {
             // Insertar aquí el código a ejecutar cuando se haga clic en el ratón
@@ -527,6 +529,28 @@ public class PanelPrincipalCasasController implements Initializable {
         labelPass.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 abrirCasaLogin();
+            }
+        });
+        botonSalirAlumno1.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Stage stage = (Stage) botonSalirAlumno1.getScene().getWindow();
+                stage.close();
+
+                try {
+                    App.loadFXML(DB_URL)
+                    
+                    
+                    Parent root = FXMLLoader.load(getClass().getResource("PanelPrincipalCasas.fxml"));
+                    Stage nuevaStage = new Stage();
+                    nuevaStage.setScene(new Scene(root));
+                    nuevaStage.initStyle(StageStyle.UNDECORATED);
+                    nuevaStage.setWidth(858);
+                    nuevaStage.setHeight(458);
+                    nuevaStage.show();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -801,7 +825,8 @@ public class PanelPrincipalCasasController implements Initializable {
 
     @FXML
     private void cambiarTareasProfes() {
-
+        _cbTareas_cursos.getItems().clear();
+        _cbTarea_casa.getItems().clear();
         vaciarPanelProfes();
         _panelAsignaerTareasProfes.setVisible(true);
         _cbTareas_cursos.getItems().addAll("Primero", "Segundo", "Tercero", "Cuarto", "Quinto", "Sexto", "Séptimo");
@@ -820,6 +845,7 @@ public class PanelPrincipalCasasController implements Initializable {
     private void cambiarCorreccionesProfes() {
         vaciarPanelProfes();
         _tbTarea_correciones.getItems().clear();
+        _tbTarea_correciones_pendientes.getItems().clear();
         _panelCorreccionesProfes.setVisible(true);
         rellenar_tabla_correcciones(14);
         rellenar_tabla_correccionesPendientes(14);
@@ -832,7 +858,8 @@ public class PanelPrincipalCasasController implements Initializable {
         _cbCursos.setValue("Primero");
         vaciarPanelProfes();
         _panelCursosProfes.setVisible(true);
-        int id_profesor = id_profesor_Con_dni(_labelSesionProfesor.getText());
+        int id_profesor = id_profesor_Con_dni("Minerva");
+        _tablaProfesor_cursos.getItems().clear();
         int id_asigProf = id_profesor_obtener_asifprof(id_profesor);
         rellenar_tabla(7);//????????????????????????????????????????'
     }
@@ -945,6 +972,7 @@ public class PanelPrincipalCasasController implements Initializable {
     }
 
     public void pulsarCasas() {
+
         SecureRandom generador = new SecureRandom();
         int i = generador.nextInt(4);
         switch (i) {
@@ -970,19 +998,24 @@ public class PanelPrincipalCasasController implements Initializable {
     private void anden934() {
 
         String casa = label_casa_seleccion.getText();
-        switch (casa) {
-            case "GRYFFINDOR":
-                cambiarImagenGr();
-                break;
-            case "SLYTHERIN":
-                cambiarImagenSl();
-                break;
-            case "HAFFLEPUFF":
-                cambiarImagenHu();
-                break;
-            case "RAVENCLAW":
-                cambiarImagenRa();
-                break;
+        if (casa.equals("")) {
+            Jopane("No has selecionado ninguna casa", "Error de seleción");
+        } else {
+            switch (casa) {
+                case "GRYFFINDOR":
+                    cambiarImagenGr();
+                    break;
+                case "SLYTHERIN":
+                    cambiarImagenSl();
+                    break;
+                case "HAFFLEPUFF":
+                    cambiarImagenHu();
+                    break;
+                case "RAVENCLAW":
+                    cambiarImagenRa();
+                    break;
+            }
+
         }
 
     }
@@ -1186,13 +1219,7 @@ public class PanelPrincipalCasasController implements Initializable {
     //ARREGLAR PARA CERRAR SESIÓN DE VERDAD, REINICIAR TODOS LOS VALORES O ALGO ASI
     @FXML
     private void cerrarSesion(MouseEvent event) {
-        Window win = App.getScene().getWindow();
-        win.setWidth(858);
-        win.setHeight(458);
-        vaciarPanelTodo();
-        panelLog.setVisible(true);
-        borrarTodo();
-
+        
     }
 
     public void borrarTodo() {
@@ -2626,6 +2653,7 @@ public class PanelPrincipalCasasController implements Initializable {
             a.add(0, "Todas");
 
             _jcFilto_notas_alumno.getItems().addAll(a);
+            _jcFilto_notas_alumno.getSelectionModel().select(0);
 
         } catch (SQLException ex) {
             Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
@@ -2637,9 +2665,14 @@ public class PanelPrincipalCasasController implements Initializable {
 
         _jcFilto_notas_alumno.valueProperty().addListener((ov, p1, p2) -> {
             _tablaAlu_notas.getItems().clear();
-            String asignatura = p2.toString();
-            System.out.println(asignatura);
-            if (asignatura.equals("Todas")) {
+            String asignatura;
+            if (p2 == null) {
+                asignatura = "Todas";
+            } else {
+                asignatura = p2.toString();
+            }
+
+            if (asignatura.equals("Todas") || asignatura == (null)) {
                 rellenar_notas_alumnos(id_estudiante);
             } else {
                 rellenar_notas_alumnos_por_asignaturas(id_estudiante, asignatura);
@@ -2891,7 +2924,7 @@ public class PanelPrincipalCasasController implements Initializable {
             if (aaaa.equals(bbb)) {
                 System.out.println(a.get(z).getId().toString());
                 a.get(z).setVisible(true);
-            }else{
+            } else {
                 a.get(z).setVisible(false);
             }
         }
@@ -2905,18 +2938,18 @@ public class PanelPrincipalCasasController implements Initializable {
 ----------------------ERRORES PARA ARREGLAR-------------------------------------
 
 ----PROFESORES----
-*correcciones duplica en pendientes al pinchar en correcciones del menu
-*error en filtrar al entrar ya que 'p2' es null
-*cursos sigue dando dos errores y tmbn carga datos duplicados al pinchar en cursos
-*la sala comun no carga nada
+
+
+
+
 *cargar todos los datos con el id de inicio
 
 ----ALUMNOS----
 *al entrar como alumno sigue cargando la ventana de configuracion vacía, hay que poner los datos del alumno actual que entra
-*sala comun no carga nada
+
 *en tareas hay que hacer que se suba la ruta del archivo y que le cargue al profe en su tabla con algo para descargar el archivo
 *coger comentario del alumno y ponerlo en la tabla del profe de correcciones
-*en notas da error en java al entrar ya que p2 está vacío... no es error pero hacer un catch
+
 *añadir botón para añadir una foto y que cargue en su sitio (donde aparezco yo...)
 
 
@@ -2924,7 +2957,7 @@ public class PanelPrincipalCasasController implements Initializable {
 *hacer el chat entre profe y alumno (recargar cada 15 segundo)
 *hacer documentacion (los param y esas cosas)
 *control de datos (de todos)
-*en registro aunque no pulses el sombrero te lleva a Gryffindor, no dar opción.
+
 *si cierras sesión realmente no cierra, solo vuelve a la pantalla de inicio
 *modificar el botón atrás, la daga de dobby
 *¿?¿?¿?¿?¿buscar un gif con más resolución para el inicio?¿?¿?¿?¿?

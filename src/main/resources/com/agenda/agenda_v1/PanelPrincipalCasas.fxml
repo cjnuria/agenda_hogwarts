@@ -139,7 +139,7 @@
                      </font>
                   </Button>
                   <Label fx:id="_labelSesionEstudiante" layoutX="22.0" layoutY="6.0" prefHeight="17.0" prefWidth="72.0" text="LabelSesion1" />
-                  <Button fx:id="botonSalirAlumno1" layoutX="57.0" layoutY="347.0" mnemonicParsing="false" onMouseClicked="#cerrarSesion" text="Cerrar Sesión" textFill="#e2a825">
+                  <Button fx:id="botonSalirAlumno1" layoutX="57.0" layoutY="347.0" mnemonicParsing="false" text="Cerrar Sesión" textFill="#e2a825">
                      <font>
                         <Font size="14.0" />
                      </font>
