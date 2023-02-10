@@ -69,6 +69,7 @@ import javafx.stage.StageStyle;
 import javafx.stage.Window;
 import com.agenda.agenda_v1.Delta;
 import javafx.event.EventHandler;
+import javafx.scene.control.TableCell;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.effect.GaussianBlur;
 
@@ -418,8 +419,6 @@ public class PanelPrincipalCasasController implements Initializable {
     @FXML
     private TableColumn<Alumnos_objeto, String> _columP_apellidos;
     @FXML
-    private TableColumn<Alumnos_objeto, String> _columP_asistencia;
-    @FXML
     private ComboBox<String> _comboP_AsistenciaCursos;
     @FXML
     private ComboBox<String> _comboP_AsistenciaCasa;
@@ -495,6 +494,8 @@ public class PanelPrincipalCasasController implements Initializable {
     private ImageView _imagNotas6;
     @FXML
     private TextArea _taTemario;
+    @FXML
+    private TableColumn<Alumnos_objeto, String> columP_asistencia2;
 
     /**
      * Initializes the controller class.
@@ -510,6 +511,9 @@ public class PanelPrincipalCasasController implements Initializable {
         controTareas();
         solo_combo_casa();
         solo_combo_curos();
+
+        filtrar_alumnos_asistencia_curso(7);
+        filtrar_alumnos_asistencia_casa(7);
         _cbCursos.getItems().addAll("Primero", "Segundo", "Tercero", "Cuarto", "Quinto", "Sexto", "Séptimo");
         _cbCursos.setValue("Primero");
         label_casa_seleccion.setText("");
@@ -529,28 +533,6 @@ public class PanelPrincipalCasasController implements Initializable {
         labelPass.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 abrirCasaLogin();
-            }
-        });
-        botonSalirAlumno1.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                Stage stage = (Stage) botonSalirAlumno1.getScene().getWindow();
-                stage.close();
-
-                try {
-                    App.loadFXML(DB_URL)
-                    
-                    
-                    Parent root = FXMLLoader.load(getClass().getResource("PanelPrincipalCasas.fxml"));
-                    Stage nuevaStage = new Stage();
-                    nuevaStage.setScene(new Scene(root));
-                    nuevaStage.initStyle(StageStyle.UNDECORATED);
-                    nuevaStage.setWidth(858);
-                    nuevaStage.setHeight(458);
-                    nuevaStage.show();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
             }
         });
 
@@ -1219,7 +1201,17 @@ public class PanelPrincipalCasasController implements Initializable {
     //ARREGLAR PARA CERRAR SESIÓN DE VERDAD, REINICIAR TODOS LOS VALORES O ALGO ASI
     @FXML
     private void cerrarSesion(MouseEvent event) {
-        
+        Window win = App.getScene().getWindow();
+        win.setWidth(858);
+        win.setHeight(458);
+        vaciarPanelTodo();
+        panelLog.setVisible(true);
+        borrarTodo();
+        imagenPulsaSombrero.setVisible(true);
+        labelPulsaSombrero1.setVisible(true);
+        labelPulsaSombrero2.setVisible(true);
+        imagenNombreCasa.setVisible(false);
+        label_casa_seleccion.setVisible(false);
     }
 
     public void borrarTodo() {
@@ -1366,6 +1358,30 @@ public class PanelPrincipalCasasController implements Initializable {
             if (!resultado.first()) {
 
                 Jopane("No se han encontrado datos", "Error");
+                return -1;
+            } else {
+                int id = resultado.getInt("id_asigProf");
+                return id;
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            return -1;
+        }
+
+    }
+
+    public int obtener_id_asigProf_por_idProfesor(int id_profesor) {
+        ResultSet resultado;
+        try {
+            PreparedStatement pst = conn.prepareStatement("SELECT * FROM asigProf WHERE id_profesor = ? ", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            pst.setInt(1, id_profesor);
+            resultado = pst.executeQuery();
+
+            if (!resultado.first()) {
+
+                Jopane("No se han encontrado datos", "Error en el id_profesor");
                 return -1;
             } else {
                 int id = resultado.getInt("id_asigProf");
@@ -2282,36 +2298,32 @@ public class PanelPrincipalCasasController implements Initializable {
         return obs;
     }
 
-    //metodo rellenar comboxs asistencia de curso y casa
-    public void rellenar_comboAsistencia() {
-
-    }
-
     //metodo para  rellenar tabla asistencia alumnos
     public ObservableList<Alumnos_objeto> rellenar_tabla_asistencia(int id_profesor) {
-
+        _tablaP_asistencia.getItems().clear();
         ObservableList<Alumnos_objeto> obs = FXCollections.observableArrayList();
         _columP_nombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         _columP_apellidos.setCellValueFactory(new PropertyValueFactory<>("apellidos"));
-        _columP_asistencia.setCellValueFactory(new PropertyValueFactory<>("asistencia"));
+        _columP_dni.setCellValueFactory(new PropertyValueFactory<>("dni"));
 
-        ObservableList<String> asistencia = FXCollections.observableArrayList("Falta", "Retraso", "Presente");
-        // combo box dentro de la tabla 
-        _columP_asistencia.setCellFactory(ComboBoxTableCell.forTableColumn(asistencia));
+        //esta es la PUTA LINEA para poner un PUTO COMBOBOX DE MIERDA dentro de la columna de una tabla (2 horas...)
+        columP_asistencia2.setCellFactory(c -> new ComboBoxTableCell<>("Presente", "Ausente", "Retraso"));
+
         String nombre = null;
+        Alumnos_objeto p = null;
         try {
             ResultSet rs = datos_asistencia(7);
             while (rs.next()) {
                 int id = rs.getInt("id_estudiante");
-                ResultSet rst = totalAlumnos_porId(id);
+                ResultSet rst = datosAlumnos_porId(id);
                 while (rst.next()) {
                     nombre = rst.getString("nombre");
+                    String apellidos = rst.getString("apellidos");
+                    String dni = rst.getString("dni");
+                    p = new Alumnos_objeto(nombre, apellidos, dni);
+                    obs.add(p);
                 }
 
-                String apellidos = rst.getString("apellidos");
-                String dni = rst.getString("dni");
-                Alumnos_objeto p = new Alumnos_objeto(nombre, apellidos, dni);
-                obs.add(p);
                 _tablaP_asistencia.getItems().addAll(p);
 
             }
@@ -2321,6 +2333,106 @@ public class PanelPrincipalCasasController implements Initializable {
             Jopane("Error", "Error al rellenar la tabla asistencias");
         }
         return obs;
+    }
+
+    //==========================metodo rellenar datos asistencia en tabla===============================
+    public void filtrar_alumnos_asistencia_curso(int id_asigProf) {
+
+        _comboP_AsistenciaCursos.valueProperty().addListener((ov, p1, p2) -> {
+            if (_comboP_AsistenciaCasa.getValue() == null) {
+
+                rellenar_tabla_asistencia(id_asigProf);
+
+            } else {
+                String casa = _comboP_AsistenciaCasa.getValue().toString();
+                rellenar_tabla_asistencia_casaCurso(id_asigProf, p2, casa);
+            }
+
+            System.out.println(p2);
+        });
+
+    }
+
+    public void filtrar_alumnos_asistencia_casa(int id_asigProf) {
+
+        _comboP_AsistenciaCasa.valueProperty().addListener((ov, p1, p2) -> {
+            if (_comboP_AsistenciaCursos.getValue() == null) {
+
+                rellenar_tabla_asistencia(id_asigProf);
+
+            } else {
+                String curso = _comboP_AsistenciaCursos.getValue().toString();
+                rellenar_tabla_asistencia_casaCurso(id_asigProf, curso, p2);
+            }
+
+            System.out.println(p2);
+        });
+
+    }
+
+    public void rellenar_tabla_asistencia_casaCurso(int id_asigProf, String curso, String casa) {
+        Alumnos_objeto p = null;
+        _tablaP_asistencia.getItems().clear();
+        try {
+            ObservableList<Alumnos_objeto> obs = FXCollections.observableArrayList();
+            _columP_nombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+            _columP_apellidos.setCellValueFactory(new PropertyValueFactory<>("apellidos"));
+            _columP_dni.setCellValueFactory(new PropertyValueFactory<>("dni"));
+//            columP_asistencia2.setCellFactory(c -> new ComboBoxTableCell<>("Presente", "Ausente", "Retraso"));
+//
+//            columP_asistencia2.getColumns().add(columP_asistencia2);
+
+            curso = _comboP_AsistenciaCursos.getValue().toString();
+            casa = _comboP_AsistenciaCasa.getValue().toString();
+
+            if (curso == null || casa == null) {
+                rellenar_tabla_asistencia(id_asigProf);
+            } else {
+                ResultSet rs = alumnos_segun_curso_asistencia(id_asigProf, curso, casa);
+
+                while (rs.next()) {
+                    int id = rs.getInt("id_estudiante");
+                    ResultSet rst = datosAlumnos_porId(id);
+                    while (rst.next()) {
+                        String nombre = rst.getString("nombre");
+                        String apellidos = rst.getString("apellidos");
+                        String dni = rst.getString("dni");
+                        p = new Alumnos_objeto(nombre, apellidos, dni);
+                        obs.add(p);
+                    }
+
+                    _tablaP_asistencia.getItems().addAll(p);
+                }
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    //==========================metodo rellenar tabla asistencia combo cursos===============================
+    public ResultSet alumnos_segun_curso_asistencia(int id_asigProf, String curso, String casa) {
+        ResultSet rs;
+        ArrayList a = new ArrayList();
+        try {
+            PreparedStatement pst = conn.prepareStatement("SELECT estudiantes.* \n"
+                    + "FROM alu_nurismy_agenda.estudiantes\n"
+                    + "WHERE id_estudiante IN (SELECT id_estudiante\n"
+                    + "FROM alu_nurismy_agenda.asigEstu\n"
+                    + "WHERE (id_asigProf) IN (?))AND  estudiantes.curso=? AND estudiantes.casa=?;", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            pst.setInt(1, id_asigProf);
+            pst.setString(2, curso);
+            pst.setString(3, casa);
+            rs = pst.executeQuery();
+
+            return rs;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+
     }
 
     //==========================metodo rellenar datos asistencia===============================
@@ -2343,15 +2455,18 @@ public class PanelPrincipalCasasController implements Initializable {
     //=========icono asistencia sala comun profesores=======================
     @FXML
     public void cambiar_asistencia() {
+        _comboP_AsistenciaCursos.getItems().clear();
+        _comboP_AsistenciaCasa.getItems().clear();
         _comboP_AsistenciaCursos.getItems().addAll("Primero", "Segundo", "Tercero", "Cuarto", "Quinto", "Sexto", "Séptimo");
         _comboP_AsistenciaCasa.getItems().addAll("Gryffindor", "Slytherin", "Hafflepuff", "Ravenclaw");
         vaciarPanelTodo();
+        _tablaP_asistencia.getItems().clear();
         panelProfesores.setVisible(true);
         _panelAsistencia.setVisible(true);
-        rellenar_tabla_asistencia(7);//???????????????????????????
+//        rellenar_tabla_asistencia(7);//???????????????????????????
     }
 
-    public ResultSet totalAlumnos_porId(int id_estudiante) {
+    public ResultSet datosAlumnos_porId(int id_estudiante) {
         try {
             ResultSet rs;
             PreparedStatement pst = conn.prepareStatement("SELECT * FROM estudiantes WHERE id_estudiante=?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
@@ -2931,6 +3046,37 @@ public class PanelPrincipalCasasController implements Initializable {
 
     }
 
+    //==========================Guardar datos de asistencia de la tabla asistencia===============================
+    @FXML
+    private void guardar_Asistencias_Alumnos(MouseEvent event) {
+        int id_profesor = 14;//??????????????
+        try {
+            int id_estudiante, id_asigprof;
+            String estado;
+
+            
+
+            for (int i = 0; i < _tablaP_asistencia.getItems().size(); i++) {
+                System.out.println(_tablaP_asistencia.getItems().get(i).dni);
+                id_estudiante = obtner_id_estudiante(_tablaP_asistencia.getItems().get(i).dni);
+                id_asigprof = obtener_id_asigProf_por_idProfesor(id_profesor);
+                
+                estado = _tablaP_asistencia.getSelectionModel().getSelectedItem().toString();
+                System.out.println(estado);
+
+                PreparedStatement pst = conn.prepareStatement("INSERT INTO alu_nurismy_agenda.asistencia (id_estudiante, id_asigProf, estado) VALUES(?,?,?);", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+                pst.setInt(1, id_estudiante);
+                pst.setInt(2, id_asigprof);
+                pst.setString(3, estado);
+
+                pst.executeUpdate();
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 }
 
 /*
@@ -2939,15 +3085,16 @@ public class PanelPrincipalCasasController implements Initializable {
 
 ----PROFESORES----
 
-
-
-
 *cargar todos los datos con el id de inicio
 
+*guardar datos del combobox asistencia
+
 ----ALUMNOS----
+
 *al entrar como alumno sigue cargando la ventana de configuracion vacía, hay que poner los datos del alumno actual que entra
 
 *en tareas hay que hacer que se suba la ruta del archivo y que le cargue al profe en su tabla con algo para descargar el archivo
+
 *coger comentario del alumno y ponerlo en la tabla del profe de correcciones
 
 *añadir botón para añadir una foto y que cargue en su sitio (donde aparezco yo...)
@@ -2955,12 +3102,13 @@ public class PanelPrincipalCasasController implements Initializable {
 
 ----GENERAL----
 *hacer el chat entre profe y alumno (recargar cada 15 segundo)
+
 *hacer documentacion (los param y esas cosas)
+
 *control de datos (de todos)
 
-*si cierras sesión realmente no cierra, solo vuelve a la pantalla de inicio
 *modificar el botón atrás, la daga de dobby
-*¿?¿?¿?¿?¿buscar un gif con más resolución para el inicio?¿?¿?¿?¿?
+
 *quitar todos los souts
-*asd
+
  */

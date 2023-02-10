@@ -4,41 +4,29 @@
  */
 package com.agenda.agenda_v1;
 
-import java.util.Date;
-
 /**
  *
- * @author Ismael
+ * @author ismae
  */
-public class Alumnos_objeto {
+public class Alumnos_asistencia_objeto {
     public String nombre;
     public String apellidos;
-    public String curso;
-    public String casa;
-    
+    public String dni;
     public String estado;
 
-    public String getDni() {
-        return dni;
-    }
-
-    public void setDni(String dni) {
-        this.dni = dni;
-    }
-    public String dni;
-
-    public Alumnos_objeto(String nombre, String apellidos, String curso, String casa) {
+    public Alumnos_asistencia_objeto(String nombre, String apellidos, String dni, String estado) {
         this.nombre = nombre;
         this.apellidos = apellidos;
-        this.curso = curso;
-        this.casa = casa;
+        this.dni = dni;
+        this.estado = estado;
     }
 
-    public Alumnos_objeto(String nombre, String apellidos, String dni) {
+    public Alumnos_asistencia_objeto(String nombre, String apellidos, String dni) {
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.dni = dni;
     }
+    
     
 
     public String getNombre() {
@@ -57,32 +45,21 @@ public class Alumnos_objeto {
         this.apellidos = apellidos;
     }
 
-    public String getCurso() {
-        return curso;
+    public String getDni() {
+        return dni;
     }
 
-    public void setCurso(String curso) {
-        this.curso = curso;
-    }
-
-    public String getCasa() {
-        return casa;
-    }
-
-    public void setCasa(String casa) {
-        this.casa = casa;
+    public void setDni(String dni) {
+        this.dni = dni;
     }
 
     public String getEstado() {
-        
-        
         return estado;
     }
 
     public void setEstado(String estado) {
         this.estado = estado;
     }
-
     
     
 }

@@ -139,14 +139,14 @@
                      </font>
                   </Button>
                   <Label fx:id="_labelSesionEstudiante" layoutX="22.0" layoutY="6.0" prefHeight="17.0" prefWidth="72.0" text="LabelSesion1" />
-                  <Button fx:id="botonSalirAlumno1" layoutX="57.0" layoutY="347.0" mnemonicParsing="false" text="Cerrar Sesión" textFill="#e2a825">
+                  <Button fx:id="botonSalirAlumno1" layoutX="57.0" layoutY="347.0" mnemonicParsing="false" onMouseClicked="#cerrarSesion" text="Cerrar Sesión" textFill="#e2a825">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Button>
                </children>
             </Pane>
-            <Pane fx:id="panelSalaComun" layoutX="225.0" layoutY="-3.0" prefHeight="695.0" prefWidth="816.0" style="-fx-background-color: white;">
+            <Pane fx:id="panelSalaComun" layoutX="225.0" layoutY="-3.0" prefHeight="695.0" prefWidth="816.0" style="-fx-background-color: white;" visible="false">
                <children>
                   <ImageView fitHeight="829.0" fitWidth="865.0" layoutX="-4.0" layoutY="-125.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -227,7 +227,7 @@
                   </ImageView>
                </children>
             </Pane>
-            <Pane fx:id="panelAsignaturas" layoutX="221.0" layoutY="-2.0" prefHeight="695.0" prefWidth="823.0">
+            <Pane fx:id="panelAsignaturas" layoutX="221.0" layoutY="-2.0" prefHeight="695.0" prefWidth="823.0" visible="false">
                <children>
                   <ImageView fitHeight="820.0" fitWidth="837.0" layoutY="-126.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -727,7 +727,7 @@
                   <ComboBox fx:id="_cbCursos" layoutX="308.0" layoutY="449.0" prefHeight="25.0" prefWidth="254.0" />
                </children>
             </Pane>
-            <Pane fx:id="paneAsignaturasIndividual" layoutX="218.0" layoutY="-1.0" prefHeight="695.0" prefWidth="823.0">
+            <Pane fx:id="paneAsignaturasIndividual" layoutX="218.0" layoutY="-1.0" prefHeight="695.0" prefWidth="823.0" visible="false">
                <children>
                   <ImageView fitHeight="817.0" fitWidth="823.0" layoutY="-112.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -1156,7 +1156,7 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane fx:id="panelProfesores" layoutY="-1.0" prefHeight="695.0" prefWidth="1052.0" visible="false">
+      <Pane fx:id="panelProfesores" layoutY="-1.0" prefHeight="695.0" prefWidth="1052.0">
          <children>
             <Pane fx:id="_panelMenuLateralProfe" prefHeight="693.0" prefWidth="228.0">
                <children>
@@ -1542,7 +1542,7 @@
                   </Button>
                </children>
             </Pane>
-            <Pane fx:id="_panelAsistencia" layoutX="219.0" layoutY="-1.0" prefHeight="695.0" prefWidth="831.0" style="-fx-background-color: white;" visible="false">
+            <Pane fx:id="_panelAsistencia" layoutX="219.0" layoutY="-1.0" prefHeight="695.0" prefWidth="831.0" style="-fx-background-color: white;">
                <children>
                   <ImageView fitHeight="830.0" fitWidth="891.0" layoutX="-8.0" layoutY="-135.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -1570,12 +1570,12 @@
                         </LinearGradient>
                      </textFill>
                   </Label>
-                  <TableView fx:id="_tablaP_asistencia" layoutX="105.0" layoutY="240.0" prefHeight="228.0" prefWidth="612.0" tableMenuButtonVisible="true">
+                  <TableView fx:id="_tablaP_asistencia" editable="true" layoutX="105.0" layoutY="240.0" prefHeight="228.0" prefWidth="612.0" tableMenuButtonVisible="true">
                      <columns>
                         <TableColumn fx:id="_columP_nombre" prefWidth="174.66665649414062" text="Nombre" />
                         <TableColumn fx:id="_columP_apellidos" prefWidth="123.33331298828125" text="Apellidos" />
-                        <TableColumn fx:id="_columP_dni" prefWidth="157.77783203125" text="Dni" />
-                        <TableColumn fx:id="_columP_asistencia" minWidth="0.0" prefWidth="155.5555419921875" text="Asistencia" />
+                        <TableColumn fx:id="_columP_dni" prefWidth="159.199951171875" text="Dni" />
+                        <TableColumn fx:id="columP_asistencia2" prefWidth="137.60003662109375" text="Asistencia" />
                      </columns>
                      <effect>
                         <Blend>
@@ -1590,7 +1590,7 @@
                         <Font name="Harrington" size="24.0" />
                      </font>
                   </Label>
-                  <Button layoutX="269.0" layoutY="536.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="159.0" text="Guardar">
+                  <Button layoutX="331.0" layoutY="508.0" mnemonicParsing="false" onMouseClicked="#guardar_Asistencias_Alumnos" prefHeight="56.0" prefWidth="159.0" text="Guardar">
                      <font>
                         <Font name="Harrington" size="24.0" />
                      </font>
