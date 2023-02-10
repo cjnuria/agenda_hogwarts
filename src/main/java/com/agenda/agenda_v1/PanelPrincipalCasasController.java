@@ -496,6 +496,24 @@ public class PanelPrincipalCasasController implements Initializable {
     private TextArea _taTemario;
     @FXML
     private TableColumn<Alumnos_objeto, String> columP_asistencia2;
+    @FXML
+    private Pane _panelHistorialAsistencia;
+    @FXML
+    private TableView<Alumnos_asistencia_objeto> _tablaP_asistencia1;
+    @FXML
+    private TableColumn<Alumnos_asistencia_objeto, String> _columP_nombre1;
+    @FXML
+    private TableColumn<Alumnos_asistencia_objeto, String> _columP_apellidos1;
+    @FXML
+    private TableColumn<Alumnos_asistencia_objeto, String> _columP_dni1;
+    @FXML
+    private TableColumn<Alumnos_asistencia_objeto, String> columP_asistencia21;
+    @FXML
+    private ComboBox<String> _comboP_AsistenciaCursos1;
+    @FXML
+    private ComboBox<String> _comboP_AsistenciaCasa1;
+    @FXML
+    private ImageView _fenixProfesores;
 
     /**
      * Initializes the controller class.
@@ -514,6 +532,10 @@ public class PanelPrincipalCasasController implements Initializable {
 
         filtrar_alumnos_asistencia_curso(7);
         filtrar_alumnos_asistencia_casa(7);
+
+        filtrar_alumnos_asistencia_curso_historial(7);
+        filtrar_alumnos_asistencia_casa_historial(7);
+
         _cbCursos.getItems().addAll("Primero", "Segundo", "Tercero", "Cuarto", "Quinto", "Sexto", "Séptimo");
         _cbCursos.setValue("Primero");
         label_casa_seleccion.setText("");
@@ -738,6 +760,7 @@ public class PanelPrincipalCasasController implements Initializable {
         _panelAdministadorAlumnos.setVisible(false);
         _panelAdministradorConfiguracion.setVisible(false);
         _panelAdministrador_profesor.setVisible(false);
+        _panelHistorialAsistencia.setVisible(false);
 
     }
 
@@ -747,6 +770,7 @@ public class PanelPrincipalCasasController implements Initializable {
         _panelSalaComunProfes.setVisible(false);
         _panelAsignaerTareasProfes.setVisible(false);
         _panelAsistencia.setVisible(false);
+        _panelHistorialAsistencia.setVisible(false);
 
     }
 
@@ -1347,6 +1371,30 @@ public class PanelPrincipalCasasController implements Initializable {
         }
 
     }
+      public String obtner_dni_estudiante(int id_estudiante) {
+        ResultSet resultado;
+        try {
+            PreparedStatement pst = conn.prepareStatement("SELECT * FROM estudiantes WHERE id_estudiante = ? ", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            pst.setInt(1, id_estudiante);
+            resultado = pst.executeQuery();
+
+            if (!resultado.first()) {
+
+                Jopane("No se han encontrado datos", "Error");
+                return null;
+            } else {
+                String dni= resultado.getString("dni");
+                return dni;
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+
+    }
+
 
     public int obtener_id_asigProf(int id_asignatura) {
         ResultSet resultado;
@@ -2434,6 +2482,24 @@ public class PanelPrincipalCasasController implements Initializable {
         }
 
     }
+    //==========================metodo historial===============================
+
+    public ResultSet alumnos_segun_curso_asistencia_historial(int asigProf) {
+        ResultSet rs;
+        ArrayList a = new ArrayList();
+        try {
+            PreparedStatement pst = conn.prepareStatement("Select * from asistencia where id_asigProf=?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            pst.setInt(1, asigProf);
+            rs = pst.executeQuery();
+
+            return rs;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+
+    }
 
     //==========================metodo rellenar datos asistencia===============================
     public ResultSet datos_asistencia(int id_asigProf) {
@@ -2470,6 +2536,20 @@ public class PanelPrincipalCasasController implements Initializable {
         try {
             ResultSet rs;
             PreparedStatement pst = conn.prepareStatement("SELECT * FROM estudiantes WHERE id_estudiante=?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            pst.setInt(1, id_estudiante);
+            rs = pst.executeQuery();
+            return rs;
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+
+    }
+
+    public ResultSet datosAlumnos_porId_historial(int id_estudiante) {
+        try {
+            ResultSet rs;
+            PreparedStatement pst = conn.prepareStatement("SELECT * from asistencia where id_estudiante=?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             pst.setInt(1, id_estudiante);
             rs = pst.executeQuery();
             return rs;
@@ -2635,6 +2715,52 @@ public class PanelPrincipalCasasController implements Initializable {
                 return null;
             } else {
                 String apellido = resultado.getString("apellidos");
+                return apellido;
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+
+    }
+
+    //======================================================================================
+    public String obtenerNombreAlumno_porID(int id_estudiante) {
+        try {
+            PreparedStatement pst = conn.prepareStatement("SELECT * FROM estudiantes where id_estudiante= ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            pst.setInt(1, id_estudiante);
+            ResultSet resultado = pst.executeQuery();
+            if (!resultado.first()) {
+
+                Jopane("No se han encontrado datos", "Error");
+                return null;
+            } else {
+                String nombre = resultado.getString("nombre");
+
+                return nombre;
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+
+    }
+    //======================================================================================
+
+    public String obtenerApellidoAlumno_porID(int id_estudiante) {
+        try {
+            PreparedStatement pst = conn.prepareStatement("SELECT * FROM estudiantes where id_estudiante= ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            pst.setInt(1, id_estudiante);
+            ResultSet resultado = pst.executeQuery();
+            if (!resultado.first()) {
+
+                Jopane("No se han encontrado datos", "Error");
+                return null;
+            } else {
+                String apellido = resultado.getString("apellidos");
+
                 return apellido;
 
             }
@@ -3054,13 +3180,11 @@ public class PanelPrincipalCasasController implements Initializable {
             int id_estudiante, id_asigprof;
             String estado;
 
-            
-
             for (int i = 0; i < _tablaP_asistencia.getItems().size(); i++) {
                 System.out.println(_tablaP_asistencia.getItems().get(i).dni);
                 id_estudiante = obtner_id_estudiante(_tablaP_asistencia.getItems().get(i).dni);
                 id_asigprof = obtener_id_asigProf_por_idProfesor(id_profesor);
-                
+
                 estado = _tablaP_asistencia.getSelectionModel().getSelectedItem().toString();
                 System.out.println(estado);
 
@@ -3075,6 +3199,130 @@ public class PanelPrincipalCasasController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @FXML
+    private void cambiarPanel_historial_asistencia(MouseEvent event) {
+        vaciarPanelTodo();
+        panelProfesores.setVisible(true);
+        _comboP_AsistenciaCursos1.getItems().addAll("Primero", "Segundo", "Tercero", "Cuarto", "Quinto", "Sexto", "Séptimo");
+        _comboP_AsistenciaCasa1.getItems().addAll("Gryffindor", "Slytherin", "Hafflepuff", "Ravenclaw");
+        _panelHistorialAsistencia.setVisible(true);
+    }
+    //==========================HISTORIAL ASISTENCIA===============================
+
+    public void filtrar_alumnos_asistencia_curso_historial(int id_asigProf) {
+
+        _comboP_AsistenciaCursos1.valueProperty().addListener((ov, p1, p2) -> {
+            if (_comboP_AsistenciaCasa1.getValue() == null) {
+
+                rellenar_tabla_asistencia_historial(id_asigProf);
+
+            } else {
+                String casa = _comboP_AsistenciaCasa1.getValue().toString();
+                rellenar_tabla_asistencia_casaCurso_historial(id_asigProf, p2, casa);
+            }
+
+            System.out.println(p2);
+        });
+
+    }
+
+    public void filtrar_alumnos_asistencia_casa_historial(int id_asigProf) {
+
+        _comboP_AsistenciaCasa1.valueProperty().addListener((ov, p1, p2) -> {
+            if (_comboP_AsistenciaCursos1.getValue() == null) {
+
+                rellenar_tabla_asistencia_historial(id_asigProf);
+
+            } else {
+                String curso = _comboP_AsistenciaCursos1.getValue().toString();
+                rellenar_tabla_asistencia_casaCurso_historial(id_asigProf, curso, p2);
+            }
+
+            System.out.println(p2);
+        });
+
+    }
+
+    public void rellenar_tabla_asistencia_casaCurso_historial(int id_asigProf, String curso, String casa) {
+        Alumnos_asistencia_objeto p = null;
+        _tablaP_asistencia1.getItems().clear();
+        try {
+            ObservableList<Alumnos_asistencia_objeto> obs = FXCollections.observableArrayList();
+            _columP_nombre1.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+            _columP_apellidos1.setCellValueFactory(new PropertyValueFactory<>("apellidos"));
+            _columP_dni1.setCellValueFactory(new PropertyValueFactory<>("dni"));
+            columP_asistencia21.setCellValueFactory(new PropertyValueFactory<>("estado"));
+
+            curso = _comboP_AsistenciaCursos1.getValue().toString();
+            casa = _comboP_AsistenciaCasa1.getValue().toString();
+
+            if (curso == null || casa == null) {
+                rellenar_tabla_asistencia_historial(id_asigProf);
+            } else {
+                ResultSet rs = alumnos_segun_curso_asistencia_historial(id_asigProf);
+
+                while (rs.next()) {
+                    int id = rs.getInt("id_estudiante");
+                    ResultSet rst = datosAlumnos_porId_historial(id);
+                    while (rst.next()) {
+                        String nombre = rst.getString("nombre");
+                        String apellidos = rst.getString("apellidos");
+                        String dni = rst.getString("dni");
+                        String estado = rst.getString("estado");
+                        p = new Alumnos_asistencia_objeto(nombre, apellidos, dni, estado);
+                        obs.add(p);
+                    }
+
+                    _tablaP_asistencia1.getItems().addAll(p);
+                }
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+    //metodo para  rellenar tabla asistencia alumnos historial (FENIX)
+
+    public ObservableList<Alumnos_asistencia_objeto> rellenar_tabla_asistencia_historial(int id_profesor) {
+        _tablaP_asistencia1.getItems().clear();
+        ObservableList<Alumnos_asistencia_objeto> obs = FXCollections.observableArrayList();
+        _columP_nombre1.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+        _columP_apellidos1.setCellValueFactory(new PropertyValueFactory<>("apellidos"));
+        _columP_dni1.setCellValueFactory(new PropertyValueFactory<>("dni"));
+        columP_asistencia21.setCellValueFactory(new PropertyValueFactory<>("estado"));
+
+        String nombre = null;
+        Alumnos_asistencia_objeto p = null;
+        try {
+            ResultSet rs = datos_asistencia(7);
+            while (rs.next()) {
+                int id = rs.getInt("id_estudiante");
+                ResultSet rst = datosAlumnos_porId_historial(id);
+                while (rst.next()) {
+                    int id_estudiante = rst.getInt("id_estudiante");
+                    nombre = obtenerNombreAlumno_porID(id_estudiante);
+                    String apellidos = obtenerApellidoAlumno_porID(id_estudiante);
+                    String dni=obtner_dni_estudiante(id_estudiante);
+                    int id_asigProf = rst.getInt("id_asigProf");
+                    
+
+                    String estado = rst.getString("estado");
+                    p = new Alumnos_asistencia_objeto(nombre, apellidos, dni, estado);
+                    obs.add(p);
+                }
+
+                _tablaP_asistencia1.getItems().addAll(p);
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            Jopane("Error", "Error al rellenar la tabla asistencias");
+        }
+        return obs;
     }
 
 }
