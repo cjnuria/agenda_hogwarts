@@ -5,7 +5,6 @@
 package com.agenda.agenda_v1;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -17,27 +16,19 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Time;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
-import java.util.Timer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -57,21 +48,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.input.PickResult;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import static javafx.scene.paint.Color.rgb;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.Window;
-import com.agenda.agenda_v1.Delta;
-import javafx.event.EventHandler;
-import javafx.scene.control.TableCell;
-import javafx.scene.effect.BoxBlur;
-import javafx.scene.effect.GaussianBlur;
 
 /**
  * FXML Controller class
@@ -89,29 +70,15 @@ public class PanelPrincipalCasasController implements Initializable {
     @FXML
     private ImageView _imgEScudo;
     @FXML
-    private Button _boton_sala_comun;
-    @FXML
-    private Button _boton_asignaturas;
-    @FXML
-    private Button _boton_tareas;
-    @FXML
-    private Button _boton_notas;
-    @FXML
-    private Button botonSalirAlumno;
-    @FXML
     private Pane panelSalaComun;
     @FXML
     private Pane panelAsignaturas;
     @FXML
     private Pane panelTareas;
     @FXML
-    private Label label_titulo;
-    @FXML
     private Pane panelNotas;
     @FXML
     private Pane paneConfiguracion;
-    @FXML
-    private Button _boton_sala_comun1;
     @FXML
     private Pane paneAsignaturasIndividual;
     @FXML
@@ -121,17 +88,7 @@ public class PanelPrincipalCasasController implements Initializable {
     @FXML
     private PasswordField labelPass;
     @FXML
-    private ImageView jlabelEntrarLogin;
-    @FXML
-    private Label jlabelRegistro;
-    @FXML
-    private ImageView botonRegistro;
-    @FXML
-    private Label jlabelSalir;
-    @FXML
     private Pane panelRegistro;
-    @FXML
-    private ImageView botonSombrero;
     @FXML
     private ImageView imagenPulsaSombrero;
     @FXML
@@ -143,23 +100,7 @@ public class PanelPrincipalCasasController implements Initializable {
     @FXML
     private Label label_casa_seleccion;
     @FXML
-    private ImageView botonIrHogwarts;
-    @FXML
     private Pane panelProfesores;
-    @FXML
-    private ImageView _imagen_banderaProfes;
-    @FXML
-    private ImageView _imgEScudoProfes;
-    @FXML
-    private Button _boton_sala_comun_Profes;
-    @FXML
-    private Button _boton_Cursos_Profes;
-    @FXML
-    private Button _boton_tareas_Profes;
-    @FXML
-    private Button _boton_Alumnos_Profes;
-    @FXML
-    private Button _botonSalirProfes;
     @FXML
     private Pane _panelMenuLateralProfe;
     @FXML
@@ -199,15 +140,9 @@ public class PanelPrincipalCasasController implements Initializable {
     @FXML
     private ImageView _asignaturaAdivinacion;
     @FXML
-    private Pane panelTareas1;
-    @FXML
-    private Label label_titulo1;
-    @FXML
     private TextField _tfDocumentoSubir;
     @FXML
     private TextField _tfComentario;
-    @FXML
-    private Button botonSalirAlumno1;
     @FXML
     private TextField _tfNombreEstudiante;
     @FXML
@@ -223,27 +158,7 @@ public class PanelPrincipalCasasController implements Initializable {
     @FXML
     private TextField _tfPassEstudiante;
     @FXML
-    private Button botonSalirAlumno11;
-    @FXML
     private Pane panelSelecionAsignatura;
-    @FXML
-    private ImageView _asignaturaPociones11;
-    @FXML
-    private ImageView _asignaturaTransformaciones11;
-    @FXML
-    private ImageView _asignaturaEncantamientos11;
-    @FXML
-    private ImageView _asignaturaDefensa11;
-    @FXML
-    private ImageView _asignaturaCriaturas11;
-    @FXML
-    private ImageView _asignaturaHistoria11;
-    @FXML
-    private ImageView _asignaturaVuelo11;
-    @FXML
-    private ImageView _asignaturaRunas11;
-    @FXML
-    private ImageView _asignaturaAdivinacion11;
     @FXML
     private ComboBox<String> _cbCursos;
     @FXML
@@ -264,14 +179,12 @@ public class PanelPrincipalCasasController implements Initializable {
     private CheckBox _checkAdivinacion;
     @FXML
     private CheckBox _checkVuelo;
-
     @FXML
     private CheckBox _checkHistoria;
     @FXML
     private TableView<Alumnos_objeto> _tablaProfesor_cursos;
     @FXML
     private TableColumn<Alumnos_objeto, String> _columAlumno;
-
     @FXML
     private TableColumn<Alumnos_objeto, String> _columCasa;
     @FXML
@@ -345,75 +258,15 @@ public class PanelPrincipalCasasController implements Initializable {
     @FXML
     private TableView<tareas_profesores_objeto> _tbprofesores_semanal;
     @FXML
-    private ImageView _iconPergamino;
-    @FXML
-    private ImageView _iconTemario;
-    @FXML
     private Pane _panelAsistencia;
     @FXML
     private Pane _paneTemario;
-    @FXML
-    private Pane panelAdministrador;
-    @FXML
-    private Pane panelTareas11;
-    @FXML
-    private Label label_titulo11;
-    @FXML
-    private Pane panelMenuLateral1;
-    @FXML
-    private ImageView _imagen_bandera1;
-    @FXML
-    private Button _boton_alumnos_administrador;
-    @FXML
-    private Button _boton_profesores_administrador;
-    @FXML
-    private Button _boton_cerrar_sesion;
-    @FXML
-    private Button _boton_salir;
-    @FXML
-    private Label _labelSesionEstudiante1;
     @FXML
     private Pane _panelAdministadorAlumnos;
     @FXML
     private Pane _panelAdministrador_profesor;
     @FXML
-    private TextField _tfNombreEstudiante11;
-    @FXML
-    private TextField _tfApellidosEstudiante11;
-    @FXML
-    private TextField _tfEmailEstudiante11;
-    @FXML
-    private TextField _tfDniEstudiante11;
-    @FXML
-    private TextField _tfTelefonoEstudiante11;
-    @FXML
-    private TextField _tfFechaNacEstudiante11;
-    @FXML
-    private Button _boton_sala_comun111;
-    @FXML
-    private TextField _tfPassEstudiante11;
-    @FXML
-    private ComboBox<?> _cbCursos11;
-    @FXML
     private Pane _panelAdministradorConfiguracion;
-    @FXML
-    private TextField _tfNombreEstudiante1;
-    @FXML
-    private TextField _tfApellidosEstudiante1;
-    @FXML
-    private TextField _tfEmailEstudiante1;
-    @FXML
-    private TextField _tfDniEstudiante1;
-    @FXML
-    private TextField _tfTelefonoEstudiante1;
-    @FXML
-    private TextField _tfFechaNacEstudiante1;
-    @FXML
-    private Button _boton_sala_comun11;
-    @FXML
-    private TextField _tfPassEstudiante1;
-    @FXML
-    private ComboBox<?> _cbCursos1;
     @FXML
     private TableColumn<Alumnos_objeto, String> _columP_nombre;
     @FXML
@@ -424,7 +277,6 @@ public class PanelPrincipalCasasController implements Initializable {
     private ComboBox<String> _comboP_AsistenciaCasa;
     @FXML
     private TableView<Alumnos_objeto> _tablaP_asistencia;
-
     private static List<String> valoresLista = new ArrayList<>();
     @FXML
     private TableColumn<tareas_profesores_objeto, String> _columP_dni;
@@ -517,6 +369,9 @@ public class PanelPrincipalCasasController implements Initializable {
 
     /**
      * Initializes the controller class.
+     *
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -652,9 +507,7 @@ public class PanelPrincipalCasasController implements Initializable {
         win.setWidth(1040);
         win.setHeight(690);
         Image image1 = new Image(getClass().getResourceAsStream("/img/escudos/verde.png"));
-        ImageView imageView1 = new ImageView(image1);
         Image image2 = new Image(getClass().getResourceAsStream("/img/casas/banderaVerde.png"));
-        ImageView imageView2 = new ImageView(image2);
         //panelMenuLateral.getChildren().add(imageView1);//para coger nodo hijo y añadir nueva imagen
         _imgEScudo.setImage(image1);
         _imagen_bandera.setImage(image2);
@@ -671,9 +524,7 @@ public class PanelPrincipalCasasController implements Initializable {
         win.setWidth(1040);
         win.setHeight(690);
         Image image1 = new Image(getClass().getResourceAsStream("/img/escudos/rojo.png"));
-        ImageView imageView1 = new ImageView(image1);
         Image image2 = new Image(getClass().getResourceAsStream("/img/casas/banderaRoja.png"));
-        ImageView imageView2 = new ImageView(image2);
         //panelMenuLateral.getChildren().add(imageView1);//para coger nodo hijo y añadir nueva imagen
         _imgEScudo.setImage(image1);
         _imagen_bandera.setImage(image2);
@@ -690,9 +541,7 @@ public class PanelPrincipalCasasController implements Initializable {
         win.setWidth(1040);
         win.setHeight(690);
         Image image1 = new Image(getClass().getResourceAsStream("/img/escudos/azul.png"));
-        ImageView imageView1 = new ImageView(image1);
         Image image2 = new Image(getClass().getResourceAsStream("/img/casas/banderaAzul.png"));
-        ImageView imageView2 = new ImageView(image2);
         _imgEScudo.setImage(image1);
         panelMenuLateral.getStylesheets().clear();
         panelMenuLateral.getStylesheets().add("/css/CssAzul.css");
@@ -707,13 +556,10 @@ public class PanelPrincipalCasasController implements Initializable {
         win.setWidth(1040);
         win.setHeight(690);
         Image image1 = new Image(getClass().getResourceAsStream("/img/escudos/amarillo.png"));
-        ImageView imageView1 = new ImageView(image1);
         Image image2 = new Image(getClass().getResourceAsStream("/img/casas/banderaAmarilla.png"));
-        ImageView imageView2 = new ImageView(image2);
 
         //panelMenuLateral.getChildren().add(imageView1);//para coger nodo hijo y añadir nueva imagen
         _imgEScudo.setImage(image1);
-        imageView1.setDisable(true);
 
         panelMenuLateral.getStylesheets().clear();
         panelMenuLateral.getStylesheets().add("/css/CssAmarillo.css");
@@ -883,7 +729,6 @@ public class PanelPrincipalCasasController implements Initializable {
         //HACERLO CON TODOS LOS CASES O CREAR UN MÉTODO(SE PODRIA HACER SOLO UNO....)
         //panelMenuLateral.getChildren().add(imageView1);//para coger nodo hijo y añadir nueva imagen
         Image image1 = new Image(getClass().getResourceAsStream("/img/asignaturas/" + asignatura + ".png"));
-        ImageView imageView1 = new ImageView(image1);
         _imagenAsignatura.setImage(image1);
 
         _tituloAsignatura.setText(asignatura.toUpperCase());
@@ -1031,12 +876,6 @@ public class PanelPrincipalCasasController implements Initializable {
         vaciarPanelTodo();
         panelAlumnos.setVisible(true);
         panelSalaComun.setVisible(true);
-
-    }
-
-    private void elegirAsignaturaPanel(MouseEvent event) {
-
-        String asignatura = event.getPickResult().toString();
 
     }
 
@@ -1213,10 +1052,12 @@ public class PanelPrincipalCasasController implements Initializable {
                 _labelSesionEstudiante.setText(dni);
             } else {
                 Jopane("Error", "error al insertar");
+
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -1236,6 +1077,30 @@ public class PanelPrincipalCasasController implements Initializable {
         labelPulsaSombrero2.setVisible(true);
         imagenNombreCasa.setVisible(false);
         label_casa_seleccion.setVisible(false);
+
+        ArrayList<ComboBox> miListaDeComboBoxes = new ArrayList<ComboBox>();
+
+        for (ComboBox c : miListaDeComboBoxes) {
+            c.getItems().clear();
+        }
+
+        ArrayList<TableView> miListaDeTablas = new ArrayList<TableView>();
+
+        for (TableView t : miListaDeTablas) {
+            t.setItems(FXCollections.observableArrayList());
+        }
+
+        ArrayList<TextField> miListaDeTextFields = new ArrayList<TextField>();
+
+        for (TextField t : miListaDeTextFields) {
+            t.setText("");
+        }
+
+        ArrayList<TextArea> miListaDeTextAreas = new ArrayList<TextArea>();
+
+        for (TextArea t : miListaDeTextAreas) {
+            t.setText("");
+        }
     }
 
     public void borrarTodo() {
@@ -1340,7 +1205,8 @@ public class PanelPrincipalCasasController implements Initializable {
             pst.executeUpdate();
 
         } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -1366,7 +1232,8 @@ public class PanelPrincipalCasasController implements Initializable {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
             return -1;
         }
 
@@ -1414,7 +1281,8 @@ public class PanelPrincipalCasasController implements Initializable {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
             return -1;
         }
 
@@ -1438,7 +1306,8 @@ public class PanelPrincipalCasasController implements Initializable {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
             return -1;
         }
 
@@ -1462,7 +1331,8 @@ public class PanelPrincipalCasasController implements Initializable {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
             return -1;
         }
 
@@ -1484,7 +1354,8 @@ public class PanelPrincipalCasasController implements Initializable {
 
             }
         } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
             return -1;
         }
     }
@@ -1598,7 +1469,8 @@ public class PanelPrincipalCasasController implements Initializable {
 
             }
         } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
             return null;
         }
 
@@ -1619,7 +1491,8 @@ public class PanelPrincipalCasasController implements Initializable {
 
             }
         } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
             return -1;
         }
 
@@ -1640,7 +1513,8 @@ public class PanelPrincipalCasasController implements Initializable {
 
             }
         } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
             return -1;
         }
 
@@ -1661,7 +1535,8 @@ public class PanelPrincipalCasasController implements Initializable {
 
             }
         } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
             return -1;
         }
 
@@ -1679,7 +1554,8 @@ public class PanelPrincipalCasasController implements Initializable {
             return resultado;
 
         } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
             return null;
         }
 
@@ -1706,7 +1582,8 @@ public class PanelPrincipalCasasController implements Initializable {
 
             }
         } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
         return obs;
     }
@@ -1740,7 +1617,8 @@ public class PanelPrincipalCasasController implements Initializable {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
             return -1;
         }
 
@@ -1761,7 +1639,8 @@ public class PanelPrincipalCasasController implements Initializable {
 
             }
         } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
             return null;
         }
 
@@ -1782,7 +1661,8 @@ public class PanelPrincipalCasasController implements Initializable {
 
             }
         } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
             return null;
         }
 
@@ -1804,9 +1684,11 @@ public class PanelPrincipalCasasController implements Initializable {
                 a.add(c);
                 _cbTareas_alumnos.getItems().clear();// limpia los combo box para no duplicar datos
                 _cbTareas_alumnos.getItems().addAll(a);
+
             }
         } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -1832,7 +1714,8 @@ public class PanelPrincipalCasasController implements Initializable {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
 
         }
     }
@@ -1859,7 +1742,8 @@ public class PanelPrincipalCasasController implements Initializable {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
 
         }
     }
@@ -1887,7 +1771,8 @@ public class PanelPrincipalCasasController implements Initializable {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
 
         }
     }
@@ -1919,7 +1804,8 @@ public class PanelPrincipalCasasController implements Initializable {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -1950,7 +1836,8 @@ public class PanelPrincipalCasasController implements Initializable {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -1983,7 +1870,8 @@ public class PanelPrincipalCasasController implements Initializable {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -2016,7 +1904,8 @@ public class PanelPrincipalCasasController implements Initializable {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -2048,7 +1937,8 @@ public class PanelPrincipalCasasController implements Initializable {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -2125,10 +2015,12 @@ public class PanelPrincipalCasasController implements Initializable {
 
                 } else {
                     Jopane("Error", "Error al insertar");
+
                 }
 
             } catch (SQLException ex) {
-                Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(PanelPrincipalCasasController.class
+                        .getName()).log(Level.SEVERE, null, ex);
             }
         }
 
@@ -2162,7 +2054,8 @@ public class PanelPrincipalCasasController implements Initializable {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
         return obs;
     }
@@ -2178,7 +2071,8 @@ public class PanelPrincipalCasasController implements Initializable {
             return resultado;
 
         } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
             return null;
         }
 
@@ -2195,7 +2089,8 @@ public class PanelPrincipalCasasController implements Initializable {
             return resultado;
 
         } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
             return null;
         }
 
@@ -2229,7 +2124,8 @@ public class PanelPrincipalCasasController implements Initializable {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
         return obs;
     }
@@ -2261,7 +2157,8 @@ public class PanelPrincipalCasasController implements Initializable {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
         return obs;
     }
@@ -2290,7 +2187,8 @@ public class PanelPrincipalCasasController implements Initializable {
             return resultado;
 
         } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
             return null;
         }
 
@@ -2307,7 +2205,8 @@ public class PanelPrincipalCasasController implements Initializable {
             return resultado;
 
         } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
             return null;
         }
 
@@ -2341,7 +2240,8 @@ public class PanelPrincipalCasasController implements Initializable {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
         return obs;
     }
@@ -2377,7 +2277,8 @@ public class PanelPrincipalCasasController implements Initializable {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
             Jopane("Error", "Error al rellenar la tabla asistencias");
         }
         return obs;
@@ -2450,11 +2351,13 @@ public class PanelPrincipalCasasController implements Initializable {
                     }
 
                     _tablaP_asistencia.getItems().addAll(p);
+
                 }
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -2477,7 +2380,8 @@ public class PanelPrincipalCasasController implements Initializable {
             return rs;
 
         } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
             return null;
         }
 
@@ -2512,7 +2416,8 @@ public class PanelPrincipalCasasController implements Initializable {
             return resultado;
 
         } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
             return null;
         }
 
@@ -2529,7 +2434,7 @@ public class PanelPrincipalCasasController implements Initializable {
         _tablaP_asistencia.getItems().clear();
         panelProfesores.setVisible(true);
         _panelAsistencia.setVisible(true);
-//        rellenar_tabla_asistencia(7);//???????????????????????????
+
     }
 
     public ResultSet datosAlumnos_porId(int id_estudiante) {
@@ -2539,8 +2444,10 @@ public class PanelPrincipalCasasController implements Initializable {
             pst.setInt(1, id_estudiante);
             rs = pst.executeQuery();
             return rs;
+
         } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
             return null;
         }
 
@@ -2588,7 +2495,8 @@ public class PanelPrincipalCasasController implements Initializable {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -2621,10 +2529,12 @@ public class PanelPrincipalCasasController implements Initializable {
                 //correo.split(", ");
 
                 return valoresLista;
+
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
             return null;
         }
 
@@ -2643,10 +2553,12 @@ public class PanelPrincipalCasasController implements Initializable {
                 //rs = pst.executeQuery();
                 String dni = rs.getString("dni");
                 return dni;
+
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
             return null;
         }
 
@@ -2683,7 +2595,8 @@ public class PanelPrincipalCasasController implements Initializable {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
         return obs;
     }
@@ -2697,7 +2610,8 @@ public class PanelPrincipalCasasController implements Initializable {
             return resultado;
 
         } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
             return null;
         }
 
@@ -2719,7 +2633,8 @@ public class PanelPrincipalCasasController implements Initializable {
 
             }
         } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
             return null;
         }
 
@@ -2790,7 +2705,8 @@ public class PanelPrincipalCasasController implements Initializable {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
             return null;
         }
 
@@ -2824,7 +2740,8 @@ public class PanelPrincipalCasasController implements Initializable {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
         return obs;
     }
@@ -2841,7 +2758,8 @@ public class PanelPrincipalCasasController implements Initializable {
             return resultado;
 
         } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
             return null;
         }
 
@@ -2866,7 +2784,8 @@ public class PanelPrincipalCasasController implements Initializable {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
             return null;
         }
 
@@ -2897,7 +2816,8 @@ public class PanelPrincipalCasasController implements Initializable {
             _jcFilto_notas_alumno.getSelectionModel().select(0);
 
         } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -2977,7 +2897,8 @@ public class PanelPrincipalCasasController implements Initializable {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
         return obs;
     }
@@ -3049,12 +2970,14 @@ public class PanelPrincipalCasasController implements Initializable {
                 } else {
                     float media = notas_total / numero_notas;
                     return media;
+
                 }
 
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
             return 0;
         }
 
@@ -3076,10 +2999,12 @@ public class PanelPrincipalCasasController implements Initializable {
             } else {
                 notas_total = rs.getFloat("numero_notas");
                 return notas_total;
+
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
             return 0;
         }
 
@@ -3107,7 +3032,8 @@ public class PanelPrincipalCasasController implements Initializable {
             return a;
 
         } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
             return null;
         }
 
@@ -3128,8 +3054,10 @@ public class PanelPrincipalCasasController implements Initializable {
             pst.setString(2, comentarioAlumno);
             pst.setInt(3, 0);//modificar el id tarea para que lo coja automático al seleccionar la tarea
             ResultSet rs = pst.executeQuery();
+
         } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -3194,10 +3122,12 @@ public class PanelPrincipalCasasController implements Initializable {
                 pst.setString(3, estado);
 
                 pst.executeUpdate();
+
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }
 
