@@ -38,6 +38,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -260,8 +261,6 @@ public class PanelPrincipalCasasController implements Initializable {
     @FXML
     private Pane _panelAsistencia;
     @FXML
-    private Pane _paneTemario;
-    @FXML
     private Pane _panelAdministadorAlumnos;
     @FXML
     private Pane _panelAdministrador_profesor;
@@ -345,8 +344,6 @@ public class PanelPrincipalCasasController implements Initializable {
     @FXML
     private ImageView _imagNotas6;
     @FXML
-    private TextArea _taTemario;
-    @FXML
     private TableColumn<Alumnos_objeto, String> columP_asistencia2;
     @FXML
     private Pane _panelHistorialAsistencia;
@@ -366,6 +363,158 @@ public class PanelPrincipalCasasController implements Initializable {
     private ComboBox<String> _comboP_AsistenciaCasa1;
     @FXML
     private ImageView _fenixProfesores;
+    @FXML
+    private Pane panelTareas1;
+    @FXML
+    private Label label_titulo1;
+    @FXML
+    private Button _boton_sala_comun;
+    @FXML
+    private Button _boton_asignaturas;
+    @FXML
+    private Button _boton_tareas;
+    @FXML
+    private Button _boton_notas;
+    @FXML
+    private Button botonSalirAlumno;
+    @FXML
+    private Button botonSalirAlumno1;
+    @FXML
+    private Label label_titulo;
+    @FXML
+    private Button _boton_sala_comun1;
+    @FXML
+    private ImageView _asignaturaPociones11;
+    @FXML
+    private ImageView _asignaturaTransformaciones11;
+    @FXML
+    private ImageView _asignaturaEncantamientos11;
+    @FXML
+    private ImageView _asignaturaDefensa11;
+    @FXML
+    private ImageView _asignaturaCriaturas11;
+    @FXML
+    private ImageView _asignaturaHistoria11;
+    @FXML
+    private ImageView _asignaturaVuelo11;
+    @FXML
+    private ImageView _asignaturaRunas11;
+    @FXML
+    private ImageView _asignaturaAdivinacion11;
+    @FXML
+    private ImageView jlabelEntrarLogin;
+    @FXML
+    private Label jlabelRegistro;
+    @FXML
+    private ImageView botonRegistro;
+    @FXML
+    private Label jlabelSalir;
+    @FXML
+    private ImageView botonSombrero;
+    @FXML
+    private ImageView botonIrHogwarts;
+    @FXML
+    private ImageView _imagen_banderaProfes;
+    @FXML
+    private ImageView _imgEScudoProfes;
+    @FXML
+    private Button _boton_sala_comun_Profes;
+    @FXML
+    private Button _boton_Cursos_Profes;
+    @FXML
+    private Button _boton_tareas_Profes;
+    @FXML
+    private Button _boton_Alumnos_Profes;
+    @FXML
+    private Button _botonSalirProfes;
+    @FXML
+    private Button botonSalirAlumno11;
+    @FXML
+    private ImageView _iconPergamino;
+    @FXML
+    private ImageView _iconTemario;
+    @FXML
+    private Pane _paneMensajeria;
+    @FXML
+    private Tab tab_pane_novedades;
+    @FXML
+    private ComboBox<?> combo_mensajeria_alumnos;
+    @FXML
+    private TextArea textArea_menaje_editar;
+    @FXML
+    private Tab tab_pane_historico;
+    @FXML
+    private TableView<?> tablaP_listar_mensajes;
+    @FXML
+    private TableColumn<?, ?> columP_dni_mensajeria;
+    @FXML
+    private TableColumn<?, ?> columP_apellidos_mensajeria;
+    @FXML
+    private TableColumn<?, ?> columP_curso_mensajeria;
+    @FXML
+    private TableColumn<?, ?> columP_fecha_mensajeria;
+    @FXML
+    private TableColumn<?, ?> columP_leidos_mensajeria;
+    @FXML
+    private TextArea textarea_mensajeria;
+    @FXML
+    private Pane panelAdministrador;
+    @FXML
+    private Pane panelTareas11;
+    @FXML
+    private Label label_titulo11;
+    @FXML
+    private Pane panelMenuLateral1;
+    @FXML
+    private ImageView _imagen_bandera1;
+    @FXML
+    private Button _boton_alumnos_administrador;
+    @FXML
+    private Button _boton_profesores_administrador;
+    @FXML
+    private Button _boton_cerrar_sesion;
+    @FXML
+    private Button _boton_salir;
+    @FXML
+    private Label _labelSesionEstudiante1;
+    @FXML
+    private TextField _tfNombreEstudiante11;
+    @FXML
+    private TextField _tfApellidosEstudiante11;
+    @FXML
+    private TextField _tfEmailEstudiante11;
+    @FXML
+    private TextField _tfDniEstudiante11;
+    @FXML
+    private TextField _tfTelefonoEstudiante11;
+    @FXML
+    private TextField _tfFechaNacEstudiante11;
+    @FXML
+    private Button _boton_sala_comun111;
+    @FXML
+    private TextField _tfPassEstudiante11;
+    @FXML
+    private ComboBox<?> _cbCursos11;
+    @FXML
+    private TextField _tfNombreEstudiante1;
+    @FXML
+    private TextField _tfApellidosEstudiante1;
+    @FXML
+    private TextField _tfEmailEstudiante1;
+    @FXML
+    private TextField _tfDniEstudiante1;
+    @FXML
+    private TextField _tfTelefonoEstudiante1;
+    @FXML
+    private TextField _tfFechaNacEstudiante1;
+    @FXML
+    private Button _boton_sala_comun11;
+    @FXML
+    private TextField _tfPassEstudiante1;
+    @FXML
+    private ComboBox<?> _cbCursos1;
+    @FXML
+    private ImageView imagen_texto_asignatura;
 
     /**
      * Initializes the controller class.
@@ -602,11 +751,12 @@ public class PanelPrincipalCasasController implements Initializable {
         _panelSalaComunProfes.setVisible(false);
         _panelAsignaerTareasProfes.setVisible(false);
         _panelAsistencia.setVisible(false);
-        _paneTemario.setVisible(false);
+        _paneMensajeria.setVisible(false);
         _panelAdministadorAlumnos.setVisible(false);
         _panelAdministradorConfiguracion.setVisible(false);
         _panelAdministrador_profesor.setVisible(false);
         _panelHistorialAsistencia.setVisible(false);
+        imagen_texto_asignatura.setVisible(false);
 
     }
 
@@ -724,12 +874,16 @@ public class PanelPrincipalCasasController implements Initializable {
         vaciarPanelTodo();
         panelAlumnos.setVisible(true);
         paneAsignaturasIndividual.setVisible(true);
+        imagen_texto_asignatura.setVisible(true);
 
         //CAMBIAR FOTOS, LABEL Y TABLAS, SOLO ESTÁ EL CODE SIN CAMBIAR
         //HACERLO CON TODOS LOS CASES O CREAR UN MÉTODO(SE PODRIA HACER SOLO UNO....)
         //panelMenuLateral.getChildren().add(imageView1);//para coger nodo hijo y añadir nueva imagen
         Image image1 = new Image(getClass().getResourceAsStream("/img/asignaturas/" + asignatura + ".png"));
+         Image image2 = new Image(getClass().getResourceAsStream("/img/textos_asignaturas/" + asignatura + ".png"));
         _imagenAsignatura.setImage(image1);
+        imagen_texto_asignatura.setImage(image2);
+        
 
         _tituloAsignatura.setText(asignatura.toUpperCase());
         _nombreProfesorAsignatura.setText(profesor);
@@ -884,6 +1038,7 @@ public class PanelPrincipalCasasController implements Initializable {
 
         paneAsignaturasIndividual.setVisible(false);
         panelAsignaturas.setVisible(true);
+        imagen_texto_asignatura.setVisible(false);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -3254,7 +3409,12 @@ public class PanelPrincipalCasasController implements Initializable {
         }
         return obs;
     }
-
+    @FXML
+    public void cambiarMensajeria(){
+        vaciarPanelTodo();
+        panelProfesores.setVisible(true);
+        _paneMensajeria.setVisible(true);
+    }
 }
 
 /*
