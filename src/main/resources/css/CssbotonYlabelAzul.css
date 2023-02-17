@@ -3,8 +3,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to c
 Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
 */
 /* 
-    Created on : 26 dic 2022, 12:52:58
-    Author     : ismael
+    Created on : 17 feb 2023, 20:11:29
+    Author     : nuria
 */
 
 Button{
@@ -13,5 +13,10 @@ Button{
 /*    -fx-font-family: "Harrington";*/
 
 }
-
-
+#label_titulo1{
+    -fx-text-fill: linear-gradient(from 52.6814% 50.1577% to 52.3659% 73.1861%, #e2a825 0.0%, #da1b06 100.0%);
+    
+}
+Label{
+     -fx-text-fill: #00587e;
+}

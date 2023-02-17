@@ -28,33 +28,34 @@
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane id="AnchorPane" prefHeight="690.0" prefWidth="1040.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.agenda.agenda_v1.PanelPrincipalCasasController">
    <children>
       <Pane fx:id="panelAlumnos" layoutX="-2.0" layoutY="-1.0" prefHeight="691.0" prefWidth="1044.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="-1.0">
          <children>
-            <Pane fx:id="panelTareas1" layoutX="222.0" layoutY="-1.0" prefHeight="695.0" prefWidth="823.0" visible="false">
+            <Pane fx:id="panelTareas1" layoutX="222.0" layoutY="-1.0" prefHeight="695.0" prefWidth="823.0">
                <children>
                   <ImageView fitHeight="820.0" fitWidth="837.0" layoutY="-124.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@imagenes/pngegg%20(51).png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="label_titulo1" layoutX="347.0" layoutY="46.0" prefHeight="62.0" prefWidth="174.0" text="Tareas">
+                  <Label id="label_titulo1" fx:id="label_titulo1" layoutX="347.0" layoutY="46.0" prefHeight="62.0" prefWidth="174.0" style="-fx-text-fill: red;" styleClass="label_titulo1" text="Tareas">
                      <font>
                         <Font name="Harrington" size="50.0" />
                      </font>
                      <textFill>
-                        <LinearGradient endX="0.5236593180274361" endY="0.731861204002934" startX="0.5268138673403285" startY="0.5015773231674819">
+                        <LinearGradient endX="1.0" endY="0.47003153220336147" startY="0.08517350157728706">
                            <stops>
                               <Stop>
                                  <color>
-                                    <Color red="0.886274516582489" green="0.658823549747467" blue="0.14509804546833038" />
+                                    <Color />
                                  </color>
                               </Stop>
                               <Stop offset="1.0">
                                  <color>
-                                    <Color red="0.8549019694328308" green="0.10588235408067703" blue="0.0235294122248888" />
+                                    <Color red="1.0" green="1.0" blue="1.0" />
                                  </color>
                               </Stop>
                            </stops>
@@ -82,7 +83,7 @@
                         <Image url="@imagenes/pn5gegg%20(10).png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="296.0" layoutY="592.0" text="Guardar Cambios">
+                  <Label layoutX="296.0" layoutY="592.0" text="Guardar Cambios" textFill="#b71212">
                      <font>
                         <Font name="Harrington" size="28.0" />
                      </font>
@@ -144,6 +145,11 @@
                         <Font size="14.0" />
                      </font>
                   </Button>
+                  <Text fx:id="pruebaInicio" layoutX="124.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="hola">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </Text>
                </children>
             </Pane>
             <Pane fx:id="panelSalaComun" layoutX="225.0" layoutY="-3.0" prefHeight="695.0" prefWidth="816.0" style="-fx-background-color: white;" visible="false">
@@ -157,22 +163,7 @@
                      <font>
                         <Font name="Harrington" size="55.0" />
                      </font>
-                     <textFill>
-                        <LinearGradient endX="0.49211358873626043" endY="0.5173501577287066" startX="0.4921135526350244" startY="0.5993690746439744">
-                           <stops>
-                              <Stop>
-                                 <color>
-                                    <Color red="0.8549019694328308" green="0.10588235408067703" blue="0.0235294122248888" />
-                                 </color>
-                              </Stop>
-                              <Stop offset="1.0">
-                                 <color>
-                                    <Color red="0.8799999952316284" green="0.6487066745758057" blue="0.14959999918937683" opacity="0.9923858046531677" />
-                                 </color>
-                              </Stop>
-                           </stops>
-                        </LinearGradient>
-                     </textFill>
+                     
                   </Label>
                   <TableView fx:id="_tablaAlum_salaComun" layoutX="105.0" layoutY="192.0" prefHeight="276.0" prefWidth="612.0" tableMenuButtonVisible="true">
                     <columns>
@@ -238,22 +229,7 @@
                      <font>
                         <Font name="Harrington" size="42.0" />
                      </font>
-                     <textFill>
-                        <LinearGradient endX="0.49842267683251806" endY="0.5552050473186121" startX="0.49842272496749923" startY="0.473186155975053">
-                           <stops>
-                              <Stop>
-                                 <color>
-                                    <Color red="0.886274516582489" green="0.658823549747467" blue="0.14509804546833038" />
-                                 </color>
-                              </Stop>
-                              <Stop offset="1.0">
-                                 <color>
-                                    <Color red="0.8549019694328308" green="0.10588235408067703" blue="0.0235294122248888" />
-                                 </color>
-                              </Stop>
-                           </stops>
-                        </LinearGradient>
-                     </textFill>
+                     
                   </Label>
                   <Pane layoutX="28.0" layoutY="108.0" prefHeight="105.0" prefWidth="338.0">
                      <children>
@@ -448,22 +424,7 @@
                      <font>
                         <Font name="Harrington" size="50.0" />
                      </font>
-                     <textFill>
-                        <LinearGradient endX="0.5236593180274361" endY="0.731861204002934" startX="0.5268138673403285" startY="0.5015773231674819">
-                           <stops>
-                              <Stop>
-                                 <color>
-                                    <Color red="0.886274516582489" green="0.658823549747467" blue="0.14509804546833038" />
-                                 </color>
-                              </Stop>
-                              <Stop offset="1.0">
-                                 <color>
-                                    <Color red="0.8549019694328308" green="0.10588235408067703" blue="0.0235294122248888" />
-                                 </color>
-                              </Stop>
-                           </stops>
-                        </LinearGradient>
-                     </textFill>
+                    
                   </Label>
                   <TableView fx:id="_tbA_tareas" layoutX="58.0" layoutY="138.0" prefHeight="199.0" prefWidth="715.0">
                     <columns>
@@ -527,22 +488,7 @@
                      <font>
                         <Font name="Harrington" size="47.0" />
                      </font>
-                     <textFill>
-                        <LinearGradient endX="0.5331230404249125" endY="0.4637224350817947" startX="0.533123063740294" startY="0.47949520797007467">
-                           <stops>
-                              <Stop>
-                                 <color>
-                                    <Color red="0.8549019694328308" green="0.10588235408067703" blue="0.0235294122248888" />
-                                 </color>
-                              </Stop>
-                              <Stop offset="1.0">
-                                 <color>
-                                    <Color red="0.886274516582489" green="0.658823549747467" blue="0.14509804546833038" />
-                                 </color>
-                              </Stop>
-                           </stops>
-                        </LinearGradient>
-                     </textFill>
+                    
                   </Label>
                   <TableView fx:id="_tablaAlu_notas" layoutX="106.0" layoutY="108.0" prefHeight="276.0" prefWidth="612.0" tableMenuButtonVisible="true">
                     <columns>
@@ -645,22 +591,7 @@
                      <font>
                         <Font name="Harrington" size="47.0" />
                      </font>
-                     <textFill>
-                        <LinearGradient endX="0.5331230404249125" endY="0.4637224350817947" startX="0.533123063740294" startY="0.47949520797007467">
-                           <stops>
-                              <Stop>
-                                 <color>
-                                    <Color red="0.8549019694328308" green="0.10588235408067703" blue="0.0235294122248888" />
-                                 </color>
-                              </Stop>
-                              <Stop offset="1.0">
-                                 <color>
-                                    <Color red="0.886274516582489" green="0.658823549747467" blue="0.14509804546833038" />
-                                 </color>
-                              </Stop>
-                           </stops>
-                        </LinearGradient>
-                     </textFill>
+                     
                   </Label>
                   <Label layoutX="109.0" layoutY="160.0" text="Nombre:">
                      <font>
@@ -727,7 +658,7 @@
                   <ComboBox fx:id="_cbCursos" layoutX="308.0" layoutY="449.0" prefHeight="25.0" prefWidth="254.0" />
                </children>
             </Pane>
-            <Pane fx:id="paneAsignaturasIndividual" layoutX="218.0" layoutY="-1.0" prefHeight="695.0" prefWidth="823.0">
+            <Pane fx:id="paneAsignaturasIndividual" layoutX="218.0" layoutY="-1.0" prefHeight="695.0" prefWidth="823.0" visible="false">
                <children>
                   <ImageView fitHeight="817.0" fitWidth="823.0" layoutY="-112.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -793,22 +724,7 @@
                      <font>
                         <Font name="Harrington" size="42.0" />
                      </font>
-                     <textFill>
-                        <LinearGradient endX="0.49842267683251806" endY="0.5552050473186121" startX="0.49842272496749923" startY="0.473186155975053">
-                           <stops>
-                              <Stop>
-                                 <color>
-                                    <Color red="0.886274516582489" green="0.658823549747467" blue="0.14509804546833038" />
-                                 </color>
-                              </Stop>
-                              <Stop offset="1.0">
-                                 <color>
-                                    <Color red="0.8549019694328308" green="0.10588235408067703" blue="0.0235294122248888" />
-                                 </color>
-                              </Stop>
-                           </stops>
-                        </LinearGradient>
-                     </textFill>
+                     
                   </Label>
                   <Pane layoutX="28.0" layoutY="108.0" prefHeight="105.0" prefWidth="338.0">
                      <children>
@@ -1152,7 +1068,7 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane fx:id="panelProfesores" layoutY="-1.0" prefHeight="695.0" prefWidth="1052.0">
+      <Pane fx:id="panelProfesores" layoutY="-1.0" prefHeight="695.0" prefWidth="1052.0" visible="false">
          <children>
             <Pane fx:id="_panelMenuLateralProfe" prefHeight="693.0" prefWidth="228.0">
                <children>
@@ -1214,22 +1130,7 @@
                      <font>
                         <Font name="Harrington" size="55.0" />
                      </font>
-                     <textFill>
-                        <LinearGradient endX="0.49211358873626043" endY="0.5173501577287066" startX="0.4921135526350244" startY="0.5993690746439744">
-                           <stops>
-                              <Stop>
-                                 <color>
-                                    <Color red="0.8549019694328308" green="0.10588235408067703" blue="0.0235294122248888" />
-                                 </color>
-                              </Stop>
-                              <Stop offset="1.0">
-                                 <color>
-                                    <Color red="0.8799999952316284" green="0.6487066745758057" blue="0.14959999918937683" opacity="0.9923858046531677" />
-                                 </color>
-                              </Stop>
-                           </stops>
-                        </LinearGradient>
-                     </textFill>
+                     
                   </Label>
                   <TableView fx:id="_tbprofesores_semanal" layoutX="105.0" layoutY="192.0" prefHeight="276.0" prefWidth="612.0" tableMenuButtonVisible="true">
                      <columns>
@@ -1311,22 +1212,7 @@
                      <font>
                         <Font name="Harrington" size="55.0" />
                      </font>
-                     <textFill>
-                        <LinearGradient endX="0.49211358873626043" endY="0.5173501577287066" startX="0.4921135526350244" startY="0.5993690746439744">
-                           <stops>
-                              <Stop>
-                                 <color>
-                                    <Color red="0.8549019694328308" green="0.10588235408067703" blue="0.0235294122248888" />
-                                 </color>
-                              </Stop>
-                              <Stop offset="1.0">
-                                 <color>
-                                    <Color red="0.8799999952316284" green="0.6487066745758057" blue="0.14959999918937683" opacity="0.9923858046531677" />
-                                 </color>
-                              </Stop>
-                           </stops>
-                        </LinearGradient>
-                     </textFill>
+                     
                   </Label>
                </children></Pane>
             <Pane fx:id="_panelAsignaerTareasProfes" layoutX="228.0" prefHeight="695.0" prefWidth="831.0" visible="false">
@@ -1368,22 +1254,7 @@
                      <font>
                         <Font name="Harrington" size="55.0" />
                      </font>
-                     <textFill>
-                        <LinearGradient endX="0.49211358873626043" endY="0.5173501577287066" startX="0.4921135526350244" startY="0.5993690746439744">
-                           <stops>
-                              <Stop>
-                                 <color>
-                                    <Color red="0.8549019694328308" green="0.10588235408067703" blue="0.0235294122248888" />
-                                 </color>
-                              </Stop>
-                              <Stop offset="1.0">
-                                 <color>
-                                    <Color red="0.8799999952316284" green="0.6487066745758057" blue="0.14959999918937683" opacity="0.9923858046531677" />
-                                 </color>
-                              </Stop>
-                           </stops>
-                        </LinearGradient>
-                     </textFill>
+                     
                   </Label>
                   <TextField fx:id="_tfNombreTarea" layoutX="302.0" layoutY="125.0" prefHeight="25.0" prefWidth="248.0" />
                   <Label layoutX="132.0" layoutY="522.0" text="Destinatarios">
@@ -1496,22 +1367,7 @@
                      <font>
                         <Font name="Harrington" size="55.0" />
                      </font>
-                     <textFill>
-                        <LinearGradient endX="0.49211358873626043" endY="0.5173501577287066" startX="0.4921135526350244" startY="0.5993690746439744">
-                           <stops>
-                              <Stop>
-                                 <color>
-                                    <Color red="0.8549019694328308" green="0.10588235408067703" blue="0.0235294122248888" />
-                                 </color>
-                              </Stop>
-                              <Stop offset="1.0">
-                                 <color>
-                                    <Color red="0.8799999952316284" green="0.6487066745758057" blue="0.14959999918937683" opacity="0.9923858046531677" />
-                                 </color>
-                              </Stop>
-                           </stops>
-                        </LinearGradient>
-                     </textFill>
+                     
                   </Label>
                   <Label layoutX="120.0" layoutY="478.0" text="Alumno">
                      <font>
@@ -1549,22 +1405,7 @@
                      <font>
                         <Font name="Harrington" size="55.0" />
                      </font>
-                     <textFill>
-                        <LinearGradient endX="0.49211358873626043" endY="0.5173501577287066" startX="0.4921135526350244" startY="0.5993690746439744">
-                           <stops>
-                              <Stop>
-                                 <color>
-                                    <Color red="0.8549019694328308" green="0.10588235408067703" blue="0.0235294122248888" />
-                                 </color>
-                              </Stop>
-                              <Stop offset="1.0">
-                                 <color>
-                                    <Color red="0.8799999952316284" green="0.6487066745758057" blue="0.14959999918937683" opacity="0.9923858046531677" />
-                                 </color>
-                              </Stop>
-                           </stops>
-                        </LinearGradient>
-                     </textFill>
+                     
                   </Label>
                   <TableView fx:id="_tablaP_asistencia" editable="true" layoutX="105.0" layoutY="240.0" prefHeight="228.0" prefWidth="612.0" tableMenuButtonVisible="true">
                      <columns>
@@ -1616,22 +1457,7 @@
                      <font>
                         <Font name="Harrington" size="55.0" />
                      </font>
-                     <textFill>
-                        <LinearGradient endX="0.49211358873626043" endY="0.5173501577287066" startX="0.4921135526350244" startY="0.5993690746439744">
-                           <stops>
-                              <Stop>
-                                 <color>
-                                    <Color red="0.8549019694328308" green="0.10588235408067703" blue="0.0235294122248888" />
-                                 </color>
-                              </Stop>
-                              <Stop offset="1.0">
-                                 <color>
-                                    <Color red="0.8799999952316284" green="0.6487066745758057" blue="0.14959999918937683" opacity="0.9923858046531677" />
-                                 </color>
-                              </Stop>
-                           </stops>
-                        </LinearGradient>
-                     </textFill>
+                    
                   </Label>
                   <TabPane layoutX="78.0" layoutY="120.0" prefHeight="513.0" prefWidth="695.0" tabClosingPolicy="UNAVAILABLE">
                     <tabs>
@@ -1703,22 +1529,7 @@
                      <font>
                         <Font name="Harrington" size="50.0" />
                      </font>
-                     <textFill>
-                        <LinearGradient endX="0.5236593180274361" endY="0.731861204002934" startX="0.5268138673403285" startY="0.5015773231674819">
-                           <stops>
-                              <Stop>
-                                 <color>
-                                    <Color red="0.886274516582489" green="0.658823549747467" blue="0.14509804546833038" />
-                                 </color>
-                              </Stop>
-                              <Stop offset="1.0">
-                                 <color>
-                                    <Color red="0.8549019694328308" green="0.10588235408067703" blue="0.0235294122248888" />
-                                 </color>
-                              </Stop>
-                           </stops>
-                        </LinearGradient>
-                     </textFill>
+                     
                   </Label>
                   <TableView layoutX="99.0" layoutY="138.0" prefHeight="199.0" prefWidth="625.0">
                      <columns>
@@ -1806,22 +1617,7 @@
                      <font>
                         <Font name="Harrington" size="55.0" />
                      </font>
-                     <textFill>
-                        <LinearGradient endX="0.49211358873626043" endY="0.5173501577287066" startX="0.4921135526350244" startY="0.5993690746439744">
-                           <stops>
-                              <Stop>
-                                 <color>
-                                    <Color red="0.8549019694328308" green="0.10588235408067703" blue="0.0235294122248888" />
-                                 </color>
-                              </Stop>
-                              <Stop offset="1.0">
-                                 <color>
-                                    <Color red="0.8799999952316284" green="0.6487066745758057" blue="0.14959999918937683" opacity="0.9923858046531677" />
-                                 </color>
-                              </Stop>
-                           </stops>
-                        </LinearGradient>
-                     </textFill>
+                     
                   </Label>
                   <TableView layoutX="105.0" layoutY="192.0" prefHeight="276.0" prefWidth="612.0" tableMenuButtonVisible="true">
                      <columns>
@@ -1861,22 +1657,7 @@
                      <font>
                         <Font name="Harrington" size="36.0" />
                      </font>
-                     <textFill>
-                        <LinearGradient endX="0.5331230404249125" endY="0.4637224350817947" startX="0.533123063740294" startY="0.47949520797007467">
-                           <stops>
-                              <Stop>
-                                 <color>
-                                    <Color red="0.8549019694328308" green="0.10588235408067703" blue="0.0235294122248888" />
-                                 </color>
-                              </Stop>
-                              <Stop offset="1.0">
-                                 <color>
-                                    <Color red="0.886274516582489" green="0.658823549747467" blue="0.14509804546833038" />
-                                 </color>
-                              </Stop>
-                           </stops>
-                        </LinearGradient>
-                     </textFill>
+                     
                   </Label>
                   <Label layoutX="109.0" layoutY="160.0" text="Nombre:">
                      <font>
@@ -1944,22 +1725,7 @@
                      <font>
                         <Font name="Harrington" size="36.0" />
                      </font>
-                     <textFill>
-                        <LinearGradient endX="0.5331230404249125" endY="0.4637224350817947" startX="0.533123063740294" startY="0.47949520797007467">
-                           <stops>
-                              <Stop>
-                                 <color>
-                                    <Color red="0.8549019694328308" green="0.10588235408067703" blue="0.0235294122248888" />
-                                 </color>
-                              </Stop>
-                              <Stop offset="1.0">
-                                 <color>
-                                    <Color red="0.886274516582489" green="0.658823549747467" blue="0.14509804546833038" />
-                                 </color>
-                              </Stop>
-                           </stops>
-                        </LinearGradient>
-                     </textFill>
+                    
                   </Label>
                   <Label layoutX="109.0" layoutY="160.0" text="Nombre:">
                      <font>
@@ -2039,22 +1805,7 @@
                <font>
                   <Font name="Harrington" size="55.0" />
                </font>
-               <textFill>
-                  <LinearGradient endX="0.49211358873626043" endY="0.5173501577287066" startX="0.4921135526350244" startY="0.5993690746439744">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="0.8549019694328308" green="0.10588235408067703" blue="0.0235294122248888" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="0.8799999952316284" green="0.6487066745758057" blue="0.14959999918937683" opacity="0.9923858046531677" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </textFill>
+               
             </Label>
             <TableView fx:id="_tablaP_asistencia1" editable="true" layoutX="105.0" layoutY="240.0" prefHeight="228.0" prefWidth="612.0" tableMenuButtonVisible="true">
                <columns>

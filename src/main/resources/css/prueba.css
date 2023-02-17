@@ -1,0 +1,49 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 17 feb 2023, 20:21:24
+    Author     : nuria
+*/
+
+Label{
+      -fx-text-fill: linear-gradient(from 50% 50% to 50% 40%, #1d7239,#c0c0c0);
+    -fx-font-family:"Harrington";
+        /*-fx-text-fill:red;*/
+    /*    funciona el gradian*/
+}
+.table-view .column-header .label{
+    -fx-text-fill:black;
+    -fx-font-family:"Harrington";
+    -fx-font-Size:16;
+
+}
+.table-cell{
+    -fx-font-Size:14;
+    -fx-font-weight:bold;
+    -fx-text-fill:black;
+    -fx-font-family:"Harrington";
+
+}
+.label_titulo1 .label{
+    -fx-text-fill:black;
+
+}
+.combo-box{
+    -fx-text-fill:black;
+    -fx-font-Size:12;
+    -fx-font-weight:bold;
+    -fx-text-fill:black;
+    -fx-font-family:"Harrington";
+
+}
+/*.combo-box .list-cell{
+    -fx-control-inner-background:#fffad4;
+    -fx-background-color:#fffad4;
+}*/
+Text{
+    -fx-font-family:"Harrington";
+    -fx-font-Size:14;
+  
+}
