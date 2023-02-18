@@ -55,3 +55,12 @@ Text{
     -fx-font-Size:14;
 
 }
+/*.Cssboton{
+     -fx-font-family: "Arial";
+     -fx-font-Size:14;
+         
+}*/
+.CssMenu{
+     -fx-font-family: "Harrington";
+     -fx-font-Size:30;
+}

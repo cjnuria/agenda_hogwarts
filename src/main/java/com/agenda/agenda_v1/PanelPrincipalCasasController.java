@@ -5,6 +5,7 @@
 package com.agenda.agenda_v1;
 
 import java.io.File;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -16,6 +17,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -40,6 +42,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -445,17 +448,15 @@ public class PanelPrincipalCasasController implements Initializable {
     @FXML
     private Tab tab_pane_historico;
     @FXML
-    private TableView<?> tablaP_listar_mensajes;
+    private TableView<mensajeria_objeto> tablaP_listar_mensajes;
     @FXML
-    private TableColumn<?, ?> columP_dni_mensajeria;
+    private TableColumn<mensajeria_objeto, String> columP_apellidos_mensajeria;
     @FXML
-    private TableColumn<?, ?> columP_apellidos_mensajeria;
+    private TableColumn<mensajeria_objeto, String> columP_curso_mensajeria;
     @FXML
-    private TableColumn<?, ?> columP_curso_mensajeria;
+    private TableColumn<mensajeria_objeto, String> columP_fecha_mensajeria;
     @FXML
-    private TableColumn<?, ?> columP_fecha_mensajeria;
-    @FXML
-    private TableColumn<?, ?> columP_leidos_mensajeria;
+    private TableColumn<mensajeria_objeto, Boolean> columP_leidos_mensajeria;
     @FXML
     private TextArea textarea_mensajeria;
     @FXML
@@ -518,6 +519,54 @@ public class PanelPrincipalCasasController implements Initializable {
     private ImageView imagen_texto_asignatura;
     @FXML
     private Text pruebaInicio;
+    @FXML
+    private ImageView _imagen_perfil;
+    @FXML
+    private Button _botonA_cambiar_Perfil;
+    @FXML
+    private ImageView abrir_mensajeria_alumnos;
+    @FXML
+    private Pane _panelMensajeria_alumnos;
+    @FXML
+    private Tab tab_pane_novedades1;
+    @FXML
+    private ComboBox<?> combo_mensajeria_alumnos1;
+    @FXML
+    private TextArea textArea_menaje_editar1;
+    @FXML
+    private Tab tab_pane_historico1;
+
+    private TableColumn<mensajeria_objeto, String> columP_dni_mensajeria1;
+    @FXML
+    private TableColumn<mensajeria_objeto, String> columP_apellidos_mensajeria1;
+    @FXML
+    private TableColumn<mensajeria_objeto, String> columP_fecha_mensajeria1;
+    @FXML
+    private TableColumn<mensajeria_objeto, Boolean> columP_leidos_mensajeria1;
+    @FXML
+    private TextArea textarea_mensajeria1;
+    @FXML
+    private Label label_mensaje_alumnos;
+    @FXML
+    private Button boton_mostrarMensaje_alumnos;
+    @FXML
+    private Button boton_cerrar;
+    @FXML
+    private TableColumn<mensajeria_objeto, String> columP_nombre_mensajeria1;
+    @FXML
+    private TableView<mensajeria_objeto> tablaA_listar_mensajes1;
+    @FXML
+    private TableColumn<?, ?> columP_Id_mensajeria1;
+    @FXML
+    private TableColumn<?, ?> columP_id_mensajeria;
+    @FXML
+    private Button botonP_mostar_mensaje;
+    @FXML
+    private Button botonP_cerrar_mensaje;
+    @FXML
+    private Label label_mensajeP;
+    @FXML
+    private TableColumn<?, ?> columP_nombre_mensajeria;
 
     /**
      * Initializes the controller class.
@@ -565,7 +614,23 @@ public class PanelPrincipalCasasController implements Initializable {
             }
 
         });
-        label_titulo1.getStyleClass().add("label_titulo1");
+        botonSalirAlumno1.getStyleClass().add("Cssboton");
+        botonSalirAlumno.getStyleClass().add("Cssboton");
+        _boton_tareas.getStyleClass().add("CssMenu");
+        _boton_Alumnos_Profes.getStyleClass().add("CssMenu");
+        _boton_Cursos_Profes.getStyleClass().add("CssMenu");
+        _boton_alumnos_administrador.getStyleClass().add("CssMenu");
+        _boton_asignaturas.getStyleClass().add("CssMenu");
+        _boton_cerrar_sesion.getStyleClass().add("CssMenu");
+        _boton_notas.getStyleClass().add("CssMenu");
+        _boton_profesores_administrador.getStyleClass().add("CssMenu");
+        _boton_sala_comun.getStyleClass().add("CssMenu");
+        _boton_sala_comun1.getStyleClass().add("CssMenu");
+        _boton_sala_comun11.getStyleClass().add("CssMenu");
+        _boton_sala_comun111.getStyleClass().add("CssMenu");
+        _boton_sala_comun_Profes.getStyleClass().add("CssMenu");
+        _boton_salir.getStyleClass().add("CssMenu");
+        _boton_tareas_Profes.getStyleClass().add("CssMenu");
 
     }
 
@@ -665,6 +730,7 @@ public class PanelPrincipalCasasController implements Initializable {
         //panelMenuLateral.getChildren().add(imageView1);//para coger nodo hijo y añadir nueva imagen
         _imgEScudo.setImage(image1);
         _imagen_bandera.setImage(image2);
+        win.getScene().getStylesheets().clear();
         panelMenuLateral.getStylesheets().clear();
         panelMenuLateral.getStylesheets().add("/css/CssVerde.css");
         panelAlumnos.getStylesheets().clear();
@@ -687,6 +753,7 @@ public class PanelPrincipalCasasController implements Initializable {
         _imgEScudo.setImage(image1);
         _imagen_bandera.setImage(image2);
         //solo csss para menu lateral si se pone asi
+        win.getScene().getStylesheets().clear();
         panelMenuLateral.getStylesheets().clear();
         panelMenuLateral.getStylesheets().add("/css/CssRojo.css");
         panelAlumnos.getStylesheets().clear();
@@ -788,7 +855,7 @@ public class PanelPrincipalCasasController implements Initializable {
     }
 
     //===========================================================================================================
-    //////////////MÉTODOS PARA CABIAR PANELES SEGÚN DONDE HAGAS CLICK/////////
+    //////////////MÉTODOS PARA CAMBIAR PANELES SEGÚN DONDE HAGAS CLICK/////////
     //////////////////////////////////////////////////////////////////////////
     @FXML
     private void cambiarPanelSalaComun(ActionEvent event) {
@@ -2783,6 +2850,36 @@ public class PanelPrincipalCasasController implements Initializable {
 
     }
 
+    public ResultSet rellenar_tabla_mensajeriaAlumnos(int id_estudiante) {
+        try {
+            PreparedStatement pst = conn.prepareStatement("SELECT * FROM mensajes WHERE id_estudiante =? ORDER BY leido DESC ", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            pst.setInt(1, id_estudiante);
+            ResultSet resultado = pst.executeQuery();
+            return resultado;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+
+    }
+
+    public ResultSet rellenar_tabla_mensajeriaProfesor(int id_profesor) {
+        try {
+            PreparedStatement pst = conn.prepareStatement("SELECT * FROM mensajes WHERE id_profesor =? ORDER BY leido DESC ", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            pst.setInt(1, id_profesor);
+            ResultSet resultado = pst.executeQuery();
+            return resultado;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+
+    }
+
     //======================================================================================
     public String obtenerNombreProfesor_porID(int id_profesor) {
         try {
@@ -2794,8 +2891,30 @@ public class PanelPrincipalCasasController implements Initializable {
                 Jopane("No se han encontrado datos", "Error");
                 return null;
             } else {
-                String apellido = resultado.getString("apellidos");
-                return apellido;
+                String nombre = resultado.getString("nombre");
+                return nombre;
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+
+    }
+
+    public String obtenerApellidoProfesor_porID(int id_profesor) {
+        try {
+            PreparedStatement pst = conn.prepareStatement("SELECT * FROM profesores where id_profesor= ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            pst.setInt(1, id_profesor);
+            ResultSet resultado = pst.executeQuery();
+            if (!resultado.first()) {
+
+                Jopane("No se han encontrado datos", "Error");
+                return null;
+            } else {
+                String apellidos = resultado.getString("apellidos");
+                return apellidos;
 
             }
         } catch (SQLException ex) {
@@ -3421,10 +3540,336 @@ public class PanelPrincipalCasasController implements Initializable {
     @FXML
     public void cambiarMensajeria() {
         vaciarPanelTodo();
+        combo_mensajeria_alumnos.getItems().clear();
+        filtar_combo_mensajeria_profesores();
         panelProfesores.setVisible(true);
         _paneMensajeria.setVisible(true);
+     
+        rellenar_tabla_mensajesP(14);
+//        TableColumn<mensajeria_objeto,String> columna=(TableColumn<mensajeria_objeto,String>) tablaA_listar_mensajes1.getColumns().get(0);
+//        columna.setVisible(false);
     }
+
+    @FXML
+    public void cambiarMensajeria_alumnos() {
+        vaciarPanelTodo();
+        tablaA_listar_mensajes1.getItems().clear();
+        rellenar_tabla_mensajesA(53);
+        combo_mensajeria_alumnos1.getItems().clear();
+        filtar_combo_mensajeria_alumnos();
+        panelAlumnos.setVisible(true);
+        _panelMensajeria_alumnos.setVisible(true);
+        textarea_mensajeria1.setVisible(false);
+        label_mensaje_alumnos.setVisible(false);
+        boton_cerrar.setVisible(false);
+
+    }
+
+    @FXML
+    public void botonGuardarMensajeria_profesores() {
+        try {
+            String datos_completos = combo_mensajeria_alumnos.getValue().toString();
+            String dni = datos_completos.substring(0, 9);
+            String texto = textArea_menaje_editar.getText();
+            int id_profesor = obtener_id_profesor("minerva");//????????????????
+            int id_estudiante = obtner_id_estudiante(dni);
+            String fecha = LocalDate.now().toString();
+
+            PreparedStatement pst = conn.prepareStatement("INSERT INTO alu_nurismy_agenda.mensajes (id_profesor, id_estudiante, mensaje, fecha) VALUES (?, ?, ?, ?)");
+            pst.setInt(1, id_profesor);
+            pst.setInt(2, id_estudiante);
+            pst.setString(3, texto);
+            pst.setString(4, fecha);
+
+            pst.executeUpdate();
+            textArea_menaje_editar.clear();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    @FXML
+    public void botonGuardarMensajeria_Alumnos() {
+        try {
+            String datos_completos = combo_mensajeria_alumnos1.getValue().toString();
+            String texto = textArea_menaje_editar1.getText();
+            System.out.println(texto);
+            int id_profesor = obtener_id_profesor(datos_completos.substring(0, datos_completos.indexOf("-")).trim());
+            System.out.println(id_profesor);
+            int id_estudiante = obtner_id_estudiante("76652552s");//????????????????
+            System.out.println(id_estudiante);
+            String fecha = LocalDate.now().toString();
+            System.out.println(fecha);
+
+            PreparedStatement pst = conn.prepareStatement("INSERT INTO alu_nurismy_agenda.mensajes (id_profesor, id_estudiante, mensaje, fecha) VALUES (?, ?, ?, ?)");
+            pst.setInt(1, id_profesor);
+            pst.setInt(2, id_estudiante);
+            pst.setString(3, texto);
+            pst.setString(4, fecha);
+
+            pst.executeUpdate();
+            textArea_menaje_editar1.clear();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public void filtar_combo_mensajeria_profesores() {
+        ResultSet rs;
+        ArrayList a = new ArrayList();
+        try {
+            PreparedStatement pst = conn.prepareStatement("SELECT nombre, apellidos, dni  FROM estudiantes", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+
+            rs = pst.executeQuery();
+            combo_mensajeria_alumnos.getItems().clear();
+
+            while (rs.next()) {
+
+                String dni = rs.getString("dni");
+                String nombre = rs.getString("nombre");
+                String apellidos = rs.getString("apellidos");
+
+                String c = dni + " - " + nombre + " " + apellidos;
+                a.add(c);
+
+            }
+            combo_mensajeria_alumnos.getItems().addAll(a);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public void filtar_combo_mensajeria_alumnos() {
+        ResultSet rs;
+        ArrayList a = new ArrayList();
+        try {
+            PreparedStatement pst = conn.prepareStatement("SELECT nombre, apellidos, dni  FROM profesores", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+
+            rs = pst.executeQuery();
+            combo_mensajeria_alumnos1.getItems().clear();
+
+            while (rs.next()) {
+
+                String dni = rs.getString("dni");
+                String nombre = rs.getString("nombre");
+                String apellidos = rs.getString("apellidos");
+
+                String c = dni + " - " + nombre + " " + apellidos;
+                a.add(c);
+
+            }
+            combo_mensajeria_alumnos1.getItems().addAll(a);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    @FXML
+    private void cambiarImagenPerfil() {
+        // Abre el cuadro de diálogo de selección de archivo
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Seleccionar imagen");
+        File selectedFile = fileChooser.showOpenDialog(null);
+
+        if (selectedFile != null) {
+            try {
+                // Actualiza la imagen en la ImageView con la imagen seleccionada
+                _imagen_perfil.setImage(new Image(selectedFile.toURI().toURL().toExternalForm()));
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @FXML
+    public void mostrar_mensajesAlumnos() {
+        boton_mostrarMensaje_alumnos.setVisible(false);
+        textarea_mensajeria1.setVisible(true);
+        label_mensaje_alumnos.setVisible(true);
+        boton_cerrar.setVisible(true);
+
+        // Obtener los datos de la fila seleccionada
+        mensajeria_objeto objetoSeleccionado = tablaA_listar_mensajes1.getSelectionModel().getSelectedItem();
+        int id_mensaje = objetoSeleccionado.id;
+
+        try {
+            PreparedStatement pst = conn.prepareStatement("SELECT * FROM mensajes where id_mensaje= ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            pst.setInt(1, id_mensaje);
+
+            ResultSet rs = pst.executeQuery();
+            if (rs.first()) {
+                String mensaje = rs.getString("mensaje");
+                // Rellenar el TextArea con el texto a mostrar
+                textarea_mensajeria1.setText(mensaje);
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public void mostrar_mensajesProfesor() {
+        botonP_mostar_mensaje.setVisible(false);
+        textarea_mensajeria.setVisible(true);
+        label_mensajeP.setVisible(true);
+        botonP_cerrar_mensaje.setVisible(true);
+
+        // Obtener los datos de la fila seleccionada
+        mensajeria_objeto objetoSeleccionado = tablaP_listar_mensajes.getSelectionModel().getSelectedItem();
+        int id_mensaje = objetoSeleccionado.id;
+
+        try {
+            PreparedStatement pst = conn.prepareStatement("SELECT * FROM mensajes where id_mensaje= ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            pst.setInt(1, id_mensaje);
+
+            ResultSet rs = pst.executeQuery();
+            if (rs.first()) {
+                String mensaje = rs.getString("mensaje");
+                // Rellenar el TextArea con el texto a mostrar
+                textarea_mensajeria.setText(mensaje);
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    @FXML
+    public void boton_cerrar_mensajeA() {
+        boton_mostrarMensaje_alumnos.setVisible(true);
+        textarea_mensajeria1.setVisible(false);
+        label_mensaje_alumnos.setVisible(false);
+        boton_cerrar.setVisible(false);
+        textarea_mensajeria1.setText("");
+
+    }
+
+    public void boton_cerrar_mensajeP() {
+        botonP_mostar_mensaje.setVisible(true);
+        textarea_mensajeria.setVisible(false);
+        label_mensajeP.setVisible(false);
+        botonP_cerrar_mensaje.setVisible(false);
+        textarea_mensajeria.setText("");
+
+    }
+
+    public String obtener_dniProfesor_porID(int id_profesor) {
+        try {
+            PreparedStatement pst = conn.prepareStatement("SELECT * FROM profesores where id_profesor= ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            pst.setInt(1, id_profesor);
+
+            ResultSet rs = pst.executeQuery();
+            if (rs.first()) {
+                String dni = rs.getString("dni");
+                return dni;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public ObservableList<mensajeria_objeto> rellenar_tabla_mensajesA(int id_estudiante) {
+        String estado_leido = "";
+        ObservableList<mensajeria_objeto> obs = FXCollections.observableArrayList();
+        columP_Id_mensajeria1.setCellValueFactory(new PropertyValueFactory<>("id"));
+        columP_nombre_mensajeria1.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+        columP_apellidos_mensajeria1.setCellValueFactory(new PropertyValueFactory<>("apellidos"));
+        columP_fecha_mensajeria1.setCellValueFactory(new PropertyValueFactory<>("fecha"));
+        columP_leidos_mensajeria1.setCellValueFactory(new PropertyValueFactory<>("leidos"));
+
+        try {
+            ResultSet rs = rellenar_tabla_mensajeriaAlumnos(53);//????????????????????????????????
+
+            while (rs.next()) {
+                int id_profesor = rs.getInt("id_profesor");
+                int id_mensaje = rs.getInt("id_mensaje");
+                String nombre = obtenerNombreProfesor_porID(id_profesor);
+                String apellidos = obtenerApellidoProfesor_porID(id_profesor);
+
+                String fecha = rs.getString("fecha");
+                boolean leido = rs.getBoolean("leido");
+                if (leido == false) {
+                    estado_leido = "No leído";
+                } else {
+                    estado_leido = "Leído";
+                }
+
+                mensajeria_objeto v = new mensajeria_objeto(id_mensaje, nombre, apellidos, fecha, estado_leido);
+                obs.add(v);
+                tablaA_listar_mensajes1.getItems().addAll(v);
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+        return obs;
+    }
+
+    public ObservableList<mensajeria_objeto> rellenar_tabla_mensajesP(int id_profesor) {
+        String estado_leido = "";
+        ObservableList<mensajeria_objeto> obs = FXCollections.observableArrayList();
+        columP_id_mensajeria.setCellValueFactory(new PropertyValueFactory<>("id"));
+        columP_nombre_mensajeria.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+        columP_apellidos_mensajeria.setCellValueFactory(new PropertyValueFactory<>("apellidos"));
+        columP_curso_mensajeria.setCellValueFactory(new PropertyValueFactory<>("curso"));
+        columP_fecha_mensajeria.setCellValueFactory(new PropertyValueFactory<>("fecha"));
+        columP_leidos_mensajeria.setCellValueFactory(new PropertyValueFactory<>("leido"));
+
+        try {
+            ResultSet rs = rellenar_tabla_mensajeriaProfesor(id_profesor);//????????????????????????????????
+
+            while (rs.next()) {
+               
+                int id_mensaje = rs.getInt("id_mensaje");
+                int id_alumno=rs.getInt("id_alumno");
+                String nombre = obtenerNombreAlumno_porID(id_alumno);
+                String apellidos = obtenerApellidoAlumno_porID(id_alumno);
+                String dni=obtner_dni_estudiante(id_alumno);
+                String curso= cursos_por_dni(dni);
+                String fecha = rs.getString("fecha");
+                boolean leido = rs.getBoolean("leido");
+                if (leido == false) {
+                    estado_leido = "No leído";
+                } else {
+                    estado_leido = "Leído";
+                }
+
+                mensajeria_objeto v = new mensajeria_objeto(id_mensaje, nombre, apellidos,curso, fecha, estado_leido);
+                obs.add(v);
+                tablaA_listar_mensajes1.getItems().addAll(v);
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+        return obs;
+    }
+
 }
+
 
 /*
 

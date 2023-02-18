@@ -19,14 +19,14 @@ Label{
 Button{
     -fx-background-color: #fbd702; /*amarillo*/
     -fx-text-fill: #131313;
-        -fx-font-family: "Harrington";
+    -fx-font-family: "Harrington";
 
 }
 .table-view .column-header .label{
     -fx-text-fill:black;
     -fx-font-family:"Harrington";
     -fx-font-Size:18;
-    
+
 
 }
 .table-cell{
@@ -43,7 +43,7 @@ Button{
 .combo-box{
     -fx-text-fill:black;
     -fx-font-Size:14;
-   
+
     -fx-text-fill:black;
     -fx-font-family:"Harrington";
 
@@ -56,4 +56,8 @@ Text{
     -fx-font-family:"Harrington";
     -fx-font-Size:14;
 
+}
+.CssMenu{
+     -fx-font-family: "Harrington";
+     -fx-font-Size:30;
 }

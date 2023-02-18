@@ -34,7 +34,78 @@
    <children>
       <Pane fx:id="panelAlumnos" layoutX="-2.0" layoutY="-1.0" prefHeight="691.0" prefWidth="1044.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="-1.0">
          <children>
-            <Pane fx:id="panelTareas1" layoutX="222.0" layoutY="-1.0" prefHeight="695.0" prefWidth="823.0">
+            <Pane fx:id="_panelMensajeria_alumnos" layoutX="234.0" layoutY="5.0" prefHeight="695.0" prefWidth="831.0" style="-fx-background-color: white;" visible="false">
+               <children>
+                  <ImageView fitHeight="821.0" fitWidth="854.0" layoutX="-21.0" layoutY="-125.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagenes/pngegg%20(51).png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="262.0" layoutY="49.0" text="Mensajería">
+                     <font>
+                        <Font name="Harrington" size="55.0" />
+                     </font>
+                  </Label>
+                  <TabPane layoutX="78.0" layoutY="120.0" prefHeight="513.0" prefWidth="695.0" tabClosingPolicy="UNAVAILABLE">
+                     <tabs>
+                        <Tab fx:id="tab_pane_novedades1" text="Enviar mensajes">
+                           <content>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Label layoutX="103.0" layoutY="65.0" text="Alumno:">
+                                       <font>
+                                          <Font name="Harrington" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="105.0" layoutY="125.0" text="Mensaje:">
+                                       <font>
+                                          <Font name="Harrington" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <ComboBox fx:id="combo_mensajeria_alumnos1" layoutX="231.0" layoutY="61.0" prefHeight="25.0" prefWidth="215.0" />
+                                    <TextArea fx:id="textArea_menaje_editar1" layoutX="93.0" layoutY="162.0" prefHeight="149.0" prefWidth="480.0" />
+                                    <Button layoutX="288.0" layoutY="353.0" mnemonicParsing="false" onMouseClicked="#botonGuardarMensajeria_Alumnos" text="Enviar">
+                                       <font>
+                                          <Font name="Harrington" size="24.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                        <Tab fx:id="tab_pane_historico1" text="Mensajes">
+                           <content>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <TableView fx:id="tablaA_listar_mensajes1" layoutX="19.0" layoutY="17.0" prefHeight="200.0" prefWidth="617.0">
+                                       <columns>
+                                          <TableColumn fx:id="columP_Id_mensajeria1" prefWidth="86.88888549804688" text="Id" />
+                                          <TableColumn fx:id="columP_nombre_mensajeria1" prefWidth="90.44442749023438" text="Nombre" />
+                                          <TableColumn fx:id="columP_apellidos_mensajeria1" prefWidth="189.33328247070312" text="Apellidos" />
+                                          <TableColumn fx:id="columP_fecha_mensajeria1" prefWidth="135.3333740234375" text="Fecha" />
+                                          <TableColumn fx:id="columP_leidos_mensajeria1" prefWidth="114.66668701171875" text="Leído" />
+                                       </columns>
+                                    </TableView>
+                                    <TextArea fx:id="textarea_mensajeria1" layoutX="21.0" layoutY="269.0" prefHeight="190.0" prefWidth="503.0" />
+                                    <Label fx:id="label_mensaje_alumnos" layoutX="26.0" layoutY="234.0" text="Mensaje:">
+                                       <font>
+                                          <Font name="Harrington" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Button fx:id="boton_mostrarMensaje_alumnos" layoutX="302.0" layoutY="230.0" mnemonicParsing="false" onMouseClicked="#mostrar_mensajesAlumnos" text="Mostrar Mensaje" />
+                                    <Button fx:id="boton_cerrar" layoutX="563.0" layoutY="269.0" mnemonicParsing="false" onMouseClicked="#boton_cerrar_mensajeA" text="Cerrar" />
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                     </tabs>
+                     <effect>
+                        <SepiaTone />
+                     </effect>
+                  </TabPane>
+               </children>
+            </Pane>
+            <Pane fx:id="panelTareas1" layoutX="222.0" layoutY="-1.0" prefHeight="695.0" prefWidth="823.0" visible="false">
                <children>
                   <ImageView fitHeight="820.0" fitWidth="837.0" layoutY="-124.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -46,16 +117,16 @@
                         <Font name="Harrington" size="50.0" />
                      </font>
                      <textFill>
-                        <LinearGradient endX="1.0" endY="0.47003153220336147" startY="0.08517350157728706">
+                        <LinearGradient endX="0.6056782334384857" endY="0.5552050157300304" startX="0.605678208618886" startY="0.4290220699851821">
                            <stops>
                               <Stop>
                                  <color>
-                                    <Color />
+                                    <Color red="0.5199999809265137" green="0.5199999809265137" blue="0.18719999492168427" opacity="0.8199999928474426" />
                                  </color>
                               </Stop>
                               <Stop offset="1.0">
                                  <color>
-                                    <Color red="1.0" green="1.0" blue="1.0" />
+                                    <Color red="0.6754385828971863" green="0.22306151688098907" blue="0.22306151688098907" />
                                  </color>
                               </Stop>
                            </stops>
@@ -191,7 +262,7 @@
                      <font>
                         <Font name="Harrington" size="16.0" />
                      </font></Label>
-                  <Label layoutX="300.0" layoutY="600.0" text="Nota media">
+                  <Label layoutX="300.0" layoutY="600.0" text="Mensajería">
                      <font>
                         <Font name="Harrington" size="16.0" />
                      </font></Label>
@@ -206,14 +277,14 @@
                         <Image url="@imagenes/pngegg%20(1).png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="92.0" fitWidth="128.0" layoutX="281.0" layoutY="479.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="abrir_mensajeria_alumnos" fitHeight="92.0" fitWidth="128.0" layoutX="298.0" layoutY="479.0" onMouseClicked="#cambiarMensajeria_alumnos" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@imagenes/libros.png" />
+                        <Image url="@imagenes/png6egg%20(11).png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="73.0" fitWidth="72.0" layoutX="467.0" layoutY="488.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="63.0" fitWidth="92.0" layoutX="458.0" layoutY="493.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@imagenes/recordadora_roja.png" />
+                        <Image url="@imagenes/pngegg.png" />
                      </image>
                   </ImageView>
                </children>
@@ -634,7 +705,7 @@
                      </font>
                   </Label>
                   <TextField fx:id="_tfFechaNacEstudiante" layoutX="309.0" layoutY="402.0" prefHeight="25.0" prefWidth="254.0" />
-                  <ImageView fitHeight="92.0" fitWidth="102.0" layoutX="674.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="_imagen_perfil" fitHeight="92.0" fitWidth="102.0" layoutX="674.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@imagenes/WhatsApp%20Image%202022-12-08%20at%2017.45.47.jpeg" />
                      </image>
@@ -656,6 +727,7 @@
                   </Label>
                   <TextField fx:id="_tfPassEstudiante" layoutX="309.0" layoutY="492.0" prefHeight="25.0" prefWidth="254.0" />
                   <ComboBox fx:id="_cbCursos" layoutX="308.0" layoutY="449.0" prefHeight="25.0" prefWidth="254.0" />
+                  <Button fx:id="_botonA_cambiar_Perfil" layoutX="671.0" layoutY="210.0" mnemonicParsing="false" onMouseClicked="#cambiarImagenPerfil" text="Cambiar Imagen" />
                </children>
             </Pane>
             <Pane fx:id="paneAsignaturasIndividual" layoutX="218.0" layoutY="-1.0" prefHeight="695.0" prefWidth="823.0" visible="false">
@@ -710,9 +782,9 @@
                         <Image url="@../../../img/otros/atras.png" />
                      </image>
                   </ImageView>
+                  <ImageView fx:id="imagen_texto_asignatura" fitHeight="317.0" fitWidth="646.0" layoutX="82.0" layoutY="143.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
-            <ImageView fx:id="imagen_texto_asignatura" fitHeight="314.0" fitWidth="555.0" layoutX="343.0" layoutY="146.0" pickOnBounds="true" preserveRatio="true" />
             <Pane fx:id="panelSelecionAsignatura" layoutX="222.0" layoutY="10.0" prefHeight="695.0" prefWidth="854.0" visible="false">
                <children>
                   <ImageView fitHeight="869.0" fitWidth="850.0" layoutX="-4.0" layoutY="-145.0" pickOnBounds="true" preserveRatio="true">
@@ -1068,7 +1140,7 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane fx:id="panelProfesores" layoutY="-1.0" prefHeight="695.0" prefWidth="1052.0" visible="false">
+      <Pane fx:id="panelProfesores" layoutY="-1.0" prefHeight="695.0" prefWidth="1052.0">
          <children>
             <Pane fx:id="_panelMenuLateralProfe" prefHeight="693.0" prefWidth="228.0">
                <children>
@@ -1119,7 +1191,7 @@
                   </Button>
                </children>
             </Pane>
-            <Pane fx:id="_panelSalaComunProfes" layoutX="223.0" prefHeight="695.0" prefWidth="831.0" style="-fx-background-color: white;" visible="false">
+            <Pane fx:id="_panelSalaComunProfes" layoutX="223.0" prefHeight="695.0" prefWidth="831.0" style="-fx-background-color: white;">
                <children>
                   <ImageView fitHeight="822.0" fitWidth="837.0" layoutX="-3.0" layoutY="-125.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -1446,7 +1518,7 @@
                   <ComboBox fx:id="_comboP_AsistenciaCasa" layoutX="300.0" layoutY="187.0" prefHeight="25.0" prefWidth="228.0" />
                </children>
             </Pane>
-            <Pane fx:id="_paneMensajeria" layoutX="223.0" prefHeight="695.0" prefWidth="831.0" style="-fx-background-color: white;" visible="false">
+            <Pane fx:id="_paneMensajeria" layoutX="223.0" prefHeight="695.0" prefWidth="831.0" style="-fx-background-color: white;">
                <children>
                   <ImageView fitHeight="817.0" fitWidth="833.0" layoutX="1.0" layoutY="-118.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -1477,7 +1549,7 @@
                                     </Label>
                                     <ComboBox fx:id="combo_mensajeria_alumnos" layoutX="231.0" layoutY="61.0" prefHeight="25.0" prefWidth="215.0" />
                                     <TextArea fx:id="textArea_menaje_editar" layoutX="93.0" layoutY="162.0" prefHeight="149.0" prefWidth="480.0" />
-                                    <Button layoutX="288.0" layoutY="353.0" mnemonicParsing="false" text="Enviar">
+                                    <Button layoutX="288.0" layoutY="353.0" mnemonicParsing="false" onMouseClicked="#botonGuardarMensajeria_profesores" text="Enviar">
                                        <font>
                                           <Font name="Harrington" size="24.0" />
                                        </font>
@@ -1490,8 +1562,8 @@
                                  <children>
                                     <TableView fx:id="tablaP_listar_mensajes" layoutX="19.0" layoutY="17.0" prefHeight="200.0" prefWidth="617.0">
                                       <columns>
-                                          <TableColumn fx:id="columP_dni_mensajeria" prefWidth="86.88888549804688" text="Dni" />
-                                        <TableColumn prefWidth="90.44442749023438" text="Nombre" />
+                                          <TableColumn fx:id="columP_id_mensajeria" prefWidth="86.88888549804688" text="Id" />
+                                        <TableColumn fx:id="columP_nombre_mensajeria" prefWidth="90.44442749023438" text="Nombre" />
                                         <TableColumn fx:id="columP_apellidos_mensajeria" prefWidth="113.33331298828125" text="Apellidos" />
                                           <TableColumn fx:id="columP_curso_mensajeria" prefWidth="115.33331298828125" text="Curso" />
                                           <TableColumn fx:id="columP_fecha_mensajeria" prefWidth="111.33331298828125" text="Fecha" />
@@ -1499,11 +1571,13 @@
                                       </columns>
                                     </TableView>
                                     <TextArea fx:id="textarea_mensajeria" layoutX="21.0" layoutY="269.0" prefHeight="190.0" prefWidth="503.0" />
-                                    <Label layoutX="26.0" layoutY="234.0" text="Mensaje:">
+                                    <Label fx:id="label_mensajeP" layoutX="26.0" layoutY="234.0" text="Mensaje:">
                                        <font>
                                           <Font name="Harrington" size="18.0" />
                                        </font>
                                     </Label>
+                                    <Button fx:id="botonP_mostar_mensaje" layoutX="302.0" layoutY="230.0" mnemonicParsing="false" onMouseClicked="#mostrar_mensajesProfesor" text="Mostrar Mensaje" />
+                                    <Button fx:id="botonP_cerrar_mensaje" layoutX="563.0" layoutY="269.0" mnemonicParsing="false" onMouseClicked="#boton_cerrar_mensajeP" text="Cerrar" />
                                  </children>
                               </AnchorPane>
                            </content></Tab>
