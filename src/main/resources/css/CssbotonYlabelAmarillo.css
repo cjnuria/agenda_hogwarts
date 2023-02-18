@@ -7,16 +7,53 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     Author     : nuria
 */
 
+
+
+Label{
+    -fx-text-fill: linear-gradient(from 60.5678% 38.8013% to 60.5678% 55.836%,#131313, #fbd702);
+
+    -fx-font-family:"Harrington";
+
+    /*    funciona el gradian*/
+}
 Button{
-    -fx-background-color: #fbd702;
-    -fx-text-fill:  #131313;
-/*    -fx-font-family: "Harrington";*/
+    -fx-background-color: #fbd702; /*amarillo*/
+    -fx-text-fill: #131313;
+        -fx-font-family: "Harrington";
 
 }
-#label_titulo1{
-    -fx-text-fill: linear-gradient(from 52.6814% 50.1577% to 52.3659% 73.1861%, #e2a825 0.0%, #da1b06 100.0%);
+.table-view .column-header .label{
+    -fx-text-fill:black;
+    -fx-font-family:"Harrington";
+    -fx-font-Size:18;
     
+
 }
-Label{
-     -fx-text-fill: #131313;
+.table-cell{
+    -fx-font-Size:14;
+    -fx-font-weight:bold;
+    -fx-text-fill:black;
+    -fx-font-family:"Harrington";
+
+}
+.label_titulo1 .label{
+    -fx-text-fill:black;
+
+}
+.combo-box{
+    -fx-text-fill:black;
+    -fx-font-Size:14;
+   
+    -fx-text-fill:black;
+    -fx-font-family:"Harrington";
+
+}
+/*.combo-box .list-cell{
+    -fx-control-inner-background:#fffad4;
+    -fx-background-color:#fffad4;
+}*/
+Text{
+    -fx-font-family:"Harrington";
+    -fx-font-Size:14;
+
 }

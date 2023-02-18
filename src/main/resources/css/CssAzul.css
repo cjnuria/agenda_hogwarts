@@ -9,5 +9,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 
 Button{
     -fx-background-color: #00587e;
-    -fx-text-fill: #613e2e;
+    -fx-text-fill: #c0c0c0;
+    /*-fx-font-Size:30;*/
 }

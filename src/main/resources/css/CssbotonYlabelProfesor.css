@@ -7,16 +7,25 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     Author     : nuria
 */
 
+
 Label{
-      -fx-text-fill: linear-gradient(from 50% 50% to 50% 40%, #1d7239,#c0c0c0);
+    -fx-text-fill: linear-gradient(from 60.5678% 38.8013% to 60.5678% 55.836%,#feca04, #2c333d);
+
     -fx-font-family:"Harrington";
-        /*-fx-text-fill:red;*/
+
     /*    funciona el gradian*/
+}
+Button{
+    -fx-background-color: #2c333d; /*profesor*/
+    -fx-text-fill: #feca04;
+        -fx-font-family: "Harrington";
+
 }
 .table-view .column-header .label{
     -fx-text-fill:black;
     -fx-font-family:"Harrington";
-    -fx-font-Size:16;
+    -fx-font-Size:18;
+    
 
 }
 .table-cell{
@@ -32,8 +41,8 @@ Label{
 }
 .combo-box{
     -fx-text-fill:black;
-    -fx-font-Size:12;
-    -fx-font-weight:bold;
+    -fx-font-Size:14;
+   
     -fx-text-fill:black;
     -fx-font-family:"Harrington";
 
@@ -45,5 +54,5 @@ Label{
 Text{
     -fx-font-family:"Harrington";
     -fx-font-Size:14;
-  
+
 }

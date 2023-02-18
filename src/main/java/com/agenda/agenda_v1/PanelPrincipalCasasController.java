@@ -667,10 +667,10 @@ public class PanelPrincipalCasasController implements Initializable {
         _imagen_bandera.setImage(image2);
         panelMenuLateral.getStylesheets().clear();
         panelMenuLateral.getStylesheets().add("/css/CssVerde.css");
-        //panelAlumnos.getStylesheets().add("/css/CssbotonYlabelVerde.css");
+        panelAlumnos.getStylesheets().clear();
+        panelAlumnos.getStylesheets().add("/css/CssbotonYlabelVerde.css");
         label_titulo1.getStylesheets().clear();
-        label_titulo1.getStyleClass().add("label_titulo1");
-        panelAlumnos.getStylesheets().add("/css/prueba.css");
+        //panelAlumnos.getStylesheets().add("/css/prueba.css");
         vaciarPanelTodo();
         panelAlumnos.setVisible(true);
         paneConfiguracion.setVisible(true);
@@ -689,6 +689,7 @@ public class PanelPrincipalCasasController implements Initializable {
         //solo csss para menu lateral si se pone asi
         panelMenuLateral.getStylesheets().clear();
         panelMenuLateral.getStylesheets().add("/css/CssRojo.css");
+        panelAlumnos.getStylesheets().clear();
         panelAlumnos.getStylesheets().add("/css/CssbotonYlabelRojo.css");
         vaciarPanelTodo();
         panelAlumnos.setVisible(true);
@@ -704,6 +705,7 @@ public class PanelPrincipalCasasController implements Initializable {
         _imgEScudo.setImage(image1);
         panelMenuLateral.getStylesheets().clear();
         panelMenuLateral.getStylesheets().add("/css/CssAzul.css");
+        panelAlumnos.getStylesheets().clear();
         panelAlumnos.getStylesheets().add("/css/CssbotonYlabelAzul.css");
         _imagen_bandera.setImage(image2);
         vaciarPanelTodo();
@@ -723,6 +725,7 @@ public class PanelPrincipalCasasController implements Initializable {
 
         panelMenuLateral.getStylesheets().clear();
         panelMenuLateral.getStylesheets().add("/css/CssAmarillo.css");
+        panelAlumnos.getStylesheets().clear();
         panelAlumnos.getStylesheets().add("/css/CssbotonYlabelAmarillo.css");
         _imagen_bandera.setImage(image2);
         vaciarPanelTodo();
@@ -736,6 +739,8 @@ public class PanelPrincipalCasasController implements Initializable {
         win.setHeight(690);
         _panelMenuLateralProfe.getStylesheets().clear();
         _panelMenuLateralProfe.getStylesheets().add("/css/CssProfesor.css");
+        panelProfesores.getStylesheets().clear();
+        panelProfesores.getStylesheets().add("/css/CssbotonYlabelProfesor.css");
         vaciarPanelTodo();
         panelProfesores.setVisible(true);
         _panelSalaComunProfes.setVisible(true);

@@ -8,6 +8,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 */
 
 Button{
-    -fx-background-color: #2c333d;
-    -fx-text-fill: #feca04;
+    -fx-background-color: #2c333d;/*profesor*/
+    -fx-text-fill: #feca04;/*amarilloP*/
 }
