@@ -12,19 +12,19 @@ import java.util.Date;
  */
 public class Tareas_objeto {
     
-    private int id_tarea;
-    private String id_profesor;
-    private String id_estudiante;
-    private String id_curso;
-    private String nombre_tarea;    
-    private Date descripcion_tarea;
-    private String tipo_tarea;
-    private String rubrica;
-    private String fecha_inicio;
-    private String fecha_fin;
-    private String entregado;
-    private String archivo;
-    private String corregido;
+    public int id_tarea;
+    public String id_profesor;
+    public String id_estudiante;
+    public String id_curso;
+    public String nombre_tarea;    
+    public Date descripcion_tarea;
+    public String tipo_tarea;
+    public String rubrica;
+    public String fecha_inicio;
+    public String fecha_fin;
+    public String entregado;
+    public String archivo;
+    public String corregido;
     
 
 

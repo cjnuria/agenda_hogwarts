@@ -488,7 +488,7 @@
                   </Pane>
                </children>
             </Pane>
-            <Pane fx:id="panelTareas" layoutX="221.0" layoutY="-1.0" prefHeight="695.0" prefWidth="823.0" visible="false">
+            <Pane fx:id="panelTareas" layoutX="221.0" layoutY="-1.0" prefHeight="695.0" prefWidth="823.0">
                <children>
                   <ImageView fitHeight="820.0" fitWidth="843.0" layoutY="-126.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -503,11 +503,12 @@
                   </Label>
                   <TableView fx:id="_tbA_tareas" layoutX="58.0" layoutY="138.0" prefHeight="199.0" prefWidth="715.0">
                     <columns>
-                      <TableColumn fx:id="_columA_tareaAsignatura" prefWidth="157.99996948242188" text="Asignatura" />
-                      <TableColumn fx:id="_columA_tareaTipo" prefWidth="97.60000610351562" text="Tipo" />
-                        <TableColumn fx:id="_columA_tareaNombre" prefWidth="126.4000244140625" text="Nombre" />
-                        <TableColumn fx:id="_columA_tareafecha_fin" prefWidth="129.5999755859375" text="Fecha Entrega" />
-                        <TableColumn fx:id="_columA_tareaArchivo" prefWidth="201.0" text="Archivo" />
+                        <TableColumn fx:id="_columA_tareaId" prefWidth="42.39996337890625" text="Id" />
+                      <TableColumn fx:id="_columA_tareaAsignatura" prefWidth="155.19998168945312" text="Asignatura" />
+                      <TableColumn fx:id="_columA_tareaTipo" prefWidth="88.800048828125" text="Tipo" />
+                        <TableColumn fx:id="_columA_tareaNombre" prefWidth="120.800048828125" text="Nombre" />
+                        <TableColumn fx:id="_columA_tareafecha_fin" prefWidth="123.20001220703125" text="Fecha Entrega" />
+                        <TableColumn fx:id="_columA_tareaArchivo" prefWidth="180.800048828125" text="Archivo" />
                     </columns>
                      <effect>
                         <SepiaTone />
@@ -548,8 +549,7 @@
                   </ImageView>
                   <Button layoutX="533.0" layoutY="390.0" mnemonicParsing="false" onMouseClicked="#fileChooser" text="+" />
                   <TextField fx:id="_tfDocumentoSubir" layoutX="294.0" layoutY="390.0" prefHeight="25.0" prefWidth="232.0" />
-                  <TextField fx:id="_tfComentario" layoutX="294.0" layoutY="494.0" prefHeight="25.0" prefWidth="232.0" />
-                  <Button layoutX="533.0" layoutY="494.0" mnemonicParsing="false" text="+" />
+                  <TextArea fx:id="_tfComentario" layoutX="294.0" layoutY="494.0" prefHeight="81.0" prefWidth="232.0" />
                </children>
             </Pane>
             <Pane fx:id="panelNotas" layoutX="221.0" layoutY="-3.0" prefHeight="695.0" prefWidth="823.0" visible="false">
@@ -655,7 +655,7 @@
                   <Pane layoutX="89.0" layoutY="448.0" prefHeight="201.0" prefWidth="485.0" />
                </children>
             </Pane>
-            <Pane fx:id="paneConfiguracion" layoutX="222.0" layoutY="-1.0" prefHeight="695.0" prefWidth="823.0">
+            <Pane fx:id="paneConfiguracion" layoutX="222.0" layoutY="-1.0" prefHeight="695.0" prefWidth="823.0" visible="false">
                <children>
                   <ImageView fitHeight="817.0" fitWidth="823.0" layoutY="-112.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -1650,7 +1650,7 @@
                   <Button layoutX="521.0" layoutY="388.0" mnemonicParsing="false" onMouseClicked="#fileChooser" text="+" />
                </children>
             </Pane>
-            <ImageView fitHeight="719.0" fitWidth="1066.0" layoutX="43.0" layoutY="-20.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="719.0" fitWidth="1066.0" layoutX="43.0" layoutY="-20.0" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
                   <Image url="@../../../img/otros/despacho.jpg" />
                </image>
@@ -1689,7 +1689,7 @@
                   <Label fx:id="_labelSesionEstudiante1" layoutX="22.0" layoutY="6.0" prefHeight="17.0" prefWidth="72.0" text="LabelSesion1" />
                </children>
             </Pane>
-            <Pane fx:id="_panelAdministadorAlumnos" layoutX="225.0" layoutY="-7.0" prefHeight="699.0" prefWidth="835.0" style="-fx-background-color: white;" visible="false">
+            <Pane fx:id="_panelAdministadorAlumnos" layoutX="225.0" layoutY="-7.0" prefHeight="699.0" prefWidth="835.0" style="-fx-background-color: white;">
                <children>
                   <ImageView fitHeight="821.0" fitWidth="845.0" layoutX="-4.0" layoutY="-121.0" pickOnBounds="true" preserveRatio="true">
                      <image>

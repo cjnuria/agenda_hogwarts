@@ -147,7 +147,7 @@ public class PanelPrincipalCasasController implements Initializable {
     @FXML
     private TextField _tfDocumentoSubir;
     @FXML
-    private TextField _tfComentario;
+    private TextArea _tfComentario;
     @FXML
     private TextField _tfNombreEstudiante;
     @FXML
@@ -556,9 +556,9 @@ public class PanelPrincipalCasasController implements Initializable {
     @FXML
     private TableView<mensajeria_objeto> tablaA_listar_mensajes1;
     @FXML
-    private TableColumn<?, ?> columP_Id_mensajeria1;
+    private TableColumn<mensajeria_objeto, String> columP_Id_mensajeria1;
     @FXML
-    private TableColumn<?, ?> columP_id_mensajeria;
+    private TableColumn<mensajeria_objeto, String> columP_id_mensajeria;
     @FXML
     private Button botonP_mostar_mensaje;
     @FXML
@@ -566,13 +566,15 @@ public class PanelPrincipalCasasController implements Initializable {
     @FXML
     private Label label_mensajeP;
     @FXML
-    private TableColumn<?, ?> columP_nombre_mensajeria;
+    private TableColumn<mensajeria_objeto, String> columP_nombre_mensajeria;
     @FXML
     private ImageView imagen_recordadoraA;
     @FXML
     private ImageView imagen_recordadora;
     @FXML
     private Button boton_guardarMensajeriaP;
+    @FXML
+    private TableColumn<tareas_alumnos_objeto, String> _columA_tareaId;
 
     /**
      * Initializes the controller class.
@@ -763,6 +765,9 @@ public class PanelPrincipalCasasController implements Initializable {
             case "p":
                 cambiarImagenProfe();
                 break;
+            case "admin":
+                cambiarImagenAdmin();
+
 //            case "minerva":
 //                _labelSesionProfesor.setText("minerva");
 //                cambiarImagenProfe();
@@ -774,6 +779,16 @@ public class PanelPrincipalCasasController implements Initializable {
 
     ////////////MÉTODOS PARA CAMBIAR APARIENCIA SEGÚN CASA///////////////
     /////////////////////////////////////////////////////////////////////
+    public void cambiarImagenAdmin() {
+        Window win = App.getScene().getWindow();
+        win.setWidth(1040);
+        win.setHeight(690);
+        vaciarPanelProfes();
+        vaciarPanelTodo();
+        panelAdministrador.setVisible(true);
+
+    }
+
     public void cambiarImagenSl() {
         Window win = App.getScene().getWindow();
         win.setWidth(1040);
@@ -1213,33 +1228,63 @@ public class PanelPrincipalCasasController implements Initializable {
 
     @FXML
     private void GuardarDocumentoComentario() {
-        String archivoElegido = _tfDocumentoSubir.getText();
-        String comentario_alumno = _tfComentario.getText();
 
-        Path path = Paths.get("");// inicializa una variable vacia de ruta
-        String directoryName = path.toAbsolutePath().toString();// guarda la ruta
+        tareas_alumnos_objeto objetoSeleccionado = _tbA_tareas.getSelectionModel().getSelectedItem();
+        int id_tarea = objetoSeleccionado.id_tarea;
+        
+        if (String.valueOf(id_tarea).equals("")) {
+            Jopane("No se ha seleccionado ninguna fila", "Error al guardar datos");
+        } else {
+            
+            String archivoElegido = _tfDocumentoSubir.getText();
+            String comentario_alumno = _tfComentario.getText();
 
-        String destinationPath = directoryName + "\\src\\main\\resources\\archivos\\";  // destination file path
-        File sourceFile = new File(archivoElegido);        // Creating A Source File
-        File destinationFile = new File(destinationPath + sourceFile.getName());   //Creating A Destination File. Name stays the same this way, referring to getName()
+            Path path = Paths.get("");// inicializa una variable vacia de ruta
+            String directoryName = path.toAbsolutePath().toString();// guarda la ruta
 
-        try {
-            Alert dialogoAlerta = new Alert(AlertType.CONFIRMATION);
-            dialogoAlerta.setTitle("Ventana de Confirmación");
-            dialogoAlerta.setHeaderText(null);
-            dialogoAlerta.initStyle(StageStyle.UTILITY);
-            dialogoAlerta.setContentText("¿Seguro que quieres subir el archivo?");
+            String destinationPath = directoryName + "\\src\\main\\resources\\archivos\\";  // destination file path
+            File sourceFile = new File(archivoElegido);        // Creating A Source File
+            File destinationFile = new File(destinationPath + sourceFile.getName());   //Creating A Destination File. Name stays the same this way, referring to getName()
 
-            Optional<ButtonType> result = dialogoAlerta.showAndWait();
-            if (result.get() == ButtonType.OK) {
-                Files.copy(sourceFile.toPath(), destinationFile.toPath());
+            try {
+                Alert dialogoAlerta = new Alert(AlertType.CONFIRMATION);
+                dialogoAlerta.setTitle("Ventana de Confirmación");
+                dialogoAlerta.setHeaderText(null);
+                dialogoAlerta.initStyle(StageStyle.UTILITY);
+                dialogoAlerta.setContentText("¿Seguro que quieres subir el archivo?");
+
+                Optional<ButtonType> result = dialogoAlerta.showAndWait();
+                if (result.get() == ButtonType.OK) {
+                    Files.copy(sourceFile.toPath(), destinationFile.toPath());
+                    String nombreArchivo = destinationFile.toString().substring(destinationFile.toString().lastIndexOf("\\") + 1);
+                    actualizarTareasAlumno_Ruta(id_tarea, nombreArchivo, comentario_alumno);//?????Arreglar tabla y poner id tarea???????
+                    Jopane("Guardado correctamente", "Guartar tarea");
+                }
+
+                // Static Methods To Copy Copy source path to destination path
+            } catch (Exception e) {
+                Jopane("Error, al subir la tarea", "Error");
             }
 
-            // Static Methods To Copy Copy source path to destination path
-        } catch (Exception e) {
-            Jopane("Error", "Error, el comentario no se ha guardado");
         }
 
+    }
+
+    public void actualizarTareasAlumno_Ruta(int id_tarea, String ruta, String comentario_alumno) {
+
+        try {
+            PreparedStatement pst = conn.prepareStatement("UPDATE alu_nurismy_agenda.tareas\n"
+                    + "SET entregado=1, archivo=?, comentario_alumno=?\n"
+                    + "WHERE id_tarea=?;", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+
+            pst.setString(1, ruta);
+            pst.setString(2, comentario_alumno);
+            pst.setInt(3, id_tarea);
+            
+            pst.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void guardarP_comentarioYnota_tareas() {
@@ -1318,30 +1363,70 @@ public class PanelPrincipalCasasController implements Initializable {
     public void altaEstudiante() {
 
         if (_boton_sala_comun1.getText().equalsIgnoreCase("Actualizar")) {
-            try {
 
-                PreparedStatement pst = conn.prepareStatement("UPDATE alu_nurismy_agenda.estudiantes\n"
-                        + "SET nombre= ?, apellidos= ?, telefono= ?, fecha_nac= ?, correo= ?\n"
-                        + "WHERE id_estudiante= ?;");
+            if (!_tfPassEstudiante.getText().equals("")) {
+                try {
 
-                String nombre = _tfNombreEstudiante.getText();
-                String apellidos = _tfApellidosEstudiante.getText();
-                int telefono = Integer.parseInt(_tfTelefonoEstudiante.getText());
-                String fecha_nac = _tfFechaNacEstudiante.getText();
-                String correo = _tfEmailEstudiante.getText();
-                int id_estudiante = Integer.valueOf(_labelSesionEstudiante.getText());
+                    PreparedStatement pst = conn.prepareStatement("UPDATE alu_nurismy_agenda.estudiantes\n"
+                            + "SET nombre= ?, apellidos= ?, telefono= ?, fecha_nac= ?, correo= ?, pass= ?\n"
+                            + "WHERE id_estudiante= ?;");
 
-                pst.setString(1, nombre);
-                pst.setString(2, apellidos);
-                pst.setInt(3, telefono);
-                pst.setString(4, fecha_nac);
-                pst.setString(5, correo);
-                pst.setInt(6, id_estudiante);
+                    String nombre = _tfNombreEstudiante.getText();
+                    String apellidos = _tfApellidosEstudiante.getText();
+                    int telefono = Integer.parseInt(_tfTelefonoEstudiante.getText());
+                    String fecha_nac = _tfFechaNacEstudiante.getText();
+                    String correo = _tfEmailEstudiante.getText();
+                    String pass = _tfPassEstudiante.getText();
+                    int id_estudiante = 53;//???????????????????? 
 
-                pst.executeUpdate();
-            } catch (SQLException ex) {
-                Logger.getLogger(PanelPrincipalCasasController.class
-                        .getName()).log(Level.SEVERE, null, ex);
+                    if (nombre.equals("") || apellidos.equals("") || fecha_nac.equals("") || correo.equals("") || String.valueOf(telefono).equals("") || pass.endsWith("")) {
+                        Jopane("No puede dejar campos vacíos", "Error actualizar datos");
+                    } else {
+                        pst.setString(1, nombre);
+                        pst.setString(2, apellidos);
+                        pst.setInt(3, telefono);
+                        pst.setString(4, fecha_nac);
+                        pst.setString(5, correo);
+                        pst.setInt(6, id_estudiante);
+                        pst.setString(7, pass);
+
+                        pst.executeUpdate();
+                    }
+
+                } catch (SQLException ex) {
+                    Logger.getLogger(PanelPrincipalCasasController.class
+                            .getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                try {
+
+                    PreparedStatement pst = conn.prepareStatement("UPDATE alu_nurismy_agenda.estudiantes\n"
+                            + "SET nombre= ?, apellidos= ?, telefono= ?, fecha_nac= ?, correo= ?\n"
+                            + "WHERE id_estudiante= ?;");
+
+                    String nombre = _tfNombreEstudiante.getText();
+                    String apellidos = _tfApellidosEstudiante.getText();
+                    int telefono = Integer.parseInt(_tfTelefonoEstudiante.getText());
+                    String fecha_nac = _tfFechaNacEstudiante.getText();
+                    String correo = _tfEmailEstudiante.getText();
+                    int id_estudiante = 53;//????????????????
+                    if (nombre.equals("") || apellidos.equals("") || fecha_nac.equals("") || correo.equals("") || String.valueOf(telefono).equals("")) {
+                        Jopane("No puede dejar campos vacíos", "Error actualizar datos");
+                    } else {
+                        pst.setString(1, nombre);
+                        pst.setString(2, apellidos);
+                        pst.setInt(3, telefono);
+                        pst.setString(4, fecha_nac);
+                        pst.setString(5, correo);
+                        pst.setInt(6, id_estudiante);
+
+                        pst.executeUpdate();
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(PanelPrincipalCasasController.class
+                            .getName()).log(Level.SEVERE, null, ex);
+                }
+
             }
 
         } else if (_boton_sala_comun1.getText().equalsIgnoreCase("Guardar Datos")) {
@@ -1358,31 +1443,34 @@ public class PanelPrincipalCasasController implements Initializable {
                 String pass = _tfPassEstudiante.getText();
                 String casa = label_casa_seleccion.getText();
                 String curso = _cbCursos.getValue();
-
-                //sql = "INSERT INTO estudiantes (nombre, apellidos, telefono, dni, fecha_nac, correo, pass, casa) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-                pst.setString(1, nombre);
-                pst.setString(2, apellidos);
-                pst.setString(3, dni);
-                pst.setInt(4, telefono);
-                pst.setString(5, fecha_nac);
-                pst.setString(6, correo);
-                pst.setString(7, pass);
-                pst.setString(8, casa);
-                pst.setString(9, curso);
-
-                boolean a = pst.execute();
-
-                if (!a) {
-
-                    vaciarPanelTodo();
-                    panelAlumnos.setVisible(true);
-                    panelSelecionAsignatura.setVisible(true);
-                    Jopane("Añadido correctamente, seleccione ahora 6 asignaturas", "Añadir estudiantes");
-                    borrar_datos_registro();
-                    _labelSesionEstudiante.setText(dni);
+                if (nombre.equals("") || apellidos.equals("") || fecha_nac.equals("") || correo.equals("") || String.valueOf(telefono).equals("") || pass.equals("") || curso.equals("")) {
+                    Jopane("No puede dejar campos vacíos", "Error actualizar datos");
                 } else {
-                    Jopane("Error", "error al insertar");
+                    //sql = "INSERT INTO estudiantes (nombre, apellidos, telefono, dni, fecha_nac, correo, pass, casa) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                    pst.setString(1, nombre);
+                    pst.setString(2, apellidos);
+                    pst.setString(3, dni);
+                    pst.setInt(4, telefono);
+                    pst.setString(5, fecha_nac);
+                    pst.setString(6, correo);
+                    pst.setString(7, pass);
+                    pst.setString(8, casa);
+                    pst.setString(9, curso);
 
+                    boolean a = pst.execute();
+
+                    if (!a) {
+
+                        vaciarPanelTodo();
+                        panelAlumnos.setVisible(true);
+                        panelSelecionAsignatura.setVisible(true);
+                        Jopane("Añadido correctamente, seleccione ahora 6 asignaturas", "Añadir estudiantes");
+                        borrar_datos_registro();
+                        _labelSesionEstudiante.setText(dni);
+                    } else {
+                        Jopane("Error", "error al insertar");
+
+                    }
                 }
 
             } catch (SQLException ex) {
@@ -1396,7 +1484,7 @@ public class PanelPrincipalCasasController implements Initializable {
 
     public void cargar_datos_configuracionA() {
         try {
-         //   int id_estudiante = Integer.valueOf(_labelSesionEstudiante.getText());
+            //   int id_estudiante = Integer.valueOf(_labelSesionEstudiante.getText());
 
             PreparedStatement pst = conn.prepareStatement("SELECT * FROM estudiantes WHERE id_estudiante=?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             //falta actualizar sin contraseña
@@ -2027,15 +2115,18 @@ public class PanelPrincipalCasasController implements Initializable {
 
     public void totalAlumnos() {
         ResultSet rs;
+        int id_asigprof = 3;//????????????????????????
         ArrayList a = new ArrayList();
         try {
-            PreparedStatement pst = conn.prepareStatement("SELECT * FROM estudiantes", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            PreparedStatement pst = conn.prepareStatement("SELECT id_estudiante FROM asigEstu WHERE id_asigProf = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            pst.setInt(1, id_asigprof);
             rs = pst.executeQuery();
             _cbTareas_alumnos.getItems().clear();
             while (rs.next()) {
-                String dni = rs.getString("dni");
-                String nombre = rs.getString("nombre");
-                String apellidos = rs.getString("apellidos");
+                int id_estudiante = rs.getInt("id_estudiante");
+                String dni = obtner_dni_estudiante(id_estudiante);
+                String nombre = obtenerNombreAlumno_porID(id_estudiante);
+                String apellidos = obtenerApellidoAlumno_porID(id_estudiante);
 
                 String c = dni + " - " + nombre + " " + apellidos;
                 a.add(c);
@@ -2369,6 +2460,8 @@ public class PanelPrincipalCasasController implements Initializable {
                     _panelSalaComunProfes.setVisible(true);
                     Jopane("Añadido correctamente", "Añadir Tareas");
                     borrar_datos_registro();
+                    _tbprofesores_semanal.getItems().clear();
+                    rellenar_tablaProfesor_semanal(14);//???????????????????????????
 
                 } else {
                     Jopane("Error", "Error al insertar");
@@ -2490,6 +2583,7 @@ public class PanelPrincipalCasasController implements Initializable {
     public ObservableList<tareas_alumnos_objeto> rellenar_tareas_alumnos(int id_estudiante) {
 
         ObservableList<tareas_alumnos_objeto> obs = FXCollections.observableArrayList();
+        _columA_tareaId.setCellValueFactory(new PropertyValueFactory<>("id_tarea"));
         _columA_tareaAsignatura.setCellValueFactory(new PropertyValueFactory<>("asignatura"));
         _columA_tareaTipo.setCellValueFactory(new PropertyValueFactory<>("tipo_tarea"));
         _columA_tareaNombre.setCellValueFactory(new PropertyValueFactory<>("nombre_tarea"));
@@ -2500,14 +2594,14 @@ public class PanelPrincipalCasasController implements Initializable {
             ResultSet rs = datos_para_tareas_alumnos(id_estudiante);
 
             while (rs.next()) {
-
+                int id_tarea = rs.getInt("id_tarea");
                 String asignatura = rs.getString("nombre_asignatura");
                 String tipo_tarea = rs.getString("tipo_tarea");
                 String nombre_tarea = rs.getString("nombre_tarea");
                 String fecha_fin = rs.getString("fecha_fin");
                 String archivo = rs.getString("archivo");
 
-                tareas_alumnos_objeto e = new tareas_alumnos_objeto(asignatura, tipo_tarea, nombre_tarea, fecha_fin, archivo);
+                tareas_alumnos_objeto e = new tareas_alumnos_objeto(id_tarea, asignatura, tipo_tarea, nombre_tarea, fecha_fin, archivo);
                 obs.add(e);
                 _tbA_tareas.getItems().addAll(e);
 
@@ -2535,7 +2629,7 @@ public class PanelPrincipalCasasController implements Initializable {
 
     public ResultSet datos_para_tareas_alumnos(int id_estudiante) {
         try {
-            PreparedStatement pst = conn.prepareStatement("SELECT asignaturas.nombre AS nombre_asignatura, tareas.nombre_tarea, tareas.tipo_tarea, tareas.fecha_fin, tareas.archivo\n"
+            PreparedStatement pst = conn.prepareStatement("SELECT asignaturas.nombre AS nombre_asignatura, tareas.id_tarea, tareas.nombre_tarea, tareas.tipo_tarea, tareas.fecha_fin, tareas.archivo\n"
                     + "FROM alu_nurismy_agenda.asignaturas asignaturas, alu_nurismy_agenda.tareas tareas\n"
                     + "WHERE \n"
                     + "	tareas.id_asignatura = asignaturas.id_asignatura AND tareas.id_estudiante=?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
@@ -2553,10 +2647,10 @@ public class PanelPrincipalCasasController implements Initializable {
 
     public ResultSet datos_tablaProfesores_semanal(int id_profesor) {
         try {
-            PreparedStatement pst = conn.prepareStatement("SELECT estudiantes.nombre, estudiantes.apellidos, estudiantes.curso, tareas.nombre_tarea, tareas.tipo_tarea, tareas.fecha_fin\n"
+            PreparedStatement pst = conn.prepareStatement("SELECT estudiantes.nombre, estudiantes.apellidos, estudiantes.curso, tareas.nombre_tarea, tareas.tipo_tarea, tareas.fecha_fin, tareas.corregido\n"
                     + "FROM alu_nurismy_agenda.estudiantes estudiantes, alu_nurismy_agenda.tareas tareas\n"
                     + "WHERE \n"
-                    + "	tareas.id_estudiante = estudiantes.id_estudiante AND tareas.id_profesor = ? AND tareas.fecha_fin<CURRENT_DATE() +7;", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+                    + "	tareas.id_estudiante = estudiantes.id_estudiante AND tareas.id_profesor = ? AND tareas.fecha_fin<CURRENT_DATE() +7 AND tareas.corregido=0;", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             pst.setInt(1, id_profesor);
             ResultSet resultado = pst.executeQuery();
             return resultado;
@@ -3443,26 +3537,7 @@ public class PanelPrincipalCasasController implements Initializable {
 
     }
 
-    public void subirTarea_Alumno() {
 
-        try {
-            String comentarioAlumno = _tfComentario.getText();
-            String rutaTarea = _tfDocumentoSubir.getText();
-
-            PreparedStatement pst = conn.prepareStatement("UPDATE alu_nurismy_agenda.tareas\n"
-                    + "SET entregado=1, archivo=?, comentario_alumno=?\n"
-                    + "WHERE id_tarea=?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            pst.setString(1, rutaTarea);
-            pst.setString(2, comentarioAlumno);
-            pst.setInt(3, 0);//modificar el id tarea para que lo coja automático al seleccionar la tarea
-            ResultSet rs = pst.executeQuery();
-
-        } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class
-                    .getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
 
     public void iconosPanelAsignaturas(int id_estudiante) {
 
@@ -3708,8 +3783,14 @@ public class PanelPrincipalCasasController implements Initializable {
             pst.setString(3, texto);
             pst.setString(4, fecha);
 
-            pst.executeUpdate();
+            int comprobar = pst.executeUpdate();
             textArea_menaje_editar.clear();
+            
+            if (comprobar!=0) {
+                Jopane("Mensaje enviado", "Enviar mensaje");
+            }else{
+                Jopane("Error al enviar mensaje", "Enviar mensaje");
+            }
 
         } catch (SQLException ex) {
             Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
@@ -3732,8 +3813,13 @@ public class PanelPrincipalCasasController implements Initializable {
             pst.setString(3, texto);
             pst.setString(4, fecha);
 
-            pst.executeUpdate();
+            int comprobar = pst.executeUpdate();
             textArea_menaje_editar1.clear();
+            if (comprobar!=0) {
+                Jopane("Mensaje enviado", "Enviar mensaje");
+            }else{
+                Jopane("Error al enviar mensaje", "Enviar mensaje");
+            }
 
         } catch (SQLException ex) {
             Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
@@ -3867,7 +3953,7 @@ public class PanelPrincipalCasasController implements Initializable {
                         .getName()).log(Level.SEVERE, null, ex);
             }
             // cambiar el menasaje a leido en profesor y refescar la tabla de profesor
-            PreparedStatement pst = conn.prepareStatement("UPDATE alu_nurismy_agenda.mensajes_profesor SET leido=1 WHERE id_mensaje_profesorp= ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            PreparedStatement pst = conn.prepareStatement("UPDATE alu_nurismy_agenda.mensajes_profesor SET leido=1 WHERE id_mensaje_profesor= ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             pst.setInt(1, id_mensaje);
             pst.executeUpdate();
             tablaP_listar_mensajes.getItems().clear();

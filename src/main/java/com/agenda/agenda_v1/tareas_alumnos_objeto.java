@@ -9,18 +9,28 @@ package com.agenda.agenda_v1;
  * @author nuria
  */
 public class tareas_alumnos_objeto {
+    public int id_tarea;
     public String asignatura;
     public String tipo_tarea;
     public String nombre_tarea;
     public String fecha_fin;
     public String archivo;
 
-    public tareas_alumnos_objeto(String asignatura, String tipo_tarea, String nombre_tarea, String fecha_fin, String archivo) {
+    public tareas_alumnos_objeto(int id_tarea, String asignatura, String tipo_tarea, String nombre_tarea, String fecha_fin, String archivo) {
+        this.id_tarea = id_tarea;
         this.asignatura = asignatura;
         this.tipo_tarea = tipo_tarea;
         this.nombre_tarea = nombre_tarea;
         this.fecha_fin = fecha_fin;
         this.archivo = archivo;
+    }
+
+    public int getId_tarea() {
+        return id_tarea;
+    }
+
+    public void setId_tarea(int id_tarea) {
+        this.id_tarea = id_tarea;
     }
 
     public String getAsignatura() {
@@ -62,7 +72,6 @@ public class tareas_alumnos_objeto {
     public void setArchivo(String archivo) {
         this.archivo = archivo;
     }
-    
-    
+
     
 }
