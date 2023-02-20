@@ -371,10 +371,7 @@ public class PanelPrincipalCasasController implements Initializable {
     private ComboBox<String> _comboP_AsistenciaCasa1;
     @FXML
     private ImageView _fenixProfesores;
-    @FXML
-    private Pane panelTareas1;
-    @FXML
-    private Label label_titulo1;
+  
     @FXML
     private Button _boton_sala_comun;
     @FXML
@@ -721,18 +718,15 @@ public class PanelPrincipalCasasController implements Initializable {
     private Label labelA_configura;
     @FXML
     private Label labelA_mensa;
-    @FXML
-    private Label labelA_guardarCambios_tareas;
+  
     @FXML
     private Button boton_mas;
-    @FXML
-    private Button _boton_Guardar_Correcciones;
-    @FXML
     private TableColumn<?, ?> _columTareaId;
-    @FXML
     private TableColumn<?, ?> _columTareaIdPendientes;
     @FXML
     private ProgressBar _progressBar_Trimestre;
+    @FXML
+    private Button boton_guardarComentario;
 
     /**
      * Initializes the controller class.
@@ -825,7 +819,7 @@ public class PanelPrincipalCasasController implements Initializable {
 //============================ALUMNOS=============================================================================================
         //================= TITULO label principal gradian =======================
         labelA_mensajeria.getStyleClass().add("CssLabelPrincipal");
-        label_titulo1.getStyleClass().add("CssLabelPrincipal");
+       
         labelA_sala_comun.getStyleClass().add("CssLabelPrincipal");
         labelA_asisgnaturas.getStyleClass().add("CssLabelPrincipal");
         labelA_tareas.getStyleClass().add("CssLabelPrincipal");
@@ -864,7 +858,7 @@ public class PanelPrincipalCasasController implements Initializable {
         labelA_subirDocumento.getStyleClass().add("CsslabelPanelTareas");
         labelA_comentario.getStyleClass().add("CsslabelPanelTareas");
         //============guardar cambios Tareas=======================
-        labelA_guardarCambios_tareas.getStyleClass().add("CsslabelGuardarCambiosTareas");
+       
         //========================panel NOTAS=======================
         labelA_seleccionaAsignatura.getStyleClass().add("CsslabelPanelNotas");
         _labelNotas1.getStyleClass().add("CsslabelPanelNotas");
@@ -897,7 +891,9 @@ public class PanelPrincipalCasasController implements Initializable {
         labelA_seleccionAdivinacion.getStyleClass().add("CsslabelSeleccionAsignaturas");
 
         //================================boton ========================================
+//        boton_mas.setEffect(null);
         boton_mas.getStyleClass().add("cssmas");
+//        botonA_enviar_mensajeria.setEffect(null);
         botonA_enviar_mensajeria.getStyleClass().add("CssMensajeria");
         _boton_sala_comun1.getStyleClass().add("CssGuardarConfiguracion");
 
@@ -933,6 +929,8 @@ public class PanelPrincipalCasasController implements Initializable {
         //===============panel asistencia profesores==========================
         labelP_asistencia_curso.getStyleClass().add("CsspanelAsistenciaProfesores");
         labelP_asistencia_casa.getStyleClass().add("CsspanelAsistenciaProfesores");
+//========================progrees bar=============================================
+        _progressBar_Trimestre.getStyleClass().add("Cssbar");
 
     }//fin inicializate
 
@@ -1092,7 +1090,7 @@ public class PanelPrincipalCasasController implements Initializable {
         panelMenuLateral.getStylesheets().add("/css/CssVerde.css");
         panelAlumnos.getStylesheets().clear();
         panelAlumnos.getStylesheets().add("/css/CssbotonYlabelVerde.css");
-        label_titulo1.getStylesheets().clear();
+       
         //panelAlumnos.getStylesheets().add("/css/prueba.css");
         vaciarPanelTodo();
         panelAlumnos.setVisible(true);
@@ -1512,6 +1510,7 @@ public class PanelPrincipalCasasController implements Initializable {
         String archivoElegido = archivo.getAbsoluteFile().toString();
 
         _tfDocumentoSubir.setText(archivoElegido);
+        
 
     }
 
@@ -4098,6 +4097,7 @@ public class PanelPrincipalCasasController implements Initializable {
 
     }
 
+    @FXML
     public void botonGuardarMensajeria_Alumnos() {
         try {
             String datos_completos = combo_mensajeria_alumnos1.getValue().toString();
@@ -4401,7 +4401,6 @@ public class PanelPrincipalCasasController implements Initializable {
         }
     }
 
-    @FXML
     public void guardarCorrecciones() {
 
         try {
