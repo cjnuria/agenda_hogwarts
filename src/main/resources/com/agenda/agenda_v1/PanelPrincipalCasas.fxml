@@ -34,14 +34,14 @@
    <children>
       <Pane fx:id="panelAlumnos" layoutX="-2.0" layoutY="-1.0" prefHeight="691.0" prefWidth="1044.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="-1.0">
          <children>
-            <Pane fx:id="_panelMensajeria_alumnos" layoutX="234.0" layoutY="5.0" prefHeight="695.0" prefWidth="831.0" style="-fx-background-color: white;" visible="false">
+            <Pane fx:id="_panelMensajeria_alumnos" layoutX="234.0" layoutY="5.0" prefHeight="695.0" prefWidth="831.0" style="-fx-background-color: white;">
                <children>
                   <ImageView fitHeight="821.0" fitWidth="854.0" layoutX="-21.0" layoutY="-125.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@imagenes/pngegg%20(51).png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="262.0" layoutY="49.0" text="Mensajería">
+                  <Label fx:id="labelA_mensajeria" layoutX="262.0" layoutY="49.0" text="Mensajería">
                      <font>
                         <Font name="Harrington" size="55.0" />
                      </font>
@@ -64,7 +64,7 @@
                                     </Label>
                                     <ComboBox fx:id="combo_mensajeria_alumnos1" layoutX="231.0" layoutY="61.0" prefHeight="25.0" prefWidth="215.0" />
                                     <TextArea fx:id="textArea_menaje_editar1" layoutX="93.0" layoutY="162.0" prefHeight="149.0" prefWidth="480.0" />
-                                    <Button layoutX="288.0" layoutY="353.0" mnemonicParsing="false" onMouseClicked="#botonGuardarMensajeria_Alumnos" text="Enviar">
+                                    <Button fx:id="botonA_enviar_mensajeria" layoutX="288.0" layoutY="353.0" mnemonicParsing="false" onMouseClicked="#botonGuardarMensajeria_Alumnos" text="Enviar">
                                        <font>
                                           <Font name="Harrington" size="24.0" />
                                        </font>
@@ -154,7 +154,7 @@
                         <Image url="@imagenes/pn5gegg%20(10).png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="296.0" layoutY="592.0" text="Guardar Cambios" textFill="#b71212">
+                  <Label fx:id="labelA_guardarCambios_tareas" layoutX="296.0" layoutY="592.0" text="Guardar Cambios" textFill="#b71212">
                      <font>
                         <Font name="Harrington" size="28.0" />
                      </font>
@@ -166,7 +166,7 @@
                   </ImageView>
                   <TextArea layoutX="294.0" layoutY="457.0" prefHeight="92.0" prefWidth="214.0" />
                   <TextField layoutX="294.0" layoutY="388.0" prefHeight="25.0" prefWidth="214.0" />
-                  <Button layoutX="521.0" layoutY="388.0" mnemonicParsing="false" onMouseClicked="#fileChooser" text="+" />
+                  <Button fx:id="boton_mas" layoutX="521.0" layoutY="388.0" mnemonicParsing="false" onMouseClicked="#fileChooser" text="+" />
                </children>
             </Pane>
             <Pane fx:id="panelMenuLateral" prefHeight="693.0" prefWidth="228.0">
@@ -223,14 +223,14 @@
                   </Text>
                </children>
             </Pane>
-            <Pane fx:id="panelSalaComun" layoutX="225.0" layoutY="-3.0" prefHeight="695.0" prefWidth="816.0" style="-fx-background-color: white;">
+            <Pane fx:id="panelSalaComun" layoutX="225.0" layoutY="-3.0" prefHeight="695.0" prefWidth="816.0" style="-fx-background-color: white;" visible="false">
                <children>
                   <ImageView fitHeight="829.0" fitWidth="865.0" layoutX="-4.0" layoutY="-125.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@imagenes/pngegg%20(51).png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="125.0" layoutY="34.0" text="Sala común de Gryffindor">
+                  <Label fx:id="labelA_sala_comun" layoutX="125.0" layoutY="34.0" text="Sala común de Gryffindor">
                      <font>
                         <Font name="Harrington" size="55.0" />
                      </font>
@@ -252,21 +252,21 @@
                         </Blend>
                      </effect>
                   </TableView>
-                  <Label layoutX="102.0" layoutY="124.0" text="Planning Semanal" underline="true">
+                  <Label fx:id="labelA_planing" layoutX="102.0" layoutY="124.0" text="Planning Semanal" underline="true">
                      <font>
                         <Font name="Harrington" size="24.0" />
                      </font>
                   </Label>
                   <ProgressBar layoutX="98.0" layoutY="591.0" prefHeight="18.0" prefWidth="128.0" progress="0.0" />
-                  <Label layoutX="125.0" layoutY="569.0" text="Trimestre 1">
+                  <Label fx:id="labelA_trimestre" layoutX="125.0" layoutY="569.0" text="Trimestre 1">
                      <font>
                         <Font name="Harrington" size="16.0" />
                      </font></Label>
-                  <Label layoutX="306.0" layoutY="569.0" text="Mensajería">
+                  <Label fx:id="labelA_mensa" layoutX="306.0" layoutY="569.0" text="Mensajería">
                      <font>
                         <Font name="Harrington" size="16.0" />
                      </font></Label>
-                  <Label layoutX="458.0" layoutY="569.0" text="Configuración">
+                  <Label fx:id="labelA_configura" layoutX="458.0" layoutY="569.0" text="Configuración">
                      <font>
                         <Font name="Harrington" size="16.0" />
                      </font></Label>
@@ -300,7 +300,7 @@
                         <Image url="@imagenes/pngegg%20(51).png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="322.0" layoutY="27.0" prefHeight="62.0" prefWidth="304.0" text="Asignaturas">
+                  <Label fx:id="labelA_asisgnaturas" layoutX="322.0" layoutY="27.0" prefHeight="62.0" prefWidth="304.0" text="Asignaturas">
                      <font>
                         <Font name="Harrington" size="42.0" />
                      </font>
@@ -316,7 +316,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </ImageView>
-                        <Label layoutX="115.0" layoutY="35.0" prefHeight="42.0" prefWidth="109.0" text="Pociones">
+                        <Label fx:id="labelA_posiciones" layoutX="115.0" layoutY="35.0" prefHeight="42.0" prefWidth="109.0" text="Pociones">
                            <font>
                               <Font name="Harrington" size="25.0" />
                            </font>
@@ -339,7 +339,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </ImageView>
-                        <Label layoutX="115.0" layoutY="35.0" prefHeight="42.0" prefWidth="199.0" text="Transformaciones">
+                        <Label fx:id="labelA_transformaciones" layoutX="115.0" layoutY="35.0" prefHeight="42.0" prefWidth="199.0" text="Transformaciones">
                            <font>
                               <Font name="Harrington" size="25.0" />
                            </font>
@@ -359,7 +359,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </ImageView>
-                        <Label layoutX="115.0" layoutY="35.0" prefHeight="42.0" prefWidth="199.0" text="Encantamientos">
+                        <Label fx:id="labelA_encantamientos" layoutX="115.0" layoutY="35.0" prefHeight="42.0" prefWidth="199.0" text="Encantamientos">
                            <font>
                               <Font name="Harrington" size="25.0" />
                            </font>
@@ -379,12 +379,12 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </ImageView>
-                        <Label layoutX="115.0" layoutY="22.0" prefHeight="35.0" prefWidth="215.0" text="Defensa contra las">
+                        <Label fx:id="labelA_defensa1" layoutX="115.0" layoutY="22.0" prefHeight="35.0" prefWidth="215.0" text="Defensa contra las">
                            <font>
                               <Font name="Harrington" size="25.0" />
                            </font>
                         </Label>
-                        <Label layoutX="115.0" layoutY="53.0" prefHeight="25.0" prefWidth="199.0" text="artes oscuras">
+                        <Label fx:id="labelA_defensa2" layoutX="115.0" layoutY="53.0" prefHeight="25.0" prefWidth="199.0" text="artes oscuras">
                            <font>
                               <Font name="Harrington" size="25.0" />
                            </font>
@@ -401,12 +401,12 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </ImageView>
-                        <Label layoutX="111.0" layoutY="21.0" prefHeight="35.0" prefWidth="199.0" text="Cuidado de ">
+                        <Label fx:id="labelA_cuidado1" layoutX="111.0" layoutY="21.0" prefHeight="35.0" prefWidth="199.0" text="Cuidado de ">
                            <font>
                               <Font name="Harrington" size="25.0" />
                            </font>
                         </Label>
-                        <Label layoutX="111.0" layoutY="49.0" prefHeight="35.0" prefWidth="199.0" text="criaturas mágicas">
+                        <Label fx:id="labelA_cuidado2" layoutX="111.0" layoutY="49.0" prefHeight="35.0" prefWidth="199.0" text="criaturas mágicas">
                            <font>
                               <Font name="Harrington" size="25.0" />
                            </font>
@@ -423,12 +423,12 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </ImageView>
-                        <Label layoutX="112.0" layoutY="25.0" prefHeight="42.0" prefWidth="199.0" text="Historia de la">
+                        <Label fx:id="labelA_historia1" layoutX="112.0" layoutY="25.0" prefHeight="42.0" prefWidth="199.0" text="Historia de la">
                            <font>
                               <Font name="Harrington" size="25.0" />
                            </font>
                         </Label>
-                        <Label layoutX="112.0" layoutY="53.0" prefHeight="36.0" prefWidth="199.0" text="magia">
+                        <Label fx:id="labelA_historia2" layoutX="112.0" layoutY="53.0" prefHeight="36.0" prefWidth="199.0" text="magia">
                            <font>
                               <Font name="Harrington" size="25.0" />
                            </font>
@@ -445,7 +445,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </ImageView>
-                        <Label layoutX="115.0" layoutY="35.0" prefHeight="42.0" prefWidth="199.0" text="Clases de vuelo">
+                        <Label fx:id="labelA_vuelo" layoutX="115.0" layoutY="35.0" prefHeight="42.0" prefWidth="199.0" text="Clases de vuelo">
                            <font>
                               <Font name="Harrington" size="25.0" />
                            </font>
@@ -462,7 +462,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </ImageView>
-                        <Label layoutX="117.0" layoutY="36.0" prefHeight="42.0" prefWidth="207.0" text="Runas antiguas">
+                        <Label fx:id="labelA_runas" layoutX="117.0" layoutY="36.0" prefHeight="42.0" prefWidth="207.0" text="Runas antiguas">
                            <font>
                               <Font name="Harrington" size="25.0" />
                            </font>
@@ -479,7 +479,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </ImageView>
-                        <Label layoutX="126.0" layoutY="31.0" prefHeight="42.0" prefWidth="134.0" text="Adivinación">
+                        <Label fx:id="labelA_adivinacion" layoutX="126.0" layoutY="31.0" prefHeight="42.0" prefWidth="134.0" text="Adivinación">
                            <font>
                               <Font name="Harrington" size="25.0" />
                            </font>
@@ -488,14 +488,14 @@
                   </Pane>
                </children>
             </Pane>
-            <Pane fx:id="panelTareas" layoutX="221.0" layoutY="-1.0" prefHeight="695.0" prefWidth="823.0">
+            <Pane fx:id="panelTareas" layoutX="221.0" layoutY="-1.0" prefHeight="695.0" prefWidth="823.0" visible="false">
                <children>
                   <ImageView fitHeight="820.0" fitWidth="843.0" layoutY="-126.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@imagenes/pngegg%20(51).png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="label_titulo" layoutX="347.0" layoutY="46.0" prefHeight="62.0" prefWidth="174.0" text="Tareas">
+                  <Label fx:id="labelA_tareas" layoutX="347.0" layoutY="46.0" prefHeight="62.0" prefWidth="174.0" text="Tareas">
                      <font>
                         <Font name="Harrington" size="50.0" />
                      </font>
@@ -514,7 +514,7 @@
                         <SepiaTone />
                      </effect>
                   </TableView>
-                  <Label layoutX="294.0" layoutY="370.0" text="Subir documento">
+                  <Label fx:id="labelA_subirDocumento" layoutX="294.0" layoutY="370.0" text="Subir documento">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -524,7 +524,7 @@
                         <Image url="@imagenes/reliquias.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="296.0" layoutY="474.0" text="Añadir comentario">
+                  <Label fx:id="labelA_comentario" layoutX="296.0" layoutY="474.0" text="Añadir comentario">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -559,7 +559,7 @@
                         <Image url="@imagenes/pngegg%20(51).png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="348.0" layoutY="14.0" prefHeight="62.0" prefWidth="128.0" text="Notas">
+                  <Label fx:id="labelA_notas" layoutX="348.0" layoutY="14.0" prefHeight="62.0" prefWidth="189.0" text="Notas">
                      <font>
                         <Font name="Harrington" size="47.0" />
                      </font>
@@ -577,7 +577,7 @@
                         <SepiaTone />
                      </effect>
                   </TableView>
-                  <Label layoutX="106.0" layoutY="408.0" text="Selecciona Asignatura">
+                  <Label fx:id="labelA_seleccionaAsignatura" layoutX="106.0" layoutY="408.0" text="Selecciona Asignatura">
                      <font>
                         <Font name="Harrington" size="20.0" />
                      </font>
@@ -662,48 +662,48 @@
                         <Image url="@imagenes/pngegg%20(51).png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="201.0" layoutY="55.0" prefHeight="62.0" prefWidth="350.0" text="Configuración">
+                  <Label fx:id="labelA_configuracion" layoutX="201.0" layoutY="55.0" prefHeight="62.0" prefWidth="350.0" text="Configuración">
                      <font>
                         <Font name="Harrington" size="47.0" />
                      </font>
                      
                   </Label>
-                  <Label layoutX="109.0" layoutY="160.0" text="Nombre:">
+                  <Label fx:id="labelA_nombre" layoutX="109.0" layoutY="160.0" text="Nombre:">
                      <font>
                         <Font name="Harrington" size="24.0" />
                      </font>
                   </Label>
                   <TextField fx:id="_tfNombreEstudiante" layoutX="309.0" layoutY="165.0" prefHeight="25.0" prefWidth="254.0" />
-                  <Label layoutX="107.0" layoutY="253.0" text="DNI:">
+                  <Label fx:id="labelA_dni" layoutX="107.0" layoutY="253.0" text="DNI:">
                      <font>
                         <Font name="Harrington" size="24.0" />
                      </font>
                   </Label>
                   <TextField fx:id="_tfApellidosEstudiante" layoutX="309.0" layoutY="213.0" prefHeight="25.0" prefWidth="254.0" />
-                  <Label layoutX="109.0" layoutY="445.0" text="Curso:">
+                  <Label fx:id="labelA_curso" layoutX="109.0" layoutY="445.0" text="Curso:">
                      <font>
                         <Font name="Harrington" size="24.0" />
                      </font>
                   </Label>
                   <TextField fx:id="_tfEmailEstudiante" layoutX="309.0" layoutY="352.0" prefHeight="25.0" prefWidth="254.0" />
-                  <Label layoutX="107.0" layoutY="208.0" text="Apellidos">
+                  <Label fx:id="labelA_apellidos" layoutX="107.0" layoutY="208.0" text="Apellidos">
                      <font>
                         <Font name="Harrington" size="24.0" />
                      </font>
                   </Label>
                   <TextField fx:id="_tfDniEstudiante" layoutX="309.0" layoutY="258.0" prefHeight="25.0" prefWidth="254.0" />
-                  <Label layoutX="111.0" layoutY="347.0" text="Email:">
+                  <Label fx:id="labelA_email" layoutX="111.0" layoutY="347.0" text="Email:">
                      <font>
                         <Font name="Harrington" size="24.0" />
                      </font>
                   </Label>
                   <TextField fx:id="_tfTelefonoEstudiante" layoutX="309.0" layoutY="305.0" prefHeight="25.0" prefWidth="254.0" />
-                  <Label layoutX="107.0" layoutY="300.0" text="Teléfono:">
+                  <Label fx:id="labelA_telefono" layoutX="107.0" layoutY="300.0" text="Teléfono:">
                      <font>
                         <Font name="Harrington" size="24.0" />
                      </font>
                   </Label>
-                  <Label layoutX="107.0" layoutY="397.0" text="F. Nacimiento:">
+                  <Label fx:id="labelA_fecha" layoutX="107.0" layoutY="397.0" text="F. Nacimiento:">
                      <font>
                         <Font name="Harrington" size="24.0" />
                      </font>
@@ -724,7 +724,7 @@
                         <Font name="Harrington" size="30.0" />
                      </font>
                   </Button>
-                  <Label layoutX="107.0" layoutY="487.0" text="Contraseña:">
+                  <Label fx:id="labelA_pass" layoutX="107.0" layoutY="487.0" text="Contraseña:">
                      <font>
                         <Font name="Harrington" size="24.0" />
                      </font>
@@ -751,17 +751,17 @@
                         <Image url="@../../../img/asignaturas/pociones.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="118.0" layoutY="480.0" text="Profesor:">
+                  <Label fx:id="labelA_profesor" layoutX="118.0" layoutY="480.0" text="Profesor:">
                      <font>
                         <Font size="22.0" />
                      </font>
                   </Label>
-                  <Label layoutX="118.0" layoutY="523.0" text="Nota media:">
+                  <Label fx:id="labelA_notaMedia" layoutX="118.0" layoutY="523.0" text="Nota media:">
                      <font>
                         <Font size="22.0" />
                      </font>
                   </Label>
-                  <Label layoutX="118.0" layoutY="566.0" text="Tipo:">
+                  <Label fx:id="labelA_tipo" layoutX="118.0" layoutY="566.0" text="Tipo:">
                      <font>
                         <Font size="22.0" />
                      </font>
@@ -796,7 +796,7 @@
                         <Image url="@imagenes/pngegg%20(51).png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="145.0" layoutY="31.0" prefHeight="62.0" prefWidth="525.0" text="Selección de Asignaturas">
+                  <Label fx:id="labelA_selecionAsignaturas" layoutX="145.0" layoutY="31.0" prefHeight="62.0" prefWidth="525.0" text="Selección de Asignaturas">
                      <font>
                         <Font name="Harrington" size="42.0" />
                      </font>
@@ -812,7 +812,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </ImageView>
-                        <Label layoutX="114.0" layoutY="34.0" prefHeight="42.0" prefWidth="109.0" text="Pociones">
+                        <Label fx:id="labelA_seleccionPociones" layoutX="114.0" layoutY="34.0" prefHeight="42.0" prefWidth="109.0" text="Pociones">
                            <font>
                               <Font name="Harrington" size="25.0" />
                            </font>
@@ -840,7 +840,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </ImageView>
-                        <Label layoutX="115.0" layoutY="35.0" prefHeight="42.0" prefWidth="199.0" text="Transformaciones">
+                        <Label fx:id="labelA_seleccionTransformaciones" layoutX="115.0" layoutY="35.0" prefHeight="42.0" prefWidth="199.0" text="Transformaciones">
                            <font>
                               <Font name="Harrington" size="25.0" />
                            </font>
@@ -865,7 +865,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </ImageView>
-                        <Label layoutX="115.0" layoutY="35.0" prefHeight="42.0" prefWidth="199.0" text="Encantamientos">
+                        <Label fx:id="labelA_seleccionEncantamientos" layoutX="115.0" layoutY="35.0" prefHeight="42.0" prefWidth="199.0" text="Encantamientos">
                            <font>
                               <Font name="Harrington" size="25.0" />
                            </font>
@@ -885,12 +885,12 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </ImageView>
-                        <Label layoutX="115.0" layoutY="22.0" prefHeight="35.0" prefWidth="215.0" text="Defensa contra las">
+                        <Label fx:id="labelA_seleccionDefensa1" layoutX="115.0" layoutY="22.0" prefHeight="35.0" prefWidth="215.0" text="Defensa contra las">
                            <font>
                               <Font name="Harrington" size="25.0" />
                            </font>
                         </Label>
-                        <Label layoutX="115.0" layoutY="53.0" prefHeight="25.0" prefWidth="199.0" text="artes oscuras">
+                        <Label fx:id="labelA_seleccionDefensa2" layoutX="115.0" layoutY="53.0" prefHeight="25.0" prefWidth="199.0" text="artes oscuras">
                            <font>
                               <Font name="Harrington" size="25.0" />
                            </font>
@@ -907,12 +907,12 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </ImageView>
-                        <Label layoutX="111.0" layoutY="21.0" prefHeight="35.0" prefWidth="199.0" text="Cuidado de ">
+                        <Label fx:id="labelA_seleccionCuidado1" layoutX="111.0" layoutY="21.0" prefHeight="35.0" prefWidth="199.0" text="Cuidado de ">
                            <font>
                               <Font name="Harrington" size="25.0" />
                            </font>
                         </Label>
-                        <Label layoutX="111.0" layoutY="49.0" prefHeight="35.0" prefWidth="199.0" text="criaturas mágicas">
+                        <Label fx:id="labelA_seleccionCuidado2" layoutX="111.0" layoutY="49.0" prefHeight="35.0" prefWidth="199.0" text="criaturas mágicas">
                            <font>
                               <Font name="Harrington" size="25.0" />
                            </font>
@@ -929,12 +929,12 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </ImageView>
-                        <Label layoutX="112.0" layoutY="25.0" prefHeight="42.0" prefWidth="199.0" text="Historia de la">
+                        <Label fx:id="labelA_seleccionHistoria1" layoutX="112.0" layoutY="25.0" prefHeight="42.0" prefWidth="199.0" text="Historia de la">
                            <font>
                               <Font name="Harrington" size="25.0" />
                            </font>
                         </Label>
-                        <Label layoutX="112.0" layoutY="53.0" prefHeight="36.0" prefWidth="199.0" text="magia">
+                        <Label fx:id="labelA_seleccionHistoria2" layoutX="112.0" layoutY="53.0" prefHeight="36.0" prefWidth="199.0" text="magia">
                            <font>
                               <Font name="Harrington" size="25.0" />
                            </font>
@@ -951,7 +951,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </ImageView>
-                        <Label layoutX="115.0" layoutY="35.0" prefHeight="42.0" prefWidth="199.0" text="Clases de vuelo">
+                        <Label fx:id="labelA_seleccionVuelo" layoutX="115.0" layoutY="35.0" prefHeight="42.0" prefWidth="199.0" text="Clases de vuelo">
                            <font>
                               <Font name="Harrington" size="25.0" />
                            </font>
@@ -968,7 +968,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </ImageView>
-                        <Label layoutX="117.0" layoutY="36.0" prefHeight="42.0" prefWidth="207.0" text="Runas antiguas">
+                        <Label fx:id="labelA_seleccionRunas" layoutX="117.0" layoutY="36.0" prefHeight="42.0" prefWidth="207.0" text="Runas antiguas">
                            <font>
                               <Font name="Harrington" size="25.0" />
                            </font>
@@ -985,7 +985,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </ImageView>
-                        <Label layoutX="126.0" layoutY="31.0" prefHeight="42.0" prefWidth="134.0" text="Adivinación">
+                        <Label fx:id="labelA_seleccionAdivinacion" layoutX="126.0" layoutY="31.0" prefHeight="42.0" prefWidth="134.0" text="Adivinación">
                            <font>
                               <Font name="Harrington" size="25.0" />
                            </font>
@@ -1225,22 +1225,22 @@
                         </Blend>
                      </effect>
                   </TableView>
-                  <Label layoutX="102.0" layoutY="124.0" text="Planning Semanal" underline="true">
+                  <Label fx:id="labelP_planing" layoutX="102.0" layoutY="124.0" text="Planning Semanal" underline="true">
                      <font>
                         <Font name="Harrington" size="24.0" />
                      </font>
                   </Label>
-                  <Label layoutX="124.0" layoutY="584.0" text="Asistencia">
+                  <Label fx:id="labelP_asistencia" layoutX="124.0" layoutY="584.0" text="Asistencia">
                      <font>
                         <Font name="Harrington" size="16.0" />
                      </font>
                   </Label>
-                  <Label layoutX="308.0" layoutY="584.0" text="Mensajería">
+                  <Label fx:id="labelP_mensajeria" layoutX="308.0" layoutY="584.0" text="Mensajería">
                      <font>
                         <Font name="Harrington" size="16.0" />
                      </font>
                   </Label>
-                  <Label layoutX="429.0" layoutY="584.0" text="Historial Asistencia">
+                  <Label fx:id="labelP_historial" layoutX="429.0" layoutY="584.0" text="Historial Asistencia">
                      <font>
                         <Font name="Harrington" size="16.0" />
                      </font>
@@ -1289,7 +1289,7 @@
                         </Blend>
                      </effect>
                   </TableView>
-                  <Label layoutX="197.0" layoutY="42.0" text="Cursos Asignados">
+                  <Label fx:id="labelP_cursosAsisgnados" layoutX="197.0" layoutY="42.0" text="Cursos Asignados">
                      <font>
                         <Font name="Harrington" size="55.0" />
                      </font>
@@ -1303,26 +1303,26 @@
                         <Image url="@imagenes/pngegg%20(51).png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="124.0" layoutY="124.0" text="Nombre Tarea">
+                  <Label fx:id="labelP_tareas_nombre" layoutX="124.0" layoutY="124.0" text="Nombre Tarea">
                      <font>
                         <Font size="18.0" />
                      </font></Label>
-                  <Label layoutX="126.0" layoutY="159.0" text="Cursos">
+                  <Label fx:id="labelP_tareas_cursos" layoutX="126.0" layoutY="159.0" text="Cursos">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label layoutX="123.0" layoutY="245.0" text="Alumnos">
+                  <Label fx:id="labelP_tareas_alumnos" layoutX="123.0" layoutY="245.0" text="Alumnos">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label layoutX="126.0" layoutY="402.0" text="Descripción">
+                  <Label fx:id="labelP_tareas_descripcion" layoutX="126.0" layoutY="402.0" text="Descripción">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label layoutX="123.0" layoutY="334.0" text="Fecha inicio">
+                  <Label fx:id="labelP_tareas_fecha" layoutX="123.0" layoutY="334.0" text="Fecha inicio">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -1331,14 +1331,14 @@
                   <ComboBox fx:id="_cbTareas_alumnos" layoutX="303.0" layoutY="245.0" prefHeight="25.0" prefWidth="248.0" />
                   <TextArea fx:id="_taTareas_descripcion" layoutX="127.0" layoutY="438.0" prefHeight="73.0" prefWidth="431.0" />
                   <DatePicker fx:id="_dpTareas_fechaIni" layoutX="303.0" layoutY="335.0" prefHeight="25.0" prefWidth="248.0" />
-                  <Label layoutX="135.0" layoutY="44.0" text="Asignar Tareas">
+                  <Label fx:id="labelP_asignarTareas" layoutX="135.0" layoutY="44.0" text="Asignar Tareas">
                      <font>
                         <Font name="Harrington" size="55.0" />
                      </font>
                      
                   </Label>
                   <TextField fx:id="_tfNombreTarea" layoutX="302.0" layoutY="125.0" prefHeight="25.0" prefWidth="248.0" />
-                  <Label layoutX="132.0" layoutY="522.0" text="Destinatarios">
+                  <Label fx:id="labelP_tareas_destinatarios" layoutX="132.0" layoutY="522.0" text="Destinatarios">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -1356,13 +1356,13 @@
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font></Button>
-                  <Label layoutX="122.0" layoutY="288.0" text="Tipo Tarea">
+                  <Label fx:id="labelP_tareas_tipo" layoutX="122.0" layoutY="288.0" text="Tipo Tarea">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
                   <ComboBox fx:id="_cbTareas_tipo" layoutX="302.0" layoutY="288.0" prefHeight="25.0" prefWidth="248.0" />
-                  <Label layoutX="123.0" layoutY="201.0" text="Casa">
+                  <Label fx:id="labelP_tareas_casa" layoutX="123.0" layoutY="201.0" text="Casa">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -1373,7 +1373,7 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
-                  <Label layoutX="122.0" layoutY="375.0" text="Fecha Entrega">
+                  <Label fx:id="labelP_tareas_fecha_entrega" layoutX="122.0" layoutY="375.0" text="Fecha Entrega">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -1444,25 +1444,25 @@
                         <SepiaTone />
                      </effect>
                   </TabPane>
-                  <Label layoutX="257.0" layoutY="47.0" text="Correcciones ">
+                  <Label fx:id="labelP_correciones" layoutX="257.0" layoutY="47.0" text="Correcciones ">
                      <font>
                         <Font name="Harrington" size="55.0" />
                      </font>
                      
                   </Label>
-                  <Label layoutX="120.0" layoutY="478.0" text="Alumno">
+                  <Label fx:id="labelP_correciones_alumno" layoutX="120.0" layoutY="478.0" text="Alumno">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
                   <TextField fx:id="_tfTareas_alumno" layoutX="260.0" layoutY="479.0" prefHeight="25.0" prefWidth="274.0" />
-                  <Label layoutX="120.0" layoutY="520.0" text="Comentario">
+                  <Label fx:id="labelP_correciones_comentario" layoutX="120.0" layoutY="520.0" text="Comentario">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
                   <TextField fx:id="_tfTareasComentario" layoutX="260.0" layoutY="521.0" prefHeight="25.0" prefWidth="274.0" />
-                  <Label layoutX="120.0" layoutY="564.0" text="Nota">
+                  <Label fx:id="labelP_correciones_nota" layoutX="120.0" layoutY="564.0" text="Nota">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -1482,7 +1482,7 @@
                         <Image url="@imagenes/pngegg%20(51).png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="125.0" layoutY="34.0" text="Asistencia Alumnos">
+                  <Label fx:id="labelP_asistenciaAlumnos" layoutX="125.0" layoutY="34.0" text="Asistencia Alumnos">
                      <font>
                         <Font name="Harrington" size="55.0" />
                      </font>
@@ -1503,22 +1503,17 @@
                         </Blend>
                      </effect>
                   </TableView>
-                  <Label layoutX="102.0" layoutY="124.0" underline="true">
-                     <font>
-                        <Font name="Harrington" size="24.0" />
-                     </font>
-                  </Label>
                   <Button layoutX="331.0" layoutY="508.0" mnemonicParsing="false" onMouseClicked="#guardar_Asistencias_Alumnos" prefHeight="56.0" prefWidth="159.0" text="Guardar">
                      <font>
                         <Font name="Harrington" size="24.0" />
                      </font>
                   </Button>
-                  <Label layoutX="197.0" layoutY="147.0" text="Curso:">
+                  <Label fx:id="labelP_asistencia_curso" layoutX="197.0" layoutY="147.0" text="Curso:">
                      <font>
                         <Font name="Harrington" size="18.0" />
                      </font>
                   </Label>
-                  <Label layoutX="200.0" layoutY="189.0" text="Casa:">
+                  <Label fx:id="labelP_asistencia_casa" layoutX="200.0" layoutY="189.0" text="Casa:">
                      <font>
                         <Font name="Harrington" size="18.0" />
                      </font>
@@ -1534,7 +1529,7 @@
                         <Image url="@imagenes/pngegg%20(51).png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="262.0" layoutY="49.0" text="Mensajería">
+                  <Label fx:id="labelP_mensajeria" layoutX="262.0" layoutY="49.0" text="Mensajería">
                      <font>
                         <Font name="Harrington" size="55.0" />
                      </font>

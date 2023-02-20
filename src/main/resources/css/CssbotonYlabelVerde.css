@@ -59,3 +59,13 @@ Text{
      -fx-font-family: "Harrington";
      -fx-font-Size:30;
 }
+.tab {
+    -fx-font-size: 18px;
+}
+/*mensajeria*/
+.CssMensajeria{
+     -fx-font-family: "Harrington";
+     -fx-font-Size:20;
+     -fx-background-color:#1d7239;
+     -fx-text-fill: #c0c0c0;
+}

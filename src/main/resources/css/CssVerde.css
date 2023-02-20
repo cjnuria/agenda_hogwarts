@@ -10,9 +10,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 Button{
     -fx-background-color: #1d7239;
     -fx-text-fill: #c0c0c0;
-/*    -fx-font-family: "Harrington";*/
- /*-fx-font-Size:30;*/
 
+}
+.Cssboton{
+     -fx-font-family: "Harrington";
+     -fx-font-Size:14;
+         
 }
 
 

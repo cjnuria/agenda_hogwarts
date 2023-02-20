@@ -12,3 +12,8 @@ Button{
     -fx-text-fill: #131313;
      /*-fx-font-Size:30;*/
 }
+.Cssboton{
+     -fx-font-family: "Harrington";
+     -fx-font-Size:14;
+         
+}

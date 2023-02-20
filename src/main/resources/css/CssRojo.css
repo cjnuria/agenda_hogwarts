@@ -10,14 +10,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 Button{
     -fx-background-color: #c90909;/*rojo*/
     -fx-text-fill: #dbab29;/*amarilloG*/
-     /*-fx-font-Size:30;*/
+    /*-fx-font-Size:30;*/
+   
 }
 .Cssboton{
-     -fx-font-family: "Arial";
-     -fx-font-Size:14;
-         
+    -fx-font-family: "Harrington";
+    -fx-font-Size:14;
+
 }
-/*.CssMenu{
-     -fx-font-family: "Arial";
-     -fx-font-Size:30;
-}*/

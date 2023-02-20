@@ -61,3 +61,15 @@ Text{
      -fx-font-family: "Harrington";
      -fx-font-Size:30;
 }
+
+/**esto es el tabpane*/ 
+.tab {
+    -fx-font-size: 18px;
+}
+/*mensajeria*/
+.CssMensajeria{
+     -fx-font-family: "Harrington";
+     -fx-font-Size:20;
+     -fx-background-color:#fbd702; 
+     -fx-text-fill:#131313;
+}

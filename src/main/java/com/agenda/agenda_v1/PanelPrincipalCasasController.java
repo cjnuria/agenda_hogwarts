@@ -384,8 +384,6 @@ public class PanelPrincipalCasasController implements Initializable {
     @FXML
     private Button botonSalirAlumno1;
     @FXML
-    private Label label_titulo;
-    @FXML
     private Button _boton_sala_comun1;
     @FXML
     private ImageView _asignaturaPociones11;
@@ -575,6 +573,154 @@ public class PanelPrincipalCasasController implements Initializable {
     private Button boton_guardarMensajeriaP;
     @FXML
     private TableColumn<tareas_alumnos_objeto, String> _columA_tareaId;
+    @FXML
+    private Button botonA_enviar_mensajeria;
+    @FXML
+    private Label labelA_mensajeria;
+    @FXML
+    private Label labelA_sala_comun;
+    @FXML
+    private Label labelA_asisgnaturas;
+    @FXML
+    private Label labelA_posiciones;
+    @FXML
+    private Label labelA_transformaciones;
+    @FXML
+    private Label labelA_encantamientos;
+    @FXML
+    private Label labelA_defensa1;
+    @FXML
+    private Label labelA_defensa2;
+    @FXML
+    private Label labelA_cuidado1;
+    @FXML
+    private Label labelA_cuidado2;
+    @FXML
+    private Label labelA_historia1;
+    @FXML
+    private Label labelA_historia2;
+    @FXML
+    private Label labelA_vuelo;
+    @FXML
+    private Label labelA_runas;
+    @FXML
+    private Label labelA_adivinacion;
+    @FXML
+    private Label labelA_tareas;
+    @FXML
+    private Label labelA_subirDocumento;
+    @FXML
+    private Label labelA_comentario;
+    @FXML
+    private Label labelA_notas;
+    @FXML
+    private Label labelA_seleccionaAsignatura;
+    @FXML
+    private Label labelA_configuracion;
+    @FXML
+    private Label labelA_nombre;
+    @FXML
+    private Label labelA_dni;
+    @FXML
+    private Label labelA_curso;
+    @FXML
+    private Label labelA_apellidos;
+    @FXML
+    private Label labelA_email;
+    @FXML
+    private Label labelA_telefono;
+    @FXML
+    private Label labelA_fecha;
+    @FXML
+    private Label labelA_pass;
+    @FXML
+    private Label labelA_profesor;
+    @FXML
+    private Label labelA_notaMedia;
+    @FXML
+    private Label labelA_tipo;
+    @FXML
+    private Label labelA_selecionAsignaturas;
+    @FXML
+    private Label labelA_seleccionPociones;
+    @FXML
+    private Label labelA_seleccionTransformaciones;
+    @FXML
+    private Label labelA_seleccionEncantamientos;
+    @FXML
+    private Label labelA_seleccionDefensa1;
+    @FXML
+    private Label labelA_seleccionDefensa2;
+    @FXML
+    private Label labelA_seleccionCuidado1;
+    @FXML
+    private Label labelA_seleccionCuidado2;
+    @FXML
+    private Label labelA_seleccionHistoria1;
+    @FXML
+    private Label labelA_seleccionHistoria2;
+    @FXML
+    private Label labelA_seleccionVuelo;
+    @FXML
+    private Label labelA_seleccionRunas;
+    @FXML
+    private Label labelA_seleccionAdivinacion;
+    @FXML
+    private Label labelP_planing;
+    @FXML
+    private Label labelP_asistencia;
+    @FXML
+    private Label labelP_mensajeria;
+    @FXML
+    private Label labelP_historial;
+    @FXML
+    private Label labelP_cursosAsisgnados;
+    @FXML
+    private Label labelP_tareas_nombre;
+    @FXML
+    private Label labelP_tareas_cursos;
+    @FXML
+    private Label labelP_tareas_alumnos;
+    @FXML
+    private Label labelP_tareas_descripcion;
+    @FXML
+    private Label labelP_tareas_fecha;
+    @FXML
+    private Label labelP_asignarTareas;
+    @FXML
+    private Label labelP_tareas_destinatarios;
+    @FXML
+    private Label labelP_tareas_tipo;
+    @FXML
+    private Label labelP_tareas_casa;
+    @FXML
+    private Label labelP_tareas_fecha_entrega;
+    @FXML
+    private Label labelP_correciones;
+    @FXML
+    private Label labelP_correciones_alumno;
+    @FXML
+    private Label labelP_correciones_comentario;
+    @FXML
+    private Label labelP_correciones_nota;
+    @FXML
+    private Label labelP_asistenciaAlumnos;
+    @FXML
+    private Label labelP_asistencia_curso;
+    @FXML
+    private Label labelP_asistencia_casa;
+    @FXML
+    private Label labelA_planing;
+    @FXML
+    private Label labelA_trimestre;
+    @FXML
+    private Label labelA_configura;
+    @FXML
+    private Label labelA_mensa;
+    @FXML
+    private Label labelA_guardarCambios_tareas;
+    @FXML
+    private Button boton_mas;
 
     /**
      * Initializes the controller class.
@@ -626,24 +772,147 @@ public class PanelPrincipalCasasController implements Initializable {
         Cambiar_recordadoraProfesores(14);//???????????????????
         Cambiar_recordadoraAlumnos(53);//??????????????????????''
 
-        // darle id a los botones para el css
-        botonSalirAlumno1.getStyleClass().add("Cssboton");
-        botonSalirAlumno.getStyleClass().add("Cssboton");
-        _boton_tareas.getStyleClass().add("CssMenu");
-        _boton_Alumnos_Profes.getStyleClass().add("CssMenu");
-        _boton_Cursos_Profes.getStyleClass().add("CssMenu");
-        _boton_alumnos_administrador.getStyleClass().add("CssMenu");
-        _boton_asignaturas.getStyleClass().add("CssMenu");
-        _boton_cerrar_sesion.getStyleClass().add("CssMenu");
-        _boton_notas.getStyleClass().add("CssMenu");
-        _boton_profesores_administrador.getStyleClass().add("CssMenu");
-        _boton_sala_comun.getStyleClass().add("CssMenu");
-        _boton_sala_comun1.getStyleClass().add("CssMenu");
-        _boton_sala_comun11.getStyleClass().add("CssMenu");
-        _boton_sala_comun111.getStyleClass().add("CssMenu");
-        _boton_sala_comun_Profes.getStyleClass().add("CssMenu");
-        _boton_salir.getStyleClass().add("CssMenu");
-        _boton_tareas_Profes.getStyleClass().add("CssMenu");
+//        // darle id a los botones para el css
+//        botonSalirAlumno1.getStyleClass().add("Cssboton");
+//        botonSalirAlumno.getStyleClass().add("Cssboton");
+//        _boton_tareas.getStyleClass().add("CssMenu");
+//        _boton_Alumnos_Profes.getStyleClass().add("CssMenu");
+//        _boton_Cursos_Profes.getStyleClass().add("CssMenu");
+//        _boton_alumnos_administrador.getStyleClass().add("CssMenu");
+//        _boton_asignaturas.getStyleClass().add("CssMenu");
+//        _boton_cerrar_sesion.getStyleClass().add("CssMenu");
+//        _boton_notas.getStyleClass().add("CssMenu");
+//        _boton_profesores_administrador.getStyleClass().add("CssMenu");
+//        _boton_sala_comun.getStyleClass().add("CssMenu");
+//        _boton_sala_comun1.getStyleClass().add("CssMenu");
+//        _boton_sala_comun11.getStyleClass().add("CssMenu");
+//        _boton_sala_comun111.getStyleClass().add("CssMenu");
+//        _boton_sala_comun_Profes.getStyleClass().add("CssMenu");
+//        _boton_salir.getStyleClass().add("CssMenu");
+//        _boton_tareas_Profes.getStyleClass().add("CssMenu");
+//
+//        //css mensajeria botones
+//        botonA_enviar_mensajeria.getStyleClass().add("CssMensajeria");
+//        boton_mostrarMensaje_alumnos.getStyleClass().add("CssMensajeria");
+//        boton_cerrar.getStyleClass().add("CssMensajeria");
+        //================================css menus laterales================================================
+        _boton_sala_comun.getStyleClass().add("CssLateral");
+        _boton_asignaturas.getStyleClass().add("CssLateral");
+        _boton_tareas.getStyleClass().add("CssLateral");
+        _boton_notas.getStyleClass().add("CssLateral");
+
+        // BOTONES "CERRAR SESION" Y "CERRAR" MENU LATERAL
+        botonSalirAlumno1.getStyleClass().add("CssSalir");
+        botonSalirAlumno.getStyleClass().add("CssSalir");
+//============================ALUMNOS=============================================================================================
+        //================= TITULO label principal gradian =======================
+        labelA_mensajeria.getStyleClass().add("CssLabelPrincipal");
+        label_titulo1.getStyleClass().add("CssLabelPrincipal");
+        labelA_sala_comun.getStyleClass().add("CssLabelPrincipal");
+        labelA_asisgnaturas.getStyleClass().add("CssLabelPrincipal");
+        labelA_tareas.getStyleClass().add("CssLabelPrincipal");
+        labelA_notas.getStyleClass().add("CssLabelPrincipal");
+        labelA_configuracion.getStyleClass().add("CssLabelPrincipal");
+        _tituloAsignatura.getStyleClass().add("CssLabelPrincipal");
+
+        //================planin alunnos sala comun===================================
+        labelA_planing.getStyleClass().add("CssLabelPlaning");
+        //==================sala comun alumnos===================================
+        labelA_trimestre.getStyleClass().add("CssSalacomun");
+        labelA_mensa.getStyleClass().add("CssSalacomun");
+        labelA_configura.getStyleClass().add("CssSalacomun");
+//====================label asisgnaturas gradian======================
+        labelA_posiciones.getStyleClass().add("CssAsignaturas");
+        labelA_transformaciones.getStyleClass().add("CssAsignaturas");
+        labelA_encantamientos.getStyleClass().add("CssAsignaturas");
+        labelA_defensa1.getStyleClass().add("CssAsignaturas");
+        labelA_defensa2.getStyleClass().add("CssAsignaturas");
+        labelA_cuidado1.getStyleClass().add("CssAsignaturas");
+        labelA_cuidado2.getStyleClass().add("CssAsignaturas");
+        labelA_historia1.getStyleClass().add("CssAsignaturas");
+        labelA_historia2.getStyleClass().add("CssAsignaturas");
+        labelA_vuelo.getStyleClass().add("CssAsignaturas");
+        labelA_runas.getStyleClass().add("CssAsignaturas");
+        labelA_adivinacion.getStyleClass().add("CssAsignaturas");
+
+        //======================panel asignatura con imagen ========================
+        labelA_profesor.getStyleClass().add("CssAsignaturasImagen");
+        labelA_tipo.getStyleClass().add("CssAsignaturasImagen");
+        _nombreProfesorAsignatura.getStyleClass().add("CssAsignaturasImagen");
+        labelA_notaMedia.getStyleClass().add("CssAsignaturasImagen");
+        _notaMediaAsignatura.getStyleClass().add("CssAsignaturasImagen");
+        _tipoAsignatura.getStyleClass().add("CssAsignaturasImagen");
+        //==============panel TAREAS========================================
+        labelA_subirDocumento.getStyleClass().add("CsslabelPanelTareas");
+        labelA_comentario.getStyleClass().add("CsslabelPanelTareas");
+        //============guardar cambios Tareas=======================
+        labelA_guardarCambios_tareas.getStyleClass().add("CsslabelGuardarCambiosTareas");
+        //========================panel NOTAS=======================
+        labelA_seleccionaAsignatura.getStyleClass().add("CsslabelPanelNotas");
+        _labelNotas1.getStyleClass().add("CsslabelPanelNotas");
+        _labelNotas2.getStyleClass().add("CsslabelPanelNotas");
+        _labelNotas3.getStyleClass().add("CsslabelPanelNotas");
+        _labelNotas4.getStyleClass().add("CsslabelPanelNotas");
+        _labelNotas5.getStyleClass().add("CsslabelPanelNotas");
+        _labelNotas6.getStyleClass().add("CsslabelPanelNotas");
+        //=========================Panel Configuracion========================0
+        labelA_nombre.getStyleClass().add("CsslabelPanelconfiguracion");
+        labelA_dni.getStyleClass().add("CsslabelPanelconfiguracion");
+        labelA_curso.getStyleClass().add("CsslabelPanelconfiguracion");
+        labelA_apellidos.getStyleClass().add("CsslabelPanelconfiguracion");
+        labelA_telefono.getStyleClass().add("CsslabelPanelconfiguracion");
+        labelA_email.getStyleClass().add("CsslabelPanelconfiguracion");
+        labelA_fecha.getStyleClass().add("CsslabelPanelconfiguracion");
+        labelA_pass.getStyleClass().add("CsslabelPanelconfiguracion");
+        //=======================Panel seleccion asignaturas==========================
+        labelA_seleccionPociones.getStyleClass().add("CsslabelSeleccionAsignaturas");
+        labelA_seleccionTransformaciones.getStyleClass().add("CsslabelSeleccionAsignaturas");
+        labelA_seleccionEncantamientos.getStyleClass().add("CsslabelSeleccionAsignaturas");
+        labelA_seleccionDefensa1.getStyleClass().add("CsslabelSeleccionAsignaturas");
+        labelA_seleccionDefensa2.getStyleClass().add("CsslabelSeleccionAsignaturas");
+        labelA_seleccionCuidado1.getStyleClass().add("CsslabelSeleccionAsignaturas");
+        labelA_seleccionCuidado2.getStyleClass().add("CsslabelSeleccionAsignaturas");
+        labelA_seleccionHistoria1.getStyleClass().add("CsslabelSeleccionAsignaturas");
+        labelA_seleccionHistoria2.getStyleClass().add("CsslabelSeleccionAsignaturas");
+        labelA_seleccionVuelo.getStyleClass().add("CsslabelSeleccionAsignaturas");
+        labelA_seleccionRunas.getStyleClass().add("CsslabelSeleccionAsignaturas");
+        labelA_seleccionAdivinacion.getStyleClass().add("CsslabelSeleccionAsignaturas");
+
+        //================================boton +======================================
+        boton_mas.getStyleClass().add("cssmas");
+
+        //=============================PROFESORES================================
+        // titulo principal gradian
+        labelP_cursosAsisgnados.getStyleClass().add("CssLabelPrincipalProfesores");
+        labelA_selecionAsignaturas.getStyleClass().add("CssLabelPrincipalProfesores");
+        labelP_asignarTareas.getStyleClass().add("CssLabelPrincipalProfesores");
+        labelP_correciones.getStyleClass().add("CssLabelPrincipalProfesores");
+        labelP_asistenciaAlumnos.getStyleClass().add("CssLabelPrincipalProfesores");
+        labelP_mensajeria.getStyleClass().add("CssLabelPrincipalProfesores");
+        //planing===================================================
+
+        labelP_planing.getStyleClass().add("CssLabelPlaningProfesores");
+        //==============sala comun profesores================
+        labelP_asistencia.getStyleClass().add("CssSalacomunProfesores");
+        labelP_mensajeria.getStyleClass().add("CssSalacomunProfesores");
+        labelP_historial.getStyleClass().add("CssSalacomunProfesores");
+        //==============panel tareas profesores==========================
+        labelP_tareas_nombre.getStyleClass().add("CssPanelTareasProfesores");
+        labelP_tareas_cursos.getStyleClass().add("CssPanelTareasProfesores");
+        labelP_tareas_alumnos.getStyleClass().add("CssPanelTareasProfesores");
+        labelP_tareas_descripcion.getStyleClass().add("CssPanelTareasProfesores");
+        labelP_tareas_fecha.getStyleClass().add("CssPanelTareasProfesores");
+        labelP_tareas_destinatarios.getStyleClass().add("CssPanelTareasProfesores");
+        labelP_tareas_tipo.getStyleClass().add("CssPanelTareasProfesores");
+        labelP_tareas_casa.getStyleClass().add("CssPanelTareasProfesores");
+        labelP_tareas_fecha_entrega.getStyleClass().add("CssPanelTareasProfesores");
+        //===============panel correciones profesores============
+        labelP_correciones_comentario.getStyleClass().add("CsspanelCorrecionesProfesores");
+        labelP_correciones_alumno.getStyleClass().add("CsspanelCorrecionesProfesores");
+        labelP_correciones_nota.getStyleClass().add("CsspanelCorrecionesProfesores");
+        //===============panel asistencia profesores==========================
+        labelP_asistencia_curso.getStyleClass().add("CsspanelAsistenciaProfesores");
+        labelP_asistencia_casa.getStyleClass().add("CsspanelAsistenciaProfesores");
 
     }//fin inicializate
 
@@ -823,7 +1092,7 @@ public class PanelPrincipalCasasController implements Initializable {
         //solo csss para menu lateral si se pone asi
         win.getScene().getStylesheets().clear();
         panelMenuLateral.getStylesheets().clear();
-        panelMenuLateral.getStylesheets().add("/css/CssRojo.css");
+        panelMenuLateral.getStylesheets().add("/css/CssRojo1.css");
         panelAlumnos.getStylesheets().clear();
         panelAlumnos.getStylesheets().add("/css/CssbotonYlabelRojo.css");
         vaciarPanelTodo();
@@ -859,7 +1128,7 @@ public class PanelPrincipalCasasController implements Initializable {
         _imgEScudo.setImage(image1);
 
         panelMenuLateral.getStylesheets().clear();
-        panelMenuLateral.getStylesheets().add("/css/CssAmarillo.css");
+        panelMenuLateral.getStylesheets().add("/css/CssAmarillo1.css");
         panelAlumnos.getStylesheets().clear();
         panelAlumnos.getStylesheets().add("/css/CssbotonYlabelAmarillo.css");
         _imagen_bandera.setImage(image2);
@@ -1231,11 +1500,11 @@ public class PanelPrincipalCasasController implements Initializable {
 
         tareas_alumnos_objeto objetoSeleccionado = _tbA_tareas.getSelectionModel().getSelectedItem();
         int id_tarea = objetoSeleccionado.id_tarea;
-        
+
         if (String.valueOf(id_tarea).equals("")) {
             Jopane("No se ha seleccionado ninguna fila", "Error al guardar datos");
         } else {
-            
+
             String archivoElegido = _tfDocumentoSubir.getText();
             String comentario_alumno = _tfComentario.getText();
 
@@ -1280,7 +1549,7 @@ public class PanelPrincipalCasasController implements Initializable {
             pst.setString(1, ruta);
             pst.setString(2, comentario_alumno);
             pst.setInt(3, id_tarea);
-            
+
             pst.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
@@ -3537,8 +3806,6 @@ public class PanelPrincipalCasasController implements Initializable {
 
     }
 
-
-
     public void iconosPanelAsignaturas(int id_estudiante) {
 
         ArrayList asignaturas = new ArrayList();
@@ -3785,10 +4052,10 @@ public class PanelPrincipalCasasController implements Initializable {
 
             int comprobar = pst.executeUpdate();
             textArea_menaje_editar.clear();
-            
-            if (comprobar!=0) {
+
+            if (comprobar != 0) {
                 Jopane("Mensaje enviado", "Enviar mensaje");
-            }else{
+            } else {
                 Jopane("Error al enviar mensaje", "Enviar mensaje");
             }
 
@@ -3815,9 +4082,9 @@ public class PanelPrincipalCasasController implements Initializable {
 
             int comprobar = pst.executeUpdate();
             textArea_menaje_editar1.clear();
-            if (comprobar!=0) {
+            if (comprobar != 0) {
                 Jopane("Mensaje enviado", "Enviar mensaje");
-            }else{
+            } else {
                 Jopane("Error al enviar mensaje", "Enviar mensaje");
             }
 
