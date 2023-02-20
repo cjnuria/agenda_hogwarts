@@ -18,6 +18,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -25,6 +26,8 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -40,6 +43,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
@@ -721,6 +725,14 @@ public class PanelPrincipalCasasController implements Initializable {
     private Label labelA_guardarCambios_tareas;
     @FXML
     private Button boton_mas;
+    @FXML
+    private Button _boton_Guardar_Correcciones;
+    @FXML
+    private TableColumn<?, ?> _columTareaId;
+    @FXML
+    private TableColumn<?, ?> _columTareaIdPendientes;
+    @FXML
+    private ProgressBar _progressBar_Trimestre;
 
     /**
      * Initializes the controller class.
@@ -733,6 +745,7 @@ public class PanelPrincipalCasasController implements Initializable {
         vaciarPanelTodo();
         panelLog.setVisible(true);
         connect();
+        progressBar();
 
         filtras_notas_asignatura(53);
         controlcheck();
@@ -750,6 +763,10 @@ public class PanelPrincipalCasasController implements Initializable {
         label_casa_seleccion.setText("");
 
         _tbTarea_correciones.setOnMouseClicked((MouseEvent mouseEvent) -> {
+            // Insertar aquí el código a ejecutar cuando se haga clic en el ratón
+            comprobar();
+        });
+        _tbTarea_correciones_pendientes.setOnMouseClicked((MouseEvent mouseEvent) -> {
             // Insertar aquí el código a ejecutar cuando se haga clic en el ratón
             comprobar();
         });
@@ -804,6 +821,7 @@ public class PanelPrincipalCasasController implements Initializable {
         // BOTONES "CERRAR SESION" Y "CERRAR" MENU LATERAL
         botonSalirAlumno1.getStyleClass().add("CssSalir");
         botonSalirAlumno.getStyleClass().add("CssSalir");
+
 //============================ALUMNOS=============================================================================================
         //================= TITULO label principal gradian =======================
         labelA_mensajeria.getStyleClass().add("CssLabelPrincipal");
@@ -878,8 +896,10 @@ public class PanelPrincipalCasasController implements Initializable {
         labelA_seleccionRunas.getStyleClass().add("CsslabelSeleccionAsignaturas");
         labelA_seleccionAdivinacion.getStyleClass().add("CsslabelSeleccionAsignaturas");
 
-        //================================boton +======================================
+        //================================boton ========================================
         boton_mas.getStyleClass().add("cssmas");
+        botonA_enviar_mensajeria.getStyleClass().add("CssMensajeria");
+        _boton_sala_comun1.getStyleClass().add("CssGuardarConfiguracion");
 
         //=============================PROFESORES================================
         // titulo principal gradian
@@ -2748,6 +2768,7 @@ public class PanelPrincipalCasasController implements Initializable {
     public ObservableList<tareas_profesores_objeto> rellenar_tabla_correcciones(int id_profesor) {
 
         ObservableList<tareas_profesores_objeto> obs = FXCollections.observableArrayList();
+        _columTareaId.setCellValueFactory(new PropertyValueFactory<>("id_tarea"));
         _columTareaNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         _columTareasApellidos.setCellValueFactory(new PropertyValueFactory<>("apellidos"));
         _columTareasCursos.setCellValueFactory(new PropertyValueFactory<>("curso"));
@@ -2758,7 +2779,7 @@ public class PanelPrincipalCasasController implements Initializable {
             ResultSet rs = datos_para_correcciones(id_profesor);
 
             while (rs.next()) {
-
+                String id_tarea = rs.getString("id_tarea");
                 String nombre = rs.getString("nombre");
                 String apellidos = rs.getString("apellidos");
                 String cursos = rs.getString("curso");
@@ -2766,7 +2787,7 @@ public class PanelPrincipalCasasController implements Initializable {
                 String tipo_tarea = rs.getString("tipo_tarea");
                 String fecha_fin = rs.getString("fecha_fin");
 
-                tareas_profesores_objeto c = new tareas_profesores_objeto(nombre, apellidos, cursos, nombre_tarea, tipo_tarea, fecha_fin);
+                tareas_profesores_objeto c = new tareas_profesores_objeto(id_tarea, nombre, apellidos, cursos, nombre_tarea, tipo_tarea, fecha_fin);
                 obs.add(c);
                 _tbTarea_correciones.getItems().addAll(c);
 
@@ -2781,7 +2802,7 @@ public class PanelPrincipalCasasController implements Initializable {
 
     public ResultSet datos_para_correcciones(int id_profesor) {
         try {
-            PreparedStatement pst = conn.prepareStatement("SELECT estudiantes.nombre, estudiantes.apellidos, estudiantes.curso, tareas.nombre_tarea, tareas.tipo_tarea, tareas.fecha_fin\n"
+            PreparedStatement pst = conn.prepareStatement("SELECT tareas.id_tarea, estudiantes.nombre, estudiantes.apellidos, estudiantes.curso, tareas.nombre_tarea, tareas.tipo_tarea, tareas.fecha_fin\n"
                     + "FROM alu_nurismy_agenda.estudiantes estudiantes, alu_nurismy_agenda.tareas tareas\n"
                     + "WHERE \n"
                     + "	tareas.id_estudiante = estudiantes.id_estudiante AND tareas.id_profesor = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
@@ -2799,7 +2820,7 @@ public class PanelPrincipalCasasController implements Initializable {
 
     public ResultSet datos_para_correccionesPendientes(int id_profesor) {
         try {
-            PreparedStatement pst = conn.prepareStatement("SELECT estudiantes.nombre, estudiantes.apellidos, estudiantes.curso, tareas.nombre_tarea, tareas.tipo_tarea, tareas.fecha_fin\n"
+            PreparedStatement pst = conn.prepareStatement("SELECT tareas.id_tarea, estudiantes.nombre, estudiantes.apellidos, estudiantes.curso, tareas.nombre_tarea, tareas.tipo_tarea, tareas.fecha_fin\n"
                     + "FROM alu_nurismy_agenda.estudiantes estudiantes, alu_nurismy_agenda.tareas tareas\n"
                     + "WHERE \n"
                     + "	tareas.id_estudiante = estudiantes.id_estudiante AND tareas.id_profesor = ? AND tareas.corregido=0 ", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
@@ -2818,6 +2839,7 @@ public class PanelPrincipalCasasController implements Initializable {
     public ObservableList<tareas_profesores_objeto> rellenar_tabla_correccionesPendientes(int id_profesor) {
 
         ObservableList<tareas_profesores_objeto> obs = FXCollections.observableArrayList();
+        _columTareaIdPendientes.setCellValueFactory(new PropertyValueFactory<>("id_tarea"));
         _columTareaNombrePendientes.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         _columTareasApellidosPendientes.setCellValueFactory(new PropertyValueFactory<>("apellidos"));
         _columTareasCursosPendientes.setCellValueFactory(new PropertyValueFactory<>("curso"));
@@ -2828,7 +2850,7 @@ public class PanelPrincipalCasasController implements Initializable {
             ResultSet rs = datos_para_correccionesPendientes(id_profesor);
 
             while (rs.next()) {
-
+                String id_tarea = rs.getString("id_tarea");
                 String nombre = rs.getString("nombre");
                 String apellidos = rs.getString("apellidos");
                 String cursos = rs.getString("curso");
@@ -2836,7 +2858,7 @@ public class PanelPrincipalCasasController implements Initializable {
                 String tipo_tarea = rs.getString("tipo_tarea");
                 String fecha_fin = rs.getString("fecha_fin");
 
-                tareas_profesores_objeto c = new tareas_profesores_objeto(nombre, apellidos, cursos, nombre_tarea, tipo_tarea, fecha_fin);
+                tareas_profesores_objeto c = new tareas_profesores_objeto(id_tarea, nombre, apellidos, cursos, nombre_tarea, tipo_tarea, fecha_fin);
                 obs.add(c);
                 _tbTarea_correciones_pendientes.getItems().addAll(c);
 
@@ -2886,10 +2908,21 @@ public class PanelPrincipalCasasController implements Initializable {
     public void comprobar() {
         if (_tbTarea_correciones.getSelectionModel().getSelectedItem() != null) {
             tareas_profesores_objeto p = _tbTarea_correciones.getSelectionModel().getSelectedItem();
+            String id_tarea = p.getId_tarea();
             String nombre_alumno = p.getNombre();
             String apellidos_alumno = p.getApellidos();
             String nombreCompleto = nombre_alumno + " " + apellidos_alumno;
+            _tfTareas_alumno.setText("");
             _tfTareas_alumno.setText(nombreCompleto);
+
+        } else if (_tbTarea_correciones_pendientes.getSelectionModel().getSelectedItem() != null) {
+            tareas_profesores_objeto x = _tbTarea_correciones_pendientes.getSelectionModel().getSelectedItem();
+            String id_tareap = x.getId_tarea();
+            String nombre_alumnop = x.getNombre();
+            String apellidos_alumnop = x.getApellidos();
+            String nombreCompletop = nombre_alumnop + " " + apellidos_alumnop;
+            _tfTareas_alumno.setText("");
+            _tfTareas_alumno.setText(nombreCompletop);
 
         } else {
             Jopane("Error", "No ha selecionado nada");
@@ -4065,7 +4098,6 @@ public class PanelPrincipalCasasController implements Initializable {
 
     }
 
-    @FXML
     public void botonGuardarMensajeria_Alumnos() {
         try {
             String datos_completos = combo_mensajeria_alumnos1.getValue().toString();
@@ -4368,8 +4400,83 @@ public class PanelPrincipalCasasController implements Initializable {
             }
         }
     }
-}
 
+    @FXML
+    public void guardarCorrecciones() {
+
+        try {
+            tareas_profesores_objeto p = _tbTarea_correciones.getSelectionModel().getSelectedItem();
+            int id_tarea = Integer.valueOf(p.getId_tarea());
+
+            int id = Integer.valueOf(p.getId_tarea());
+            String comentario = _tfTareasComentario.getText();
+            double nota = Double.valueOf(_tfTareasNota.getText());
+            int id_estudiante = obtener_id_estudiante_por_id_tarea(id_tarea);
+
+            PreparedStatement pst = conn.prepareStatement("UPDATE tareas SET corregido=1 WHERE id_tarea=?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            pst.setInt(1, id_tarea);
+
+            pst.executeUpdate();
+
+            PreparedStatement pst2 = conn.prepareStatement("INSERT INTO alu_nurismy_agenda.notas\n"
+                    + "(id_tarea, id_estudiante, nota, comentario_profesor)\n"
+                    + "VALUES(?, ?, ?, ?);", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            pst2.setInt(1, id_tarea);
+            pst2.setInt(2, id_estudiante);
+            pst2.setDouble(3, nota);
+            pst2.setString(4, comentario);
+
+            pst2.executeUpdate();
+
+            _tfTareasComentario.setText("");
+            _tfTareasNota.setText("");
+            _tfTareas_alumno.setText("");
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public void progressBar() {
+        LocalDate START_DATE = LocalDate.of(2022, 9, 15);
+        LocalDate END_DATE = LocalDate.of(2023, 6, 22);
+        DoubleProperty progressProperty = new SimpleDoubleProperty();
+
+        // Calculate the duration of the date range
+        long totalDays = ChronoUnit.DAYS.between(START_DATE, END_DATE);
+
+        // Update the progress property based on the current date
+        long daysElapsed = ChronoUnit.DAYS.between(START_DATE, LocalDate.now());
+        progressProperty.set((double) daysElapsed / totalDays);
+
+        _progressBar_Trimestre.progressProperty().bind(progressProperty);
+    }
+
+    public int obtener_id_estudiante_por_id_tarea(int id_tarea) {
+        try {
+            PreparedStatement pst = conn.prepareStatement("SELECT * FROM tareas where id_tarea=?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            pst.setInt(1, id_tarea);
+            ResultSet resultado = pst.executeQuery();
+            if (!resultado.first()) {
+
+                Jopane("No se han encontrado datos", "Error");
+                return -1;
+            } else {
+                int id_estudiante = resultado.getInt("id_estudiante");
+                System.out.println(id_estudiante);
+                return id_estudiante;
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
+            return -1;
+        }
+
+    }
+
+}
 
 /*
 
