@@ -846,6 +846,7 @@ public class PanelPrincipalCasasController implements Initializable {
         labelA_vuelo.getStyleClass().add("CssAsignaturas");
         labelA_runas.getStyleClass().add("CssAsignaturas");
         labelA_adivinacion.getStyleClass().add("CssAsignaturas");
+       
 
         //======================panel asignatura con imagen ========================
         labelA_profesor.getStyleClass().add("CssAsignaturasImagen");
@@ -858,7 +859,7 @@ public class PanelPrincipalCasasController implements Initializable {
         labelA_subirDocumento.getStyleClass().add("CsslabelPanelTareas");
         labelA_comentario.getStyleClass().add("CsslabelPanelTareas");
         //============guardar cambios Tareas=======================
-       
+       boton_guardarComentario.getStyleClass().add("CssguardarCambiosTareas");
         //========================panel NOTAS=======================
         labelA_seleccionaAsignatura.getStyleClass().add("CsslabelPanelNotas");
         _labelNotas1.getStyleClass().add("CsslabelPanelNotas");
@@ -896,6 +897,7 @@ public class PanelPrincipalCasasController implements Initializable {
 //        botonA_enviar_mensajeria.setEffect(null);
         botonA_enviar_mensajeria.getStyleClass().add("CssMensajeria");
         _boton_sala_comun1.getStyleClass().add("CssGuardarConfiguracion");
+        _botonA_cambiar_Perfil.getStyleClass().add("CsscambiarImagenConfiguracion");
 
         //=============================PROFESORES================================
         // titulo principal gradian

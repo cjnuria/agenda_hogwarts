@@ -7,65 +7,134 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     Author     : nuria
 */
 
-Label{
+
+/*TITULOS PRINCIPALES GRADIAN*/
+.CssLabelPrincipal{
     -fx-text-fill: linear-gradient(from 60.5678% 38.8013% to 60.5678% 55.836%,#c0c0c0, #1d7239);
-
     -fx-font-family:"Harrington";
-
-    /*    funciona el gradian*/
+    -fx-font-Size:55;
 }
-Button{
-    -fx-background-color: #1d7239; /*verde*/
-    -fx-text-fill: #c0c0c0;/*plata*/
-    /*    -fx-font-family: "Harrington";*/
+.CssAsignaturas{
+    -fx-font-family:"Harrington";
+    -fx-font-Size:25;
+    /*-fx-text-fill: linear-gradient(from 60.5678% 38.8013% to 60.5678% 55.836%,#dbab29, #c90909);*/
+    -fx-text-fill: #1d7239;/*cambiar amarillo oscuro*/
+}
+.CssAsignaturasImagen{
+    -fx-font-family:"Harrington";
+    -fx-font-Size:20;
+    /*-fx-text-fill: linear-gradient(from 60.5678% 38.8013% to 60.5678% 55.836%,#dbab29, #c90909);*/
+    -fx-text-fill: #1d7239;/*cambiar*/
 
+}
+.CsslabelPanelTareas{
+    -fx-font-family:"Harrington";
+    -fx-font-Size:17;
+    -fx-text-fill: #1d7239;/*cambiar*/
+}
+.CsslabelPanelNotas{
+    -fx-font-family:"Harrington";
+    -fx-font-Size:22;
+    -fx-text-fill: #1d7239;/*cambiar*/
+}
+.CsslabelPanelconfiguracion{
+    -fx-font-family:"Harrington";
+    -fx-font-Size:26;
+    -fx-text-fill:#1d7239;/*cambiar*/
+}
+.CsslabelSeleccionAsignaturas{
+    -fx-font-family:"Harrington";
+    -fx-font-Size:25;
+    -fx-text-fill: #1d7239;/*cambiar*/
 }
 .table-view .column-header .label{
     -fx-text-fill:black;
     -fx-font-family:"Harrington";
-    -fx-font-Size:18;
-    
-
+    -fx-font-Size:21;
 }
 .table-cell{
-    -fx-font-Size:14;
-    -fx-font-weight:bold;
+    -fx-font-Size:17;
     -fx-text-fill:black;
     -fx-font-family:"Harrington";
-
-}
-.label_titulo1 .label{
-    -fx-text-fill:black;
-
 }
 .combo-box{
-    -fx-text-fill:black;
-    -fx-font-Size:14;
-   
+    -fx-font-Size:15;
     -fx-text-fill:black;
     -fx-font-family:"Harrington";
 
 }
-/*.combo-box .list-cell{
-    -fx-control-inner-background:#fffad4;
-    -fx-background-color:#fffad4;
+/*Text{ dar formato al login
+    -fx-font-family:"Harrington";
+    -fx-font-Size:14;
+
 }*/
-Text{
+.tab {
+    -fx-font-size: 20;
     -fx-font-family:"Harrington";
-    -fx-font-Size:14;
+}
+.CssLabelPlaning{
+    -fx-font-family:"Harrington";
+    -fx-font-Size:30;
+    -fx-text-fill: #1d7239;/*cambiar*/
 
 }
-.CssMenu{
-     -fx-font-family: "Harrington";
-     -fx-font-Size:30;
+.CssSalacomun{
+    -fx-font-family:"Harrington";
+    -fx-font-Size:18;
+    -fx-text-fill: #1d7239;/*cambiar*/
 }
-.tab {
-    -fx-font-size: 18px;
+.CsslabelGuardarCambiosTareas{
+    -fx-font-family:"Harrington";
+    -fx-font-Size:18;
+    /*-fx-text-fill: linear-gradient(from 60.5678% 38.8013% to 60.5678% 55.836%,#dbab29, #c90909);*/
+    -fx-background-color: #1d7239;/*cambiar*/
+    -fx-text-fill: #c0c0c0;
+
 }
-/*mensajeria*/
+/*{
+    -fx-font-family:"Harrington";
+    -fx-font-size: 12;
+    -fx-background-color: #c90909;
+    -fx-text-fill: #dbab29;
+}*/
+
+.cssmas{
+
+    -fx-font-size: 12;
+    -fx-background-color: #1d7239;/*cambiar*/
+    -fx-text-fill: #c0c0c0;
+}
+
 .CssMensajeria{
-     -fx-font-family: "Harrington";
-     -fx-font-Size:20;
-     -fx-background-color:#1d7239;
-     -fx-text-fill: #c0c0c0;
+    -fx-font-family:"Harrington";
+    -fx-font-size: 16;
+    -fx-background-color: #1d7239;/*cambiar*/
+    -fx-text-fill: #c0c0c0;
+}
+
+.CssGuardarConfiguracion{
+    -fx-font-family:"Harrington";
+    -fx-font-size: 25;
+    -fx-background-color: #1d7239;/*cambiar*/
+    -fx-text-fill: #c0c0c0;
+    -fx-background-radius: 10;
+    
+}
+.Cssbar .bar{
+    -fx-background-color: #1d7239;/*cambiar*/
+
+}
+.CssguardarCambiosTareas{
+    -fx-font-family:"Harrington";
+    -fx-font-size: 25;
+    -fx-background-color: #1d7239;/*cambiar*/
+    -fx-text-fill: #c0c0c0;
+    -fx-background-radius: 10;
+}
+.CsscambiarImagenConfiguracion{
+    -fx-font-family:"Harrington";
+    -fx-font-size: 15;
+    -fx-background-color: #1d7239;/*cambiar*/
+    -fx-text-fill: #c0c0c0;
+    -fx-background-radius: 10;
 }

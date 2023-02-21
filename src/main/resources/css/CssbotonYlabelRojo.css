@@ -57,7 +57,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     -fx-font-family:"Harrington";
 }
 .combo-box{
-    -fx-font-Size:17;
+    -fx-font-Size:15;
     -fx-text-fill:black;
     -fx-font-family:"Harrington";
 
@@ -98,7 +98,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 }*/
 
 .cssmas{
-    
+
     -fx-font-size: 12;
     -fx-background-color: #c90909;
     -fx-text-fill: #dbab29;
@@ -113,11 +113,27 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 
 .CssGuardarConfiguracion{
     -fx-font-family:"Harrington";
-    -fx-font-size: 16;
+    -fx-font-size: 25;
     -fx-background-color: #c90909;
     -fx-text-fill: #dbab29;
+    -fx-background-radius: 10;
+    
 }
 .Cssbar .bar{
     -fx-background-color: #c90909;
-    
+
+}
+.CssguardarCambiosTareas{
+    -fx-font-family:"Harrington";
+    -fx-font-size: 25;
+    -fx-background-color: #c90909;
+    -fx-text-fill: #dbab29;
+    -fx-background-radius: 10;
+}
+.CsscambiarImagenConfiguracion{
+    -fx-font-family:"Harrington";
+    -fx-font-size: 15;
+    -fx-background-color: #c90909;/*cambiar*/
+    -fx-text-fill: #131313;
+    -fx-background-radius: 10;
 }

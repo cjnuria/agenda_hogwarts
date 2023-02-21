@@ -11,6 +11,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 
     -fx-font-family:"Harrington";
     -fx-font-Size:30;
+    -fx-background-color: #fbd702;/*amarillo*/
+    -fx-text-fill: #131313;
 /*    -fx-text-fill: linear-gradient(from 60.5678% 38.8013% to 60.5678% 55.836%,#131313, #fbd702);*/
 }
 .CssSalir{

@@ -7,13 +7,18 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     Author     : ismael
 */
 
-Button{
+.CssLateral{
+
+    -fx-font-family:"Harrington";
+    -fx-font-Size:30;
+    -fx-background-color:  #00587e;
+    -fx-text-fill: #c0c0c0;/*plata*/
+    /*    -fx-text-fill: linear-gradient(from 60.5678% 38.8013% to 60.5678% 55.836%,#131313, #fbd702);*/
+}
+.CssSalir{
     -fx-background-color: #00587e;
     -fx-text-fill: #c0c0c0;
-    /*-fx-font-Size:30;*/
-}
-.Cssboton{
-     -fx-font-family: "Harrington";
-     -fx-font-Size:14;
-         
+    -fx-font-family:"Harrington";
+    -fx-font-Size:14;
+
 }
