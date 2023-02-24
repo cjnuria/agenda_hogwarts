@@ -7,68 +7,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     Author     : nuria
 */
 
-/*Label{
-    -fx-text-fill: linear-gradient(from 60.5678% 38.8013% to 60.5678% 55.836%,#c0c0c0, #00587e);
 
-    -fx-font-family:"Harrington";
-
-        funciona el gradian
-}
-Button{
-    -fx-background-color: #00587e; azul
-    -fx-text-fill: #c0c0c0;plata;
-    -fx-font-family: "Harrington";
-
-}
-.table-view .column-header .label{
-    -fx-text-fill:black;
-    -fx-font-family:"Harrington";
-    -fx-font-Size:18;
-    
-
-}
-.table-cell{
-    -fx-font-Size:14;
-    -fx-font-weight:bold;
-    -fx-text-fill:black;
-    -fx-font-family:"Harrington";
-
-}
-.label_titulo1 .label{
-    -fx-text-fill:black;
-
-}
-.combo-box{
-    -fx-text-fill:black;
-    -fx-font-Size:14;
-   
-    -fx-text-fill:black;
-    -fx-font-family:"Harrington";
-
-}
-.combo-box .list-cell{
-    -fx-control-inner-background:#fffad4;
-    -fx-background-color:#fffad4;
-}
-Text{
-    -fx-font-family:"Harrington";
-    -fx-font-Size:14;
-
-}
-.CssMenu{
-     -fx-font-family: "Harrington";
-     -fx-font-Size:30;
-}
-.tab {
-    -fx-font-size: 18px;
-}
-mensajeria
-.CssMensajeria{
-     -fx-font-family: "Harrington";
-     -fx-font-Size:20;
-     -fx-background-color:#00587e; 
-     -fx-text-fill:#c0c0c0;
-}*/
 /*TITULOS PRINCIPALES GRADIAN*/
 .CssLabelPrincipal{
     -fx-text-fill: linear-gradient(from 60.5678% 38.8013% to 60.5678% 55.836%,#c0c0c0, #00587e);
