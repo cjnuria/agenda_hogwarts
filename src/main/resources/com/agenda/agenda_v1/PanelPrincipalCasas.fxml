@@ -143,20 +143,19 @@
                         <Font size="14.0" />
                      </font>
                   </Button>
-                  <Label fx:id="_labelSesionEstudiante" layoutX="22.0" layoutY="6.0" prefHeight="17.0" prefWidth="72.0" text="LabelSesion1" />
                   <Button fx:id="botonSalirAlumno1" layoutX="57.0" layoutY="347.0" mnemonicParsing="false" onMouseClicked="#cerrarSesion" text="Cerrar Sesión" textFill="#e2a825">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Button>
-                  <Text fx:id="pruebaInicio" layoutX="124.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="hola">
+                  <Text fx:id="pruebaInicio" layoutX="23.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="hola" wrappingWidth="83.267578125">
                      <font>
-                        <Font size="36.0" />
+                        <Font size="14.0" />
                      </font>
                   </Text>
                </children>
             </Pane>
-            <Pane fx:id="panelSalaComun" layoutX="225.0" layoutY="-3.0" prefHeight="695.0" prefWidth="816.0" style="-fx-background-color: white;">
+            <Pane fx:id="panelSalaComun" layoutX="225.0" layoutY="-3.0" prefHeight="695.0" prefWidth="816.0" style="-fx-background-color: white;" visible="false">
                <children>
                   <ImageView fitHeight="829.0" fitWidth="865.0" layoutX="-4.0" layoutY="-125.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -1069,7 +1068,7 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane fx:id="panelProfesores" layoutY="-1.0" prefHeight="695.0" prefWidth="1052.0" visible="false">
+      <Pane fx:id="panelProfesores" layoutY="-1.0" prefHeight="695.0" prefWidth="1052.0">
          <children>
             <Pane fx:id="_panelMenuLateralProfe" prefHeight="693.0" prefWidth="228.0">
                <children>
@@ -1112,7 +1111,6 @@
                         <Font size="14.0" />
                      </font>
                   </Button>
-                  <Label fx:id="_labelSesionProfesor" layoutX="22.0" layoutY="6.0" prefHeight="17.0" prefWidth="72.0" text="LabelSesion1" textFill="#fffefe" />
                   <Button fx:id="botonSalirAlumno11" layoutX="56.0" layoutY="338.0" mnemonicParsing="false" onMouseClicked="#cerrarSesion" text="Cerrar Sesión" textFill="#e2a825">
                      <font>
                         <Font size="14.0" />
@@ -1297,7 +1295,7 @@
                   <DatePicker fx:id="_dpTareas_fechaFin" layoutX="302.0" layoutY="376.0" prefHeight="25.0" prefWidth="248.0" />
                </children>
             </Pane>
-            <Pane fx:id="_panelCorreccionesProfes" layoutX="219.0" prefHeight="695.0" prefWidth="837.0" visible="false">
+            <Pane fx:id="_panelCorreccionesProfes" layoutX="219.0" prefHeight="695.0" prefWidth="837.0">
                <children>
                   <ImageView fitHeight="820.0" fitWidth="837.0" layoutX="6.0" layoutY="-125.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -1310,14 +1308,15 @@
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="239.0" prefWidth="699.0">
                                  <children>
-                                    <TableView fx:id="_tbTarea_correciones" layoutX="29.0" layoutY="10.0" prefHeight="276.0" prefWidth="612.0" tableMenuButtonVisible="true">
+                                    <TableView fx:id="_tbTarea_correciones" layoutX="4.0" layoutY="10.0" prefHeight="276.0" prefWidth="670.0" tableMenuButtonVisible="true">
                                        <columns>
-                                          <TableColumn fx:id="_columTareaNombre" prefWidth="75.0" text="Nombre" />
-                                          <TableColumn fx:id="_columTareasApellidos" prefWidth="133.38299560546875" text="Apellidos" />
-                                          <TableColumn fx:id="_columTareasCursos" prefWidth="108.61700439453125" text="Cursos" />
-                                          <TableColumn fx:id="_columTareasTareas" prefWidth="125.8128662109375" text="Tareas" />
-                                          <TableColumn fx:id="_columTareaTipo" prefWidth="69.14630126953125" text="Tipo" />
-                                          <TableColumn fx:id="_columTareasFechaFin" editable="false" minWidth="0.0" prefWidth="97.33331298828125" text="Fecha" />
+                                          <TableColumn fx:id="_columTareaId" prefWidth="40.0" text="Id" />
+                                          <TableColumn fx:id="_columTareaNombre" prefWidth="94.4000244140625" text="Nombre" />
+                                          <TableColumn fx:id="_columTareasApellidos" prefWidth="142.4000244140625" text="Apellidos" />
+                                          <TableColumn fx:id="_columTareasCursos" prefWidth="94.4000244140625" text="Cursos" />
+                                          <TableColumn fx:id="_columTareasTareas" prefWidth="100.79998779296875" text="Tareas" />
+                                          <TableColumn fx:id="_columTareaTipo" prefWidth="103.199951171875" text="Tipo" />
+                                          <TableColumn fx:id="_columTareasFechaFin" editable="false" minWidth="0.0" prefWidth="92.00006103515625" text="Fecha" />
                                        </columns>
                                        <effect>
                                           <Blend>
@@ -1335,14 +1334,15 @@
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <TableView fx:id="_tbTarea_correciones_pendientes" layoutX="29.0" layoutY="10.0" prefHeight="276.0" prefWidth="612.0" tableMenuButtonVisible="true">
+                                    <TableView fx:id="_tbTarea_correciones_pendientes" layoutX="-2.0" layoutY="10.0" prefHeight="276.0" prefWidth="670.0" tableMenuButtonVisible="true">
                                        <columns>
-                                          <TableColumn fx:id="_columTareaNombrePendientes" prefWidth="75.0" text="Nombre" />
-                                          <TableColumn fx:id="_columTareasApellidosPendientes" prefWidth="133.38299560546875" text="Apellidos" />
-                                          <TableColumn fx:id="_columTareasCursosPendientes" prefWidth="108.61700439453125" text="Cursos" />
-                                          <TableColumn fx:id="_columTareasTareasPendientes" prefWidth="125.8128662109375" text="Tareas" />
-                                          <TableColumn fx:id="_columTareaTipoPendientes" prefWidth="69.14630126953125" text="Tipo" />
-                                          <TableColumn fx:id="_columTareasFechaFinPendientes" editable="false" minWidth="0.0" prefWidth="97.33331298828125" text="Fecha" />
+                                          <TableColumn fx:id="_columTareaIdPendientes" prefWidth="45.5999755859375" text="Id" />
+                                          <TableColumn fx:id="_columTareaNombrePendientes" prefWidth="90.4000244140625" text="Nombre" />
+                                          <TableColumn fx:id="_columTareasApellidosPendientes" prefWidth="123.20001220703125" text="Apellidos" />
+                                          <TableColumn fx:id="_columTareasCursosPendientes" prefWidth="92.79998779296875" text="Cursos" />
+                                          <TableColumn fx:id="_columTareasTareasPendientes" prefWidth="124.79998779296875" text="Tareas" />
+                                          <TableColumn fx:id="_columTareaTipoPendientes" prefWidth="99.20001220703125" text="Tipo" />
+                                          <TableColumn fx:id="_columTareasFechaFinPendientes" editable="false" minWidth="0.0" prefWidth="92.0" text="Fecha" />
                                        </columns>
                                        <effect>
                                           <Blend>

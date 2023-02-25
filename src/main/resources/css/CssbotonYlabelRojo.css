@@ -69,6 +69,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 }*/
 .tab {
     -fx-font-size: 20;
+    -fx-text-fill:black;
     -fx-font-family:"Harrington";
 }
 .CssLabelPlaning{
@@ -136,4 +137,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     -fx-background-color: #c90909;/*cambiar*/
     -fx-text-fill: #131313;
     -fx-background-radius: 10;
+}
+
+.CssTablaSalaComun{
+    -fx-text-fill: black;
 }

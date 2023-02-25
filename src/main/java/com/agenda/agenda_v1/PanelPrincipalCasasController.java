@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
  */
-
 package com.agenda.agenda_v1;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Files;
@@ -27,6 +27,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.collections.FXCollections;
@@ -172,8 +173,6 @@ public class PanelPrincipalCasasController implements Initializable {
     @FXML
     private ComboBox<String> _cbCursos;
     @FXML
-    private Label _labelSesionEstudiante;
-    @FXML
     private CheckBox _checkPociones;
     @FXML
     private CheckBox _checkTransformaciones;
@@ -201,7 +200,6 @@ public class PanelPrincipalCasasController implements Initializable {
     private TableColumn<Alumnos_objeto, String> _columCursos;
     @FXML
     private TableColumn<Alumnos_objeto, String> _columApellidos;
-    @FXML
     private Label _labelSesionProfesor;
     @FXML
     private ComboBox<String> _cbTareas_cursos;
@@ -478,8 +476,6 @@ public class PanelPrincipalCasasController implements Initializable {
     @FXML
     private Button _boton_salir;
     @FXML
-    private Label _labelSesionEstudiante1;
-    @FXML
     private TextField _tfNombreEstudiante11;
     @FXML
     private TextField _tfApellidosEstudiante11;
@@ -722,12 +718,16 @@ public class PanelPrincipalCasasController implements Initializable {
 
     @FXML
     private Button boton_mas;
+    @FXML
     private TableColumn<?, ?> _columTareaId;
+    @FXML
     private TableColumn<?, ?> _columTareaIdPendientes;
     @FXML
     private ProgressBar _progressBar_Trimestre;
     @FXML
     private Button boton_guardarComentario;
+    @FXML
+    private Label _labelSesionEstudiante1;
 
     /**
      * Initializes the controller class.
@@ -737,37 +737,23 @@ public class PanelPrincipalCasasController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
         vaciarPanelTodo();
         panelLog.setVisible(true);
         connect();
         progressBar();
-        
-        filtras_notas_asignatura(53);
         controlcheck();
-        solo_combo_casa();
-        solo_combo_curos();
-
-        filtrar_alumnos_asistencia_curso(7);
-        filtrar_alumnos_asistencia_casa(7);
-
-        filtrar_alumnos_asistencia_curso_historial(7);
-        filtrar_alumnos_asistencia_casa_historial(7);
-
-        _cbCursos.getItems().addAll("Primero", "Segundo", "Tercero", "Cuarto", "Quinto", "Sexto", "Séptimo");
-        _cbCursos.setValue("Primero");
-        label_casa_seleccion.setText("");
-
+        
         _tbTarea_correciones.setOnMouseClicked((MouseEvent mouseEvent) -> {
             // Insertar aquí el código a ejecutar cuando se haga clic en el ratón
             comprobar();
         });
+        
         _tbTarea_correciones_pendientes.setOnMouseClicked((MouseEvent mouseEvent) -> {
             // Insertar aquí el código a ejecutar cuando se haga clic en el ratón
             comprobar();
         });
-
-        rellenar_tablaProfesor_semanal(14);
-
+        
         labelUser.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 abrirCasaLogin();
@@ -781,9 +767,6 @@ public class PanelPrincipalCasasController implements Initializable {
         });
         imagen_recordadora.setVisible(false);
         imagen_recordadoraA.setVisible(false);
-        Cambiar_recordadoraProfesores(14);//???????????????????
-        Cambiar_recordadoraAlumnos(53);//??????????????????????''
-
 
 //================================css menus laterales================================================
         _boton_sala_comun.getStyleClass().add("CssLateral");
@@ -796,7 +779,7 @@ public class PanelPrincipalCasasController implements Initializable {
         botonSalirAlumno.getStyleClass().add("CssSalir");
 
 //============================ALUMNOS=============================================================================================
-        //================= TITULO label principal gradian =======================
+        //================= TITULO label principal gradian =====================
         labelA_mensajeria.getStyleClass().add("CssLabelPrincipal");
 
         labelA_sala_comun.getStyleClass().add("CssLabelPrincipal");
@@ -806,9 +789,9 @@ public class PanelPrincipalCasasController implements Initializable {
         labelA_configuracion.getStyleClass().add("CssLabelPrincipal");
         _tituloAsignatura.getStyleClass().add("CssLabelPrincipal");
 
-        //================planin alunnos sala comun===================================
+        //================planin alunnos sala comun=============================
         labelA_planing.getStyleClass().add("CssLabelPlaning");
-        //==================sala comun alumnos===================================
+        //==================sala comun alumnos==================================
         labelA_trimestre.getStyleClass().add("CssSalacomun");
         labelA_mensa.getStyleClass().add("CssSalacomun");
         labelA_configura.getStyleClass().add("CssSalacomun");
@@ -826,7 +809,7 @@ public class PanelPrincipalCasasController implements Initializable {
         labelA_runas.getStyleClass().add("CssAsignaturas");
         labelA_adivinacion.getStyleClass().add("CssAsignaturas");
 
-        //======================panel asignatura con imagen ========================
+        //======================panel asignatura con imagen ====================
         labelA_profesor.getStyleClass().add("CssAsignaturasImagen");
         labelA_tipo.getStyleClass().add("CssAsignaturasImagen");
         _nombreProfesorAsignatura.getStyleClass().add("CssAsignaturasImagen");
@@ -855,7 +838,7 @@ public class PanelPrincipalCasasController implements Initializable {
         labelA_email.getStyleClass().add("CsslabelPanelconfiguracion");
         labelA_fecha.getStyleClass().add("CsslabelPanelconfiguracion");
         labelA_pass.getStyleClass().add("CsslabelPanelconfiguracion");
-        //=======================Panel seleccion asignaturas==========================
+        //=======================Panel seleccion asignaturas====================
         labelA_seleccionPociones.getStyleClass().add("CsslabelSeleccionAsignaturas");
         labelA_seleccionTransformaciones.getStyleClass().add("CsslabelSeleccionAsignaturas");
         labelA_seleccionEncantamientos.getStyleClass().add("CsslabelSeleccionAsignaturas");
@@ -869,15 +852,14 @@ public class PanelPrincipalCasasController implements Initializable {
         labelA_seleccionRunas.getStyleClass().add("CsslabelSeleccionAsignaturas");
         labelA_seleccionAdivinacion.getStyleClass().add("CsslabelSeleccionAsignaturas");
 
-        //================================boton ========================================
-
+        //================================boton ================================
         boton_mas.getStyleClass().add("cssmas");
 //        botonA_enviar_mensajeria.setEffect(null);
         botonA_enviar_mensajeria.getStyleClass().add("CssMensajeria");
         _boton_sala_comun1.getStyleClass().add("CssGuardarConfiguracion");
         _botonA_cambiar_Perfil.getStyleClass().add("CsscambiarImagenConfiguracion");
 
-        //=============================PROFESORES================================
+        //=============================PROFESORES===============================
         // titulo principal gradian
         labelP_cursosAsisgnados.getStyleClass().add("CssLabelPrincipalProfesores");
         labelA_selecionAsignaturas.getStyleClass().add("CssLabelPrincipalProfesores");
@@ -909,14 +891,17 @@ public class PanelPrincipalCasasController implements Initializable {
         //===============panel asistencia profesores==========================
         labelP_asistencia_curso.getStyleClass().add("CsspanelAsistenciaProfesores");
         labelP_asistencia_casa.getStyleClass().add("CsspanelAsistenciaProfesores");
-//========================progrees bar=============================================
+//========================progrees bar==========================================
         _progressBar_Trimestre.getStyleClass().add("Cssbar");
+        _tbA_tareas.getStyleClass().add("CssTablaSalaComun");
 
     }//fin inicializate
-/**
- * 
- * @param id_estudiante  tipo entero recoge un dato autoincremental con el id que identifica al estudiante
- */
+
+    /**
+     *
+     * @param id_estudiante tipo entero recoge un dato autoincremental con el id
+     * que identifica al estudiante
+     */
     public void Cambiar_recordadoraAlumnos(int id_estudiante) {
         try {
             PreparedStatement pst = conn.prepareStatement("SELECT * FROM mensajes where id_estudiante= ?");
@@ -936,10 +921,12 @@ public class PanelPrincipalCasasController implements Initializable {
         }
 
     }
-/**
- * 
- * @param id_profesor tipo entero recoge un dato autoincremental con el id que identifica al profesor
- */
+
+    /**
+     *
+     * @param id_profesor tipo entero recoge un dato autoincremental con el id
+     * que identifica al profesor
+     */
     public void Cambiar_recordadoraProfesores(int id_profesor) {
         try {
             PreparedStatement pst = conn.prepareStatement("SELECT * FROM mensajes_profesor where id_profesor= ?");
@@ -974,9 +961,10 @@ public class PanelPrincipalCasasController implements Initializable {
 
     }
 
-/**
- * Método para controlar los click que se hacen al elegir asignaturas para poder bloquearlas al elegir 6
- */
+    /**
+     * Método para controlar los click que se hacen al elegir asignaturas para
+     * poder bloquearlas al elegir 6
+     */
     public void controlcheck() {
 
         _checkAdivinacion.setOnMouseClicked((MouseEvent mouseEvent) -> {
@@ -1010,47 +998,117 @@ public class PanelPrincipalCasasController implements Initializable {
 
     }
 
-/**
- * Método para abrir la casa según dni(no terminado)
- * */
+    /**
+     * Método para abrir la casa según dni(no terminado)
+     *
+     */
     @FXML
     public void abrirCasaLogin() {
-        String dni = labelUser.getText();
+        try {
+            String dni = labelUser.getText();
+            String pass = labelPass.getText();
+            String casa = comprobarInicioSesionEstudiantes(dni, pass);
+            int id_estudiante = obtner_id_estudiante(dni);
+            System.out.println(id_estudiante);
+            System.out.println(casa);
+            
+            switch (casa) {
 
-        switch (dni) {
+                case "GRYFFINDOR":
+                    cambiarImagenGr();
+                    paneConfiguracion.setVisible(false);
+                    rellenar_tareas_alumnos_semanal(id_estudiante);
+                    panelSalaComun.setVisible(true);
+                    pruebaInicio.setText(dni);
+                    Cambiar_recordadoraAlumnos(id_estudiante);
+                    filtras_notas_asignatura(id_estudiante);
+                    break;
+                case "SLYTHERIN":
+                    cambiarImagenSl();
+                    paneConfiguracion.setVisible(false);
+                    panelSalaComun.setVisible(true);
+                    pruebaInicio.setText(dni);
+                    Cambiar_recordadoraAlumnos(id_estudiante);
+                    filtras_notas_asignatura(id_estudiante);
+                    rellenar_tareas_alumnos_semanal(id_estudiante);
+                    break;
+                case "HAFFLEPUFF":
+                    cambiarImagenHu();
+                    paneConfiguracion.setVisible(false);
+                    panelSalaComun.setVisible(true);
+                    pruebaInicio.setText(dni);
+                    Cambiar_recordadoraAlumnos(id_estudiante);
+                    filtras_notas_asignatura(id_estudiante);
+                    rellenar_tareas_alumnos_semanal(id_estudiante);
+                    break;
+                case "RAVENCLAW":
+                    cambiarImagenRa();
+                    paneConfiguracion.setVisible(false);
+                    panelSalaComun.setVisible(true);
+                    pruebaInicio.setText(dni);
+                    Cambiar_recordadoraAlumnos(id_estudiante);
+                    filtras_notas_asignatura(id_estudiante);
+                    rellenar_tareas_alumnos_semanal(id_estudiante);
+                    break;
+                case "profesor":
+                    int id_profesor = obtener_id_profesor(dni);
+                    cambiarImagenProfe();
+                    int id_asigprof = obtener_id_asigProf_por_idProfesor(id_profesor);
+                    Cambiar_recordadoraAlumnos(id_profesor);
+                    rellenar_tablaProfesor_semanal(id_profesor);
+                    filtrar_alumnos_asistencia_curso(id_asigprof);
+                    filtrar_alumnos_asistencia_casa(id_asigprof);
+                    filtrar_alumnos_asistencia_curso_historial(id_asigprof);
+                    filtrar_alumnos_asistencia_casa_historial(id_asigprof);
+                    solo_combo_casa();
+                    solo_combo_curos();
+                    break;
+                case "admin":
+                    cambiarImagenAdmin();
+                    
 
-            case "a":
-                cambiarImagenGr();
-                paneConfiguracion.setVisible(false);
-                panelSalaComun.setVisible(true);
-                break;
-            case "s":
-                cambiarImagenSl();
-                paneConfiguracion.setVisible(false);
-                panelSalaComun.setVisible(true);
-                break;
-            case "d":
-                cambiarImagenHu();
-                paneConfiguracion.setVisible(false);
-                panelSalaComun.setVisible(true);
-                break;
-            case "f":
-                cambiarImagenRa();
-                paneConfiguracion.setVisible(false);
-                panelSalaComun.setVisible(true);
-                break;
-            case "p":
-                cambiarImagenProfe();
-                break;
-            case "admin":
-                cambiarImagenAdmin();
+            }
+        } catch (NullPointerException e) {
 
-//            case "minerva":
-//                _labelSesionProfesor.setText("minerva");
-//                cambiarImagenProfe();
-//            case "SLYTHERIN":
-//                cambiarImagenSl();
-//                
+        }
+
+    }
+
+    public String comprobarInicioSesionEstudiantes(String dni, String pass) {
+        System.out.println(dni);
+        try {
+            PreparedStatement pst = conn.prepareStatement("SELECT * FROM estudiantes WHERE dni =? AND pass =?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            pst.setString(1, dni);
+            pst.setString(2, pass);
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.first()) {
+                String casa = rs.getString("casa");
+                return casa;
+
+            } else {
+                PreparedStatement pst2 = conn.prepareStatement("SELECT * FROM profesores WHERE dni =?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+                pst2.setString(1, dni);
+                ResultSet rs2 = pst2.executeQuery();
+
+                if (!rs2.first()) {
+                    Jopane("No existe ningún usuario con los datos introducidos", "Error Login");
+                    return null;
+                } else {
+                    dni = rs2.getString("dni");
+                    if (dni.equals("admin")) {
+                        return "admin";
+                    } else {
+                        pruebaInicio.setText(dni);
+                        return "profesor";
+                    }
+
+                }
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
     }
 
@@ -1163,7 +1221,6 @@ public class PanelPrincipalCasasController implements Initializable {
     //MÉTODO PARA VACIAR PANELES//
     public void vaciarPanelTodo() {
 
-        
         panelAsignaturas.setVisible(false);
         panelNotas.setVisible(false);
         panelTareas.setVisible(false);
@@ -1193,7 +1250,7 @@ public class PanelPrincipalCasasController implements Initializable {
     }
 
     public void vaciarPanelProfes() {
-        
+
         _panelCorreccionesProfes.setVisible(false);
         _panelCursosProfes.setVisible(false);
         _panelSalaComunProfes.setVisible(false);
@@ -1210,80 +1267,88 @@ public class PanelPrincipalCasasController implements Initializable {
     //////////////////////////////////////////////////////////////////////////
     @FXML
     private void cambiarPanelSalaComun(ActionEvent event) {
+        String dni = labelUser.getText();
+        int id_estudiante = obtner_id_estudiante(dni);
+
         vaciarPanelTodo();
         panelAlumnos.setVisible(true);
         panelSalaComun.setVisible(true);
         _tablaAlum_salaComun.getItems().clear();
-        rellenar_tareas_alumnos_semanal(53);//??????????????
-        Cambiar_recordadoraAlumnos(53);//??????????????????????''
-        Cambiar_recordadoraProfesores(14);//????????????????
+        rellenar_tareas_alumnos_semanal(id_estudiante);
+        Cambiar_recordadoraAlumnos(id_estudiante);
 
     }
 
     @FXML
     private void cambiarPanelAsignaturas(ActionEvent event) {
+        String dni = labelUser.getText();
+        int id_estudiante = obtner_id_estudiante(dni);
         vaciarPanelTodo();
         panelAlumnos.setVisible(true);
         panelAsignaturas.setVisible(true);
-        iconosPanelAsignaturas(53);
-        Cambiar_recordadoraAlumnos(53);//??????????????????????''
-        Cambiar_recordadoraProfesores(14);//????????????????
+        iconosPanelAsignaturas(id_estudiante);
+        Cambiar_recordadoraAlumnos(id_estudiante);
     }
 
     @FXML
     private void cambiarPanelNotas(ActionEvent event) {
+        String dni = labelUser.getText();
+        int id_estudiante = obtner_id_estudiante(dni);
         vaciarPanelTodo();
-
         panelAlumnos.setVisible(true);
         panelNotas.setVisible(true);
-
         _jcFilto_notas_alumno.getItems().clear();
-        notas_por_asignatura(53);
-
+        notas_por_asignatura(id_estudiante);
         _tablaAlu_notas.getItems().clear();
-        rellenar_notas_alumnos(53);//?????????????????????????
-        cambiarImagenAsignaturas_Notas(53);//??????????????????????????
-        Cambiar_recordadoraAlumnos(53);//??????????????????????''
-        Cambiar_recordadoraProfesores(14);//????????????????
+        rellenar_notas_alumnos(id_estudiante);
+        cambiarImagenAsignaturas_Notas(id_estudiante);
+        Cambiar_recordadoraAlumnos(id_estudiante);
     }
 
     @FXML
     private void cambiarPanelTareas(ActionEvent event) {
+        String dni = labelUser.getText();
+        int id_estudiante = obtner_id_estudiante(dni);
         vaciarPanelTodo();
         panelAlumnos.setVisible(true);
         panelTareas.setVisible(true);
         //totalAlumnos();
         _tbA_tareas.getItems().clear();
-        rellenar_tareas_alumnos(53);
-        Cambiar_recordadoraAlumnos(53);//??????????????????????''
-        Cambiar_recordadoraProfesores(14);//????????????????
+        rellenar_tareas_alumnos(id_estudiante);
+        Cambiar_recordadoraAlumnos(id_estudiante);
     }
 
     @FXML
     private void cambiarSalaProfes() {
+        String dni = labelUser.getText();
+        int id_profesor = obtener_id_profesor(dni);
         vaciarPanelProfes();
         _panelSalaComunProfes.setVisible(true);
         _tbprofesores_semanal.getItems().clear();
-        rellenar_tablaProfesor_semanal(14);
-        Cambiar_recordadoraAlumnos(53);//??????????????????????''
-        Cambiar_recordadoraProfesores(14);//????????????????
+        rellenar_tablaProfesor_semanal(id_profesor);
+        Cambiar_recordadoraProfesores(id_profesor);
 
     }
 
     @FXML
     public void cambiarConfiguracion() {
+        String dni = labelUser.getText();
+        int id_estudiante = obtner_id_estudiante(dni);
         vaciarPanelTodo();
         panelAlumnos.setVisible(true);
         paneConfiguracion.setVisible(true);
         _boton_sala_comun1.setText("Actualizar");
         cargar_datos_configuracionA();
-        Cambiar_recordadoraAlumnos(53);//??????????????????????''
-        Cambiar_recordadoraProfesores(14);//????????????????
+        Cambiar_recordadoraAlumnos(id_estudiante);
 
     }
 
     @FXML
     private void cambiarTareasProfes() {
+        String dni = pruebaInicio.getText();
+        System.out.println(dni + "-----hola");
+        int id_profesor = obtener_id_profesor(dni);
+        System.out.println(id_profesor);
         _cbTareas_cursos.getItems().clear();
         _cbTarea_casa.getItems().clear();
         vaciarPanelProfes();
@@ -1297,43 +1362,44 @@ public class PanelPrincipalCasasController implements Initializable {
         totalAlumnos();
         solo_combo_casa();
         solo_combo_curos();
-        Cambiar_recordadoraAlumnos(53);//??????????????????????''
-        Cambiar_recordadoraProfesores(14);//????????????????
+        Cambiar_recordadoraProfesores(id_profesor);
 
     }
 
     @FXML
     private void cambiarCorreccionesProfes() {
+        String dni = pruebaInicio.getText();
+        int id_profesor = obtener_id_profesor(dni);
         vaciarPanelProfes();
         _tbTarea_correciones.getItems().clear();
         _tbTarea_correciones_pendientes.getItems().clear();
         _panelCorreccionesProfes.setVisible(true);
-        rellenar_tabla_correcciones(14);
-        rellenar_tabla_correccionesPendientes(14);
-        Cambiar_recordadoraAlumnos(53);//??????????????????????''
-        Cambiar_recordadoraProfesores(14);//????????????????
+        rellenar_tabla_correcciones(id_profesor);
+        rellenar_tabla_correccionesPendientes(id_profesor);
+        Cambiar_recordadoraProfesores(id_profesor);
 
     }
 
     @FXML
     private void cambiarCursosProfes() {
+        String dni = pruebaInicio.getText();
         _cbCursos.getItems().addAll("Primero", "Segundo", "Tercero", "Cuarto", "Quinto", "Sexto", "Séptimo");
         _cbCursos.setValue("Primero");
         vaciarPanelProfes();
         _panelCursosProfes.setVisible(true);
-        int id_profesor = id_profesor_Con_dni("Minerva");
+        int id_profesor = id_profesor_Con_dni(dni);
         _tablaProfesor_cursos.getItems().clear();
         int id_asigProf = id_profesor_obtener_asifprof(id_profesor);
-        rellenar_tabla(7);//????????????????????????????????????????'
-        Cambiar_recordadoraAlumnos(53);//??????????????????????''
-        Cambiar_recordadoraProfesores(14);//????????????????
+        rellenar_tabla(id_asigProf);
+        Cambiar_recordadoraProfesores(id_profesor);
     }
 
     /////////////////////////////////////////////////////////////////////////////////
     /////////MÉTODOS PARA ABRIR ASIGNATURAS AL HACER CLICK EN SU ICONO///////////////
     /////////////////////////////////////////////////////////////////////////////////
     public void cambiarPanelAsignaturasIndividual(String asignatura, String profesor, float notaMedia, String tipoAsignatura) {
-
+        String dni = pruebaInicio.getText();
+        int id_estudiante = obtner_id_estudiante(dni);
         vaciarPanelTodo();
         panelAlumnos.setVisible(true);
         paneAsignaturasIndividual.setVisible(true);
@@ -1351,8 +1417,7 @@ public class PanelPrincipalCasasController implements Initializable {
         _nombreProfesorAsignatura.setText(profesor);
         _notaMediaAsignatura.setText(String.valueOf(notaMedia));
         _tipoAsignatura.setText(tipoAsignatura);
-        Cambiar_recordadoraAlumnos(53);//??????????????????????''
-        Cambiar_recordadoraProfesores(14);//????????????????
+        Cambiar_recordadoraAlumnos(id_estudiante);
     }
 
     @FXML
@@ -1427,6 +1492,9 @@ public class PanelPrincipalCasasController implements Initializable {
         win.setHeight(520);
         vaciarPanelTodo();
         panelRegistro.setVisible(true);
+        _cbCursos.getItems().addAll("Primero", "Segundo", "Tercero", "Cuarto", "Quinto", "Sexto", "Séptimo");
+        _cbCursos.setValue("Primero");
+        label_casa_seleccion.setText("");
     }
 
     @FXML
@@ -1499,12 +1567,12 @@ public class PanelPrincipalCasasController implements Initializable {
 
     @FXML
     private void atrasAsignatura(MouseEvent event) {
-
+        String dni = pruebaInicio.getText();
+        int id_estudiante = obtner_id_estudiante(dni);
         paneAsignaturasIndividual.setVisible(false);
         panelAsignaturas.setVisible(true);
         imagen_texto_asignatura.setVisible(false);
-        Cambiar_recordadoraAlumnos(53);//??????????????????????''
-        Cambiar_recordadoraProfesores(14);//????????????????
+        Cambiar_recordadoraAlumnos(id_estudiante);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1558,8 +1626,9 @@ public class PanelPrincipalCasasController implements Initializable {
                 if (result.get() == ButtonType.OK) {
                     Files.copy(sourceFile.toPath(), destinationFile.toPath());
                     String nombreArchivo = destinationFile.toString().substring(destinationFile.toString().lastIndexOf("\\") + 1);
-                    actualizarTareasAlumno_Ruta(id_tarea, nombreArchivo, comentario_alumno);//?????Arreglar tabla y poner id tarea???????
+                    actualizarTareasAlumno_Ruta(id_tarea, nombreArchivo, comentario_alumno);//?????Arreglar tabla y poner id tarea?????
                     Jopane("Guardado correctamente", "Guartar tarea");
+                    
                 }
 
                 // Static Methods To Copy Copy source path to destination path
@@ -1572,7 +1641,7 @@ public class PanelPrincipalCasasController implements Initializable {
     }
 
     public void actualizarTareasAlumno_Ruta(int id_tarea, String ruta, String comentario_alumno) {
-
+        int id_estudiante = obtner_id_estudiante(pruebaInicio.getText());
         try {
             PreparedStatement pst = conn.prepareStatement("UPDATE alu_nurismy_agenda.tareas\n"
                     + "SET entregado=1, archivo=?, comentario_alumno=?\n"
@@ -1583,6 +1652,7 @@ public class PanelPrincipalCasasController implements Initializable {
             pst.setInt(3, id_tarea);
 
             pst.executeUpdate();
+            rellenar_tareas_alumnos(id_estudiante);
         } catch (SQLException ex) {
             Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1594,9 +1664,8 @@ public class PanelPrincipalCasasController implements Initializable {
         float notatarea = Float.parseFloat(_tfTareasNota.getText());
     }
 
-    
     /////////////////////////////////////////////////////////////////////////////////
-                         ////////////////CONEXION///////////////////
+    ////////////////CONEXION///////////////////
     /////////////////////////////////////////////////////////////////////////////////
     // Conexión a la base de datos
     private static Connection conn = null;
@@ -1663,6 +1732,8 @@ public class PanelPrincipalCasasController implements Initializable {
     /////////////////////////////////////////////////////////////////////////////////
     @FXML
     public void altaEstudiante() {
+        String dni = pruebaInicio.getText();
+        int id_estudiante = obtner_id_estudiante(dni);
 
         if (_boton_sala_comun1.getText().equalsIgnoreCase("Actualizar")) {
 
@@ -1679,7 +1750,6 @@ public class PanelPrincipalCasasController implements Initializable {
                     String fecha_nac = _tfFechaNacEstudiante.getText();
                     String correo = _tfEmailEstudiante.getText();
                     String pass = _tfPassEstudiante.getText();
-                    int id_estudiante = 53;//???????????????????? 
 
                     if (nombre.equals("") || apellidos.equals("") || fecha_nac.equals("") || correo.equals("") || String.valueOf(telefono).equals("") || pass.endsWith("")) {
                         Jopane("No puede dejar campos vacíos", "Error actualizar datos");
@@ -1711,7 +1781,6 @@ public class PanelPrincipalCasasController implements Initializable {
                     int telefono = Integer.parseInt(_tfTelefonoEstudiante.getText());
                     String fecha_nac = _tfFechaNacEstudiante.getText();
                     String correo = _tfEmailEstudiante.getText();
-                    int id_estudiante = 53;//????????????????
                     if (nombre.equals("") || apellidos.equals("") || fecha_nac.equals("") || correo.equals("") || String.valueOf(telefono).equals("")) {
                         Jopane("No puede dejar campos vacíos", "Error actualizar datos");
                     } else {
@@ -1738,7 +1807,6 @@ public class PanelPrincipalCasasController implements Initializable {
 
                 String nombre = _tfNombreEstudiante.getText();
                 String apellidos = _tfApellidosEstudiante.getText();
-                String dni = _tfDniEstudiante.getText();
                 int telefono = Integer.parseInt(_tfTelefonoEstudiante.getText());
                 String fecha_nac = _tfFechaNacEstudiante.getText();
                 String correo = _tfEmailEstudiante.getText();
@@ -1768,7 +1836,7 @@ public class PanelPrincipalCasasController implements Initializable {
                         panelSelecionAsignatura.setVisible(true);
                         Jopane("Añadido correctamente, seleccione ahora 6 asignaturas", "Añadir estudiantes");
                         borrar_datos_registro();
-                        _labelSesionEstudiante.setText(dni);
+                        pruebaInicio.setText(dni);
                     } else {
                         Jopane("Error", "error al insertar");
 
@@ -1785,12 +1853,14 @@ public class PanelPrincipalCasasController implements Initializable {
     }
 
     public void cargar_datos_configuracionA() {
+        String dni = pruebaInicio.getText();
+        int id_estudiante = obtner_id_estudiante(dni);
         try {
-            //   int id_estudiante = Integer.valueOf(_labelSesionEstudiante.getText());
+            //   int id_estudiante = Integer.valueOf(pruebaInicio.getText());
 
             PreparedStatement pst = conn.prepareStatement("SELECT * FROM estudiantes WHERE id_estudiante=?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             //falta actualizar sin contraseña
-            pst.setInt(1, 53);//??????????????????????????????
+            pst.setInt(1, id_estudiante);
             ResultSet rs = pst.executeQuery();
             if (rs.first()) {
                 _tfNombreEstudiante.setText(rs.getString("nombre"));
@@ -1813,43 +1883,9 @@ public class PanelPrincipalCasasController implements Initializable {
     //ARREGLAR PARA CERRAR SESIÓN DE VERDAD, REINICIAR TODOS LOS VALORES O ALGO ASI
     @FXML
     private void cerrarSesion(MouseEvent event) {
-        Window win = App.getScene().getWindow();
-        win.setWidth(858);
-        win.setHeight(458);
-        vaciarPanelTodo();
-        panelLog.setVisible(true);
-        borrarTodo();
-        Cambiar_recordadoraAlumnos(53);//??????????????????????''
-        Cambiar_recordadoraProfesores(14);//????????????????
-        imagenPulsaSombrero.setVisible(true);
-        labelPulsaSombrero1.setVisible(true);
-        labelPulsaSombrero2.setVisible(true);
-        imagenNombreCasa.setVisible(false);
-        label_casa_seleccion.setVisible(false);
 
-        ArrayList<ComboBox> miListaDeComboBoxes = new ArrayList<ComboBox>();
+        App.cerrarSesion();
 
-        for (ComboBox c : miListaDeComboBoxes) {
-            c.getItems().clear();
-        }
-
-        ArrayList<TableView> miListaDeTablas = new ArrayList<TableView>();
-
-        for (TableView t : miListaDeTablas) {
-            t.setItems(FXCollections.observableArrayList());
-        }
-
-        ArrayList<TextField> miListaDeTextFields = new ArrayList<TextField>();
-
-        for (TextField t : miListaDeTextFields) {
-            t.setText("");
-        }
-
-        ArrayList<TextArea> miListaDeTextAreas = new ArrayList<TextArea>();
-
-        for (TextArea t : miListaDeTextAreas) {
-            t.setText("");
-        }
     }
 
     public void borrarTodo() {
@@ -1879,16 +1915,16 @@ public class PanelPrincipalCasasController implements Initializable {
         _checkVuelo.setSelected(false);
         _taTarea_destinatario.setText("");
         _taTareas_descripcion.setText("");
-        _labelSesionEstudiante.setText("");
+        pruebaInicio.setText("");
         _labelSesionProfesor.setText("");
 
     }
 
     //========Metodo para las alertas=============================
     /**
-     * 
-     * @param mensaje  el mensaje de Alert
-     * @param titulo  titulo del mensaje Alert
+     *
+     * @param mensaje el mensaje de Alert
+     * @param titulo titulo del mensaje Alert
      */
     public void Jopane(String mensaje, String titulo) {
         Alert alerta = new Alert(AlertType.INFORMATION);
@@ -1902,7 +1938,7 @@ public class PanelPrincipalCasasController implements Initializable {
     //============Metodo seleccion asignaturas==================
     @FXML
     public void Asignaturas_elegidas() {
-        String dni = _labelSesionEstudiante.getText();
+        String dni = pruebaInicio.getText();
         int id_estudiante = obtner_id_estudiante(dni);
 
         if (contarCheck() < 6) {
@@ -1947,7 +1983,7 @@ public class PanelPrincipalCasasController implements Initializable {
     }
 
     public void insertar_asigEstu(String asignatura) {
-        String dni = _labelSesionEstudiante.getText();
+        String dni = pruebaInicio.getText();
 
         int id_asignatura = obtener_id_asignatura(asignatura);
         int id_asigProf = obtener_id_asigProf(id_asignatura);
@@ -1969,10 +2005,11 @@ public class PanelPrincipalCasasController implements Initializable {
     ///////////////////MÉTDOS PARA OBTENER DATOS/////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////
     /**
-     * 
+     *
      * @param dni tipo String identifica el dni del estudiante
      * @return devuelve el id que identifica al estudiante
-     * @throws SQLException devuelve una excepcion si no se ha podido ejecutar la consulta
+     * @throws SQLException devuelve una excepcion si no se ha podido ejecutar
+     * la consulta
      */
     public int obtner_id_estudiante(String dni) {
         ResultSet resultado;
@@ -1982,8 +2019,6 @@ public class PanelPrincipalCasasController implements Initializable {
             resultado = pst.executeQuery();
 
             if (!resultado.first()) {
-
-                Jopane("No se han encontrado datos", "Error");
                 return -1;
             } else {
                 int id = resultado.getInt("id_estudiante");
@@ -1998,11 +2033,13 @@ public class PanelPrincipalCasasController implements Initializable {
         }
 
     }
-/**
- * 
- * @param id_estudiante de tipo int recoge un valor autoencremental que identifica al estudiante 
- * @return  devuelve el dni del estudiante
- */
+
+    /**
+     *
+     * @param id_estudiante de tipo int recoge un valor autoencremental que
+     * identifica al estudiante
+     * @return devuelve el dni del estudiante
+     */
     public String obtner_dni_estudiante(int id_estudiante) {
         ResultSet resultado;
         try {
@@ -2011,8 +2048,6 @@ public class PanelPrincipalCasasController implements Initializable {
             resultado = pst.executeQuery();
 
             if (!resultado.first()) {
-
-                Jopane("No se han encontrado datos", "Error");
                 return null;
             } else {
                 String dni = resultado.getString("dni");
@@ -2026,11 +2061,14 @@ public class PanelPrincipalCasasController implements Initializable {
         }
 
     }
-/**
- * 
- * @param id_asignatura de tipo int recoge un valor autoencremental que identifica la asignatura
- * @return devuelve el id de la tabla asigProf (identifica al profesor con la asignatura que imparte)
- */
+
+    /**
+     *
+     * @param id_asignatura de tipo int recoge un valor autoencremental que
+     * identifica la asignatura
+     * @return devuelve el id de la tabla asigProf (identifica al profesor con
+     * la asignatura que imparte)
+     */
     public int obtener_id_asigProf(int id_asignatura) {
         ResultSet resultado;
         try {
@@ -2055,11 +2093,14 @@ public class PanelPrincipalCasasController implements Initializable {
         }
 
     }
-/**
- * 
- * @param id_profesor de tipo int recoge un valor autoencremental que identifica al profesor
- * @return devuelve el id de la tabla asigProf (identifica al profesor con la asignatura que imparte)
- */
+
+    /**
+     *
+     * @param id_profesor de tipo int recoge un valor autoencremental que
+     * identifica al profesor
+     * @return devuelve el id de la tabla asigProf (identifica al profesor con
+     * la asignatura que imparte)
+     */
     public int obtener_id_asigProf_por_idProfesor(int id_profesor) {
         ResultSet resultado;
         try {
@@ -2084,11 +2125,12 @@ public class PanelPrincipalCasasController implements Initializable {
         }
 
     }
-/**
- * 
- * @param asignatura tipo String identifica la asignatura
- * @return devuelve el id autoincremental que identifica la asignatura
- */
+
+    /**
+     *
+     * @param asignatura tipo String identifica la asignatura
+     * @return devuelve el id autoincremental que identifica la asignatura
+     */
     public int obtener_id_asignatura(String asignatura) {
         ResultSet resultado;
         try {
@@ -2228,12 +2270,14 @@ public class PanelPrincipalCasasController implements Initializable {
         _checkHistoria.setDisable(false);
     }
 
-/**
- 
- * metodo devuelve la casa del alumno por el id ===================
- * @param id_estudiante tipo int incremental identifica al estudiante
- * @return devuelve la casa a la que pertenece el estudiante
- * */
+    /**
+     *
+     * metodo devuelve la casa del alumno por el id ===================
+     *
+     * @param id_estudiante tipo int incremental identifica al estudiante
+     * @return devuelve la casa a la que pertenece el estudiante
+     *
+     */
     public String casa_por_id(int id_estudiante) {
         try {
             PreparedStatement pst = conn.prepareStatement("SELECT * FROM estudiantes where id_estudiante= ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
@@ -2322,11 +2366,14 @@ public class PanelPrincipalCasasController implements Initializable {
         }
 
     }
-/**
- * 
- * @param id_asigProf de tipo  int autoincremental identifica a un profesor que imparte una asignatura
- * @return devuelve un conjunto de resultados del estudiante;nombre,apellidos,casa, curso para poder rellenar la tabla
- */
+
+    /**
+     *
+     * @param id_asigProf de tipo int autoincremental identifica a un profesor
+     * que imparte una asignatura
+     * @return devuelve un conjunto de resultados del
+     * estudiante;nombre,apellidos,casa, curso para poder rellenar la tabla
+     */
     public ResultSet datos_tabla_profesor(int id_asigProf) {
         try {
             PreparedStatement pst = conn.prepareStatement("SELECT estudiantes.nombre, estudiantes.apellidos, estudiantes.casa, estudiantes.curso \n"
@@ -2347,12 +2394,13 @@ public class PanelPrincipalCasasController implements Initializable {
     }
 
     //============rellena tabla de los profesores==========================================
-   /**
-    * 
-    * @param id_asigProf identifica al profesor que imparte una asignatura, este metodo rellana la tabla profesores
-    * @return devuelve los datos para llenar la tabla profesorees
-    * @link  com.agenda.agenda_v1.class#Alumnos_objeto(nombre, apellidos, curso, casa);
-    */
+    /**
+     *
+     * @param id_asigProf identifica al profesor que imparte una asignatura,
+     * este metodo rellana la tabla profesores
+     * @return devuelve los datos para llenar la tabla profesorees
+     * @link  com.agenda.agenda_v1.class#Alumnos_objeto(nombre, apellidos, curso, casa);
+     */
     public ObservableList<Alumnos_objeto> rellenar_tabla(int id_asigProf) {
         ObservableList<Alumnos_objeto> obs = FXCollections.observableArrayList();
         _columAlumno.setCellValueFactory(new PropertyValueFactory<>("nombre"));
@@ -2461,7 +2509,8 @@ public class PanelPrincipalCasasController implements Initializable {
 
     public void totalAlumnos() {
         ResultSet rs;
-        int id_asigprof = 3;//????????????????????????
+
+        int id_asigprof = obtener_id_asigProf_por_idProfesor(obtener_id_profesor(pruebaInicio.getText()));
         ArrayList a = new ArrayList();
         try {
             PreparedStatement pst = conn.prepareStatement("SELECT id_estudiante FROM asigEstu WHERE id_asigProf = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
@@ -2485,11 +2534,12 @@ public class PanelPrincipalCasasController implements Initializable {
                     .getName()).log(Level.SEVERE, null, ex);
         }
     }
-/**
- * 
- * @param curso tipo string curso , pasandole este parametro realiza una consulta para sacar el total de estudiantes
- * pertenecientes a ese curso
- */
+
+    /**
+     *
+     * @param curso tipo string curso , pasandole este parametro realiza una
+     * consulta para sacar el total de estudiantes pertenecientes a ese curso
+     */
     public void totalAlumnos_por_curso(String curso) {
         ResultSet rs;
         ArrayList a = new ArrayList();
@@ -2577,9 +2627,10 @@ public class PanelPrincipalCasasController implements Initializable {
 
     //== metodo para filtar los alumnos por casa=================
     /**
-     * 
-     * @param id_asigProf  tipo int autoincremental que identifican al profesor con su asignatura
-     * este metodo filta los alumnos segun su casa, lo usamos para rellanar los combo box realizando cursos
+     *
+     * @param id_asigProf tipo int autoincremental que identifican al profesor
+     * con su asignatura este metodo filta los alumnos segun su casa, lo usamos
+     * para rellanar los combo box realizando cursos
      */
     public void filtar_alumnos_por_casa(int id_asigProf) {
         ResultSet rs;
@@ -2613,12 +2664,13 @@ public class PanelPrincipalCasasController implements Initializable {
 
     }
 //== metodo para filtar los alumnos por curso=================
-    /**
-     * 
-     * @param id_asigProf  tipo int autoincremental que identifican al profesor con su asignatura
-     * este metodo filta los alumnos segun su curso, los usamos para rellanar los combos haciendo filtros
-     */
 
+    /**
+     *
+     * @param id_asigProf tipo int autoincremental que identifican al profesor
+     * con su asignatura este metodo filta los alumnos segun su curso, los
+     * usamos para rellanar los combos haciendo filtros
+     */
     public void filtar_alumnos_por_curso(int id_asigProf) {
         ResultSet rs;
         ArrayList a = new ArrayList();
@@ -2649,13 +2701,14 @@ public class PanelPrincipalCasasController implements Initializable {
         }
 
     }
+
     //== metodo para filtar los alumnos dependiendo de la casa y el curso=================
     /**
-     * 
-     * @param id_asigProf tipo int autoincremental que identifican al profesor con su asignatura
-     * este metodo filta los alumnos segun su curso y la casa, los usamos para rellanar los combos haciendo filtros
+     *
+     * @param id_asigProf tipo int autoincremental que identifican al profesor
+     * con su asignatura este metodo filta los alumnos segun su curso y la casa,
+     * los usamos para rellanar los combos haciendo filtros
      */
-
     public void alumnos_segun_casaYcurso(int id_asigProf) {
         ResultSet rs;
         ArrayList a = new ArrayList();
@@ -2688,14 +2741,15 @@ public class PanelPrincipalCasasController implements Initializable {
         }
 
     }
+
     //== metodo para filtar los alumnos dependiendo de la casa sin selecionar otro combobox=================
     /**
-     * 
-     * @param id_asigProf tipo int autoincremental que identifican al profesor con su asignatura
-     * 
+     *
+     * @param id_asigProf tipo int autoincremental que identifican al profesor
+     * con su asignatura
+     *
      * @param p2 de tipo String identifica la casa del estudiante
      */
-
     public void alumnos_segun_casa(int id_asigProf, String p2) {
         ResultSet rs;
         ArrayList a = new ArrayList();
@@ -2762,8 +2816,9 @@ public class PanelPrincipalCasasController implements Initializable {
     }
 
     public void solo_combo_curos() {
-        // ejecutar cuando se haga clic en el ratón
-        int id_asigProf = id_profesor_obtener_asifprof(id_profesor_Con_dni("sybill"));
+        String dni = pruebaInicio.getText();
+        // ejecutar cuando se haga clic en el ratón??
+        int id_asigProf = id_profesor_obtener_asifprof(id_profesor_Con_dni(dni));
 
         _cbTareas_cursos.valueProperty().addListener((ov, p1, p2) -> {
             if (_cbTarea_casa.getValue() == null) {
@@ -2775,8 +2830,9 @@ public class PanelPrincipalCasasController implements Initializable {
     }
 
     public void solo_combo_casa() {
+        String dni = pruebaInicio.getText();
 
-        int id_asigProf = id_profesor_obtener_asifprof(id_profesor_Con_dni("minerva"));
+        int id_asigProf = id_profesor_obtener_asifprof(id_profesor_Con_dni(dni));
 
         _cbTarea_casa.valueProperty().addListener((ov, p1, p2) -> {
             if (_cbTareas_cursos.getValue() == null) {
@@ -2789,8 +2845,8 @@ public class PanelPrincipalCasasController implements Initializable {
 
     @FXML
     public void alta_tareas() {
-
-        int id_profesor = obtener_id_profesor("minerva");//???????????????????????????????????
+        String dni = pruebaInicio.getText();
+        int id_profesor = obtener_id_profesor(dni);
 
         int id_alumno;
         int id_asignatura = id_asignatura_Con_id_profesor(id_profesor);
@@ -2799,7 +2855,7 @@ public class PanelPrincipalCasasController implements Initializable {
             try {
                 PreparedStatement pst = conn.prepareStatement("INSERT INTO tareas (id_profesor,id_asignatura,id_estudiante,nombre_tarea,tipo_tarea,fecha_inicio,fecha_fin,descripcion_tarea) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
                 String correo = valoresLista.get(i);
-                String dni = obtener_correo_dniEStudiante(correo);
+                String dniEstudiante = obtener_correo_dniEStudiante(correo);
                 String nombre_tarea = _tfNombreTarea.getText();
                 String tareas_cursos = cursos_por_dni(dni);
                 String casa = casa_por_dni(dni);
@@ -2832,7 +2888,7 @@ public class PanelPrincipalCasasController implements Initializable {
                     Jopane("Añadido correctamente", "Añadir Tareas");
                     borrar_datos_registro();
                     _tbprofesores_semanal.getItems().clear();
-                    rellenar_tablaProfesor_semanal(14);//???????????????????????????
+                    rellenar_tablaProfesor_semanal(id_profesor);
 
                 } else {
                     Jopane("Error", "Error al insertar");
@@ -2899,11 +2955,13 @@ public class PanelPrincipalCasasController implements Initializable {
         }
 
     }
-/**
- * 
- * @param id_profesor tipo int autoencremental identifica al profesor 
- * @return devuelve un conjunto de resultado para poder obtener las tareas pendientes
- */
+
+    /**
+     *
+     * @param id_profesor tipo int autoencremental identifica al profesor
+     * @return devuelve un conjunto de resultado para poder obtener las tareas
+     * pendientes
+     */
     public ResultSet datos_para_correccionesPendientes(int id_profesor) {
         try {
             PreparedStatement pst = conn.prepareStatement("SELECT tareas.id_tarea, estudiantes.nombre, estudiantes.apellidos, estudiantes.curso, tareas.nombre_tarea, tareas.tipo_tarea, tareas.fecha_fin\n"
@@ -2921,13 +2979,15 @@ public class PanelPrincipalCasasController implements Initializable {
         }
 
     }
-/**
- * 
- * @param id_profesor tipo int autoincremental que identifica al profesor
- * @return devuelve un conjunto de resultados para rellenar la tabla correciones pendientes
- * (id_tarea,nombre, apellidos, curso,nombre_tarea,tipo_tarea,fecha_fin)
- * @link com.agenda.agenda_v1.class#tareas_profesores_objeto
- */
+
+    /**
+     *
+     * @param id_profesor tipo int autoincremental que identifica al profesor
+     * @return devuelve un conjunto de resultados para rellenar la tabla
+     * correciones pendientes (id_tarea,nombre, apellidos,
+     * curso,nombre_tarea,tipo_tarea,fecha_fin)
+     * @link com.agenda.agenda_v1.class#tareas_profesores_objeto
+     */
     public ObservableList<tareas_profesores_objeto> rellenar_tabla_correccionesPendientes(int id_profesor) {
 
         ObservableList<tareas_profesores_objeto> obs = FXCollections.observableArrayList();
@@ -2998,6 +3058,7 @@ public class PanelPrincipalCasasController implements Initializable {
     }
 
     public void comprobar() {
+
         if (_tbTarea_correciones.getSelectionModel().getSelectedItem() != null) {
             tareas_profesores_objeto p = _tbTarea_correciones.getSelectionModel().getSelectedItem();
             String id_tarea = p.getId_tarea();
@@ -3026,7 +3087,7 @@ public class PanelPrincipalCasasController implements Initializable {
             PreparedStatement pst = conn.prepareStatement("SELECT asignaturas.nombre AS nombre_asignatura, tareas.id_tarea, tareas.nombre_tarea, tareas.tipo_tarea, tareas.fecha_fin, tareas.archivo\n"
                     + "FROM alu_nurismy_agenda.asignaturas asignaturas, alu_nurismy_agenda.tareas tareas\n"
                     + "WHERE \n"
-                    + "	tareas.id_asignatura = asignaturas.id_asignatura AND tareas.id_estudiante=?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+                    + "	tareas.id_asignatura = asignaturas.id_asignatura AND tareas.id_estudiante=? AND tareas.entregado=0", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             pst.setInt(1, id_estudiante);
             ResultSet resultado = pst.executeQuery();
             return resultado;
@@ -3044,7 +3105,7 @@ public class PanelPrincipalCasasController implements Initializable {
             PreparedStatement pst = conn.prepareStatement("SELECT estudiantes.nombre, estudiantes.apellidos, estudiantes.curso, tareas.nombre_tarea, tareas.tipo_tarea, tareas.fecha_fin, tareas.corregido\n"
                     + "FROM alu_nurismy_agenda.estudiantes estudiantes, alu_nurismy_agenda.tareas tareas\n"
                     + "WHERE \n"
-                    + "	tareas.id_estudiante = estudiantes.id_estudiante AND tareas.id_profesor = ? AND tareas.fecha_fin<CURRENT_DATE() +7 AND tareas.corregido=0;", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+                    + "	tareas.id_estudiante = estudiantes.id_estudiante AND tareas.id_profesor = ? AND fecha_fin BETWEEN CURRENT_DATE() AND DATE_ADD(CURRENT_DATE(), INTERVAL 7 DAY) AND tareas.corregido=0;", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             pst.setInt(1, id_profesor);
             ResultSet resultado = pst.executeQuery();
             return resultado;
@@ -3093,12 +3154,14 @@ public class PanelPrincipalCasasController implements Initializable {
 
     //metodo para  rellenar tabla asistencia alumnos
     /**
-     * 
+     *
      * @param id_profesor
-     * @return este metodo rellena la tabla asistencia usamos un combo box dentro de una tabla omboBoxTableCell<>("Presente", "Ausente", "Retraso")
+     * @return este metodo rellena la tabla asistencia usamos un combo box
+     * dentro de una tabla omboBoxTableCell<>("Presente", "Ausente", "Retraso")
      * @link com.agenda.agenda_v1.class#Alumnos_asistencia_objeto
      */
     public ObservableList<Alumnos_asistencia_objeto> rellenar_tabla_asistencia(int id_profesor) {
+        int id_asigProf = obtener_id_asigProf_por_idProfesor(id_profesor);
         _tablaP_asistencia.getItems().clear();
         ObservableList<Alumnos_asistencia_objeto> obs = FXCollections.observableArrayList();
         _columP_nombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
@@ -3111,7 +3174,7 @@ public class PanelPrincipalCasasController implements Initializable {
         String nombre = null;
         Alumnos_asistencia_objeto p = null;
         try {
-            ResultSet rs = datos_asistencia(7);
+            ResultSet rs = datos_asistencia(id_asigProf);
             while (rs.next()) {
                 int id = rs.getInt("id_estudiante");
                 ResultSet rst = datosAlumnos_porId(id);
@@ -3167,12 +3230,13 @@ public class PanelPrincipalCasasController implements Initializable {
         });
 
     }
-/**
- * 
- * @param id_asigProf tipo int identifica al profesor con la asignatura
- * @param curso tipo String identifica el curso del alumno
- * @param casa  tipo String identifica la casa del alumno
- */
+
+    /**
+     *
+     * @param id_asigProf tipo int identifica al profesor con la asignatura
+     * @param curso tipo String identifica el curso del alumno
+     * @param casa tipo String identifica la casa del alumno
+     */
     public void rellenar_tabla_asistencia_casaCurso(int id_asigProf, String curso, String casa) {
         Alumnos_asistencia_objeto p = null;
         _tablaP_asistencia.getItems().clear();
@@ -3396,11 +3460,12 @@ public class PanelPrincipalCasasController implements Initializable {
         }
 
     }
-/**
- * 
- * @param correo tipo string con el correo del estudiante
- * @return  devuelve el dni del estudiante
- */
+
+    /**
+     *
+     * @param correo tipo string con el correo del estudiante
+     * @return devuelve el dni del estudiante
+     */
     public String obtener_correo_dniEStudiante(String correo) {
         try {
             ResultSet rs = null;
@@ -3434,7 +3499,7 @@ public class PanelPrincipalCasasController implements Initializable {
         _columAluSema_tareas.setCellValueFactory(new PropertyValueFactory<>("nombre_tarea"));
         _columAluSema_tipo.setCellValueFactory(new PropertyValueFactory<>("tipo_tarea"));
         _columAluSema_fecha.setCellValueFactory(new PropertyValueFactory<>("fecha_fin"));
-
+        tareas_alumnoConProfesor_objeto v=null;
         try {
             ResultSet rs = rellenar_tabla_salaComum_alu(id_estudiante);
 
@@ -3447,12 +3512,13 @@ public class PanelPrincipalCasasController implements Initializable {
                 String fecha_fin = rs.getString("fecha_fin");
                 int id_profe = rs.getInt("id_profesor");
                 String profesor = obtenerNombreProfesor_porID(id_profe);
+                System.out.println(fecha_fin);
 
-                tareas_alumnoConProfesor_objeto v = new tareas_alumnoConProfesor_objeto(asignatura, tipo_tarea, nombre_tarea, fecha_fin, profesor);
+                v = new tareas_alumnoConProfesor_objeto(asignatura, profesor, nombre_tarea, tipo_tarea, fecha_fin);
                 obs.add(v);
-                _tablaAlum_salaComun.getItems().addAll(v);
 
             }
+            _tablaAlum_salaComun.getItems().addAll(v);
 
         } catch (SQLException ex) {
             Logger.getLogger(PanelPrincipalCasasController.class
@@ -3464,10 +3530,15 @@ public class PanelPrincipalCasasController implements Initializable {
     //============================rellanar tabla sala comun alumnos con profesor==================================================================
     public ResultSet rellenar_tabla_salaComum_alu(int id_estudiante) {
         try {
-            PreparedStatement pst = conn.prepareStatement("SELECT * FROM tareas WHERE id_estudiante =? AND tareas.fecha_fin<CURRENT_DATE() +7;", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            PreparedStatement pst = conn.prepareStatement("SELECT * FROM tareas WHERE id_estudiante = ? AND fecha_fin BETWEEN CURRENT_DATE() AND DATE_ADD(CURRENT_DATE(), INTERVAL 7 DAY);", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             pst.setInt(1, id_estudiante);
             ResultSet resultado = pst.executeQuery();
-            return resultado;
+            if(!resultado.first()){
+                return null;
+            }
+            else{
+                return resultado;
+            }
 
         } catch (SQLException ex) {
             Logger.getLogger(PanelPrincipalCasasController.class
@@ -3600,8 +3671,8 @@ public class PanelPrincipalCasasController implements Initializable {
 
     //==========================================================================================
     /**
-     * 
-     * @param id_asignatura tipo int incremental identifica a la  asignatura 
+     *
+     * @param id_asignatura tipo int incremental identifica a la asignatura
      * @return devuelve el nombre de la asignatura en un String
      */
     public String obtener_nombre_asignatura(int id_asignatura) {
@@ -3994,12 +4065,13 @@ public class PanelPrincipalCasasController implements Initializable {
 
     //==========================Guardar datos de asistencia de la tabla asistencia===============================
     /**
-     * 
+     *
      * @param event evento en el boton guardar asistencia alumnos
      */
     @FXML
     private void guardar_Asistencias_Alumnos(MouseEvent event) {
-        int id_profesor = 14;//??????????????
+        String dni = pruebaInicio.getText();
+        int id_profesor = obtener_id_profesor(dni);
         try {
             int id_estudiante, id_asigprof;
             String estado;
@@ -4030,10 +4102,11 @@ public class PanelPrincipalCasasController implements Initializable {
                     .getName()).log(Level.SEVERE, null, ex);
         }
     }
-/**
- * 
- * @param event evento el el boton historal asistencia para cambiar panel
- */
+
+    /**
+     *
+     * @param event evento el el boton historal asistencia para cambiar panel
+     */
     @FXML
     private void cambiarPanel_historial_asistencia(MouseEvent event) {
         vaciarPanelTodo();
@@ -4119,6 +4192,7 @@ public class PanelPrincipalCasasController implements Initializable {
     //metodo para  rellenar tabla asistencia alumnos historial (FENIX)
 
     public ObservableList<Alumnos_asistencia_objeto> rellenar_tabla_asistencia_historial(int id_profesor) {
+        int id_asigProf = obtener_id_asigProf_por_idProfesor(id_profesor);
         _tablaP_asistencia1.getItems().clear();
         ObservableList<Alumnos_asistencia_objeto> obs = FXCollections.observableArrayList();
         _columP_nombre1.setCellValueFactory(new PropertyValueFactory<>("nombre"));
@@ -4129,7 +4203,7 @@ public class PanelPrincipalCasasController implements Initializable {
         String nombre = null;
         Alumnos_asistencia_objeto p = null;
         try {
-            ResultSet rs = datos_asistencia(7);
+            ResultSet rs = datos_asistencia(id_asigProf);
             while (rs.next()) {
                 int id = rs.getInt("id_estudiante");
                 ResultSet rst = datosAlumnos_porId_historial(id);
@@ -4138,7 +4212,7 @@ public class PanelPrincipalCasasController implements Initializable {
                     nombre = obtenerNombreAlumno_porID(id_estudiante);
                     String apellidos = obtenerApellidoAlumno_porID(id_estudiante);
                     String dni = obtner_dni_estudiante(id_estudiante);
-                    int id_asigProf = rst.getInt("id_asigProf");
+                    id_asigProf = rst.getInt("id_asigProf");
 
                     String estado = rst.getString("estado");
                     p = new Alumnos_asistencia_objeto(nombre, apellidos, dni, estado);
@@ -4159,9 +4233,11 @@ public class PanelPrincipalCasasController implements Initializable {
 
     @FXML
     public void cambiarMensajeria() {// PROFESORES
+        String dni = pruebaInicio.getText();
+        int id_profesor = obtener_id_profesor(dni);
         vaciarPanelTodo();
         tablaP_listar_mensajes.getItems().clear();
-        rellenar_tabla_mensajesP(14);//?????????????
+        rellenar_tabla_mensajesP(id_profesor);
         combo_mensajeria_alumnos.getItems().clear();
         filtar_combo_mensajeria_profesores();
         panelProfesores.setVisible(true);
@@ -4176,9 +4252,11 @@ public class PanelPrincipalCasasController implements Initializable {
 
     @FXML
     public void cambiarMensajeria_alumnos() {
+        String dni = pruebaInicio.getText();
+        int id_estudiante = obtner_id_estudiante(dni);
         vaciarPanelTodo();
         tablaA_listar_mensajes1.getItems().clear();
-        rellenar_tabla_mensajesA(53);//?????????????????
+        rellenar_tabla_mensajesA(id_estudiante);
         combo_mensajeria_alumnos1.getItems().clear();
         filtar_combo_mensajeria_alumnos();
         panelAlumnos.setVisible(true);
@@ -4191,11 +4269,12 @@ public class PanelPrincipalCasasController implements Initializable {
 
     @FXML
     public void botonGuardarMensajeria_profesores() {
+        String dniP = pruebaInicio.getText();
         try {
             String datos_completos = combo_mensajeria_alumnos.getValue().toString();
             String dni = datos_completos.substring(0, 9);
             String texto = textArea_menaje_editar.getText();
-            int id_profesor = obtener_id_profesor("minerva");//????????????????
+            int id_profesor = obtener_id_profesor(dni);
             int id_estudiante = obtner_id_estudiante(dni);
             String fecha = LocalDate.now().toString();
 
@@ -4227,7 +4306,7 @@ public class PanelPrincipalCasasController implements Initializable {
 
             String texto = textArea_menaje_editar1.getText();
             int id_profesor = obtener_id_profesor(datos_completos.substring(0, datos_completos.indexOf("-")).trim());
-            int id_estudiante = obtner_id_estudiante("76652552s");//????????????????
+            int id_estudiante = obtner_id_estudiante(pruebaInicio.getText());
             String fecha = LocalDate.now().toString();
             PreparedStatement pst = conn.prepareStatement("INSERT INTO alu_nurismy_agenda.mensajes_profesor (id_estudiante, id_profesor, mensaje, fecha) VALUES (?, ?, ?, ?)");
             pst.setInt(1, id_estudiante);
@@ -4307,6 +4386,8 @@ public class PanelPrincipalCasasController implements Initializable {
 
     @FXML
     public void mostrar_mensajesAlumnos() {
+        String dni = pruebaInicio.getText();
+        int id_estudiante = obtner_id_estudiante(dni);
         try {
             boton_mostrarMensaje_alumnos.setVisible(false);
             textarea_mensajeria1.setVisible(true);
@@ -4338,7 +4419,7 @@ public class PanelPrincipalCasasController implements Initializable {
             pst.setInt(1, id_mensaje);
             pst.executeUpdate();
             tablaA_listar_mensajes1.getItems().clear();
-            rellenar_tabla_mensajesA(53);//?????????????????
+            rellenar_tabla_mensajesA(id_estudiante);
 
         } catch (SQLException ex) {
             Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
@@ -4348,6 +4429,8 @@ public class PanelPrincipalCasasController implements Initializable {
 
     @FXML
     public void mostrar_mensajesProfesor() {
+        String dni = pruebaInicio.getText();
+        int id_profesor = obtener_id_profesor(dni);
         try {
             botonP_mostar_mensaje.setVisible(false);
             textarea_mensajeria.setVisible(true);
@@ -4379,7 +4462,7 @@ public class PanelPrincipalCasasController implements Initializable {
             pst.setInt(1, id_mensaje);
             pst.executeUpdate();
             tablaP_listar_mensajes.getItems().clear();
-            rellenar_tabla_mensajesP(14);//?????????????????
+            rellenar_tabla_mensajesP(id_profesor);
 
         } catch (SQLException ex) {
             Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
@@ -4426,6 +4509,7 @@ public class PanelPrincipalCasasController implements Initializable {
     }
 
     public ObservableList<mensajeria_objeto> rellenar_tabla_mensajesA(int id_estudiante) {
+
         String estado_leido = "";
         ObservableList<mensajeria_objeto> obs = FXCollections.observableArrayList();
         columP_Id_mensajeria1.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -4435,7 +4519,7 @@ public class PanelPrincipalCasasController implements Initializable {
         columP_leidos_mensajeria1.setCellValueFactory(new PropertyValueFactory<>("leidos"));
 
         try {
-            ResultSet rs = rellenar_tabla_mensajeriaAlumnos(53);//????????????????????????????????
+            ResultSet rs = rellenar_tabla_mensajeriaAlumnos(id_estudiante);
 
             while (rs.next()) {
                 int id_profesor = rs.getInt("id_profesor");
@@ -4475,7 +4559,7 @@ public class PanelPrincipalCasasController implements Initializable {
         columP_leidos_mensajeria.setCellValueFactory(new PropertyValueFactory<>("leidos"));
 
         try {
-            ResultSet rs = rellenar_tabla_mensajeriaProfesor(id_profesor);//????????????????????????????????
+            ResultSet rs = rellenar_tabla_mensajeriaProfesor(id_profesor);
 
             while (rs.next()) {
 
@@ -4574,11 +4658,12 @@ public class PanelPrincipalCasasController implements Initializable {
 
         _progressBar_Trimestre.progressProperty().bind(progressProperty);
     }
-/**
- * 
- * @param id_tarea int autoincremental que identifica la tarea
- * @return devuelve el id del estudiante
- */
+
+    /**
+     *
+     * @param id_tarea int autoincremental que identifica la tarea
+     * @return devuelve el id del estudiante
+     */
     public int obtener_id_estudiante_por_id_tarea(int id_tarea) {
         try {
             PreparedStatement pst = conn.prepareStatement("SELECT * FROM tareas where id_tarea=?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
