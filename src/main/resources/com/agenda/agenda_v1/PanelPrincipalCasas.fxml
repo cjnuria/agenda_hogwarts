@@ -1266,8 +1266,8 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextArea fx:id="_taTarea_destinatario" layoutX="128.0" layoutY="557.0" prefHeight="58.0" prefWidth="431.0" />
-                  <Button layoutX="302.0" layoutY="637.0" mnemonicParsing="false" onMouseClicked="#alta_tareas" text="Enviar">
+                  <TextArea fx:id="_taTarea_destinatario" editable="false" layoutX="128.0" layoutY="557.0" prefHeight="58.0" prefWidth="431.0" />
+                  <Button fx:id="boton_enviar_tareas" layoutX="302.0" layoutY="637.0" mnemonicParsing="false" onMouseClicked="#alta_tareas" text="Enviar">
                      <font>
                         <Font size="20.0" />
                      </font></Button>
@@ -1295,7 +1295,7 @@
                   <DatePicker fx:id="_dpTareas_fechaFin" layoutX="302.0" layoutY="376.0" prefHeight="25.0" prefWidth="248.0" />
                </children>
             </Pane>
-            <Pane fx:id="_panelCorreccionesProfes" layoutX="219.0" prefHeight="695.0" prefWidth="837.0">
+            <Pane fx:id="_panelCorreccionesProfes" layoutX="219.0" prefHeight="695.0" prefWidth="837.0" visible="false">
                <children>
                   <ImageView fitHeight="820.0" fitWidth="837.0" layoutX="6.0" layoutY="-125.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -1406,10 +1406,9 @@
                   </Label>
                   <TableView fx:id="_tablaP_asistencia" editable="true" layoutX="105.0" layoutY="240.0" prefHeight="228.0" prefWidth="612.0" tableMenuButtonVisible="true">
                      <columns>
-                        <TableColumn fx:id="_columP_nombre" prefWidth="174.66665649414062" text="Nombre" />
-                        <TableColumn fx:id="_columP_apellidos" prefWidth="123.33331298828125" text="Apellidos" />
-                        <TableColumn fx:id="_columP_dni" prefWidth="159.199951171875" text="Dni" />
-                        <TableColumn fx:id="columP_asistencia2" prefWidth="137.60003662109375" text="Asistencia" />
+                        <TableColumn fx:id="_columP_nombre" prefWidth="223.33334350585938" text="Nombre" />
+                        <TableColumn fx:id="_columP_apellidos" prefWidth="229.33331298828125" text="Apellidos" />
+                        <TableColumn fx:id="_columP_dni" prefWidth="154.66668701171875" text="Dni" />
                      </columns>
                      <effect>
                         <Blend>
@@ -1419,11 +1418,6 @@
                         </Blend>
                      </effect>
                   </TableView>
-                  <Button layoutX="331.0" layoutY="508.0" mnemonicParsing="false" onMouseClicked="#guardar_Asistencias_Alumnos" prefHeight="56.0" prefWidth="159.0" text="Guardar">
-                     <font>
-                        <Font name="Harrington" size="24.0" />
-                     </font>
-                  </Button>
                   <Label fx:id="labelP_asistencia_curso" layoutX="197.0" layoutY="147.0" text="Curso:">
                      <font>
                         <Font name="Harrington" size="18.0" />
@@ -1436,6 +1430,14 @@
                   </Label>
                   <ComboBox fx:id="_comboP_AsistenciaCursos" layoutX="300.0" layoutY="143.0" prefHeight="25.0" prefWidth="228.0" />
                   <ComboBox fx:id="_comboP_AsistenciaCasa" layoutX="300.0" layoutY="187.0" prefHeight="25.0" prefWidth="228.0" />
+                  <Button fx:id="botonP_presente" layoutX="293.0" layoutY="492.0" mnemonicParsing="false" onMouseClicked="#guardar_Asistencias_Alumnos" text="Presente" />
+                  <Button fx:id="botonP_ausente" layoutX="359.0" layoutY="492.0" mnemonicParsing="false" onMouseClicked="#guardar_Asistencias_Alumnos" text="Ausente" />
+                  <Button fx:id="botonP_restrasado" layoutX="423.0" layoutY="492.0" mnemonicParsing="false" onMouseClicked="#guardar_Asistencias_Alumnos" text="Retraso" />
+                  <Label fx:id="label_asistencia_botones" layoutX="111.0" layoutY="483.0" prefHeight="33.0" prefWidth="174.0" text="Asignar Asistencia:">
+                     <font>
+                        <Font name="Harrington" size="18.0" />
+                     </font>
+                  </Label>
                </children>
             </Pane>
             <Pane fx:id="_paneMensajeria" layoutX="223.0" prefHeight="695.0" prefWidth="831.0" style="-fx-background-color: white;" visible="false">
@@ -1788,7 +1790,7 @@
             </Pane>
          </children>
       </Pane>
-      <Pane fx:id="_panelHistorialAsistencia" layoutX="229.0" layoutY="9.0" prefHeight="695.0" prefWidth="831.0" style="-fx-background-color: white;" visible="false">
+      <Pane fx:id="_panelHistorialAsistencia" layoutX="229.0" layoutY="9.0" prefHeight="695.0" prefWidth="831.0" style="-fx-background-color: white;">
          <children>
             <ImageView fitHeight="830.0" fitWidth="891.0" layoutX="-8.0" layoutY="-135.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -1803,10 +1805,11 @@
             </Label>
             <TableView fx:id="_tablaP_asistencia1" editable="true" layoutX="105.0" layoutY="240.0" prefHeight="228.0" prefWidth="612.0" tableMenuButtonVisible="true">
                <columns>
-                  <TableColumn fx:id="_columP_nombre1" prefWidth="174.66665649414062" text="Nombre" />
-                  <TableColumn fx:id="_columP_apellidos1" prefWidth="123.33331298828125" text="Apellidos" />
-                  <TableColumn fx:id="_columP_dni1" prefWidth="159.199951171875" text="Dni" />
-                  <TableColumn fx:id="columP_asistencia21" prefWidth="137.60003662109375" text="Asistencia" />
+                  <TableColumn fx:id="_columP_nombre1" prefWidth="122.66668701171875" text="Nombre" />
+                  <TableColumn fx:id="_columP_apellidos1" prefWidth="132.6666259765625" text="Apellidos" />
+                  <TableColumn fx:id="_columP_dni1" prefWidth="126.6666259765625" text="Dni" />
+                  <TableColumn fx:id="columP_asistencia21" prefWidth="100.66668701171875" text="Asistencia" />
+                  <TableColumn fx:id="columP_asistencia_fecha" prefWidth="113.333251953125" text="Fecha" />
                </columns>
                <effect>
                   <Blend>
@@ -1821,11 +1824,6 @@
                   <Font name="Harrington" size="24.0" />
                </font>
             </Label>
-            <Button layoutX="331.0" layoutY="508.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="159.0" text="Guardar">
-               <font>
-                  <Font name="Harrington" size="24.0" />
-               </font>
-            </Button>
             <Label layoutX="197.0" layoutY="147.0" text="Curso:">
                <font>
                   <Font name="Harrington" size="18.0" />

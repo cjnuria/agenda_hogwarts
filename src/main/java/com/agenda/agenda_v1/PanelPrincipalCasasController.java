@@ -33,6 +33,7 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -48,6 +49,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -350,8 +352,7 @@ public class PanelPrincipalCasasController implements Initializable {
     private Label _labelNotas6;
     @FXML
     private ImageView _imagNotas6;
-    @FXML
-    private TableColumn<Alumnos_objeto, String> columP_asistencia2;
+
     @FXML
     private Pane _panelHistorialAsistencia;
     @FXML
@@ -727,6 +728,18 @@ public class PanelPrincipalCasasController implements Initializable {
     private Button boton_guardarComentario;
     @FXML
     private Label _labelSesionEstudiante1;
+    @FXML
+    private Button boton_enviar_tareas;
+    @FXML
+    private Button botonP_presente;
+    @FXML
+    private Button botonP_ausente;
+    @FXML
+    private Button botonP_restrasado;
+    @FXML
+    private Label label_asistencia_botones;
+    @FXML
+    private TableColumn<Alumnos_asistencia_objeto, String> columP_asistencia_fecha;
 
     /**
      * Initializes the controller class.
@@ -1162,7 +1175,7 @@ public class PanelPrincipalCasasController implements Initializable {
     }
 
     public String comprobarInicioSesionEstudiantes(String dni, String pass) {
-        System.out.println(dni);
+
         try {
             PreparedStatement pst = conn.prepareStatement("SELECT * FROM estudiantes WHERE dni =? AND pass =?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             pst.setString(1, dni);
@@ -1863,10 +1876,6 @@ public class PanelPrincipalCasasController implements Initializable {
 
     }
 
-    /**
-     * Método para abrir la casa según dni(no terminado)
-     *
-     */
     @FXML
     private void cambiarSalaProfes() {
         String dni = labelUser.getText();
@@ -2195,7 +2204,7 @@ public class PanelPrincipalCasasController implements Initializable {
             ResultSet resultado = pst.executeQuery();
             if (!resultado.first()) {
 
-                Jopane("No se han encontrado datos", "Error");
+                Jopane("No se han encontrado datos al obtener la casa por dni", "Error");
                 return null;
             } else {
                 String casa = resultado.getString("casa");
@@ -2217,7 +2226,7 @@ public class PanelPrincipalCasasController implements Initializable {
             ResultSet resultado = pst.executeQuery();
             if (!resultado.first()) {
 
-                Jopane("No se han encontrado datos", "Error");
+                Jopane("No se han encontrado datos al obtener el curso por dni", "Error");
                 return null;
             } else {
                 String curso = resultado.getString("curso");
@@ -2349,9 +2358,8 @@ public class PanelPrincipalCasasController implements Initializable {
 
         }
     }
-    
-    //==========================HISTORIAL ASISTENCIA===============================
 
+    //==========================HISTORIAL ASISTENCIA===============================
     public void filtrar_alumnos_asistencia_curso_historial(int id_asigProf) {
 
         _comboP_AsistenciaCursos1.valueProperty().addListener((ov, p1, p2) -> {
@@ -2509,7 +2517,7 @@ public class PanelPrincipalCasasController implements Initializable {
 
             if (!resultado.first()) {
 
-                Jopane("No se han encontrado datos", "Error");
+                Jopane("No se han encontrado datos al obtener la casa por el id estudiante", "Error");
                 return null;
             } else {
                 String casa = resultado.getString("casa");
@@ -2606,7 +2614,7 @@ public class PanelPrincipalCasasController implements Initializable {
             ResultSet resultado = pst.executeQuery();
             if (!resultado.first()) {
 
-                Jopane("No se han encontrado datos", "Error");
+                Jopane("No se han encontrado datos obtener el id profesor por el dni", "Error");
                 return -1;
             } else {
                 int id_profesor = resultado.getInt("id_profesor");
@@ -2628,7 +2636,7 @@ public class PanelPrincipalCasasController implements Initializable {
             ResultSet resultado = pst.executeQuery();
             if (!resultado.first()) {
 
-                Jopane("No se han encontrado datos", "Error");
+                Jopane("No se han encontrado datos al obtener el id asinatura por el id profesor", "Error");
                 return -1;
             } else {
                 int id_asignatura = resultado.getInt("id_asignatura");
@@ -2650,7 +2658,7 @@ public class PanelPrincipalCasasController implements Initializable {
             ResultSet resultado = pst.executeQuery();
             if (!resultado.first()) {
 
-                Jopane("No se han encontrado datos", "Error");
+                Jopane("No se han encontrado datos al obtener el id asigprof por el id profesor", "Error");
                 return -1;
             } else {
                 int id_asigProf = resultado.getInt("id_asigProf");
@@ -2707,7 +2715,7 @@ public class PanelPrincipalCasasController implements Initializable {
 
             if (!resultado.first()) {
 
-                Jopane("No se han encontrado datos", "Error");
+                Jopane("No se han encontrado datos obtener id asigprof por el id asignatura", "Error");
                 return -1;
             } else {
                 int id = resultado.getInt("id_asigProf");
@@ -2739,7 +2747,7 @@ public class PanelPrincipalCasasController implements Initializable {
 
             if (!resultado.first()) {
 
-                Jopane("No se han encontrado datos", "Error en el id_profesor");
+                Jopane("No se han encontrado datos obtener el id asigprof por el id profesor", "Error en el id_profesor");
                 return -1;
             } else {
                 int id = resultado.getInt("id_asigProf");
@@ -2764,7 +2772,7 @@ public class PanelPrincipalCasasController implements Initializable {
 
             if (!resultado.first()) {
 
-                Jopane("No se han encontrado datos", "Error");
+                Jopane("No se han encontrado datos al obtener el id profesor por dni", "Error");
                 return -1;
             } else {
                 int id = resultado.getInt("id_profesor");
@@ -2796,7 +2804,7 @@ public class PanelPrincipalCasasController implements Initializable {
 
             if (!resultado.first()) {
 
-                Jopane("No se han encontrado datos", "Error");
+                Jopane("No se han encontrado datos obtener el id asignatura por el nombre asignatura", "Error");
                 return -1;
             } else {
                 int id = resultado.getInt("id_asignatura");
@@ -2820,7 +2828,7 @@ public class PanelPrincipalCasasController implements Initializable {
 
             if (!resultado.first()) {
 
-                Jopane("No se han encontrado datos", "Error");
+                Jopane("No se han encontrado datos obtener el total asignaturas por el id estudiante", "Error");
                 return -1;
             } else {
                 int num = resultado.getInt("total");
@@ -3039,8 +3047,7 @@ public class PanelPrincipalCasasController implements Initializable {
         _columP_apellidos.setCellValueFactory(new PropertyValueFactory<>("apellidos"));
         _columP_dni.setCellValueFactory(new PropertyValueFactory<>("dni"));
 
-        //esta es la PUTA LINEA para poner un PUTO COMBOBOX DE MIERDA dentro de la columna de una tabla (2 horas...)
-        columP_asistencia2.setCellFactory(c -> new ComboBoxTableCell<>("Presente", "Ausente", "Retraso"));
+        columP_asistencia21.setCellValueFactory(new PropertyValueFactory<>("asistencia"));
 
         String nombre = null;
         Alumnos_asistencia_objeto p = null;
@@ -3053,7 +3060,8 @@ public class PanelPrincipalCasasController implements Initializable {
                     nombre = rst.getString("nombre");
                     String apellidos = rst.getString("apellidos");
                     String dni = rst.getString("dni");
-                    p = new Alumnos_asistencia_objeto(nombre, apellidos, dni);
+
+                    p = new Alumnos_asistencia_objeto(nombre, apellidos, dni, "presente");
                     obs.add(p);
                 }
 
@@ -3122,8 +3130,9 @@ public class PanelPrincipalCasasController implements Initializable {
     ////////////////////////////mETODOS XOMBOS//////////////////////////////////
     public void solo_combo_curos() {
         String dni = pruebaInicio.getText();
+        int id_profesor=obtener_id_profesor(dni);
         // ejecutar cuando se haga clic en el ratón??
-        int id_asigProf = id_profesor_obtener_asifprof(id_profesor_Con_dni(dni));
+        int id_asigProf = id_profesor_obtener_asifprof(id_profesor);
 
         _cbTareas_cursos.valueProperty().addListener((ov, p1, p2) -> {
             if (_cbTarea_casa.getValue() == null) {
@@ -3136,8 +3145,12 @@ public class PanelPrincipalCasasController implements Initializable {
 
     public void solo_combo_casa() {
         String dni = pruebaInicio.getText();
+           int id_profesor=obtener_id_profesor(dni);
+     
+        int id_asigProf = id_profesor_obtener_asifprof(id_profesor);
 
-        int id_asigProf = id_profesor_obtener_asifprof(id_profesor_Con_dni(dni));
+
+     
 
         _cbTarea_casa.valueProperty().addListener((ov, p1, p2) -> {
             if (_cbTareas_cursos.getValue() == null) {
@@ -3164,11 +3177,11 @@ public class PanelPrincipalCasasController implements Initializable {
                 String correo = valoresLista.get(i);
                 String dniEstudiante = obtener_correo_dniEStudiante(correo);
                 String nombre_tarea = _tfNombreTarea.getText();
-                String tareas_cursos = cursos_por_dni(dni);
-                String casa = casa_por_dni(dni);
+                String tareas_cursos = cursos_por_dni(dniEstudiante);
+                String casa = casa_por_dni(dniEstudiante);
                 //String alumno = _cbTareas_alumnos.getValue();
 
-                id_alumno = obtner_id_estudiante(dni);
+                id_alumno = obtner_id_estudiante(dniEstudiante);
                 String Tipo = _cbTareas_tipo.getValue();
                 String fec_ini = _dpTareas_fechaIni.getValue().toString();
                 String fec_fin = _dpTareas_fechaFin.getValue().toString();
@@ -3196,6 +3209,15 @@ public class PanelPrincipalCasasController implements Initializable {
                     borrar_datos_registro();
                     _tbprofesores_semanal.getItems().clear();
                     rellenar_tablaProfesor_semanal(id_profesor);
+                    _tfNombreTarea.setText("");
+                    _taTarea_destinatario.setText("");
+                    _taTareas_descripcion.setText("");
+                    _cbTareas_cursos.getItems().set(0, "");
+                    _cbTareas_alumnos.getItems().set(0, "");
+                    _cbTareas_tipo.getItems().clear();
+                    _cbTarea_casa.getItems().set(0, "");
+                    _dpTareas_fechaFin.setValue(LocalDate.now());
+                    _dpTareas_fechaIni.setValue(LocalDate.now());
 
                 } else {
                     Jopane("Error", "Error al insertar");
@@ -3397,7 +3419,7 @@ public class PanelPrincipalCasasController implements Initializable {
     public ResultSet datos_asistencia(int id_asigProf) {
 
         try {
-            PreparedStatement pst = conn.prepareStatement("SELECT * from asigEstu WHERE id_asigProf= ?",
+            PreparedStatement pst = conn.prepareStatement("SELECT * from asistencia WHERE id_asigProf= ?",
                     ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             pst.setInt(1, id_asigProf);
             ResultSet resultado = pst.executeQuery();
@@ -3485,23 +3507,20 @@ public class PanelPrincipalCasasController implements Initializable {
             pst.setString(1, dni);
             ResultSet rs = pst.executeQuery();
             if (!rs.first()) {
-                Jopane("No se han encontrado datos", "Error");
+                Jopane("No se han encontrado datos al insertar destinatarios", "Error");
                 return null;
             } else {
 
                 String correo = rs.getString("correo");
 
                 String email = correo;
-                valoresLista.add(email);
-                Iterator<String> iter = valoresLista.iterator();
-                while (iter.hasNext()) {
-                    String next = iter.next();
-
+                if (!valoresLista.contains(email)) {
+                    valoresLista.add(email);
                 }
-
-                _taTarea_destinatario.appendText(email + ", ");
-                //correo.split(", ");
-
+                if (!_taTarea_destinatario.getText().contains(email)) {
+                    _taTarea_destinatario.appendText(email + ", ");
+                }
+////          
                 return valoresLista;
 
             }
@@ -3526,7 +3545,7 @@ public class PanelPrincipalCasasController implements Initializable {
             Statement st = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             rs = st.executeQuery(sql);
             if (!rs.first()) {
-                Jopane("No se han encontrado datos", "Error");
+                Jopane("No se han encontrado datos al obtner el dni del estudiante por el correo", "Error");
                 return null;
             } else {
                 //rs = pst.executeQuery();
@@ -3551,7 +3570,7 @@ public class PanelPrincipalCasasController implements Initializable {
             ResultSet resultado = pst.executeQuery();
             if (!resultado.first()) {
 
-                Jopane("No se han encontrado datos", "Error");
+                Jopane("No se han encontrado datos al obtener el nombre del profesor por id", "Error");
                 return null;
             } else {
                 String nombre = resultado.getString("nombre");
@@ -3573,7 +3592,7 @@ public class PanelPrincipalCasasController implements Initializable {
             ResultSet resultado = pst.executeQuery();
             if (!resultado.first()) {
 
-                Jopane("No se han encontrado datos", "Error");
+                Jopane("No se han encontrado datos al obtener el apellido del profesor por el id", "Error");
                 return null;
             } else {
                 String apellidos = resultado.getString("apellidos");
@@ -3596,7 +3615,7 @@ public class PanelPrincipalCasasController implements Initializable {
             ResultSet resultado = pst.executeQuery();
             if (!resultado.first()) {
 
-                Jopane("No se han encontrado datos", "Error");
+                Jopane("No se han encontrado datos obtner el nombre del alumno por id", "Error");
                 return null;
             } else {
                 String nombre = resultado.getString("nombre");
@@ -3619,7 +3638,7 @@ public class PanelPrincipalCasasController implements Initializable {
             ResultSet resultado = pst.executeQuery();
             if (!resultado.first()) {
 
-                Jopane("No se han encontrado datos", "Error");
+                Jopane("No se han encontrado datos al obtener el apellido del alumno por id", "Error");
                 return null;
             } else {
                 String apellido = resultado.getString("apellidos");
@@ -3649,7 +3668,7 @@ public class PanelPrincipalCasasController implements Initializable {
 
             if (!resultado.first()) {
 
-                Jopane("No se han encontrado datos", "Error");
+                Jopane("No se han encontrado datos obtener el nombre de la asignatura por su id", "Error");
                 return null;
             } else {
                 String nombre = resultado.getString("nombre");
@@ -3728,7 +3747,7 @@ public class PanelPrincipalCasasController implements Initializable {
 
             if (!resultado.first()) {
 
-                Jopane("No se han encontrado datos", "Error");
+                Jopane("No se han encontrado datos al obtener el nombre de la tarea por su id", "Error");
                 return null;
             } else {
                 String nombre = resultado.getString("nombre");
@@ -3867,7 +3886,10 @@ public class PanelPrincipalCasasController implements Initializable {
         _columAluSema_fecha.setCellValueFactory(new PropertyValueFactory<>("fecha_fin"));
         tareas_alumnoConProfesor_objeto v = null;
         try {
-            ResultSet rs = rellenar_tabla_salaComum_alu(id_estudiante);
+            PreparedStatement pst = conn.prepareStatement("SELECT * FROM tareas WHERE id_estudiante = ? AND fecha_fin BETWEEN CURRENT_DATE() AND DATE_ADD(CURRENT_DATE(), INTERVAL 7 DAY);", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            pst.setInt(1, id_estudiante);
+
+            ResultSet rs = pst.executeQuery();
 
             while (rs.next()) {
 
@@ -3884,7 +3906,7 @@ public class PanelPrincipalCasasController implements Initializable {
                 obs.add(v);
 
             }
-            _tablaAlum_salaComun.getItems().addAll(v);
+            _tablaAlum_salaComun.getItems().addAll(obs);
 
         } catch (SQLException ex) {
             Logger.getLogger(PanelPrincipalCasasController.class
@@ -3893,26 +3915,25 @@ public class PanelPrincipalCasasController implements Initializable {
         return obs;
     }
 
-    //===============rellanar tabla sala comun alumnos con profesor=============
-    public ResultSet rellenar_tabla_salaComum_alu(int id_estudiante) {
-        try {
-            PreparedStatement pst = conn.prepareStatement("SELECT * FROM tareas WHERE id_estudiante = ? AND fecha_fin BETWEEN CURRENT_DATE() AND DATE_ADD(CURRENT_DATE(), INTERVAL 7 DAY);", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            pst.setInt(1, id_estudiante);
-            ResultSet resultado = pst.executeQuery();
-            if (!resultado.first()) {
-                return null;
-            } else {
-                return resultado;
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class
-                    .getName()).log(Level.SEVERE, null, ex);
-            return null;
-        }
-
-    }
-
+//    //===============rellanar tabla sala comun alumnos con profesor=============
+//    public ResultSet rellenar_tabla_salaComum_alu(int id_estudiante) {
+//        try {
+//            PreparedStatement pst = conn.prepareStatement("SELECT * FROM tareas WHERE id_estudiante = ? AND fecha_fin BETWEEN CURRENT_DATE() AND DATE_ADD(CURRENT_DATE(), INTERVAL 7 DAY);", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+//            pst.setInt(1, id_estudiante);
+//            ResultSet resultado = pst.executeQuery();
+//            if (!resultado.first()) {.....
+//                return null;
+//            } else {
+//                return resultado;
+//            }
+//
+//        } catch (SQLException ex) {
+//            Logger.getLogger(PanelPrincipalCasasController.class
+//                    .getName()).log(Level.SEVERE, null, ex);
+//            return null;
+//        }
+//
+//    }
     public ResultSet rellenar_tabla_mensajeriaAlumnos(int id_estudiante) {
         try {
             PreparedStatement pst = conn.prepareStatement("SELECT * FROM mensajes WHERE id_estudiante =? ORDER BY leido DESC ", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
@@ -3952,6 +3973,8 @@ public class PanelPrincipalCasasController implements Initializable {
             _columP_apellidos1.setCellValueFactory(new PropertyValueFactory<>("apellidos"));
             _columP_dni1.setCellValueFactory(new PropertyValueFactory<>("dni"));
             columP_asistencia21.setCellValueFactory(new PropertyValueFactory<>("estado"));
+            columP_asistencia_fecha.setCellValueFactory(new PropertyValueFactory<>("Fecha"));
+           
 
             curso = _comboP_AsistenciaCursos1.getValue().toString();
             casa = _comboP_AsistenciaCasa1.getValue().toString();
@@ -3962,18 +3985,21 @@ public class PanelPrincipalCasasController implements Initializable {
                 ResultSet rs = alumnos_segun_curso_asistencia_historial(id_asigProf);
 
                 while (rs.next()) {
-                    int id = rs.getInt("id_estudiante");
-                    ResultSet rst = datosAlumnos_porId_historial(id);
+                    int id_estudiante = rs.getInt("id_estudiante");
+                    ResultSet rst = datosAlumnos_porId_historial(id_estudiante);
                     while (rst.next()) {
-                        String nombre = rst.getString("nombre");
-                        String apellidos = rst.getString("apellidos");
-                        String dni = rst.getString("dni");
+                        String nombre =obtenerNombreAlumno_porID(id_estudiante);
+                        String apellidos =obtenerApellidoAlumno_porID(id_estudiante);
+                        String dni = obtner_dni_estudiante(id_estudiante);
                         String estado = rst.getString("estado");
-                        p = new Alumnos_asistencia_objeto(nombre, apellidos, dni, estado);
+                        System.out.println("esty en el rellenar_tabla_asistencia_casaCurso_historial ");
+                        String fecha=rst.getString("Fecha");
+                        System.out.println(fecha);
+                        p = new Alumnos_asistencia_objeto(nombre, apellidos, dni, estado,fecha);
                         obs.add(p);
                     }
 
-                    _tablaP_asistencia1.getItems().addAll(p);
+                    _tablaP_asistencia1.getItems().addAll(obs);
                 }
             }
 
@@ -3993,13 +4019,15 @@ public class PanelPrincipalCasasController implements Initializable {
         _columP_apellidos1.setCellValueFactory(new PropertyValueFactory<>("apellidos"));
         _columP_dni1.setCellValueFactory(new PropertyValueFactory<>("dni"));
         columP_asistencia21.setCellValueFactory(new PropertyValueFactory<>("estado"));
+        columP_asistencia_fecha.setCellValueFactory(new PropertyValueFactory<>("Fecha"));
 
         String nombre = null;
-        Alumnos_asistencia_objeto p = null;
+        Alumnos_asistencia_objeto x = null;
         try {
             ResultSet rs = datos_asistencia(id_asigProf);
             while (rs.next()) {
                 int id = rs.getInt("id_estudiante");
+                System.out.println("soy el id"+id);
                 ResultSet rst = datosAlumnos_porId_historial(id);
                 while (rst.next()) {
                     int id_estudiante = rst.getInt("id_estudiante");
@@ -4007,13 +4035,19 @@ public class PanelPrincipalCasasController implements Initializable {
                     String apellidos = obtenerApellidoAlumno_porID(id_estudiante);
                     String dni = obtner_dni_estudiante(id_estudiante);
                     id_asigProf = rst.getInt("id_asigProf");
+                    System.out.println(id_asigProf);
+                    System.out.println(id_estudiante);
 
                     String estado = rst.getString("estado");
-                    p = new Alumnos_asistencia_objeto(nombre, apellidos, dni, estado);
-                    obs.add(p);
+                    String fecha=rst.getString("Fecha");
+                    System.out.println("estoy en el metodo rellenar_tabla_asistencia_historial");
+                    System.out.println(fecha);
+                    
+                    x = new Alumnos_asistencia_objeto(nombre, apellidos, dni, estado,fecha);
+                    obs.add(x);
                 }
 
-                _tablaP_asistencia1.getItems().addAll(p);
+                _tablaP_asistencia1.getItems().addAll(obs);
 
             }
 
@@ -4198,6 +4232,40 @@ public class PanelPrincipalCasasController implements Initializable {
     }
 
     //==========================Guardar datos de asistencia de la tabla asistencia===============================
+    public void guardar_botones_asistencia(String estado) {
+        String dni = pruebaInicio.getText();
+        int id_profesor = obtener_id_profesor(dni);
+
+        Alumnos_asistencia_objeto a = _tablaP_asistencia.getSelectionModel().getSelectedItem();
+        String dni_alumno = a.getDni();
+        int id_estudiante = obtner_id_estudiante(dni_alumno);
+        int id_asigProf = obtener_id_asigProf_por_idProfesor(id_profesor);
+        System.out.println("estoy aqui");
+
+        String fecha = LocalDate.now().toString();
+        System.out.println(fecha);
+        System.out.println(id_estudiante);
+        System.out.println(id_asigProf);
+
+        {
+            try {
+                PreparedStatement ps = conn.prepareStatement("INSERT INTO alu_nurismy_agenda.asistencia\n"
+                        + "(id_estudiante, id_asigProf, estado, Fecha)\n"
+                        + "VALUES(?, ?, ?, ?);");
+                ps.setInt(1, id_estudiante);
+                ps.setInt(2, id_asigProf);
+                ps.setString(3, estado);
+                ps.setString(4, fecha);
+                ps.executeUpdate();
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+    }
+    
+
     /**
      *
      * @param event evento en el boton guardar asistencia alumnos
@@ -4206,35 +4274,24 @@ public class PanelPrincipalCasasController implements Initializable {
     private void guardar_Asistencias_Alumnos(MouseEvent event) {
         String dni = pruebaInicio.getText();
         int id_profesor = obtener_id_profesor(dni);
-        try {
-            int id_estudiante, id_asigprof;
-            String estado;
+        String botonElegido = ((Button) event.getSource()).getText();
+        System.out.println(botonElegido);
 
-            for (int i = 0; i < _tablaP_asistencia.getItems().size(); i++) {
-                System.out.println(_tablaP_asistencia.getItems().get(i).dni);
-                id_estudiante = obtner_id_estudiante(_tablaP_asistencia.getItems().get(i).dni);
-                id_asigprof = obtener_id_asigProf_por_idProfesor(id_profesor);
+        switch (botonElegido) {
+            case "Presente":
+                guardar_botones_asistencia("Presente");
 
-                ObservableList<Alumnos_asistencia_objeto> listaAsistencia = _tablaP_asistencia.getItems();
-                for (Alumnos_asistencia_objeto asistencia : listaAsistencia) {
-                    String valorSeleccionado = asistencia.getEstado(); // asumiendo que el estado se guarda en un atributo "estado" de la clase Asistencia
-                    // hacer algo con el valor seleccionado, por ejemplo, imprimirlo
-                    System.out.println(valorSeleccionado);
-                }
+                break;
 
-                PreparedStatement pst = conn.prepareStatement("INSERT INTO alu_nurismy_agenda.asistencia (id_estudiante, id_asigProf, estado) VALUES(?,?,?);", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-                pst.setInt(1, id_estudiante);
-                pst.setInt(2, id_asigprof);
-                //pst.setString(3, estado);
+            case "Ausente":
+                guardar_botones_asistencia("Ausente");
+                break;
+            case "Retraso":
+                guardar_botones_asistencia("Retraso");
+                break;
 
-                pst.executeUpdate();
-
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(PanelPrincipalCasasController.class
-                    .getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 
     /**
@@ -4249,7 +4306,6 @@ public class PanelPrincipalCasasController implements Initializable {
         _comboP_AsistenciaCasa1.getItems().addAll("Gryffindor", "Slytherin", "Hafflepuff", "Ravenclaw");
         _panelHistorialAsistencia.setVisible(true);
     }
-    
 
 /////////////////////////////////////MENSAJERIA////////////////////////////////////////////////////////////////
     @FXML
@@ -4692,7 +4748,7 @@ public class PanelPrincipalCasasController implements Initializable {
             ResultSet resultado = pst.executeQuery();
             if (!resultado.first()) {
 
-                Jopane("No se han encontrado datos", "Error");
+                Jopane("No se han encontrado datos al obtener el id estudiante por el id tarea", "Error");
                 return -1;
             } else {
                 int id_estudiante = resultado.getInt("id_estudiante");

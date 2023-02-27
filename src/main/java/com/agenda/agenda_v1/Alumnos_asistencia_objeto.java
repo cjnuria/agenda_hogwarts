@@ -13,6 +13,15 @@ public class Alumnos_asistencia_objeto {
     public String apellidos;
     public String dni;
     public String estado;
+    public String Fecha;
+
+    public Alumnos_asistencia_objeto(String nombre, String apellidos, String dni, String estado, String fecha_hoy) {
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.dni = dni;
+        this.estado = estado;
+        this.Fecha = Fecha;
+    }
 
     public Alumnos_asistencia_objeto(String nombre, String apellidos, String dni, String estado) {
         this.nombre = nombre;
@@ -20,6 +29,16 @@ public class Alumnos_asistencia_objeto {
         this.dni = dni;
         this.estado = estado;
     }
+
+    public String getFecha() {
+        return Fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.Fecha = Fecha;
+    }
+
+   
 
     public Alumnos_asistencia_objeto(String nombre, String apellidos, String dni) {
         this.nombre = nombre;
