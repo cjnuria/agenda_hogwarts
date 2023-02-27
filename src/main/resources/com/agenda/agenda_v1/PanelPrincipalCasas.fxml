@@ -29,7 +29,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="690.0" prefWidth="1040.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.agenda.agenda_v1.PanelPrincipalCasasController">
    <children>
-      <Pane fx:id="panelAlumnos" layoutX="-2.0" layoutY="-1.0" prefHeight="691.0" prefWidth="1044.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="-1.0">
+      <Pane fx:id="panelAlumnos" layoutX="-2.0" layoutY="-1.0" prefHeight="691.0" prefWidth="1044.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="-1.0">
          <children>
             <Pane fx:id="_panelMensajeria_alumnos" layoutX="234.0" layoutY="5.0" prefHeight="695.0" prefWidth="831.0" style="-fx-background-color: white;" visible="false">
                <children>
@@ -1068,7 +1068,7 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane fx:id="panelProfesores" layoutY="-1.0" prefHeight="695.0" prefWidth="1052.0">
+      <Pane fx:id="panelProfesores" layoutY="-1.0" prefHeight="695.0" prefWidth="1052.0" visible="false">
          <children>
             <Pane fx:id="_panelMenuLateralProfe" prefHeight="693.0" prefWidth="228.0">
                <children>
@@ -1512,7 +1512,7 @@
             </Pane>
          </children>
       </Pane>
-      <Pane fx:id="panelAdministrador" layoutX="-2.0" layoutY="-1.0" prefHeight="695.0" prefWidth="1068.0" visible="false">
+      <Pane fx:id="panelAdministrador" layoutX="-2.0" layoutY="-1.0" prefHeight="695.0" prefWidth="1068.0">
          <children>
             <Pane fx:id="panelTareas11" layoutX="222.0" layoutY="-1.0" prefHeight="695.0" prefWidth="823.0" visible="false">
                <children>
@@ -1563,7 +1563,7 @@
                   <Button layoutX="521.0" layoutY="388.0" mnemonicParsing="false" onMouseClicked="#fileChooser" text="+" />
                </children>
             </Pane>
-            <ImageView fitHeight="719.0" fitWidth="1066.0" layoutX="43.0" layoutY="-20.0" pickOnBounds="true" preserveRatio="true" visible="false">
+            <ImageView fitHeight="719.0" fitWidth="1066.0" layoutX="43.0" layoutY="-20.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../img/otros/despacho.jpg" />
                </image>
@@ -1577,22 +1577,22 @@
                   </ImageView>
                   <VBox layoutX="-3.0" layoutY="332.0" prefHeight="370.0" prefWidth="227.0">
                      <children>
-                        <Button fx:id="_boton_alumnos_administrador" mnemonicParsing="false" onAction="#cambiarPanelSalaComun" prefHeight="143.0" prefWidth="227.0" styleClass="boton" text="Alumnos" textFill="#e2a825">
+                        <Button fx:id="_boton_alumnos_administrador" mnemonicParsing="false" onAction="#abrir_administrador_alumnos" prefHeight="143.0" prefWidth="227.0" styleClass="boton" text="Alumnos" textFill="#e2a825">
                            <font>
                               <Font name="Harrington" size="30.0" />
                            </font>
                         </Button>
-                        <Button fx:id="_boton_profesores_administrador" mnemonicParsing="false" onAction="#cambiarPanelAsignaturas" prefHeight="144.0" prefWidth="227.0" text="Profesores" textFill="#e2a825">
+                        <Button fx:id="_boton_profesores_administrador" mnemonicParsing="false" onAction="#abrir_administrador_profesores" prefHeight="144.0" prefWidth="227.0" text="Profesores" textFill="#e2a825">
                            <font>
                               <Font name="Harrington" size="30.0" />
                            </font>
                         </Button>
-                        <Button fx:id="_boton_cerrar_sesion" mnemonicParsing="false" onAction="#cambiarPanelTareas" prefHeight="147.0" prefWidth="227.0" text="Cerrar Sesión" textFill="#e2a825">
+                        <Button fx:id="_boton_cerrar_sesion" mnemonicParsing="false" onAction="#cerrarSesion" prefHeight="147.0" prefWidth="227.0" text="Cerrar Sesión" textFill="#e2a825">
                            <font>
                               <Font name="Harrington" size="30.0" />
                            </font>
                         </Button>
-                        <Button fx:id="_boton_salir" mnemonicParsing="false" onAction="#cambiarPanelNotas" prefHeight="141.0" prefWidth="227.0" text="Salir" textFill="#e2a825">
+                        <Button fx:id="_boton_salir" mnemonicParsing="false" onAction="#salirProg" prefHeight="141.0" prefWidth="227.0" text="Salir" textFill="#e2a825">
                            <font>
                               <Font name="Harrington" size="30.0" />
                            </font>
@@ -1790,7 +1790,7 @@
             </Pane>
          </children>
       </Pane>
-      <Pane fx:id="_panelHistorialAsistencia" layoutX="229.0" layoutY="9.0" prefHeight="695.0" prefWidth="831.0" style="-fx-background-color: white;">
+      <Pane fx:id="_panelHistorialAsistencia" layoutX="229.0" layoutY="9.0" prefHeight="695.0" prefWidth="831.0" style="-fx-background-color: white;" visible="false">
          <children>
             <ImageView fitHeight="830.0" fitWidth="891.0" layoutX="-8.0" layoutY="-135.0" pickOnBounds="true" preserveRatio="true">
                <image>

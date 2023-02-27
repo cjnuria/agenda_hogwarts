@@ -15,39 +15,6 @@ public class Alumnos_asistencia_objeto {
     public String estado;
     public String Fecha;
 
-    public Alumnos_asistencia_objeto(String nombre, String apellidos, String dni, String estado, String fecha_hoy) {
-        this.nombre = nombre;
-        this.apellidos = apellidos;
-        this.dni = dni;
-        this.estado = estado;
-        this.Fecha = Fecha;
-    }
-
-    public Alumnos_asistencia_objeto(String nombre, String apellidos, String dni, String estado) {
-        this.nombre = nombre;
-        this.apellidos = apellidos;
-        this.dni = dni;
-        this.estado = estado;
-    }
-
-    public String getFecha() {
-        return Fecha;
-    }
-
-    public void setFecha(String fecha) {
-        this.Fecha = Fecha;
-    }
-
-   
-
-    public Alumnos_asistencia_objeto(String nombre, String apellidos, String dni) {
-        this.nombre = nombre;
-        this.apellidos = apellidos;
-        this.dni = dni;
-    }
-    
-    
-
     public String getNombre() {
         return nombre;
     }
@@ -79,6 +46,35 @@ public class Alumnos_asistencia_objeto {
     public void setEstado(String estado) {
         this.estado = estado;
     }
+
+    public String getFecha() {
+        return Fecha;
+    }
+
+    public void setFecha(String Fecha) {
+        this.Fecha = Fecha;
+    }
+
+    public Alumnos_asistencia_objeto(String nombre, String apellidos, String dni) {
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.dni = dni;
+    }
+
+    public Alumnos_asistencia_objeto(String nombre, String apellidos, String dni, String estado) {
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.dni = dni;
+        this.estado = estado;
+    }
+
+    public Alumnos_asistencia_objeto(String nombre, String apellidos, String dni, String estado, String Fecha) {
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.dni = dni;
+        this.estado = estado;
+        this.Fecha = Fecha;
+    }
     
-    
+
 }

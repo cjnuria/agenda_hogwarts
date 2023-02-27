@@ -1166,6 +1166,12 @@ public class PanelPrincipalCasasController implements Initializable {
                     break;
                 case "admin":
                     cambiarImagenAdmin();
+                    panelAlumnos.setVisible(false);
+                    panelProfesores.setVisible(false);
+
+                    _panelAdministadorAlumnos.setVisible(true);
+                    panelTareas11.setVisible(false);
+                    panelMenuLateral1.setVisible(true);
 
             }
         } catch (NullPointerException e) {
@@ -2361,11 +2367,12 @@ public class PanelPrincipalCasasController implements Initializable {
 
     //==========================HISTORIAL ASISTENCIA===============================
     public void filtrar_alumnos_asistencia_curso_historial(int id_asigProf) {
+        int id_profesor = obtener_id_profesor(pruebaInicio.getText());
 
         _comboP_AsistenciaCursos1.valueProperty().addListener((ov, p1, p2) -> {
             if (_comboP_AsistenciaCasa1.getValue() == null) {
 
-                rellenar_tabla_asistencia_historial(id_asigProf);
+                rellenar_tabla_asistencia_historial(id_profesor);
 
             } else {
                 String casa = _comboP_AsistenciaCasa1.getValue().toString();
@@ -3130,7 +3137,7 @@ public class PanelPrincipalCasasController implements Initializable {
     ////////////////////////////mETODOS XOMBOS//////////////////////////////////
     public void solo_combo_curos() {
         String dni = pruebaInicio.getText();
-        int id_profesor=obtener_id_profesor(dni);
+        int id_profesor = obtener_id_profesor(dni);
         // ejecutar cuando se haga clic en el ratón??
         int id_asigProf = id_profesor_obtener_asifprof(id_profesor);
 
@@ -3145,12 +3152,9 @@ public class PanelPrincipalCasasController implements Initializable {
 
     public void solo_combo_casa() {
         String dni = pruebaInicio.getText();
-           int id_profesor=obtener_id_profesor(dni);
-     
+        int id_profesor = obtener_id_profesor(dni);
+
         int id_asigProf = id_profesor_obtener_asifprof(id_profesor);
-
-
-     
 
         _cbTarea_casa.valueProperty().addListener((ov, p1, p2) -> {
             if (_cbTareas_cursos.getValue() == null) {
@@ -3974,7 +3978,6 @@ public class PanelPrincipalCasasController implements Initializable {
             _columP_dni1.setCellValueFactory(new PropertyValueFactory<>("dni"));
             columP_asistencia21.setCellValueFactory(new PropertyValueFactory<>("estado"));
             columP_asistencia_fecha.setCellValueFactory(new PropertyValueFactory<>("Fecha"));
-           
 
             curso = _comboP_AsistenciaCursos1.getValue().toString();
             casa = _comboP_AsistenciaCasa1.getValue().toString();
@@ -3988,14 +3991,14 @@ public class PanelPrincipalCasasController implements Initializable {
                     int id_estudiante = rs.getInt("id_estudiante");
                     ResultSet rst = datosAlumnos_porId_historial(id_estudiante);
                     while (rst.next()) {
-                        String nombre =obtenerNombreAlumno_porID(id_estudiante);
-                        String apellidos =obtenerApellidoAlumno_porID(id_estudiante);
+                        String nombre = obtenerNombreAlumno_porID(id_estudiante);
+                        String apellidos = obtenerApellidoAlumno_porID(id_estudiante);
                         String dni = obtner_dni_estudiante(id_estudiante);
                         String estado = rst.getString("estado");
-                        System.out.println("esty en el rellenar_tabla_asistencia_casaCurso_historial ");
-                        String fecha=rst.getString("Fecha");
-                        System.out.println(fecha);
-                        p = new Alumnos_asistencia_objeto(nombre, apellidos, dni, estado,fecha);
+
+                        String fecha = rst.getString("Fecha");
+
+                        p = new Alumnos_asistencia_objeto(nombre, apellidos, dni, estado, fecha);
                         obs.add(p);
                     }
 
@@ -4027,7 +4030,6 @@ public class PanelPrincipalCasasController implements Initializable {
             ResultSet rs = datos_asistencia(id_asigProf);
             while (rs.next()) {
                 int id = rs.getInt("id_estudiante");
-                System.out.println("soy el id"+id);
                 ResultSet rst = datosAlumnos_porId_historial(id);
                 while (rst.next()) {
                     int id_estudiante = rst.getInt("id_estudiante");
@@ -4035,15 +4037,11 @@ public class PanelPrincipalCasasController implements Initializable {
                     String apellidos = obtenerApellidoAlumno_porID(id_estudiante);
                     String dni = obtner_dni_estudiante(id_estudiante);
                     id_asigProf = rst.getInt("id_asigProf");
-                    System.out.println(id_asigProf);
-                    System.out.println(id_estudiante);
 
                     String estado = rst.getString("estado");
-                    String fecha=rst.getString("Fecha");
-                    System.out.println("estoy en el metodo rellenar_tabla_asistencia_historial");
-                    System.out.println(fecha);
-                    
-                    x = new Alumnos_asistencia_objeto(nombre, apellidos, dni, estado,fecha);
+                    String fecha = rst.getString("Fecha");
+
+                    x = new Alumnos_asistencia_objeto(nombre, apellidos, dni, estado, fecha);
                     obs.add(x);
                 }
 
@@ -4257,14 +4255,13 @@ public class PanelPrincipalCasasController implements Initializable {
                 ps.setString(3, estado);
                 ps.setString(4, fecha);
                 ps.executeUpdate();
-                
+
             } catch (SQLException ex) {
                 Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 
     }
-    
 
     /**
      *
@@ -4762,6 +4759,27 @@ public class PanelPrincipalCasasController implements Initializable {
             return -1;
         }
 
+    }
+
+    // abrir administrador
+    @FXML
+    public void abrir_administrador_alumnos() {
+        vaciarPanelTodo();
+        panelAdministrador.setVisible(true);
+        _panelAdministradorConfiguracion.setVisible(true);
+
+    }
+
+    @FXML
+    public void abrir_administrador_profesores() {
+        vaciarPanelTodo();
+        panelAdministrador.setVisible(true);
+        _panelAdministrador_profesor.setVisible(true);
+
+    }
+
+    @FXML
+    private void cerrarSesion(ActionEvent event) {
     }
 
 }
