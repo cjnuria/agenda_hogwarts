@@ -740,6 +740,8 @@ public class PanelPrincipalCasasController implements Initializable {
     private Label label_asistencia_botones;
     @FXML
     private TableColumn<Alumnos_asistencia_objeto, String> columP_asistencia_fecha;
+    @FXML
+    private ImageView _imagenFondoAdmin;
 
     /**
      * Initializes the controller class.
@@ -1024,6 +1026,13 @@ public class PanelPrincipalCasasController implements Initializable {
         imagen_texto_asignatura.setVisible(false);
         _panelMensajeria_alumnos.setVisible(false);
         _paneMensajeria.setVisible(false);
+        _imagenFondoAdmin.setVisible(false);
+        panelMenuLateral1.setVisible(false);
+        panelAlumnos.setVisible(false);
+        panelProfesores.setVisible(false);
+        _panelAdministadorAlumnos.setVisible(false);
+        panelTareas11.setVisible(false);
+        panelMenuLateral1.setVisible(false);
 
     }
 
@@ -1166,10 +1175,12 @@ public class PanelPrincipalCasasController implements Initializable {
                     break;
                 case "admin":
                     cambiarImagenAdmin();
+                    _imagenFondoAdmin.setVisible(true);
+                    panelMenuLateral1.setVisible(true);
                     panelAlumnos.setVisible(false);
                     panelProfesores.setVisible(false);
 
-                    _panelAdministadorAlumnos.setVisible(true);
+                    _panelAdministadorAlumnos.setVisible(false);
                     panelTareas11.setVisible(false);
                     panelMenuLateral1.setVisible(true);
 
@@ -4765,22 +4776,30 @@ public class PanelPrincipalCasasController implements Initializable {
     @FXML
     public void abrir_administrador_alumnos() {
         vaciarPanelTodo();
+        panelMenuLateral1.setVisible(true);
         panelAdministrador.setVisible(true);
-        _panelAdministradorConfiguracion.setVisible(true);
+        _panelAdministadorAlumnos.setVisible(true);
 
     }
 
     @FXML
     public void abrir_administrador_profesores() {
         vaciarPanelTodo();
+        panelMenuLateral1.setVisible(true);
         panelAdministrador.setVisible(true);
         _panelAdministrador_profesor.setVisible(true);
 
     }
-
+    
     @FXML
-    private void cerrarSesion(ActionEvent event) {
+    public void abrir_modificar_estudiante() {
+        vaciarPanelTodo();
+        panelMenuLateral1.setVisible(true);
+        panelAdministrador.setVisible(true);
+        _panelAdministradorConfiguracion.setVisible(true);
+
     }
+
 
 }
 

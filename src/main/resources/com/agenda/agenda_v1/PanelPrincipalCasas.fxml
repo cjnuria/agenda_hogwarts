@@ -1563,7 +1563,7 @@
                   <Button layoutX="521.0" layoutY="388.0" mnemonicParsing="false" onMouseClicked="#fileChooser" text="+" />
                </children>
             </Pane>
-            <ImageView fitHeight="719.0" fitWidth="1066.0" layoutX="43.0" layoutY="-20.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="_imagenFondoAdmin" fitHeight="719.0" fitWidth="1066.0" layoutX="43.0" layoutY="-20.0" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
                   <Image url="@../../../img/otros/despacho.jpg" />
                </image>
@@ -1587,7 +1587,7 @@
                               <Font name="Harrington" size="30.0" />
                            </font>
                         </Button>
-                        <Button fx:id="_boton_cerrar_sesion" mnemonicParsing="false" onAction="#cerrarSesion" prefHeight="147.0" prefWidth="227.0" text="Cerrar Sesión" textFill="#e2a825">
+                        <Button fx:id="_boton_cerrar_sesion" mnemonicParsing="false" onMouseClicked="#cerrarSesion" prefHeight="147.0" prefWidth="227.0" text="Cerrar Sesión" textFill="#e2a825">
                            <font>
                               <Font name="Harrington" size="30.0" />
                            </font>
@@ -1602,7 +1602,7 @@
                   <Label fx:id="_labelSesionEstudiante1" layoutX="22.0" layoutY="6.0" prefHeight="17.0" prefWidth="72.0" text="LabelSesion1" />
                </children>
             </Pane>
-            <Pane fx:id="_panelAdministadorAlumnos" layoutX="225.0" layoutY="-7.0" prefHeight="699.0" prefWidth="835.0" style="-fx-background-color: white;">
+            <Pane fx:id="_panelAdministadorAlumnos" layoutX="225.0" layoutY="-7.0" prefHeight="699.0" prefWidth="835.0" style="-fx-background-color: white;" visible="false">
                <children>
                   <ImageView fitHeight="821.0" fitWidth="845.0" layoutX="-4.0" layoutY="-121.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -1630,12 +1630,12 @@
                         </Blend>
                      </effect>
                   </TableView>
-                  <Button layoutX="198.0" layoutY="551.0" mnemonicParsing="false" text="Modificar">
+                  <Button layoutX="198.0" layoutY="551.0" mnemonicParsing="false" onMouseClicked="#abrir_modificar_estudiante" text="Modificar">
                      <font>
                         <Font name="Harrington" size="18.0" />
                      </font>
                   </Button>
-                  <Button layoutX="394.0" layoutY="550.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="107.0" text="Button">
+                  <Button layoutX="394.0" layoutY="550.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="107.0" text="Eliminar">
                      <font>
                         <Font name="Harrington" size="18.0" />
                      </font>
@@ -1710,9 +1710,9 @@
                   <ComboBox fx:id="_cbCursos11" layoutX="308.0" layoutY="449.0" prefHeight="25.0" prefWidth="254.0" />
                </children>
             </Pane>
-            <Pane fx:id="_panelAdministradorConfiguracion" layoutX="220.0" layoutY="-1.0" prefHeight="705.0" prefWidth="850.0" visible="false">
+            <Pane fx:id="_panelAdministradorConfiguracion" layoutX="220.0" layoutY="-1.0" prefHeight="705.0" prefWidth="850.0">
                <children>
-                  <ImageView fitHeight="814.0" fitWidth="838.0" layoutY="-119.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                  <ImageView fitHeight="841.0" fitWidth="862.0" layoutY="-119.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@imagenes/pngegg%20(51).png" />
                      </image>
