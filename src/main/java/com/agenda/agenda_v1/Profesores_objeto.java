@@ -11,15 +11,25 @@ import java.util.Date;
  * @author Ismael
  */
 public class Profesores_objeto {
-    
-    private int id_profesor;
-    private String nombre;
-    private String apellidos;
-    private String telefono;
-    private String dni;    
-    private Date fecha_nac;
-    private String correo;
-    private String imagen;
+
+    public int id_profesor;
+    public String nombre;
+    public String apellidos;
+    public String telefono;
+    public String dni;
+    public Date fecha_nac;
+    public String correo;
+    public String imagen;
+
+    public Profesores_objeto( String dni, String nombre, String apellidos, String telefono, String correo) {
+        this.dni = dni;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.telefono = telefono;        
+        this.correo = correo;
+    }
+
+   
 
     public Profesores_objeto(int id_profesor, String nombre, String apellidos, String telefono, String dni, Date fecha_nac, String correo, String imagen) {
         this.id_profesor = id_profesor;
@@ -95,8 +105,5 @@ public class Profesores_objeto {
     public void setImagen(String imagen) {
         this.imagen = imagen;
     }
-    
-    
-    
-    
+
 }

@@ -15,7 +15,15 @@ public class Alumnos_objeto {
     public String apellidos;
     public String curso;
     public String casa;
-    
+    public String dni;
+
+    public Alumnos_objeto(String nombre, String apellidos, String curso, String casa, String dni) {
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.curso = curso;
+        this.casa = casa;
+        this.dni = dni;
+    }
     public String estado;
 
     public String getDni() {
@@ -25,7 +33,7 @@ public class Alumnos_objeto {
     public void setDni(String dni) {
         this.dni = dni;
     }
-    public String dni;
+    
 
     public Alumnos_objeto(String nombre, String apellidos, String curso, String casa) {
         this.nombre = nombre;

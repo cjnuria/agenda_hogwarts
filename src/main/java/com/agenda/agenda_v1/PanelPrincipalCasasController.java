@@ -491,8 +491,7 @@ public class PanelPrincipalCasasController implements Initializable {
     private Button _boton_sala_comun111;
     @FXML
     private TextField _tfPassEstudiante11;
-    @FXML
-    private ComboBox<?> _cbCursos11;
+
     @FXML
     private TextField _tfNombreEstudiante1;
     @FXML
@@ -508,9 +507,7 @@ public class PanelPrincipalCasasController implements Initializable {
     @FXML
     private Button _boton_sala_comun11;
     @FXML
-    private TextField _tfPassEstudiante1;
-    @FXML
-    private ComboBox<?> _cbCursos1;
+    private ComboBox<String> _cbCursos1;
     @FXML
     private ImageView imagen_texto_asignatura;
     @FXML
@@ -742,6 +739,61 @@ public class PanelPrincipalCasasController implements Initializable {
     private TableColumn<Alumnos_asistencia_objeto, String> columP_asistencia_fecha;
     @FXML
     private ImageView _imagenFondoAdmin;
+    @FXML
+    private Label labelAd_nombre;
+    @FXML
+    private Label labelAd_dni;
+    @FXML
+    private Label labelAd_curso;
+    @FXML
+    private Label labelAd_apellidos;
+    @FXML
+    private Label labelAd_email;
+    @FXML
+    private Label labelAd_telefono;
+    @FXML
+    private Label labelAd_fechNac;
+
+    @FXML
+    private TableColumn<Alumnos_objeto, String> columAD_dni;
+    @FXML
+    private Button botonAD_modificar;
+    @FXML
+    private Button botonAD_eliminar;
+    @FXML
+    private TableView<Alumnos_objeto> tablaAd_alumnos;
+    @FXML
+    private TableColumn<Alumnos_objeto, String> columAD_nombre;
+    @FXML
+    private TableColumn<Alumnos_objeto, String> columAD_apellidos;
+    @FXML
+    private TableColumn<Alumnos_objeto, String> columAD_casa;
+    @FXML
+    private TableColumn<Alumnos_objeto, String> columAD_curso;
+    @FXML
+    private Label labelAdministadorTabla;
+    @FXML
+    private TableView<Profesores_objeto> tablaAd_alumnos1;
+    @FXML
+    private TableColumn<Profesores_objeto, String> columAD_dni1;
+    @FXML
+    private TableColumn<Profesores_objeto, String> columAD_nombre1;
+    @FXML
+    private TableColumn<Profesores_objeto, String> columAD_apellidos1;
+    @FXML
+    private TableColumn<Profesores_objeto, String> columAD_casa1;
+    @FXML
+    private TableColumn<Profesores_objeto, String> columAD_curso1;
+    @FXML
+    private Button botonAD_eliminarP;
+    @FXML
+    private Button botonAD_ModificarP;
+    @FXML
+    private Button botonP_correciones;
+    @FXML
+    private Tab tabProfesores_todas;
+    @FXML
+    private Tab tabProfesores_pendientes;
 
     /**
      * Initializes the controller class.
@@ -909,6 +961,24 @@ public class PanelPrincipalCasasController implements Initializable {
         _progressBar_Trimestre.getStyleClass().add("Cssbar");
         _tbA_tareas.getStyleClass().add("CssTablaSalaComun");
 
+        //=================panel administrador=======================================
+        labelAd_nombre.getStyleClass().add("CsslabelconfiguracionAD");
+        labelAd_apellidos.getStyleClass().add("CsslabelconfiguracionAD");
+        labelAd_dni.getStyleClass().add("CsslabelconfiguracionAD");
+        labelAd_email.getStyleClass().add("CsslabelconfiguracionAD");
+        labelAd_fechNac.getStyleClass().add("CsslabelconfiguracionAD");
+        labelAd_curso.getStyleClass().add("CsslabelconfiguracionAD");
+        labelAd_telefono.getStyleClass().add("CsslabelconfiguracionAD");
+
+        //===============botones================================================
+        _boton_sala_comun11.getStyleClass().add("CssbotonconfiguracionAD");
+        botonAD_eliminar.getStyleClass().add("CssbotonconfiguracionAD");
+        botonAD_modificar.getStyleClass().add("CssbotonconfiguracionAD");
+        botonAD_eliminarP.getStyleClass().add("CssbotonconfiguracionAD");
+        botonAD_ModificarP.getStyleClass().add("CssbotonconfiguracionAD");
+        _boton_sala_comun111.getStyleClass().add("CssbotonconfiguracionAD");
+        botonP_correciones.getStyleClass().add("CssbotonconfiguracionAD");
+
     }//fin inicializate
 
     //==============================UTILIDADES==================================
@@ -1027,6 +1097,7 @@ public class PanelPrincipalCasasController implements Initializable {
         _panelMensajeria_alumnos.setVisible(false);
         _paneMensajeria.setVisible(false);
         _imagenFondoAdmin.setVisible(false);
+        panelAdministrador.setVisible(false);
         panelMenuLateral1.setVisible(false);
         panelAlumnos.setVisible(false);
         panelProfesores.setVisible(false);
@@ -1179,7 +1250,6 @@ public class PanelPrincipalCasasController implements Initializable {
                     panelMenuLateral1.setVisible(true);
                     panelAlumnos.setVisible(false);
                     panelProfesores.setVisible(false);
-
                     _panelAdministadorAlumnos.setVisible(false);
                     panelTareas11.setVisible(false);
                     panelMenuLateral1.setVisible(true);
@@ -1559,13 +1629,13 @@ public class PanelPrincipalCasasController implements Initializable {
     /////////////////////////////////////////////////////////////////////////////////
     @FXML
     public void altaEstudiante() {
-        String dni = pruebaInicio.getText();
-        int id_estudiante = obtner_id_estudiante(dni);
 
         if (_boton_sala_comun1.getText().equalsIgnoreCase("Actualizar")) {
 
             if (!_tfPassEstudiante.getText().equals("")) {
                 try {
+                    String dni = pruebaInicio.getText();
+                    int id_estudiante = obtner_id_estudiante(dni);
 
                     PreparedStatement pst = conn.prepareStatement("UPDATE alu_nurismy_agenda.estudiantes\n"
                             + "SET nombre= ?, apellidos= ?, telefono= ?, fecha_nac= ?, correo= ?, pass= ?\n"
@@ -1589,7 +1659,12 @@ public class PanelPrincipalCasasController implements Initializable {
                         pst.setInt(6, id_estudiante);
                         pst.setString(7, pass);
 
-                        pst.executeUpdate();
+                        int comprobar = pst.executeUpdate();
+                        if (comprobar < 1) {
+                            Jopane("Se ha ejecutado correctamente", "Alta alumno");
+                        } else {
+                            Jopane("Error al ejecutar", "Alta alumno");
+                        }
                     }
 
                 } catch (SQLException ex) {
@@ -1598,6 +1673,8 @@ public class PanelPrincipalCasasController implements Initializable {
                 }
             } else {
                 try {
+                    String dni = pruebaInicio.getText();
+                    int id_estudiante = obtner_id_estudiante(dni);
 
                     PreparedStatement pst = conn.prepareStatement("UPDATE alu_nurismy_agenda.estudiantes\n"
                             + "SET nombre= ?, apellidos= ?, telefono= ?, fecha_nac= ?, correo= ?\n"
@@ -1618,7 +1695,12 @@ public class PanelPrincipalCasasController implements Initializable {
                         pst.setString(5, correo);
                         pst.setInt(6, id_estudiante);
 
-                        pst.executeUpdate();
+                        int comprobar = pst.executeUpdate();
+                        if (comprobar < 1) {
+                            Jopane("No se ha podido ejecutar", "Alta estudiante");
+                        } else {
+                            Jopane("Se ha ejecutado correctamente", "Alta estudiante");
+                        }
                     }
                 } catch (SQLException ex) {
                     Logger.getLogger(PanelPrincipalCasasController.class
@@ -1634,6 +1716,7 @@ public class PanelPrincipalCasasController implements Initializable {
 
                 String nombre = _tfNombreEstudiante.getText();
                 String apellidos = _tfApellidosEstudiante.getText();
+                String dni=_tfDniEstudiante.getText();
                 int telefono = Integer.parseInt(_tfTelefonoEstudiante.getText());
                 String fecha_nac = _tfFechaNacEstudiante.getText();
                 String correo = _tfEmailEstudiante.getText();
@@ -1921,7 +2004,7 @@ public class PanelPrincipalCasasController implements Initializable {
     @FXML
     private void cambiarTareasProfes() {
         String dni = pruebaInicio.getText();
-        System.out.println(dni + "-----hola");
+
         int id_profesor = obtener_id_profesor(dni);
         System.out.println(id_profesor);
         _cbTareas_cursos.getItems().clear();
@@ -1943,6 +2026,8 @@ public class PanelPrincipalCasasController implements Initializable {
 
     @FXML
     private void cambiarCorreccionesProfes() {
+        ocultarCorrecionesProfesores();
+        labelP_correciones.setVisible(true);
         String dni = pruebaInicio.getText();
         int id_profesor = obtener_id_profesor(dni);
         vaciarPanelProfes();
@@ -1952,6 +2037,32 @@ public class PanelPrincipalCasasController implements Initializable {
         rellenar_tabla_correcciones(id_profesor);
         rellenar_tabla_correccionesPendientes(id_profesor);
         Cambiar_recordadoraProfesores(id_profesor);
+
+    }
+
+    @FXML
+    public void ocultarCorrecionesProfesores() {
+
+        labelP_correciones_alumno.setVisible(false);
+        labelP_correciones_comentario.setVisible(false);
+        labelP_correciones_nota.setVisible(false);
+        _tfTareas_alumno.setVisible(false);
+        _tfTareasComentario.setVisible(false);
+        _tfTareasNota.setVisible(false);
+        botonP_correciones.setVisible(false);
+
+    }
+
+    @FXML
+    public void mostrarCorrecionesProfesores() {
+
+        labelP_correciones_alumno.setVisible(true);
+        labelP_correciones_comentario.setVisible(true);
+        labelP_correciones_nota.setVisible(true);
+        _tfTareas_alumno.setVisible(true);
+        _tfTareasComentario.setVisible(true);
+        _tfTareasNota.setVisible(true);
+        botonP_correciones.setVisible(true);
 
     }
 
@@ -2074,17 +2185,16 @@ public class PanelPrincipalCasasController implements Initializable {
             pst.setString(2, comentario_alumno);
             pst.setInt(3, id_tarea);
 
-            pst.executeUpdate();
+            int comprobar = pst.executeUpdate();
+            if (comprobar < 1) {
+                Jopane("No se ha podido ejecutar", "Subir tarea");
+            } else {
+                Jopane("Se ha ejecutado correctamente", "Actualizar tarea");
+            }
             rellenar_tareas_alumnos(id_estudiante);
         } catch (SQLException ex) {
             Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-
-    public void guardarP_comentarioYnota_tareas() {
-
-        String comentarioTarea = _tfTareasComentario.getText();
-        float notatarea = Float.parseFloat(_tfTareasNota.getText());
     }
 
     //============Metodo seleccion asignaturas==================
@@ -2144,7 +2254,13 @@ public class PanelPrincipalCasasController implements Initializable {
             PreparedStatement pst = conn.prepareStatement("INSERT INTO asigEstu (id_estudiante, id_asigProf) VALUES (?, ?)", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             pst.setInt(1, id_estudiante);
             pst.setInt(2, id_asigProf);
-            pst.executeUpdate();
+
+            int comprobar = pst.executeUpdate();
+            if (comprobar > 0) {
+                Jopane("Se ha ejecutado correctamente", "Insertar asignatura");
+            } else {
+                Jopane("Error al ejecutar", "Insertar asignatura");
+            }
 
         } catch (SQLException ex) {
             Logger.getLogger(PanelPrincipalCasasController.class
@@ -4372,7 +4488,7 @@ public class PanelPrincipalCasasController implements Initializable {
             int comprobar = pst.executeUpdate();
             textArea_menaje_editar.clear();
 
-            if (comprobar != 0) {
+            if (comprobar > 0) {
                 Jopane("Mensaje enviado", "Enviar mensaje");
             } else {
                 Jopane("Error al enviar mensaje", "Enviar mensaje");
@@ -4401,7 +4517,7 @@ public class PanelPrincipalCasasController implements Initializable {
 
             int comprobar = pst.executeUpdate();
             textArea_menaje_editar1.clear();
-            if (comprobar != 0) {
+            if (comprobar > 0) {
                 Jopane("Mensaje enviado", "Enviar mensaje");
             } else {
                 Jopane("Error al enviar mensaje", "Enviar mensaje");
@@ -4502,7 +4618,12 @@ public class PanelPrincipalCasasController implements Initializable {
             // cambiar el menasaje a leido en alumnos y refescar la tabla de alumnos
             PreparedStatement pst = conn.prepareStatement("UPDATE alu_nurismy_agenda.mensajes SET leido=1 WHERE id_mensaje= ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             pst.setInt(1, id_mensaje);
-            pst.executeUpdate();
+            int comprobar = pst.executeUpdate();
+            if (comprobar > 0) {
+                Jopane("Mensaje enviado", "Enviar mensaje");
+            } else {
+                Jopane("Error al enviar mensaje", "Enviar mensaje");
+            }
             tablaA_listar_mensajes1.getItems().clear();
             rellenar_tabla_mensajesA(id_estudiante);
 
@@ -4546,6 +4667,7 @@ public class PanelPrincipalCasasController implements Initializable {
             PreparedStatement pst = conn.prepareStatement("UPDATE alu_nurismy_agenda.mensajes_profesor SET leido=1 WHERE id_mensaje_profesor= ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             pst.setInt(1, id_mensaje);
             pst.executeUpdate();
+
             tablaP_listar_mensajes.getItems().clear();
             rellenar_tabla_mensajesP(id_profesor);
 
@@ -4693,6 +4815,7 @@ public class PanelPrincipalCasasController implements Initializable {
         }
     }
 
+    @FXML
     public void guardarCorrecciones() {
 
         try {
@@ -4707,7 +4830,12 @@ public class PanelPrincipalCasasController implements Initializable {
             PreparedStatement pst = conn.prepareStatement("UPDATE tareas SET corregido=1 WHERE id_tarea=?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             pst.setInt(1, id_tarea);
 
-            pst.executeUpdate();
+            int comprobar = pst.executeUpdate();
+            if (comprobar > 0) {
+                Jopane("Se ha ejecutado correctamente", "Gurdar Correcion");
+            } else {
+                Jopane("Error al ejecutar", "Guardar Correcion");
+            }
 
             PreparedStatement pst2 = conn.prepareStatement("INSERT INTO alu_nurismy_agenda.notas\n"
                     + "(id_tarea, id_estudiante, nota, comentario_profesor)\n"
@@ -4776,13 +4904,38 @@ public class PanelPrincipalCasasController implements Initializable {
     @FXML
     public void abrir_administrador_alumnos() {
         vaciarPanelTodo();
+        botonAD_modificar.setVisible(true);
+        botonAD_eliminar.setVisible(true);
+        tablaAd_alumnos.setVisible(true);
+        botonAD_eliminarP.setVisible(false);
+        botonAD_ModificarP.setVisible(false);
+        tablaAd_alumnos1.setVisible(false);
+        labelAdministadorTabla.setText("Administar Alumnos");
         panelMenuLateral1.setVisible(true);
         panelAdministrador.setVisible(true);
         _panelAdministadorAlumnos.setVisible(true);
+        rellenar_tabla_aluAdministrador();
 
     }
 
     @FXML
+    public void abrir_administrador_profesorTabla() {
+        vaciarPanelTodo();
+        rellenar_tabla_ProfAdministrador();
+        botonAD_eliminarP.setVisible(true);
+        botonAD_ModificarP.setVisible(true);
+        botonAD_modificar.setVisible(false);
+        botonAD_eliminar.setVisible(false);
+        labelAdministadorTabla.setText("Administar Profesor");
+        tablaAd_alumnos.setVisible(false);
+        tablaAd_alumnos1.setVisible(true);
+        panelMenuLateral1.setVisible(true);
+        panelAdministrador.setVisible(true);
+        _panelAdministadorAlumnos.setVisible(true);
+        rellenar_tabla_aluAdministrador();
+
+    }
+
     public void abrir_administrador_profesores() {
         vaciarPanelTodo();
         panelMenuLateral1.setVisible(true);
@@ -4790,49 +4943,323 @@ public class PanelPrincipalCasasController implements Initializable {
         _panelAdministrador_profesor.setVisible(true);
 
     }
-    
+
     @FXML
     public void abrir_modificar_estudiante() {
         vaciarPanelTodo();
+        modificarAlumnos_administrador();
         panelMenuLateral1.setVisible(true);
         panelAdministrador.setVisible(true);
         _panelAdministradorConfiguracion.setVisible(true);
 
     }
+//=======================panel administrador==========================================================
 
+    public ResultSet datos_adminAlumnos() {
+
+        try {
+            PreparedStatement pst = conn.prepareStatement("SELECT * from estudiantes",
+                    ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+
+            ResultSet resultado = pst.executeQuery();
+            return resultado;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+
+    }
+
+    // rellenar tabla alumnos
+    public ObservableList<Alumnos_objeto> rellenar_tabla_aluAdministrador() {
+
+        tablaAd_alumnos.getItems().clear();
+        ObservableList<Alumnos_objeto> obs = FXCollections.observableArrayList();
+        columAD_dni.setCellValueFactory(new PropertyValueFactory<>("dni"));
+        columAD_nombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+        columAD_apellidos.setCellValueFactory(new PropertyValueFactory<>("apellidos"));
+        columAD_casa.setCellValueFactory(new PropertyValueFactory<>("casa"));
+        columAD_curso.setCellValueFactory(new PropertyValueFactory<>("curso"));
+
+        Alumnos_objeto b = null;
+        try {
+            ResultSet rs = datos_adminAlumnos();
+            while (rs.next()) {
+
+                String dni = rs.getString("dni");
+                String nombre = rs.getString("nombre");
+                String apellidos = rs.getString("apellidos");
+                String casa = rs.getString("casa");
+                String curso = rs.getString("curso");
+
+                b = new Alumnos_objeto(nombre, apellidos, curso, casa, dni);
+                obs.add(b);
+
+                tablaAd_alumnos.getItems().addAll(b);
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
+            Jopane("Error", "Error al rellenar la tabla asistencias");
+        }
+        return obs;
+    }
+// ================boton modificar===============================================
+
+    public void modificarAlumnos_administrador() {
+        Alumnos_objeto objetoSeleccionado = tablaAd_alumnos.getSelectionModel().getSelectedItem();
+        String dni = objetoSeleccionado.dni;
+
+        if (String.valueOf(dni).equals("")) {
+            Jopane("No se ha seleccionado ninguna fila", "Error al obtener datos");
+        } else {
+            try {
+
+                PreparedStatement pst = conn.prepareStatement("SELECT * FROM estudiantes WHERE dni=?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+                //falta actualizar sin contraseña
+                pst.setString(1, dni);
+                ResultSet rs = pst.executeQuery();
+                if (rs.first()) {
+                    _tfNombreEstudiante1.setText(rs.getString("nombre"));
+                    _tfApellidosEstudiante1.setText(rs.getString("apellidos"));
+                    _tfDniEstudiante1.setText(rs.getString("dni"));
+                    _tfTelefonoEstudiante1.setText(rs.getString("telefono"));
+                    _tfEmailEstudiante1.setText(rs.getString("correo"));
+                    _tfFechaNacEstudiante1.setText(rs.getString("fecha_nac"));
+                    String curso = rs.getString("curso");
+                    _cbCursos1.setValue(curso);
+
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+
+    }
+
+    // modificar configuracion
+    @FXML
+    public void guardarModificacion_alumAD() {
+
+        try {
+
+            String nombre = _tfNombreEstudiante1.getText();
+            String apellidos = _tfApellidosEstudiante1.getText();
+            String dni = _tfDniEstudiante1.getText();
+            int id_estudiante = obtner_id_estudiante(dni);
+            String telefono = _tfTelefonoEstudiante1.getText();
+            String email = _tfEmailEstudiante1.getText();
+            String fechanac = _tfFechaNacEstudiante1.getText();
+            String curso = _cbCursos1.getValue();
+
+            PreparedStatement pst = conn.prepareStatement("UPDATE alu_nurismy_agenda.estudiantes\n"
+                    + "SET nombre=?, apellidos=?, telefono=?, dni=?, fecha_nac=?, correo=?, curso=?\n"
+                    + "WHERE id_estudiante=?;");
+            pst.setString(1, nombre);
+            pst.setString(2, apellidos);
+            pst.setString(3, telefono);
+            pst.setString(4, dni);
+            pst.setString(5, fechanac);
+            pst.setString(6, email);
+            pst.setString(7, curso);
+            pst.setInt(8, id_estudiante);
+
+            int comprobar = pst.executeUpdate();
+            if (comprobar < 1) {
+                Jopane("Se ha ejecutado correctamente", "Modificar alumno");
+            } else {
+                Jopane("Error al ejecutar", "Modificar alumno");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    //=================boton eliminar========
+    @FXML
+    public void eliminarEstudiante() {
+        Alumnos_objeto objetoSeleccionado = tablaAd_alumnos.getSelectionModel().getSelectedItem();
+        String dni = objetoSeleccionado.dni;
+
+        if (String.valueOf(dni).equals("")) {
+            Jopane("No se ha seleccionado ninguna fila", "Error al obtener datos");
+        } else {
+            try {
+
+                PreparedStatement pst = conn.prepareStatement("DELETE FROM estudiantes WHERE dni=?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+                //falta actualizar sin contraseña
+                pst.setString(1, dni);
+
+                int comprobar = pst.executeUpdate();
+                if (comprobar < 1) {
+                    Jopane("Se ha ejecutado correctamente", "Eliminar alumno");
+                } else {
+                    Jopane("Error al ejecutar", "Wliminar alumno");
+                }
+
+                tablaAd_alumnos.getItems().clear();
+                rellenar_tabla_aluAdministrador();
+
+            } catch (SQLException ex) {
+                Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+
+    }
+    // rellenar tabla Profesor======================================================================
+
+    public ResultSet datos_adminProfesor() {
+
+        try {
+            PreparedStatement pst = conn.prepareStatement("SELECT * from profesores",
+                    ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+
+            ResultSet resultado = pst.executeQuery();
+            return resultado;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+
+    }
+
+    public ObservableList<Profesores_objeto> rellenar_tabla_ProfAdministrador() {
+
+        tablaAd_alumnos1.getItems().clear();
+        ObservableList<Profesores_objeto> obs = FXCollections.observableArrayList();
+        columAD_dni1.setCellValueFactory(new PropertyValueFactory<>("dni"));
+        columAD_nombre1.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+        columAD_apellidos1.setCellValueFactory(new PropertyValueFactory<>("apellidos"));
+        columAD_casa1.setCellValueFactory(new PropertyValueFactory<>("Telefono"));
+        columAD_curso1.setCellValueFactory(new PropertyValueFactory<>("Correo"));
+
+        Profesores_objeto v = null;
+        try {
+            ResultSet rs = datos_adminProfesor();
+            while (rs.next()) {
+
+                String dni = rs.getString("dni");
+                String nombre = rs.getString("nombre");
+                String apellidos = rs.getString("apellidos");
+                String telefono = rs.getString("telefono");
+                String email = rs.getString("correo");
+
+                v = new Profesores_objeto(dni, nombre, apellidos, telefono, email);
+                obs.add(v);
+
+            }
+            tablaAd_alumnos1.getItems().addAll(obs);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class
+                    .getName()).log(Level.SEVERE, null, ex);
+            Jopane("Error", "Error al rellenar la tabla asistencias");
+        }
+        return obs;
+    }
+
+    // ================boton modificar Profesores===============================================
+    @FXML
+    public void modificarProfesores_administrador() {
+        _panelAdministadorAlumnos.setVisible(false);
+        _panelAdministrador_profesor.setVisible(true);
+        Profesores_objeto objetoSeleccionado = tablaAd_alumnos1.getSelectionModel().getSelectedItem();
+        String dni = objetoSeleccionado.dni;
+
+        if (String.valueOf(dni).equals("")) {
+            Jopane("No se ha seleccionado ninguna fila", "Error al obtener datos");
+        } else {
+            try {
+
+                PreparedStatement pst = conn.prepareStatement("SELECT * FROM profesores WHERE dni=?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+                //falta actualizar sin contraseña
+                pst.setString(1, dni);
+                ResultSet rs = pst.executeQuery();
+                if (rs.first()) {
+                    _tfNombreEstudiante11.setText(rs.getString("nombre"));
+                    _tfApellidosEstudiante11.setText(rs.getString("apellidos"));
+                    _tfDniEstudiante11.setText(rs.getString("dni"));
+                    _tfTelefonoEstudiante11.setText(rs.getString("telefono"));
+                    _tfEmailEstudiante11.setText(rs.getString("correo"));
+                    _tfFechaNacEstudiante11.setText(rs.getString("fecha_nac"));
+                    _tfPassEstudiante11.setText(rs.getString("pass"));
+
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+
+    }
+
+    // modificar configuracion profesor
+    @FXML
+    public void guardarModificacion_ProfesorAD() {
+
+        try {
+
+            String nombre = _tfNombreEstudiante11.getText();
+            String apellidos = _tfApellidosEstudiante11.getText();
+            String dni = _tfDniEstudiante11.getText();
+            int id_profesor = obtener_id_profesor(dni);
+            String telefono = _tfTelefonoEstudiante11.getText();
+            String email = _tfEmailEstudiante11.getText();
+            String fechanac = _tfFechaNacEstudiante11.getText();
+            String pass = _tfPassEstudiante11.getText();
+
+            PreparedStatement pst = conn.prepareStatement("UPDATE alu_nurismy_agenda.profesores\n"
+                    + "SET nombre=?, apellidos=?, telefono=?, dni=?, fecha_nac=?, correo=?, pass=?\n"
+                    + "WHERE id_profesor=?;");
+            pst.setString(1, nombre);
+            pst.setString(2, apellidos);
+            pst.setString(3, telefono);
+            pst.setString(4, dni);
+            pst.setString(5, fechanac);
+            pst.setString(6, email);
+            pst.setString(7, pass);
+            pst.setInt(8, id_profesor);
+
+            int comprobar = pst.executeUpdate();
+            if (comprobar < 1) {
+                Jopane("No se ha podido modificar", "Modificar profesor");
+            } else {
+                Jopane("Se ha modificado correctamente", "Modificar profesor");
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipalCasasController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    //=================boton eliminar profesor========
+    @FXML
+    public void eliminarProfesor() {
+        Profesores_objeto objetoSeleccionado = tablaAd_alumnos1.getSelectionModel().getSelectedItem();
+        String dni = objetoSeleccionado.dni;
+
+        if (String.valueOf(dni).equals("")) {
+            Jopane("No se ha seleccionado ninguna fila", "Error al obtener datos");
+        } else {
+
+            String sql = "DELETE FROM profesores WHERE dni=" + dni;
+
+            transaccion(sql);
+            tablaAd_alumnos1.getItems().clear();
+            rellenar_tabla_ProfAdministrador();
+
+        }
+
+    }
 
 }
-
-/*
-
-----------------------ERRORES PARA ARREGLAR-------------------------------------
-
-----PROFESORES----
-
-*cargar todos los datos con el id de inicio
-
-*guardar datos del combobox asistencia
-
-----ALUMNOS----
-
-*al entrar como alumno sigue cargando la ventana de configuracion vacía, hay que poner los datos del alumno actual que entra
-
-*en tareas hay que hacer que se suba la ruta del archivo y que le cargue al profe en su tabla con algo para descargar el archivo
-
-*coger comentario del alumno y ponerlo en la tabla del profe de correcciones
-
-*añadir botón para añadir una foto y que cargue en su sitio (donde aparezco yo...)
-
-
-----GENERAL----
-*hacer el chat entre profe y alumno (recargar cada 15 segundo)
-
-*hacer documentacion (los param y esas cosas)
-
-*control de datos (de todos)
-
-*modificar el botón atrás, la daga de dobby
-
-*quitar todos los souts
-
- */

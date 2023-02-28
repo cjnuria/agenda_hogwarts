@@ -1304,7 +1304,7 @@
                   </ImageView>
                   <TabPane layoutX="94.0" layoutY="126.0" prefHeight="325.0" prefWidth="670.0" tabClosingPolicy="UNAVAILABLE">
                     <tabs>
-                      <Tab text="Todas">
+                      <Tab fx:id="tabProfesores_todas" onSelectionChanged="#ocultarCorrecionesProfesores" text="Todas">
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="239.0" prefWidth="699.0">
                                  <children>
@@ -1330,7 +1330,7 @@
                               </AnchorPane>
                         </content>
                       </Tab>
-                      <Tab text="Pendientes">
+                      <Tab fx:id="tabProfesores_pendientes" onSelectionChanged="#mostrarCorrecionesProfesores" text="Pendientes">
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
@@ -1384,7 +1384,7 @@
                      </font>
                   </Label>
                   <TextField fx:id="_tfTareasNota" layoutX="260.0" layoutY="565.0" prefHeight="25.0" prefWidth="274.0" />
-                  <Button layoutX="377.0" layoutY="615.0" mnemonicParsing="false" text="Guardar">
+                  <Button fx:id="botonP_correciones" layoutX="377.0" layoutY="615.0" mnemonicParsing="false" onMouseClicked="#guardarCorrecciones" text="Guardar">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -1582,7 +1582,7 @@
                               <Font name="Harrington" size="30.0" />
                            </font>
                         </Button>
-                        <Button fx:id="_boton_profesores_administrador" mnemonicParsing="false" onAction="#abrir_administrador_profesores" prefHeight="144.0" prefWidth="227.0" text="Profesores" textFill="#e2a825">
+                        <Button fx:id="_boton_profesores_administrador" mnemonicParsing="false" onMouseClicked="#abrir_administrador_profesorTabla" prefHeight="144.0" prefWidth="227.0" text="Profesores" textFill="#e2a825">
                            <font>
                               <Font name="Harrington" size="30.0" />
                            </font>
@@ -1609,18 +1609,19 @@
                         <Image url="@imagenes/pngegg%20(51).png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="125.0" layoutY="34.0" text="Administrar Alumnos">
+                  <Label fx:id="labelAdministadorTabla" layoutX="125.0" layoutY="34.0" text="Administrar Alumnos">
                      <font>
                         <Font name="Harrington" size="55.0" />
                      </font>
                      
                   </Label>
-                  <TableView layoutX="105.0" layoutY="192.0" prefHeight="276.0" prefWidth="612.0" tableMenuButtonVisible="true">
+                  <TableView fx:id="tablaAd_alumnos" layoutX="105.0" layoutY="192.0" prefHeight="276.0" prefWidth="612.0" tableMenuButtonVisible="true" visible="false">
                      <columns>
-                        <TableColumn prefWidth="145.5555419921875" text="Nombre" />
-                        <TableColumn prefWidth="161.77780151367188" text="Apellidos" />
-                        <TableColumn prefWidth="127.111083984375" text="Casa" />
-                        <TableColumn editable="false" minWidth="0.0" prefWidth="130.22222900390625" text="Curso" />
+                        <TableColumn fx:id="columAD_dni" prefWidth="75.0" text="Dni" />
+                        <TableColumn fx:id="columAD_nombre" prefWidth="145.5555419921875" text="Nombre" />
+                        <TableColumn fx:id="columAD_apellidos" prefWidth="132.66668701171875" text="Apellidos" />
+                        <TableColumn fx:id="columAD_casa" prefWidth="126.6666259765625" text="Casa" />
+                        <TableColumn fx:id="columAD_curso" editable="false" minWidth="0.0" prefWidth="115.3333740234375" text="Curso" />
                      </columns>
                      <effect>
                         <Blend>
@@ -1630,19 +1631,37 @@
                         </Blend>
                      </effect>
                   </TableView>
-                  <Button layoutX="198.0" layoutY="551.0" mnemonicParsing="false" onMouseClicked="#abrir_modificar_estudiante" text="Modificar">
+                  <Button fx:id="botonAD_modificar" layoutX="180.0" layoutY="532.0" mnemonicParsing="false" onMouseClicked="#abrir_modificar_estudiante" prefHeight="37.0" prefWidth="112.0" text="Modificar" visible="false">
                      <font>
                         <Font name="Harrington" size="18.0" />
                      </font>
                   </Button>
-                  <Button layoutX="394.0" layoutY="550.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="107.0" text="Eliminar">
+                  <Button fx:id="botonAD_eliminar" layoutX="411.0" layoutY="532.0" mnemonicParsing="false" onAction="#eliminarEstudiante" prefHeight="37.0" prefWidth="107.0" text="Eliminar" visible="false">
                      <font>
                         <Font name="Harrington" size="18.0" />
                      </font>
                   </Button>
+                  <TableView fx:id="tablaAd_alumnos1" layoutX="79.0" layoutY="151.0" prefHeight="276.0" prefWidth="612.0" tableMenuButtonVisible="true">
+                     <columns>
+                        <TableColumn fx:id="columAD_dni1" prefWidth="75.0" text="Dni" />
+                        <TableColumn fx:id="columAD_nombre1" prefWidth="109.33331298828125" text="Nombre" />
+                        <TableColumn fx:id="columAD_apellidos1" prefWidth="154.66659545898438" text="Apellidos" />
+                        <TableColumn fx:id="columAD_casa1" prefWidth="115.33331298828125" text="Telefono" />
+                        <TableColumn fx:id="columAD_curso1" editable="false" minWidth="0.0" prefWidth="144.0" text="Correo" />
+                     </columns>
+                     <effect>
+                        <Blend>
+                           <topInput>
+                              <SepiaTone />
+                           </topInput>
+                        </Blend>
+                     </effect>
+                  </TableView>
+                  <Button fx:id="botonAD_eliminarP" layoutX="408.0" layoutY="526.0" mnemonicParsing="false" onMouseClicked="#eliminarProfesor" prefHeight="37.0" prefWidth="114.0" text="Eliminar" />
+                  <Button fx:id="botonAD_ModificarP" layoutX="165.0" layoutY="526.0" mnemonicParsing="false" onMouseClicked="#modificarProfesores_administrador" prefHeight="37.0" prefWidth="119.0" text="Modificar" />
                </children>
             </Pane>
-            <Pane fx:id="_panelAdministrador_profesor" layoutX="223.0" layoutY="1.0" prefHeight="705.0" prefWidth="850.0" visible="false">
+            <Pane fx:id="_panelAdministrador_profesor" layoutX="223.0" layoutY="1.0" prefHeight="705.0" prefWidth="850.0">
                <children>
                   <ImageView fitHeight="814.0" fitWidth="838.0" layoutY="-119.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -1667,12 +1686,6 @@
                      </font>
                   </Label>
                   <TextField fx:id="_tfApellidosEstudiante11" layoutX="309.0" layoutY="213.0" prefHeight="25.0" prefWidth="254.0" />
-                  <Label layoutX="109.0" layoutY="445.0" text="Asignatura:">
-                     <font>
-                        <Font name="Harrington" size="24.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="_tfEmailEstudiante11" layoutX="309.0" layoutY="352.0" prefHeight="25.0" prefWidth="254.0" />
                   <Label layoutX="107.0" layoutY="208.0" text="Apellidos">
                      <font>
                         <Font name="Harrington" size="24.0" />
@@ -1696,21 +1709,21 @@
                      </font>
                   </Label>
                   <TextField fx:id="_tfFechaNacEstudiante11" layoutX="309.0" layoutY="402.0" prefHeight="25.0" prefWidth="254.0" />
-                  <Button fx:id="_boton_sala_comun111" layoutX="285.0" layoutY="527.0" mnemonicParsing="false" onMouseClicked="#altaEstudiante" prefHeight="43.0" prefWidth="242.0" styleClass="boton" text="Actualizar Datos" textFill="#e2a825">
+                  <Button fx:id="_boton_sala_comun111" layoutX="253.0" layoutY="527.0" mnemonicParsing="false" onMouseClicked="#guardarModificacion_ProfesorAD" prefHeight="57.0" prefWidth="274.0" styleClass="boton" text="Actualizar Datos" textFill="#e2a825">
                      <font>
                         <Font name="Harrington" size="30.0" />
                      </font>
                   </Button>
-                  <Label layoutX="107.0" layoutY="487.0" text="Contraseña:">
+                  <Label layoutX="107.0" layoutY="450.0" text="Contraseña:">
                      <font>
                         <Font name="Harrington" size="24.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="_tfPassEstudiante11" layoutX="309.0" layoutY="492.0" prefHeight="25.0" prefWidth="254.0" />
-                  <ComboBox fx:id="_cbCursos11" layoutX="308.0" layoutY="449.0" prefHeight="25.0" prefWidth="254.0" />
+                  <TextField fx:id="_tfPassEstudiante11" layoutX="309.0" layoutY="455.0" prefHeight="25.0" prefWidth="254.0" />
+                  <TextField fx:id="_tfEmailEstudiante11" layoutX="309.0" layoutY="349.0" prefHeight="25.0" prefWidth="254.0" />
                </children>
             </Pane>
-            <Pane fx:id="_panelAdministradorConfiguracion" layoutX="220.0" layoutY="-1.0" prefHeight="705.0" prefWidth="850.0">
+            <Pane fx:id="_panelAdministradorConfiguracion" layoutX="220.0" layoutY="-1.0" prefHeight="705.0" prefWidth="850.0" visible="false">
                <children>
                   <ImageView fitHeight="841.0" fitWidth="862.0" layoutY="-119.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -1723,42 +1736,42 @@
                      </font>
                     
                   </Label>
-                  <Label layoutX="109.0" layoutY="160.0" text="Nombre:">
+                  <Label fx:id="labelAd_nombre" layoutX="109.0" layoutY="160.0" text="Nombre:">
                      <font>
                         <Font name="Harrington" size="24.0" />
                      </font>
                   </Label>
                   <TextField fx:id="_tfNombreEstudiante1" layoutX="309.0" layoutY="165.0" prefHeight="25.0" prefWidth="254.0" />
-                  <Label layoutX="107.0" layoutY="253.0" text="DNI:">
+                  <Label fx:id="labelAd_dni" layoutX="107.0" layoutY="253.0" text="DNI:">
                      <font>
                         <Font name="Harrington" size="24.0" />
                      </font>
                   </Label>
                   <TextField fx:id="_tfApellidosEstudiante1" layoutX="309.0" layoutY="213.0" prefHeight="25.0" prefWidth="254.0" />
-                  <Label layoutX="109.0" layoutY="445.0" text="Curso:">
+                  <Label fx:id="labelAd_curso" layoutX="109.0" layoutY="445.0" text="Curso:">
                      <font>
                         <Font name="Harrington" size="24.0" />
                      </font>
                   </Label>
                   <TextField fx:id="_tfEmailEstudiante1" layoutX="309.0" layoutY="352.0" prefHeight="25.0" prefWidth="254.0" />
-                  <Label layoutX="107.0" layoutY="208.0" text="Apellidos">
+                  <Label fx:id="labelAd_apellidos" layoutX="107.0" layoutY="208.0" text="Apellidos">
                      <font>
                         <Font name="Harrington" size="24.0" />
                      </font>
                   </Label>
                   <TextField fx:id="_tfDniEstudiante1" layoutX="309.0" layoutY="258.0" prefHeight="25.0" prefWidth="254.0" />
-                  <Label layoutX="111.0" layoutY="347.0" text="Email:">
+                  <Label fx:id="labelAd_email" layoutX="111.0" layoutY="347.0" text="Email:">
                      <font>
                         <Font name="Harrington" size="24.0" />
                      </font>
                   </Label>
                   <TextField fx:id="_tfTelefonoEstudiante1" layoutX="309.0" layoutY="305.0" prefHeight="25.0" prefWidth="254.0" />
-                  <Label layoutX="107.0" layoutY="300.0" text="Teléfono:">
+                  <Label fx:id="labelAd_telefono" layoutX="107.0" layoutY="300.0" text="Teléfono:">
                      <font>
                         <Font name="Harrington" size="24.0" />
                      </font>
                   </Label>
-                  <Label layoutX="107.0" layoutY="397.0" text="F. Nacimiento:">
+                  <Label fx:id="labelAd_fechNac" layoutX="107.0" layoutY="397.0" text="F. Nacimiento:">
                      <font>
                         <Font name="Harrington" size="24.0" />
                      </font>
@@ -1774,17 +1787,11 @@
                         <Image url="@imagenes/Untitl3ed.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="_boton_sala_comun11" layoutX="262.0" layoutY="535.0" mnemonicParsing="false" onMouseClicked="#altaEstudiante" prefHeight="43.0" prefWidth="229.0" styleClass="boton" text="Actualizar Datos" textFill="#e2a825">
+                  <Button fx:id="_boton_sala_comun11" layoutX="289.0" layoutY="567.0" mnemonicParsing="false" onMouseClicked="#guardarModificacion_alumAD" prefHeight="57.0" prefWidth="274.0" styleClass="boton" text="Actualizar Datos" textFill="#e2a825">
                      <font>
                         <Font name="Harrington" size="30.0" />
                      </font>
                   </Button>
-                  <Label layoutX="107.0" layoutY="487.0" text="Contraseña:">
-                     <font>
-                        <Font name="Harrington" size="24.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="_tfPassEstudiante1" layoutX="309.0" layoutY="492.0" prefHeight="25.0" prefWidth="254.0" />
                   <ComboBox fx:id="_cbCursos1" layoutX="308.0" layoutY="449.0" prefHeight="25.0" prefWidth="254.0" />
                </children>
             </Pane>
