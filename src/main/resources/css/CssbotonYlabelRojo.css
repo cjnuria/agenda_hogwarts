@@ -142,3 +142,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 .CssTablaSalaComun{
     -fx-text-fill: black;
 }
+/*.tab-pane botonA_enviar_mensajeria {
+    -fx-effect: null;
+}*/
+
+/*#tabPane_mensajeria #botonA_enviar_mensajeria {
+    -fx-background-color: red !important;
+    -fx-text-fill: white !important;
+}*/

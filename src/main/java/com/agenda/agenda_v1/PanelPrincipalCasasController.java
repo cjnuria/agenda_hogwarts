@@ -794,6 +794,16 @@ public class PanelPrincipalCasasController implements Initializable {
     private Tab tabProfesores_todas;
     @FXML
     private Tab tabProfesores_pendientes;
+    @FXML
+    private Label label_salaComun_profesores;
+    @FXML
+    private Button botonP_mas;
+    @FXML
+    private Label labelP_mensajeria_titulo;
+    @FXML
+    private Label labelAD_configuracionTitulo;
+    @FXML
+    private Label labelAD_configuracionTitulo2;
 
     /**
      * Initializes the controller class.
@@ -926,15 +936,25 @@ public class PanelPrincipalCasasController implements Initializable {
         _botonA_cambiar_Perfil.getStyleClass().add("CsscambiarImagenConfiguracion");
 
         //=============================PROFESORES===============================
+        // menu lateral
+        _boton_sala_comun_Profes.getStyleClass().add("CssLateral");
+        _boton_Cursos_Profes.getStyleClass().add("CssLateral");
+        _boton_tareas_Profes.getStyleClass().add("CssLateral");
+        _boton_Alumnos_Profes.getStyleClass().add("CssLateral");
+        //cerrar sesion y salir
+        _botonSalirProfes.getStyleClass().add("CssSalir");
+        botonSalirAlumno11.getStyleClass().add("CssSalir");
+
         // titulo principal gradian
         labelP_cursosAsisgnados.getStyleClass().add("CssLabelPrincipalProfesores");
         labelA_selecionAsignaturas.getStyleClass().add("CssLabelPrincipalProfesores");
         labelP_asignarTareas.getStyleClass().add("CssLabelPrincipalProfesores");
         labelP_correciones.getStyleClass().add("CssLabelPrincipalProfesores");
         labelP_asistenciaAlumnos.getStyleClass().add("CssLabelPrincipalProfesores");
-        labelP_mensajeria.getStyleClass().add("CssLabelPrincipalProfesores");
-        //planing===================================================
+        labelP_mensajeria_titulo.getStyleClass().add("CssLabelPrincipalProfesores");
+        label_salaComun_profesores.getStyleClass().add("CssLabelPrincipalProfesores");
 
+        //planing===================================================
         labelP_planing.getStyleClass().add("CssLabelPlaningProfesores");
         //==============sala comun profesores================
         labelP_asistencia.getStyleClass().add("CssSalacomunProfesores");
@@ -957,11 +977,27 @@ public class PanelPrincipalCasasController implements Initializable {
         //===============panel asistencia profesores==========================
         labelP_asistencia_curso.getStyleClass().add("CsspanelAsistenciaProfesores");
         labelP_asistencia_casa.getStyleClass().add("CsspanelAsistenciaProfesores");
-//========================progrees bar==========================================
+        //========================progrees bar==========================================
         _progressBar_Trimestre.getStyleClass().add("Cssbar");
         _tbA_tareas.getStyleClass().add("CssTablaSalaComun");
+        //botones asistencia
+        botonP_presente.getStyleClass().add("CssBotonAsistencia");
+        botonP_ausente.getStyleClass().add("CssBotonAsistencia");
+        botonP_restrasado.getStyleClass().add("CssBotonAsistencia");
+        //Botones guardar
+        botonP_correciones.getStyleClass().add("CssBotonGuardar");
+        boton_enviar_tareas.getStyleClass().add("CssBotonGuardar");
+        boton_guardarMensajeriaP.getStyleClass().add("CssBotonGuardar");
+        // botones mensajeria
+        botonP_mostar_mensaje.getStyleClass().add("CssBotonesMensaje");
+        botonP_cerrar_mensaje.getStyleClass().add("CssBotonesMensaje");
+        // boton mas
+        botonP_mas.getStyleClass().add("cssmas");
+        // combos
+        _comboP_AsistenciaCursos1.getStyleClass().add("csscombo");
+        _comboP_AsistenciaCasa1.getStyleClass().add("csscombo");
 
-        //=================panel administrador=======================================
+        //=================ADMINISTRADOR=======================================
         labelAd_nombre.getStyleClass().add("CsslabelconfiguracionAD");
         labelAd_apellidos.getStyleClass().add("CsslabelconfiguracionAD");
         labelAd_dni.getStyleClass().add("CsslabelconfiguracionAD");
@@ -969,15 +1005,27 @@ public class PanelPrincipalCasasController implements Initializable {
         labelAd_fechNac.getStyleClass().add("CsslabelconfiguracionAD");
         labelAd_curso.getStyleClass().add("CsslabelconfiguracionAD");
         labelAd_telefono.getStyleClass().add("CsslabelconfiguracionAD");
+        //botones menu lateral
+        _boton_alumnos_administrador.getStyleClass().add("CssMenuLateral");
+        _boton_profesores_administrador.getStyleClass().add("CssMenuLateral");
+        _boton_cerrar_sesion.getStyleClass().add("CssMenuLateral");
+        _boton_salir.getStyleClass().add("CssMenuLateral");
+
+        //label titulos
+        labelAdministadorTabla.getStyleClass().add("Csslabeltitulo");
+        //medianos
+        labelAD_configuracionTitulo.getStyleClass().add("CsslabeltituloMediano");
+        labelAD_configuracionTitulo2.getStyleClass().add("CsslabeltituloMediano");
 
         //===============botones================================================
-        _boton_sala_comun11.getStyleClass().add("CssbotonconfiguracionAD");
-        botonAD_eliminar.getStyleClass().add("CssbotonconfiguracionAD");
-        botonAD_modificar.getStyleClass().add("CssbotonconfiguracionAD");
-        botonAD_eliminarP.getStyleClass().add("CssbotonconfiguracionAD");
-        botonAD_ModificarP.getStyleClass().add("CssbotonconfiguracionAD");
-        _boton_sala_comun111.getStyleClass().add("CssbotonconfiguracionAD");
-        botonP_correciones.getStyleClass().add("CssbotonconfiguracionAD");
+        _boton_sala_comun11.getStyleClass().add("CssbotonGrande");
+        _boton_sala_comun111.getStyleClass().add("CssbotonGrande");
+        //botones medianos
+        botonAD_eliminar.getStyleClass().add("Cssboton");
+        botonAD_modificar.getStyleClass().add("Cssboton");
+        botonAD_eliminarP.getStyleClass().add("Cssboton");
+        botonAD_ModificarP.getStyleClass().add("Cssboton");
+        botonP_correciones.getStyleClass().add("Cssboton");
 
     }//fin inicializate
 
@@ -1308,6 +1356,7 @@ public class PanelPrincipalCasasController implements Initializable {
         vaciarPanelProfes();
         vaciarPanelTodo();
         panelAdministrador.setVisible(true);
+        panelAdministrador.getStylesheets().add("/css/CssAdmin.css");
 
     }
 
@@ -1716,7 +1765,7 @@ public class PanelPrincipalCasasController implements Initializable {
 
                 String nombre = _tfNombreEstudiante.getText();
                 String apellidos = _tfApellidosEstudiante.getText();
-                String dni=_tfDniEstudiante.getText();
+                String dni = _tfDniEstudiante.getText();
                 int telefono = Integer.parseInt(_tfTelefonoEstudiante.getText());
                 String fecha_nac = _tfFechaNacEstudiante.getText();
                 String correo = _tfEmailEstudiante.getText();
